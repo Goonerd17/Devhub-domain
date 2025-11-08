@@ -45,6 +45,7 @@ public class GuestBookService {
         } catch (Exception e) {
             return apiResponseBuilder.fail(ErrorCodeEnum.GUESTBOOK_CREATE_FAIL, guestBookRequestDto, e.getMessage());
         } finally {
+            log.info("param 1 {}, param 2 {} : ", guestBookRequestDto.getUsername(), guestBookRequestDto.getDescription());
             log.info("GuestBookService - createGuestBook is finished");
         }
     }
