@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/guestbook")
+@RequestMapping("/v1/guestbook")
 @RequiredArgsConstructor
 public class GuestBookController {
 

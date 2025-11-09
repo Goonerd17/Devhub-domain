@@ -85,7 +85,7 @@ spring:
 
 ---
 
-## API 문서 (Swagger/OpenAPI 스타일)
+## API 문서
 
 ### 공통 응답 구조
 
