@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/v1/guestbook")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://devhub.local")
 public class GuestBookController {
 
     private final GuestBookService guestBookService;
