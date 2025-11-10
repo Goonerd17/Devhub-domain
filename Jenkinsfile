@@ -28,8 +28,8 @@ pipeline {
         stage('Build Jar') {
             steps {
                 echo "🏗 Building backend jar..."
-                sh "./gradlew clean build"  // Linux/Mac 에이전트용
-                // Windows 에이전트면: bat "gradlew.bat clean build"
+                sh "chmod +x gradlew"
+                sh "./gradlew clean build"
             }
         }
 
