@@ -5,7 +5,7 @@ pipeline {
         PROJECT = "DevHub-backend"
         DOCKERHUB_ID = "goonerd"
         DATE = sh(script: "date +%Y%m%d", returnStdout: true).trim()
-        BUILD_TAG = "${PROJECT}-${DATE}-${BUILD_NUMBER}"
+        BUILD_TAG = "${PROJECT}-${DATE}-${BUILD_NUMBER}".toLowerCase()
         INFRA_REPO = "https://github.com/Goonerd17/DevHub-infra.git"
     }
 
