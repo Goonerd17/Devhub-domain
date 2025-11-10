@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+            docker {
+                image 'docker:24-dind' // Docker CLI 포함 이미지
+                args '-v /var/run/docker.sock:/var/run/docker.sock'
+            }
+        }
 
     environment {
         PROJECT = "DevHub-backend"
