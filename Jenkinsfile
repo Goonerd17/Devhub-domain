@@ -62,13 +62,8 @@ pipeline {
                     sh 'git config --global user.name "Jenkins"'
                     sh 'git config --global user.email "jenkins@devhub.local"'
 
-                    // Infra repo clone
                     sh "git clone https://$GIT_USER:$GIT_TOKEN@github.com/Goonerd17/DevHub-infra.git"
-
-                    // deployment.yml 이미지 태그 업데이트
                     sh "cd DevHub-infra/infra/k8s/devhub-backend && sed -i.bak 's#image: goonerd/DevHub-backend:.*#image: $IMAGE_NAME:$BUILD_TAG#' deployment.yml"
-
-                    // Git 커밋 및 push (내용이 없어도 빈 커밋 생성)
                     sh """
                         cd DevHub-infra/infra/k8s/devhub-backend
                         git add .
@@ -78,6 +73,7 @@ pipeline {
                 }
             }
         }
+    }
 
     post {
         success {
