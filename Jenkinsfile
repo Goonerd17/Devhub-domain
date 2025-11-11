@@ -62,11 +62,14 @@ pipeline {
                     sh 'git config --global user.name "Jenkins"'
                     sh 'git config --global user.email "jenkins@devhub.local"'
 
+                    // Infra repo clone
                     sh "git clone https://$GIT_USER:$GIT_TOKEN@github.com/Goonerd17/DevHub-infra.git"
-                    sh "cd DevHub-infra/infra/k8s/devhub-backend && sed -i.bak 's#image: goonerd/DevHub-backend:.*#image: $IMAGE_NAME:$BUILD_TAG#' deployment.yml"
+
+                    // 백엔드 deployment.yml 이미지 태그 업데이트
                     sh """
                         cd DevHub-infra/infra/k8s/devhub-backend
-                        git add .
+                        sed -i "s#image: goonerd/DevHub-backend:.*#image: $IMAGE_NAME:$BUILD_TAG#" deployment.yml
+                        git add deployment.yml
                         git commit -m '[CI] Update backend image to $BUILD_TAG' --allow-empty
                         git push origin dev
                     """
