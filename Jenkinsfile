@@ -21,7 +21,7 @@ pipeline {
         stage('Checkout Backend') {
             steps {
                 echo "🔄 Checking out backend repository..."
-                git branch: 'dev', url: 'https://github.com/Goonerd17/DevHub-backend.git'
+                checkout scm  // 현재 Jenkins job의 브랜치에 맞게 체크아웃
             }
         }
 
@@ -41,55 +41,67 @@ pipeline {
             }
         }
 
-        stage('Docker Build') {
+        stage('Docker Build & Push') {
             steps {
-                echo "🛠 Building Docker image..."
-                sh "docker build -t $IMAGE_NAME:$BUILD_TAG ."
-            }
-        }
-
-        stage('Docker Push') {
-            steps {
-                echo "📤 Pushing Docker image..."
-                sh "docker push $IMAGE_NAME:$BUILD_TAG"
-                sh "docker logout"
+                echo "🛠 Building & pushing Docker image..."
+                sh """
+                    docker build -t $IMAGE_NAME:$BUILD_TAG .
+                    docker push $IMAGE_NAME:$BUILD_TAG
+                    docker logout
+                """
             }
         }
 
         stage('Update Infra Repo') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
-                    // Git 사용자 정보 설정
-                    sh 'git config --global user.name "Jenkins"'
-                    sh 'git config --global user.email "jenkins@devhub.local"'
+                script {
+                    // 현재 브랜치명 가져오기
+                    def currentBranch = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+                    echo "📦 Current branch: ${currentBranch}"
 
-                    // Infra 레포 클론
-                    sh "git clone https://$GIT_USER:$GIT_TOKEN@github.com/Goonerd17/DevHub-infra.git"
+                    // 브랜치별 디렉토리 매핑
+                    def targetDir = ""
+                    def targetBranch = ""
+                    if (currentBranch == "dev") {
+                        targetDir = "infra/k8s/dev/devhub-backend"
+                        targetBranch = "dev"
+                    } else if (currentBranch == "main") {
+                        targetDir = "infra/k8s/prd/devhub-backend"
+                        targetBranch = "main"
+                    } else {
+                        error "❌ Unsupported branch: ${currentBranch}. Only 'dev' or 'main' are allowed."
+                    }
 
-                    // 백엔드 deployment.yml 이미지 태그 업데이트
-                    dir('DevHub-infra/infra/k8s/devhub-backend') {
-                        sh """
-                            echo "Updating deployment.yml image tag..."
-                            sed -i "s#image: goonerd/devhub-backend:.*#image: ${IMAGE_NAME}:${BUILD_TAG}#" deployment.yml
-                            cat deployment.yml | grep "image:"   # 실제 변경 여부 확인
-                        """
+                    withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
+                        sh 'git config --global user.name "Jenkins"'
+                        sh 'git config --global user.email "jenkins@devhub.local"'
 
-                        // Git add, 커밋, 푸시
-                        sh """
-                            git add deployment.yml
-                            git commit -m '[CI] Update backend image to ${BUILD_TAG}' --allow-empty
-                            git push origin dev
-                        """
+                        // 인프라 레포 클론
+                        sh "git clone -b ${targetBranch} https://${GIT_USER}:${GIT_TOKEN}@github.com/Goonerd17/DevHub-infra.git"
+
+                        dir("DevHub-infra/${targetDir}") {
+                            sh """
+                                echo "📝 Updating deployment.yml image tag..."
+                                sed -i "s#image: goonerd/devhub-backend:.*#image: ${IMAGE_NAME}:${BUILD_TAG}#" deployment.yml
+                                grep 'image:' deployment.yml
+                            """
+
+                            // 변경 커밋 및 푸시
+                            sh """
+                                git add deployment.yml
+                                git commit -m '[CI] Update backend image to ${BUILD_TAG}' --allow-empty
+                                git push origin main
+                            """
+                        }
                     }
                 }
-
             }
         }
     }
 
     post {
         success {
-            echo "✅ Build and Infra update complete!"
+            echo "✅ Build & Infra update complete!"
         }
         failure {
             echo "❌ Pipeline failed!"
