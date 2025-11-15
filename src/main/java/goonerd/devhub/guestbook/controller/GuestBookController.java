@@ -19,7 +19,7 @@ public class GuestBookController {
 
     @GetMapping()
     public ResponseEntity<ApiResponseVo<?>> listGuestBooks() {
-        log.info("listGuestBooks, ArgoCD test! Sync Policy is Manual test v5");
+        log.info("listGuestBooks, ArgoCD test! Sync Policy is Manual test v6");
         return guestBookService.listGuestBook();
     }
 
