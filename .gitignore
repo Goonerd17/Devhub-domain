@@ -39,4 +39,3 @@ out/
 ### script
 /Jenkinsfile-prd
 /Jenkinsfile-dev
-/Dockerfile
