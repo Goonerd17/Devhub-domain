@@ -10,14 +10,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ApiResponseVo <T> {
 
-    private boolean isSuccess;
+    private boolean success;
     private String code;
     private String message;
     private T param;
     private T data;
 
-    public ApiResponseVo(boolean isSuccess, String code, String message, T param, T data) {
-        this.isSuccess = isSuccess;
+    public ApiResponseVo(boolean success, String code, String message, T param, T data) {
+        this.success = success;
         this.code = code;
         this.message = message;
         this.param = param;
