@@ -19,7 +19,7 @@ public class GuestBookController {
 
     @GetMapping()
     public ResponseEntity<ApiResponseVo<?>> listGuestBooks() {
-        log.info("This is the list of guest books. 2025-11-20");
+        log.info("This is the list of guest books. testDate : 2025-12-01");
         return guestBookService.listGuestBook();
     }
 
