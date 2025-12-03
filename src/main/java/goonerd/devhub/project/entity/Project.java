@@ -1,6 +1,6 @@
 package goonerd.devhub.project.entity;
 
-import goonerd.devhub.common.devhubenum.ErrorCodeEnum;
+import goonerd.devhub.common.mainEnum.ErrorCodeEnum;
 import goonerd.devhub.common.exception.DomainException;
 import goonerd.devhub.common.vo.CommonRequestVo;
 import goonerd.devhub.project.dto.ProjectRequestDto;

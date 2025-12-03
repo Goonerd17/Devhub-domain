@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.Collections;
 
 @RestControllerAdvice
-public class DevHubExceptionHandler {
+public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponseVo<?>> handleIllegalArgument(Exception e) {
