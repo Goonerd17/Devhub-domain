@@ -5,8 +5,10 @@ import lombok.Getter;
 @Getter
 public enum SuccessCodeEnum {
 
-    GUESTBOOK_LIST_SUCCESS("S001", "방명록 목록 조회 성공"),
-    GUESTBOOK_CREATE_SUCCESS("S002", "방명록 작성 성공");
+    PROJECT_READ_SUCCESS("SUC.DVH.001", "조회 성공"),
+    PROJECT_CREATE_SUCCESS("SUC.DVH.002", "생성 성공"),
+    PROJECT_UPDATE_SUCCESS("SUC.DVH.003", "수정 성공"),
+    PROJECT_DELETE_SUCCESS("SUC.DVH.004", "삭제 성공");
 
     private final String code;
     private final String message;

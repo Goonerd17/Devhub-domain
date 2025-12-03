@@ -201,3 +201,19 @@ spring:
 
 ## 향후 계획
 ---
+추가작업 예정 -> 기존 GuestBook 에서 Project로 변경
+이후 공통 작업 코드 미리 연습 및 작성 예정 
+추후 작업리스트
+Validation / Domain Rule / ValueObject
+
+API Response / Exception Handling
+
+Logging / AOP
+
+Security / Authentication / Authorization
+
+Email / Notification / Messaging
+
+Utility / Mapper / Config
+
+Test / Monitoring

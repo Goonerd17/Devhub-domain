@@ -18,13 +18,13 @@ public class ProjectController {
     private final ProjectService projectService;
 
     @GetMapping()
-    public ResponseEntity<ApiResponseVo<?>> listGuestBooks() {
+    public ResponseEntity<ApiResponseVo<?>> listProject() {
         log.info("This is the list of guest books. testDate : 2025-12-01");
-        return projectService.listGuestBook();
+        return projectService.listProject();
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ApiResponseVo<?>> createGuestBook(@RequestBody ProjectRequestDto projectRequestDto) {
-        return projectService.createGuestBook(projectRequestDto);
+    public ResponseEntity<ApiResponseVo<?>> createProject(@RequestBody ProjectRequestDto projectRequestDto) {
+        return projectService.createProject(projectRequestDto);
     }
 }

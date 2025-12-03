@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ApiResponseBuilder {
+public class ApiResponseUtil {
 
     public <T> ResponseEntity<ApiResponseVo<?>> success(SuccessCodeEnum codeEnum, T param, T data) {
         ApiResponseVo<T> body = new ApiResponseVo<>(true, codeEnum.getCode(), codeEnum.getMessage(), param, data);

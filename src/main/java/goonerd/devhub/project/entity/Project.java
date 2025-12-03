@@ -38,7 +38,6 @@ public class Project extends CommonRequestVo {
     private Project(ProjectRequestDto projectRequestDto) {
         validateRecruitCount(projectRequestDto);
         validateProjectPeriod(projectRequestDto);
-
         this.username = projectRequestDto.getUsername();
         this.description = projectRequestDto.getDescription();
         this.recruitCount = projectRequestDto.getRecruitCount();
@@ -53,13 +52,13 @@ public class Project extends CommonRequestVo {
 
     private void validateRecruitCount(ProjectRequestDto projectRequestDto) {
         if(projectRequestDto.getRecruitCount() < 1) {
-            throw new DomainException(ErrorCodeEnum.PROJECT_RECRUITCOUNT_FAIL.getCode(), "모집 인원은 최소 1명 이상이어야 합니다.");
+            throw new DomainException(ErrorCodeEnum.PROJECT_RECRUITCOUNT_FAIL.getCode(), ErrorCodeEnum.PROJECT_RECRUITCOUNT_FAIL.getMessage());
         }
-
     }
+
     private void validateProjectPeriod(ProjectRequestDto projectRequestDto) {
         if(projectRequestDto.getEndDate().isBefore(projectRequestDto.getStartDate())) {
-            throw new DomainException(ErrorCodeEnum.PROJECT_PERIOD_FAIL.getCode(), "모집 인원은 최소 1명 이상이어야 합니다.");
+            throw new DomainException(ErrorCodeEnum.PROJECT_PERIOD_FAIL.getCode(), ErrorCodeEnum.PROJECT_PERIOD_FAIL.getMessage());
         }
     }
 }

@@ -29,6 +29,4 @@ public class ProjectResponseDto {
                 .endDate(project.getEndDate())
                 .build();
     }
-
-
 }
