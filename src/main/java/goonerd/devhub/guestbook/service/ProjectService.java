@@ -4,10 +4,10 @@ import goonerd.devhub.common.devhubenum.ErrorCodeEnum;
 import goonerd.devhub.common.devhubenum.SuccessCodeEnum;
 import goonerd.devhub.common.utils.ApiResponseBuilder;
 import goonerd.devhub.common.vo.ApiResponseVo;
-import goonerd.devhub.guestbook.dto.GuestBookRequestDto;
-import goonerd.devhub.guestbook.dto.GuestBookResponseDto;
-import goonerd.devhub.guestbook.entity.GuestBook;
-import goonerd.devhub.guestbook.repository.GuestBookRepository;
+import goonerd.devhub.guestbook.dto.ProjectRequestDto;
+import goonerd.devhub.guestbook.dto.ProjectResponseDto;
+import goonerd.devhub.guestbook.entity.Project;
+import goonerd.devhub.guestbook.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -19,15 +19,15 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class GuestBookService {
+public class ProjectService {
 
-    private final GuestBookRepository guestBookRepository;
+    private final ProjectRepository projectRepository;
     private final ApiResponseBuilder apiResponseBuilder;
 
     public ResponseEntity<ApiResponseVo<?>> listGuestBook() {
         try {
-            List<GuestBookResponseDto> guestBookResponseList = guestBookRepository.findAll().stream()
-                    .map(GuestBookResponseDto::fromEntity)
+            List<ProjectResponseDto> guestBookResponseList = projectRepository.findAll().stream()
+                    .map(ProjectResponseDto::fromEntity)
                     .toList();
             return apiResponseBuilder.success(SuccessCodeEnum.GUESTBOOK_LIST_SUCCESS, Collections.emptyMap(), guestBookResponseList);
         } catch (Exception e) {
@@ -37,15 +37,15 @@ public class GuestBookService {
         }
     }
 
-    public ResponseEntity<ApiResponseVo<?>> createGuestBook(GuestBookRequestDto guestBookRequestDto) {
+    public ResponseEntity<ApiResponseVo<?>> createGuestBook(ProjectRequestDto projectRequestDto) {
         try {
-            GuestBook guestBookEntity = guestBookRepository.save(guestBookRequestDto.toEntity());
-            GuestBookResponseDto guestBookResponseDto = GuestBookResponseDto.fromEntity(guestBookEntity);
-            return apiResponseBuilder.success(SuccessCodeEnum.GUESTBOOK_CREATE_SUCCESS, guestBookRequestDto, guestBookResponseDto);
+            Project projectEntity = projectRepository.save(projectRequestDto.toEntity());
+            ProjectResponseDto projectResponseDto = ProjectResponseDto.fromEntity(projectEntity);
+            return apiResponseBuilder.success(SuccessCodeEnum.GUESTBOOK_CREATE_SUCCESS, projectRequestDto, projectResponseDto);
         } catch (Exception e) {
-            return apiResponseBuilder.fail(ErrorCodeEnum.GUESTBOOK_CREATE_FAIL, guestBookRequestDto, e.getMessage());
+            return apiResponseBuilder.fail(ErrorCodeEnum.GUESTBOOK_CREATE_FAIL, projectRequestDto, e.getMessage());
         } finally {
-            log.info("param 1 {}, param 2 {} : ", guestBookRequestDto.getUsername(), guestBookRequestDto.getDescription());
+            log.info("param 1 {}, param 2 {} : ", projectRequestDto.getUsername(), projectRequestDto.getDescription());
             log.info("GuestBookService - createGuestBook is finished");
         }
     }
