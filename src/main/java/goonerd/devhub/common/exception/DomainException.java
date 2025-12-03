@@ -1,14 +1,36 @@
 package goonerd.devhub.common.exception;
 
-import goonerd.devhub.common.devhubenum.ErrorCodeEnum;
+import lombok.Getter;
 
-public class DomainException extends Throwable{
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
-    ErrorCodeEnum errorCodeEnum;
-    public String message;
+@Getter
+public class DomainException extends RuntimeException{
 
-    public DomainException(ErrorCodeEnum errorCodeEnum, String message) {
-        this.errorCodeEnum = errorCodeEnum;
+    private final String errorCode;
+    private final Map<String, Object> context;
+    private String message;
+
+    public DomainException(String errorCode, String message) {
+        super(message);
+        this.errorCode = errorCode;
         this.message = message;
+        this.context = new HashMap<>();
+    }
+
+    public DomainException(String errorCode, String message, Map<String, Object> context) {
+        super(message);
+        this.errorCode = errorCode;
+        this.message = message;
+        this.context = Optional.ofNullable(context).orElse(new HashMap<>());
+    }
+
+    public DomainException(String errorCode, String message, Throwable cause) {
+        super(message, cause);
+        this.errorCode = errorCode;
+        this.message = message;
+        this.context = new HashMap<>();
     }
 }

@@ -1,8 +1,8 @@
-package goonerd.devhub.guestbook.controller;
+package goonerd.devhub.project.controller;
 
 import goonerd.devhub.common.vo.ApiResponseVo;
-import goonerd.devhub.guestbook.dto.ProjectRequestDto;
-import goonerd.devhub.guestbook.service.ProjectService;
+import goonerd.devhub.project.dto.ProjectRequestDto;
+import goonerd.devhub.project.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

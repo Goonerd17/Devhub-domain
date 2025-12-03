@@ -1,6 +1,6 @@
-package goonerd.devhub.guestbook.repository;
+package goonerd.devhub.project.repository;
 
-import goonerd.devhub.guestbook.entity.Project;
+import goonerd.devhub.project.entity.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {

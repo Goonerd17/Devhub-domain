@@ -1,10 +1,8 @@
-package goonerd.devhub.guestbook.dto;
+package goonerd.devhub.project.dto;
 
-import goonerd.devhub.guestbook.entity.Project;
-import jakarta.persistence.Column;
+import goonerd.devhub.project.entity.Project;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import java.time.LocalDate;
 

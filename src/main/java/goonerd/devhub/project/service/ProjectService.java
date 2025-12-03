@@ -1,13 +1,13 @@
-package goonerd.devhub.guestbook.service;
+package goonerd.devhub.project.service;
 
 import goonerd.devhub.common.devhubenum.ErrorCodeEnum;
 import goonerd.devhub.common.devhubenum.SuccessCodeEnum;
 import goonerd.devhub.common.utils.ApiResponseBuilder;
 import goonerd.devhub.common.vo.ApiResponseVo;
-import goonerd.devhub.guestbook.dto.ProjectRequestDto;
-import goonerd.devhub.guestbook.dto.ProjectResponseDto;
-import goonerd.devhub.guestbook.entity.Project;
-import goonerd.devhub.guestbook.repository.ProjectRepository;
+import goonerd.devhub.project.dto.ProjectRequestDto;
+import goonerd.devhub.project.dto.ProjectResponseDto;
+import goonerd.devhub.project.entity.Project;
+import goonerd.devhub.project.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
