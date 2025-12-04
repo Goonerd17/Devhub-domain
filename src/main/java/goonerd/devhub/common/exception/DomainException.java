@@ -1,20 +1,19 @@
 package goonerd.devhub.common.exception;
 
+import goonerd.devhub.common.mainEnum.ErrorCodeEnum;
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
 @Getter
-public class DomainException extends RuntimeException{
+public class DomainException extends RuntimeException {
 
-    private final String errorCode;
-    private String message;
+    private final ErrorCodeEnum errorCodeEnum;
 
-    public DomainException(String errorCode, String message) {
-        super(message);
-        this.errorCode = errorCode;
-        this.message = message;
+    private DomainException(ErrorCodeEnum errorCodeEnum) {
+        super(errorCodeEnum.getMessage());
+        this.errorCodeEnum = errorCodeEnum;
+    }
+
+    public static DomainException of(ErrorCodeEnum errorCode) {
+        return new DomainException(errorCode);
     }
 }

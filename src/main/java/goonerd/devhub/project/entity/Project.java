@@ -52,13 +52,13 @@ public class Project extends CommonRequestVo {
 
     private void validateRecruitCount(ProjectRequestDto projectRequestDto) {
         if(projectRequestDto.getRecruitCount() < 1) {
-            throw new DomainException(ErrorCodeEnum.PROJECT_RECRUITCOUNT_FAIL.getCode(), ErrorCodeEnum.PROJECT_RECRUITCOUNT_FAIL.getMessage());
+            throw DomainException.of(ErrorCodeEnum.PROJECT_RECRUITCOUNT_FAIL);
         }
     }
 
     private void validateProjectPeriod(ProjectRequestDto projectRequestDto) {
         if(projectRequestDto.getEndDate().isBefore(projectRequestDto.getStartDate())) {
-            throw new DomainException(ErrorCodeEnum.PROJECT_PERIOD_FAIL.getCode(), ErrorCodeEnum.PROJECT_PERIOD_FAIL.getMessage());
+            throw DomainException.of(ErrorCodeEnum.PROJECT_PERIOD_FAIL);
         }
     }
 }

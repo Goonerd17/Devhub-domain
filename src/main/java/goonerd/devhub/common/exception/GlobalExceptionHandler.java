@@ -11,6 +11,13 @@ import java.util.Collections;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponseVo<?>> handleDomainException(DomainException e) {
+        return ResponseEntity
+                .badRequest()
+                .body(new ApiResponseVo<>(false, "500", e.getMessage(), Collections.emptyMap(), Collections.emptyMap()));
+    }
+
+    @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponseVo<?>> handleIllegalArgument(Exception e) {
         return ResponseEntity
                 .badRequest()
