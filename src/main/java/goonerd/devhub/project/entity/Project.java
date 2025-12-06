@@ -39,6 +39,7 @@ public class Project extends CommonRequestVo {
     private Project(ProjectRequestDto projectRequestDto) {
         validateRecruitCount(projectRequestDto);
         validateProjectPeriod(projectRequestDto);
+        validateProjectDescription(projectRequestDto);
         this.username = projectRequestDto.getUsername();
         this.description = projectRequestDto.getDescription();
         this.recruitCount = projectRequestDto.getRecruitCount();
@@ -64,7 +65,7 @@ public class Project extends CommonRequestVo {
 
     private void validateProjectDescription(ProjectRequestDto projectRequestDto) {
         if(projectRequestDto.getDescription().length() > 100) {
-            throw DomainException.of(ErrorCodeEnum.PROJECT_PERIOD_FAIL);
+            throw DomainException.of(ErrorCodeEnum.PROJECT_DESCRIPTION_FAIL);
         }
     }
 }

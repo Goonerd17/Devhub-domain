@@ -10,11 +10,10 @@ import java.time.LocalDate;
 @Builder
 public class ProjectResponseDto {
 
-    private Long id;
+    private String id;
     private String username;
     private String description;
     private int recruitCount;
-    private int viewCount;
     private LocalDate startDate;
     private LocalDate endDate;
 
@@ -24,7 +23,6 @@ public class ProjectResponseDto {
                 .username(project.getUsername())
                 .description(project.getDescription())
                 .recruitCount(project.getRecruitCount())
-                .viewCount(project.getViewCount())
                 .startDate(project.getStartDate())
                 .endDate(project.getEndDate())
                 .build();

@@ -9,9 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/guestbook")
+@RequestMapping("/project")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://devhub.local")
 @Slf4j
 public class ProjectController {
 
@@ -19,11 +18,10 @@ public class ProjectController {
 
     @GetMapping()
     public ResponseEntity<ApiResponseVo<?>> listProject() {
-        log.info("This is the list of guest books. testDate : 2025-12-01");
         return projectService.listProject();
     }
 
-    @PostMapping("/create")
+    @PostMapping()
     public ResponseEntity<ApiResponseVo<?>> createProject(@RequestBody ProjectRequestDto projectRequestDto) {
         return projectService.createProject(projectRequestDto);
     }

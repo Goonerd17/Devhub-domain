@@ -1,14 +1,10 @@
 package goonerd.devhub.project.dto;
 
-import goonerd.devhub.project.entity.Project;
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import lombok.AllArgsConstructor;
+import goonerd.devhub.common.enums.RegexPatternEnum;
+import goonerd.devhub.common.validation.RegexMatch;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import java.time.LocalDate;
 
@@ -17,6 +13,7 @@ import java.time.LocalDate;
 public class ProjectRequestDto {
 
     @NotBlank
+    @RegexMatch(RegexPatternEnum.USERNAME)
     private String username;
     @NotNull
     private String description;
@@ -29,13 +26,13 @@ public class ProjectRequestDto {
     @FutureOrPresent
     private LocalDate endDate;
 
-    public Project toEntity() {
-        return Project.builder()
-                .username(this.username)
-                .description(this.description)
-                .recruitCount(this.recruitCount)
-                .startDate(this.startDate)
-                .endDate(this.endDate)
-                .build();
-    }
+//    public Project toEntity() {
+//        return Project.builder()
+//                .username(this.username)
+//                .description(this.description)
+//                .recruitCount(this.recruitCount)
+//                .startDate(this.startDate)
+//                .endDate(this.endDate)
+//                .build();
+//    }
 }
