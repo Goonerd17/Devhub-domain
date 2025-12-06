@@ -24,7 +24,7 @@ public class Project extends BaseEntity {
     @GeneratedValue
     @UuidGenerator
     @Column(length = 36, nullable = false, unique = true)
-    private String id;
+    private String uuid;
     @Column
     private String username;
     @Column

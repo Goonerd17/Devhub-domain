@@ -22,13 +22,13 @@ public class ProjectService {
         List<ProjectResponseDto> projectResponseList = projectRepository.findAll().stream()
                 .map(ProjectResponseDto::fromEntity)
                 .toList();
-        return ApiResponseVo.success(SuccessCodeEnum.PROJECT_READ_SUCCESS,Collections.emptyMap(), projectResponseList);
+        return ApiResponseVo.success(SuccessCodeEnum.READ_SUCCESS,Collections.emptyMap(), projectResponseList);
     }
 
     public ApiResponseVo<ProjectResponseDto> createProject(ProjectRequestDto projectRequestDto) {
         Project project = Project.create(projectRequestDto);
         projectRepository.save(project);
         ProjectResponseDto projectResponseDto = ProjectResponseDto.fromEntity(project);
-        return ApiResponseVo.success(SuccessCodeEnum.PROJECT_CREATE_SUCCESS, projectRequestDto, projectResponseDto);
+        return ApiResponseVo.success(SuccessCodeEnum.CREATE_SUCCESS, projectRequestDto, projectResponseDto);
     }
 }
