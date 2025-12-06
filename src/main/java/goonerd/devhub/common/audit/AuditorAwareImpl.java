@@ -1,4 +1,4 @@
-package goonerd.devhub.common.component;
+package goonerd.devhub.common.audit;
 
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
@@ -11,6 +11,6 @@ public class AuditorAwareImpl implements AuditorAware<String> {
     @Override
     public Optional<String> getCurrentAuditor() {
         // SecurityContextHolder.getContext().getAuthentication().getName()
-        return Optional.of("SYSTEM"); // 테스트용 기본값
+        return Optional.of("SYSTEM");
     }
 }

@@ -25,14 +25,4 @@ public class ProjectRequestDto {
     @NotNull
     @FutureOrPresent
     private LocalDate endDate;
-
-//    public Project toEntity() {
-//        return Project.builder()
-//                .username(this.username)
-//                .description(this.description)
-//                .recruitCount(this.recruitCount)
-//                .startDate(this.startDate)
-//                .endDate(this.endDate)
-//                .build();
-//    }
 }

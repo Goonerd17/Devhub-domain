@@ -7,8 +7,6 @@ import goonerd.devhub.project.dto.ProjectResponseDto;
 import goonerd.devhub.project.entity.Project;
 import goonerd.devhub.project.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -16,7 +14,6 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
@@ -28,7 +25,7 @@ public class ProjectService {
         return ApiResponseVo.success(SuccessCodeEnum.PROJECT_READ_SUCCESS,Collections.emptyMap(), projectResponseList);
     }
 
-    public ApiResponseVo<?> createProject(ProjectRequestDto projectRequestDto) {
+    public ApiResponseVo<ProjectResponseDto> createProject(ProjectRequestDto projectRequestDto) {
         Project project = Project.create(projectRequestDto);
         projectRepository.save(project);
         ProjectResponseDto projectResponseDto = ProjectResponseDto.fromEntity(project);

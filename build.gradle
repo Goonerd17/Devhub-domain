@@ -45,6 +45,9 @@ dependencies {
 	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+	implementation 'io.micrometer:micrometer-tracing-bridge-brave'
+	implementation 'io.micrometer:micrometer-tracing'
 }
 
 tasks.named('test') {
