@@ -21,3 +21,14 @@ spring:
         show_sql: true
         format_sql: true
         use_sql_comments: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: your.email@gmail.com
+    password: your-app-password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
