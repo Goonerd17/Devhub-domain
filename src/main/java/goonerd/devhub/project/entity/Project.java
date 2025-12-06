@@ -1,8 +1,8 @@
 package goonerd.devhub.project.entity;
 
+import goonerd.devhub.common.entity.BaseEntity;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.exception.DomainException;
-import goonerd.devhub.common.vo.CommonRequestVo;
 import goonerd.devhub.project.dto.ProjectRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Project extends CommonRequestVo {
+public class Project extends BaseEntity {
 
     @Id
     @GeneratedValue
