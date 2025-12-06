@@ -2,12 +2,10 @@ package goonerd.devhub.common.aspect;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.micrometer.tracing.Tracer;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -20,38 +18,27 @@ import java.util.stream.Collectors;
 public class LoggingAspect {
 
     private final ObjectMapper objectMapper;
-    private final Tracer tracer;
 
-    public LoggingAspect(ObjectMapper objectMapper, Tracer tracer) {
+    public LoggingAspect(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
-        this.tracer = tracer;
     }
 
     @Around("execution(* goonerd.devhub..controller..*(..)) || " +
             "execution(* goonerd.devhub..service..*(..)) || " +
-            "execution(* goonerd.devhub..repository..*(..))")
+            "execution(* goonerd.devhub..repository..*(..)) ")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
 
         String className = joinPoint.getSignature().getDeclaringTypeName();
         String methodName = joinPoint.getSignature().getName();
         String params = getParamsAsJson(joinPoint.getArgs());
-
         log.info("START {}.{}() with params: {}", className, methodName, params);
 
-        try {
-            Object result = joinPoint.proceed();
-            long elapsed = System.currentTimeMillis() - start;
-            String resultLog = summarizeResult(result);
-
-            log.info("END {}.{}() in {} ms with result: {}", className, methodName, elapsed, resultLog);
-            return result;
-        } catch (Throwable ex) {
-            long elapsed = System.currentTimeMillis() - start;
-            log.error("EXCEPTION in {}.{}() after {} ms, params: {}, error: {}",
-                    className, methodName, elapsed, params, ex.getMessage(), ex);
-            throw ex;
-        }
+        Object result = joinPoint.proceed();
+        long elapsed = System.currentTimeMillis() - start;
+        String resultLog = summarizeResult(result);
+        log.info("END {}.{}() in {} ms with result: {}", className, methodName, elapsed, resultLog);
+        return result;
     }
 
     private String getParamsAsJson(Object[] args) {
