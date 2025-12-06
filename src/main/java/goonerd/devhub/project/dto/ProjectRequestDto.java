@@ -1,8 +1,14 @@
 package goonerd.devhub.project.dto;
 
 import goonerd.devhub.project.entity.Project;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import java.time.LocalDate;
 
@@ -10,11 +16,17 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class ProjectRequestDto {
 
+    @NotBlank
     private String username;
+    @NotNull
     private String description;
+    @Positive
     private int recruitCount;
-    private int viewCount;
+    @NotNull
+    @FutureOrPresent
     private LocalDate startDate;
+    @NotNull
+    @FutureOrPresent
     private LocalDate endDate;
 
     public Project toEntity() {
@@ -22,7 +34,6 @@ public class ProjectRequestDto {
                 .username(this.username)
                 .description(this.description)
                 .recruitCount(this.recruitCount)
-                .viewCount(this.viewCount)
                 .startDate(this.startDate)
                 .endDate(this.endDate)
                 .build();

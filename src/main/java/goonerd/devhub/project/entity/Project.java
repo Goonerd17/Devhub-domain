@@ -32,8 +32,6 @@ public class Project extends CommonRequestVo {
     @Column
     private int recruitCount;
     @Column
-    private int viewCount;
-    @Column
     private LocalDate startDate;
     @Column
     private LocalDate endDate;
@@ -44,7 +42,6 @@ public class Project extends CommonRequestVo {
         this.username = projectRequestDto.getUsername();
         this.description = projectRequestDto.getDescription();
         this.recruitCount = projectRequestDto.getRecruitCount();
-        this.viewCount = projectRequestDto.getViewCount();
         this.startDate = projectRequestDto.getStartDate();
         this.endDate = projectRequestDto.getEndDate();
     }
