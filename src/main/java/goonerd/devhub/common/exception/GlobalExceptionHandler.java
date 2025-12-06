@@ -23,8 +23,8 @@ public class GlobalExceptionHandler {
 
     private void logException(Exception e) {
         String traceId = MDC.get("traceId");
-        errorFileLogger.error("[{}] GlobalExceptionHandler caught Exception: {}", traceId, e.getMessage(), e);
-        log.error("[{}] GlobalExceptionHandler caught Exception: {}", traceId, e.getMessage(), e);
+        errorFileLogger.error("[{}] -----GlobalExceptionHandler-----: {}", traceId, e.getMessage(), e);
+        log.error("[{}] -----GlobalExceptionHandler-----: {}", traceId, e.getMessage(), e);
     }
 
     @ExceptionHandler(DomainException.class)
