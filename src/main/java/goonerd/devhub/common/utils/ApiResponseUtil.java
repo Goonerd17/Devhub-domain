@@ -1,7 +1,7 @@
 package goonerd.devhub.common.utils;
 
-import goonerd.devhub.common.mainEnum.ErrorCodeEnum;
-import goonerd.devhub.common.mainEnum.SuccessCodeEnum;
+import goonerd.devhub.common.enums.ErrorCodeEnum;
+import goonerd.devhub.common.enums.SuccessCodeEnum;
 import goonerd.devhub.common.vo.ApiResponseVo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

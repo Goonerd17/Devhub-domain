@@ -10,14 +10,14 @@ import java.util.Collections;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(DomainException.class)
     public ResponseEntity<ApiResponseVo<?>> handleDomainException(DomainException e) {
         return ResponseEntity
                 .badRequest()
                 .body(new ApiResponseVo<>(false, "500", e.getMessage(), Collections.emptyMap(), Collections.emptyMap()));
     }
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ApiResponseVo<?>> handleIllegalArgument(Exception e) {
         return ResponseEntity
                 .badRequest()

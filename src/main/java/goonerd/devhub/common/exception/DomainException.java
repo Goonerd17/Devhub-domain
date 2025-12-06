@@ -1,6 +1,6 @@
 package goonerd.devhub.common.exception;
 
-import goonerd.devhub.common.mainEnum.ErrorCodeEnum;
+import goonerd.devhub.common.enums.ErrorCodeEnum;
 import lombok.Getter;
 
 @Getter

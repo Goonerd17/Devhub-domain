@@ -1,7 +1,7 @@
 package goonerd.devhub.project.service;
 
-import goonerd.devhub.common.mainEnum.ErrorCodeEnum;
-import goonerd.devhub.common.mainEnum.SuccessCodeEnum;
+import goonerd.devhub.common.enums.ErrorCodeEnum;
+import goonerd.devhub.common.enums.SuccessCodeEnum;
 import goonerd.devhub.common.utils.ApiResponseUtil;
 import goonerd.devhub.common.vo.ApiResponseVo;
 import goonerd.devhub.project.dto.ProjectRequestDto;

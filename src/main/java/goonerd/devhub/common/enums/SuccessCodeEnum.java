@@ -1,4 +1,4 @@
-package goonerd.devhub.common.mainEnum;
+package goonerd.devhub.common.enums;
 
 import lombok.Getter;
 

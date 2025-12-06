@@ -1,6 +1,6 @@
 package goonerd.devhub.project.entity;
 
-import goonerd.devhub.common.mainEnum.ErrorCodeEnum;
+import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.exception.DomainException;
 import goonerd.devhub.common.vo.CommonRequestVo;
 import goonerd.devhub.project.dto.ProjectRequestDto;
@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDate;
 
@@ -19,9 +20,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Project extends CommonRequestVo {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Long id;
+    @Id
+    @GeneratedValue
+    @UuidGenerator
+    @Column(length = 36, nullable = false, unique = true)
+    private String id;
     @Column
     private String username;
     @Column
@@ -58,6 +61,12 @@ public class Project extends CommonRequestVo {
 
     private void validateProjectPeriod(ProjectRequestDto projectRequestDto) {
         if(projectRequestDto.getEndDate().isBefore(projectRequestDto.getStartDate())) {
+            throw DomainException.of(ErrorCodeEnum.PROJECT_PERIOD_FAIL);
+        }
+    }
+
+    private void validateProjectDescription(ProjectRequestDto projectRequestDto) {
+        if(projectRequestDto.getDescription().length() > 100) {
             throw DomainException.of(ErrorCodeEnum.PROJECT_PERIOD_FAIL);
         }
     }
