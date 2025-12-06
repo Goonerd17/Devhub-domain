@@ -14,7 +14,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponseVo<?>> handleDomainException(DomainException e) {
         return ResponseEntity
                 .badRequest()
-                .body(new ApiResponseVo<>(false, "500", e.getMessage(), Collections.emptyMap(), Collections.emptyMap()));
+                .body(ApiResponseVo.fail(
+                        e.getErrorCodeEnum(),
+                        Collections.emptyMap(),
+                        Collections.emptyMap()
+                ));
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
