@@ -31,7 +31,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public JwtAuthenticationFilter(JwtUtil jwtUtil, RefreshTokenService refreshTokenService) {
         this.jwtUtil = jwtUtil;
         this.refreshTokenService = refreshTokenService;
-
         setFilterProcessesUrl("/auth/login");
     }
 
@@ -64,18 +63,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         log.info("로그인 성공 및 JWT 생성");
         ObjectMapper objectMapper = new ObjectMapper();
-
         UserDetailsImpl userDetails = (UserDetailsImpl) authResult.getPrincipal();
         String username = userDetails.getUsername();
         UserRoleEnum role = userDetails.getUser().getRole();
 
-        // AccessToken 생성
-        String accessToken = jwtUtil.createAccessToken(username, role);
-
-        // RefreshToken 생성
-        String refreshToken = jwtUtil.createRefreshToken(username);
-
-        /** ⭐ RefreshToken 저장 */
+        String accessToken = jwtUtil.substringHeaderToken(jwtUtil.createAccessToken(username, role));
+        String refreshToken = jwtUtil.substringHeaderToken(jwtUtil.createRefreshToken(username));
         refreshTokenService.save(username, refreshToken);
 
         // 응답 JSON 생성

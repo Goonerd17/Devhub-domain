@@ -14,18 +14,18 @@ public class EmailService {
 
     private final JavaMailSender mailSender;
 
-    public void sendEmail(String to, String subject, String htmlBody) {
-        try {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
-
-            helper.setTo(to);
-            helper.setSubject(subject);
-            helper.setText(htmlBody, true); // true → HTML 모드
-
-            mailSender.send(message);
-        } catch (MessagingException e) {
-            throw new RuntimeException("메일 발송 실패", e);
-        }
-    }
+//    public void sendEmail(String to, String subject, String htmlBody) {
+//        try {
+//            MimeMessage message = mailSender.createMimeMessage();
+//            MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
+//
+//            helper.setTo(to);
+//            helper.setSubject(subject);
+//            helper.setText(htmlBody, true); // true → HTML 모드
+//
+//            mailSender.send(message);
+//        } catch (MessagingException e) {
+//            throw new RuntimeException("메일 발송 실패", e);
+//        }
+//    }
 }
