@@ -1,5 +1,6 @@
 package goonerd.devhub.common.utils;
 
+import goonerd.devhub.common.enums.JwtStatusEnum;
 import goonerd.devhub.common.enums.UserRoleEnum;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -27,7 +28,8 @@ public class JwtUtil {
     public static final String AUTHORIZATION_HEADER = "Authorization";
     public static final String AUTHORIZATION_KEY = "auth";
     private static final String BEARER_PREFIX = "Bearer ";
-    private static final long TOKEN_TIME = 60 * 60 * 1000L;
+    private static final long ACCESS_TOKEN_TIME = 30 * 60 * 1000L; // 30분
+    private static final long REFRESH_TOKEN_TIME = 14 * 24 * 60 * 60 * 1000L; // 2주
 
     @Value("${jwt.secret.key}")
     private String secretKey;
@@ -38,6 +40,13 @@ public class JwtUtil {
     public void init() {
         byte[] bytes = Base64.getDecoder().decode(secretKey);
         key = Keys.hmacShaKeyFor(bytes);
+    }
+
+    public String removeBearer(String token) {
+        if (token.startsWith(BEARER_PREFIX)) {
+            return token.substring(7);
+        }
+        return token;
     }
 
     // Header 토큰을 가져오기
@@ -70,37 +79,55 @@ public class JwtUtil {
         return null;
     }
 
-    // 토큰 생성
-    public String createToken(String username, UserRoleEnum role) {
-        Date date = new Date();
+    // AccessToken 생성
+    public String createAccessToken(String username, UserRoleEnum role) {
+        Date now = new Date();
         return BEARER_PREFIX +
                 Jwts.builder()
                         .setSubject(username)
                         .claim(AUTHORIZATION_KEY, role)
-                        .setExpiration(new Date(date.getTime() + TOKEN_TIME))
-                        .setIssuedAt(date)
+                        .setExpiration(new Date(now.getTime() + ACCESS_TOKEN_TIME))
+                        .setIssuedAt(now)
+                        .signWith(key, signatureAlgorithm)
+                        .compact();
+    }
+
+    // RefreshToken 생성
+    public String createRefreshToken(String username) {
+        Date now = new Date();
+        return BEARER_PREFIX +
+                Jwts.builder()
+                        .setSubject(username)
+                        .setExpiration(new Date(now.getTime() + REFRESH_TOKEN_TIME))
+                        .setIssuedAt(now)
                         .signWith(key, signatureAlgorithm)
                         .compact();
     }
 
     // 토큰 검증
-    public boolean validateToken(String token) {
+    public JwtStatusEnum validateToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
-            return true;
+            return JwtStatusEnum.VALID;
         } catch (SecurityException | MalformedJwtException e) {
             log.info("Invalid JWT signature, 유효하지 않는 JWT 서명 입니다.");
+            return JwtStatusEnum.INVALID;
         } catch (ExpiredJwtException e) {
             log.info("Expired JWT token, 만료된 JWT token 입니다.");
+            return JwtStatusEnum.EXPIRED;
         } catch (UnsupportedJwtException e) {
             log.info("Unsupported JWT token, 지원되지 않는 JWT 토큰 입니다.");
+            return JwtStatusEnum.INVALID;
         } catch (IllegalArgumentException e) {
             log.info("JWT claims is empty, 잘못된 JWT 토큰 입니다.");
-        } return false;
+            return JwtStatusEnum.INVALID;
+        } finally {
+            log.info("JWT 토큰 검증 완료");
+        }
     }
 
     // 토큰에서 사용자 정보 가져오기
-    public Claims getUserInfoFromToken(String token) {
+    public Claims getUserInfo(String token) {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
     }
 }
