@@ -2,7 +2,7 @@ package goonerd.devhub.project.entity;
 
 import goonerd.devhub.common.entity.BaseEntity;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
-import goonerd.devhub.common.exception.DomainException;
+import goonerd.devhub.common.exception.DomainRuleException;
 import goonerd.devhub.project.dto.ProjectRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,7 +24,7 @@ public class Project extends BaseEntity {
     @GeneratedValue
     @UuidGenerator
     @Column(length = 36, nullable = false, unique = true)
-    private String uuid;
+    private String projectId;
     @Column
     private String username;
     @Column
@@ -53,19 +53,19 @@ public class Project extends BaseEntity {
 
     private void validateRecruitCount(ProjectRequestDto projectRequestDto) {
         if(projectRequestDto.getRecruitCount() < 1) {
-            throw DomainException.of(ErrorCodeEnum.PROJECT_RECRUITCOUNT_FAIL);
+            throw DomainRuleException.of(ErrorCodeEnum.PROJECT_RECRUITCOUNT_FAIL);
         }
     }
 
     private void validateProjectPeriod(ProjectRequestDto projectRequestDto) {
         if(projectRequestDto.getEndDate().isBefore(projectRequestDto.getStartDate())) {
-            throw DomainException.of(ErrorCodeEnum.PROJECT_PERIOD_FAIL);
+            throw DomainRuleException.of(ErrorCodeEnum.PROJECT_PERIOD_FAIL);
         }
     }
 
     private void validateProjectDescription(ProjectRequestDto projectRequestDto) {
         if(projectRequestDto.getDescription().length() > 100) {
-            throw DomainException.of(ErrorCodeEnum.PROJECT_DESCRIPTION_FAIL);
+            throw DomainRuleException.of(ErrorCodeEnum.PROJECT_DESCRIPTION_FAIL);
         }
     }
 }

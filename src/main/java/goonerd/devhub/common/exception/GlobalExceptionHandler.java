@@ -27,8 +27,15 @@ public class GlobalExceptionHandler {
         log.error("[{}] -----GlobalExceptionHandler-----: {}", traceId, e.getMessage(), e);
     }
 
-    @ExceptionHandler(DomainException.class)
-    public ResponseEntity<ApiResponseVo<?>> handleDomainException(DomainException e) {
+    @ExceptionHandler(DomainRuleException.class)
+    public ResponseEntity<ApiResponseVo<?>> handleDomainException(DomainRuleException e) {
+        logException(e);
+        return ResponseEntity.badRequest()
+                .body(ApiResponseVo.fail(e.getErrorCodeEnum(), Collections.emptyMap(), Collections.emptyMap()));
+    }
+
+    @ExceptionHandler(BusinessRuleException.class)
+    public ResponseEntity<ApiResponseVo<?>> handleBusinessRuleException(BusinessRuleException e) {
         logException(e);
         return ResponseEntity.badRequest()
                 .body(ApiResponseVo.fail(e.getErrorCodeEnum(), Collections.emptyMap(), Collections.emptyMap()));

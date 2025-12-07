@@ -4,7 +4,7 @@ org.springframework.web.bind.MethodArgumentNotValidException: Validation failed 
 	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122)
 	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:227)
 2025-12-06 18:25:17.611 [http-nio-8080-exec-4] ERROR ERROR_FILE [b676eca5c0] - [b676eca5c0] GlobalExceptionHandler caught Exception: 프로젝트 종료일은 시작일 이후여야 합니다.
-goonerd.devhub.common.exception.DomainException: 프로젝트 종료일은 시작일 이후여야 합니다.
-	at goonerd.devhub.common.exception.DomainException.of(DomainException.java:17)
+goonerd.devhub.common.exception.DomainRuleException: 프로젝트 종료일은 시작일 이후여야 합니다.
+	at goonerd.devhub.common.exception.DomainRuleException.of(DomainException.java:17)
 	at goonerd.devhub.project.entity.Project.validateProjectPeriod(Project.java:62)
 	at goonerd.devhub.project.entity.Project.<init>(Project.java:41)

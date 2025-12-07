@@ -18,7 +18,7 @@ public class User extends BaseEntity {
     @GeneratedValue
     @UuidGenerator
     @Column(length = 36, nullable = false, unique = true)
-    private String uuid;
+    private String userId;
 
     @Column(unique = true)
     private String username;
@@ -36,7 +36,7 @@ public class User extends BaseEntity {
         this.role = role;
     }
 
-    public static User create(String username, String password, UserRoleEnum role) {
+    public static User createLocalUser(String username, String password, UserRoleEnum role) {
         return new User(username, password, role);
     }
 }

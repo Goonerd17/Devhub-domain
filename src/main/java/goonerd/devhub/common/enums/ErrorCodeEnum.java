@@ -19,6 +19,7 @@ public enum ErrorCodeEnum {
     TOKEN_INVALID("ERR.DVH.011", "토큰 무효", BAD_REQUEST),
     SIGNUP_FAIL("ERR.DVH.012", "회원가입 실패", BAD_REQUEST),
     LOGIN_FAIL("ERR.DVH.013", "로그인 실패", BAD_REQUEST),
+    DUPLICATE_USERNAME("ERR.DVH.014", "유저명 중복", BAD_REQUEST),
 
     PROJECT_RECRUITCOUNT_FAIL("ERR.DVH.051", "모집 인원은 최소 1명 이상이어야 합니다.", BAD_REQUEST),
     PROJECT_PERIOD_FAIL("ERR.DVH.052", "프로젝트 종료일은 시작일 이후여야 합니다.",BAD_REQUEST),

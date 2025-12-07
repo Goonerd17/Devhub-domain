@@ -4,16 +4,16 @@ import goonerd.devhub.common.enums.ErrorCodeEnum;
 import lombok.Getter;
 
 @Getter
-public class DomainException extends RuntimeException {
+public class BusinessRuleException extends RuntimeException {
 
     private final ErrorCodeEnum errorCodeEnum;
 
-    private DomainException(ErrorCodeEnum errorCodeEnum) {
+    private BusinessRuleException(ErrorCodeEnum errorCodeEnum) {
         super(errorCodeEnum.getMessage());
         this.errorCodeEnum = errorCodeEnum;
     }
 
-    public static DomainException of(ErrorCodeEnum errorCode) {
-        return new DomainException(errorCode);
+    public static BusinessRuleException of(ErrorCodeEnum errorCode) {
+        return new BusinessRuleException(errorCode);
     }
 }
