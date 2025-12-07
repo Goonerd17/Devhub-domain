@@ -24,7 +24,7 @@ public class ProjectResponseDto {
 
     public static ProjectResponseDto fromEntity(Project project) {
         return ProjectResponseDto.builder()
-                .id(project.getId())
+                .id(project.getProjectId())
                 .username(project.getUsername())
                 .description(project.getDescription())
                 .recruitCount(project.getRecruitCount())

@@ -41,3 +41,4 @@ out/
 /Jenkinsfile-dev
 
 /src/main/resources/application.yml
+/logs/error.log
