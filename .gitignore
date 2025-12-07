@@ -39,3 +39,5 @@ out/
 ### script
 /Jenkinsfile-prd
 /Jenkinsfile-dev
+
+/src/main/resources/application.yml
