@@ -1,0 +1,79 @@
+package goonerd.devhub.common.exception;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import goonerd.devhub.common.enums.ErrorCodeEnum;
+import goonerd.devhub.common.vo.ApiResponseVo;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Map;
+
+@Slf4j
+@Component
+public class FilterExceptionHandler {
+
+    private final ObjectMapper mapper = new ObjectMapper();
+
+    public void handle(HttpServletResponse res, ErrorCodeEnum errorCodeEnum) {
+
+        try {
+            // 이미 커밋된 응답이 있으면 초기화 (이게 핵심!)
+            if (res.isCommitted()) {
+                res.resetBuffer();
+            }
+
+            res.setStatus(errorCodeEnum.getStatus().value());
+            res.setContentType("application/json");
+            res.setCharacterEncoding("UTF-8");
+
+            ApiResponseVo<?> result = ApiResponseVo.fail(
+                    errorCodeEnum,
+                    Collections.emptyMap(),   // param
+                    null                      // data
+            );
+
+            String json = mapper.writeValueAsString(result);
+
+            res.getWriter().write(json);
+            res.getWriter().flush();
+
+        } catch (Exception e) {
+            log.error("FilterExceptionHandler response write error", e);
+        }
+    }
+
+    public void handle(HttpServletResponse res, Throwable ex) {
+        log.error("Filter exception occurred", ex);
+
+        res.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        res.setContentType("application/json");
+        res.setCharacterEncoding("UTF-8");
+
+        // 메시지 null 방지
+        String message = ex.getMessage();
+        if (message == null || message.isBlank()) {
+            message = "An unexpected error occurred";
+        }
+
+        // 메시지를 담은 JSON 구조 생성
+        Map<String, Object> errorBody = Map.of(
+                "message", message
+        );
+
+        ApiResponseVo<?> result = ApiResponseVo.fail(
+                ErrorCodeEnum.UNKNOWN_FAIL,   // 기본 코드 사용
+                errorBody,
+                res
+        );
+
+        try {
+            res.getWriter().write(mapper.writeValueAsString(result));
+        } catch (IOException e) {
+            log.error("FilterExceptionHandler response write error", e);
+        }
+    }
+}

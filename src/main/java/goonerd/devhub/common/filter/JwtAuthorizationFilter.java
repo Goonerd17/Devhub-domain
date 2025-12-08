@@ -4,9 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import goonerd.devhub.common.auth.UserDetailsServiceImpl;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.JwtStatusEnum;
+import goonerd.devhub.common.exception.FilterExceptionHandler;
+import goonerd.devhub.common.exception.JwtAuthenticationException;
 import goonerd.devhub.common.utils.JwtUtil;
 import goonerd.devhub.common.vo.ApiResponseVo;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,6 +33,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
+    private final FilterExceptionHandler filterExceptionHandler;
 
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain)
@@ -46,30 +50,25 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         String pureToken = jwtUtil.substringHeaderToken(token);
         JwtStatusEnum status = jwtUtil.validateToken(pureToken);
 
-        switch (status) {
-            case EXPIRED:
-                sendError(res, ErrorCodeEnum.TOKEN_EXPIRED);
-                return;
-            case INVALID:
-                sendError(res, ErrorCodeEnum.TOKEN_INVALID);
-                return;
-            case VALID:
-                Claims claims = jwtUtil.getUserInfo(pureToken);
-                setAuthentication(claims.getSubject());
-                break;
+        try {
+            switch (status) {
+                case EXPIRED:
+                    throw JwtAuthenticationException.of(ErrorCodeEnum.TOKEN_EXPIRED);
+                case INVALID:
+                    throw JwtAuthenticationException.of(ErrorCodeEnum.TOKEN_INVALID);
+                case VALID:
+                    Claims claims = jwtUtil.getUserInfo(pureToken);
+                    setAuthentication(claims.getSubject());
+                    break;
+            }
+            filterChain.doFilter(req, res);
+        } catch (JwtAuthenticationException e) {
+            filterExceptionHandler.handle(res, e.getErrorCodeEnum());
+        } catch (JwtException e) {
+            filterExceptionHandler.handle(res, e);
+        } catch (Exception e) {
+            filterExceptionHandler.handle(res, e);
         }
-
-        filterChain.doFilter(req, res);
-    }
-
-    private void sendError(HttpServletResponse res, ErrorCodeEnum errorCodeEnum) throws IOException {
-        ApiResponseVo<?> result = ApiResponseVo.fail(errorCodeEnum, Collections.emptyMap(), res);
-        ObjectMapper mapper = new ObjectMapper();
-
-        res.setContentType("application/json");
-        res.setCharacterEncoding("UTF-8");
-        res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        res.getWriter().write(mapper.writeValueAsString(result));
     }
 
     public void setAuthentication(String username) {

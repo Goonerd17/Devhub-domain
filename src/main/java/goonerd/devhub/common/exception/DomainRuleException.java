@@ -13,7 +13,7 @@ public class DomainRuleException extends RuntimeException {
         this.errorCodeEnum = errorCodeEnum;
     }
 
-    public static DomainRuleException of(ErrorCodeEnum errorCode) {
-        return new DomainRuleException(errorCode);
+    public static DomainRuleException of(ErrorCodeEnum errorCodeEnum) {
+        return new DomainRuleException(errorCodeEnum);
     }
 }

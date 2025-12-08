@@ -17,13 +17,17 @@ public enum ErrorCodeEnum {
 
     TOKEN_EXPIRED("ERR.DVH.010", "토큰 만료", BAD_REQUEST),
     TOKEN_INVALID("ERR.DVH.011", "토큰 무효", BAD_REQUEST),
-    SIGNUP_FAIL("ERR.DVH.012", "회원가입 실패", BAD_REQUEST),
-    LOGIN_FAIL("ERR.DVH.013", "로그인 실패", BAD_REQUEST),
-    DUPLICATE_USERNAME("ERR.DVH.014", "유저명 중복", BAD_REQUEST),
+    MISSING_AUTH_HEADER("ERR.DVH.012", "Authorization header 가 없습니다.", BAD_REQUEST),
+    UNSUPPORTED_TOKEN("ERR.DVH.013", "지원되지 않는 토큰 형식입니다.", BAD_REQUEST),
+    SIGNUP_FAIL("ERR.DVH.014", "회원가입 실패", BAD_REQUEST),
+    LOGIN_FAIL("ERR.DVH.015", "로그인 실패", BAD_REQUEST),
+    DUPLICATE_USERNAME("ERR.DVH.016", "유저명 중복", BAD_REQUEST),
 
     PROJECT_RECRUITCOUNT_FAIL("ERR.DVH.051", "모집 인원은 최소 1명 이상이어야 합니다.", BAD_REQUEST),
     PROJECT_PERIOD_FAIL("ERR.DVH.052", "프로젝트 종료일은 시작일 이후여야 합니다.",BAD_REQUEST),
-    PROJECT_DESCRIPTION_FAIL("ERR.DVH.052", "프로젝트 설명은 100자를 넘길 수 없습니다.",BAD_REQUEST);
+    PROJECT_DESCRIPTION_FAIL("ERR.DVH.052", "프로젝트 설명은 100자를 넘길 수 없습니다.",BAD_REQUEST),
+
+    UNKNOWN_FAIL("ERR.DVH.999", "에러 발생",BAD_REQUEST);
 
     private final String code;
     private final String message;
