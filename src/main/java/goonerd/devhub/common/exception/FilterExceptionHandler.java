@@ -21,7 +21,7 @@ public class FilterExceptionHandler {
     public void handle(HttpServletResponse res, ErrorCodeEnum errorCodeEnum) {
 
         try {
-            // 이미 커밋된 응답이 있으면 초기화 (이게 핵심!)
+            // 이미 커밋된 응답이 있으면 초기화
             if (res.isCommitted()) {
                 res.resetBuffer();
             }
@@ -30,12 +30,7 @@ public class FilterExceptionHandler {
             res.setContentType("application/json");
             res.setCharacterEncoding("UTF-8");
 
-            ApiResponseVo<?> result = ApiResponseVo.fail(
-                    errorCodeEnum,
-                    Collections.emptyMap(),   // param
-                    null                      // data
-            );
-
+            ApiResponseVo<?> result = ApiResponseVo.failureWithoutParam(errorCodeEnum);
             String json = mapper.writeValueAsString(result);
 
             res.getWriter().write(json);
@@ -64,11 +59,7 @@ public class FilterExceptionHandler {
                 "message", message
         );
 
-        ApiResponseVo<?> result = ApiResponseVo.fail(
-                ErrorCodeEnum.UNKNOWN_FAIL,   // 기본 코드 사용
-                errorBody,
-                res
-        );
+        ApiResponseVo<?> result = ApiResponseVo.failureFromFilter(ex);
 
         try {
             res.getWriter().write(mapper.writeValueAsString(result));

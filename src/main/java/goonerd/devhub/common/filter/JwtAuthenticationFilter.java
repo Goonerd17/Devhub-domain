@@ -72,11 +72,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         refreshTokenService.save(username, refreshToken);
 
         // 응답 JSON 생성
-        ApiResponseVo<?> responseBody = ApiResponseVo.success(
+        ApiResponseVo<?> responseBody = ApiResponseVo.successWithData(
                 SuccessCodeEnum.LOGIN_SUCCESS,
-                Map.of("accessToken", accessToken, "refreshToken", refreshToken),
-                Collections.emptyMap()
-        );
+                Map.of("accessToken", accessToken, "refreshToken", refreshToken));
 
         String jsonResponse = objectMapper.writeValueAsString(responseBody);
 
@@ -97,11 +95,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         log.info("로그인 실패");
         ObjectMapper objectMapper = new ObjectMapper();
 
-        ApiResponseVo<?> apiResponse = ApiResponseVo.fail(
-                ErrorCodeEnum.LOGIN_FAIL,
-                Collections.emptyMap(),
-                Collections.emptyMap()
-        );
+        ApiResponseVo<?> apiResponse = ApiResponseVo.failureWithoutParam(ErrorCodeEnum.LOGIN_FAIL);
 
         String jsonResponse = objectMapper.writeValueAsString(apiResponse);
 

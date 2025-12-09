@@ -35,7 +35,7 @@ public class UserService {
 
         User user = User.createLocalUser(username, password, role);
         userRepository.save(user);
-        return ApiResponseVo.success(SuccessCodeEnum.CREATE_SUCCESS, signupRequestDto, Collections.emptyMap());
+        return ApiResponseVo.successWithParam(SuccessCodeEnum.CREATE_SUCCESS, signupRequestDto);
     }
 
     private void checkDuplicatedUsername(String username) {

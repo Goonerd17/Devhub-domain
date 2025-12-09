@@ -11,7 +11,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,14 +30,14 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponseVo<?>> handleDomainException(DomainRuleException e) {
         logException(e);
         return ResponseEntity.badRequest()
-                .body(ApiResponseVo.fail(e.getErrorCodeEnum(), Collections.emptyMap(), Collections.emptyMap()));
+                .body(ApiResponseVo.failureWithoutParam(e.getErrorCodeEnum()));
     }
 
     @ExceptionHandler(BusinessRuleException.class)
     public ResponseEntity<ApiResponseVo<?>> handleBusinessRuleException(BusinessRuleException e) {
         logException(e);
         return ResponseEntity.badRequest()
-                .body(ApiResponseVo.fail(e.getErrorCodeEnum(), Collections.emptyMap(), Collections.emptyMap()));
+                .body(ApiResponseVo.failureWithoutParam(e.getErrorCodeEnum()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -47,8 +46,8 @@ public class GlobalExceptionHandler {
         Map<String, String> errors = new HashMap<>();
         e.getBindingResult().getFieldErrors().
                 forEach(err -> errors.put(err.getField(), err.getDefaultMessage()));
-        return ResponseEntity.badRequest().body(
-                ApiResponseVo.fail(ErrorCodeEnum.VALIDATION_FAIL, Collections.emptyMap(), errors)
+        return ResponseEntity.badRequest()
+                .body(ApiResponseVo.failureWithParam(ErrorCodeEnum.VALIDATION_FAIL, errors)
         );
     }
 
@@ -56,6 +55,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponseVo<?>> handleException(Exception e) {
         logException(e);
         return ResponseEntity.badRequest()
-                .body(new ApiResponseVo<>(false, "500", e.getMessage(), Collections.emptyMap(), Collections.emptyMap()));
+                .body(ApiResponseVo.failureFromThrowable(e));
     }
 }
