@@ -1,4 +1,4 @@
-package goonerd.devhub.common.exception;
+package goonerd.devhub.common.component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
@@ -9,12 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Map;
 
 @Slf4j
 @Component
-public class FilterExceptionHandler {
+public class CustomFilterExceptionHandler {
 
     private final ObjectMapper mapper = new ObjectMapper();
 

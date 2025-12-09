@@ -17,7 +17,6 @@ public class ApiResponseVo <T> {
 
     private boolean success;
     private String code;
-    private String message;
     private Object param;
     private T data;
     private ErrorResponseVo error;
@@ -26,7 +25,6 @@ public class ApiResponseVo <T> {
         return ApiResponseVo.<T>builder()
                 .success(true)
                 .code(codeEnum.getCode())
-                .message(codeEnum.getMessage())
                 .param(param)
                 .data(data)
                 .build();
@@ -36,7 +34,6 @@ public class ApiResponseVo <T> {
         return ApiResponseVo.<T>builder()
                 .success(true)
                 .code(codeEnum.getCode())
-                .message(codeEnum.getMessage())
                 .param(param)
                 .build();
     }
@@ -45,7 +42,6 @@ public class ApiResponseVo <T> {
         return ApiResponseVo.<T>builder()
                 .success(true)
                 .code(codeEnum.getCode())
-                .message(codeEnum.getMessage())
                 .data(data)
                 .build();
     }
@@ -54,7 +50,6 @@ public class ApiResponseVo <T> {
         return ApiResponseVo.<Void>builder()
                 .success(true)
                 .code(codeEnum.getCode())
-                .message(codeEnum.getMessage())
                 .build();
     }
     
@@ -62,8 +57,16 @@ public class ApiResponseVo <T> {
         return ApiResponseVo.<T>builder()
                 .success(false)
                 .code(errorCode.getCode())
-                .message(errorCode.getMessage())
                 .param(param)
+                .error(ErrorResponseVo.of(errorCode))
+                .build();
+    }
+
+    public static <T> ApiResponseVo<T> failureWithData(ErrorCodeEnum errorCode, T data) {
+        return ApiResponseVo.<T>builder()
+                .success(false)
+                .code(errorCode.getCode())
+                .data(data)
                 .error(ErrorResponseVo.of(errorCode))
                 .build();
     }
@@ -72,7 +75,6 @@ public class ApiResponseVo <T> {
         return ApiResponseVo.<T>builder()
                 .success(false)
                 .code(errorCode.getCode())
-                .message(errorCode.getMessage())
                 .error(ErrorResponseVo.of(errorCode))
                 .build();
     }
@@ -81,25 +83,16 @@ public class ApiResponseVo <T> {
         return ApiResponseVo.<T>builder()
                 .success(false)
                 .code(ErrorCodeEnum.UNKNOWN_FAIL.getCode())
-                .message(throwable.getMessage())
                 .error(ErrorResponseVo.of(throwable))
                 .build();
     }
 
     public static <T> ApiResponseVo<T> failureFromFilter(Throwable throwable) {
-        String message = throwable.getMessage();
-        if (message == null || message.isBlank()) {
-            message = ErrorCodeEnum.UNKNOWN_FAIL.getMessage();
-        }
-
-        Map<String, Object> param = Map.of(
-                "exception", throwable.getClass().getSimpleName()
-        );
+        Map<String, Object> param = Map.of("exception", throwable.getClass().getSimpleName());
 
         return ApiResponseVo.<T>builder()
                 .success(false)
                 .code(ErrorCodeEnum.UNKNOWN_FAIL.getCode())
-                .message(message)
                 .param(param)
                 .error(ErrorResponseVo.of(throwable))
                 .build();

@@ -1,13 +1,11 @@
 package goonerd.devhub.common.filter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import goonerd.devhub.common.auth.UserDetailsServiceImpl;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.JwtStatusEnum;
-import goonerd.devhub.common.exception.FilterExceptionHandler;
+import goonerd.devhub.common.component.CustomFilterExceptionHandler;
 import goonerd.devhub.common.exception.JwtAuthenticationException;
 import goonerd.devhub.common.utils.JwtUtil;
-import goonerd.devhub.common.vo.ApiResponseVo;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
@@ -25,7 +23,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Collections;
 
 @Slf4j(topic = "JWT 검증, 인가")
 @RequiredArgsConstructor
@@ -33,7 +30,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
-    private final FilterExceptionHandler filterExceptionHandler;
+    private final CustomFilterExceptionHandler customFilterExceptionHandler;
 
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain)
@@ -63,11 +60,11 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             }
             filterChain.doFilter(req, res);
         } catch (JwtAuthenticationException e) {
-            filterExceptionHandler.handle(res, e.getErrorCodeEnum());
+            customFilterExceptionHandler.handle(res, e.getErrorCodeEnum());
         } catch (JwtException e) {
-            filterExceptionHandler.handle(res, e);
+            customFilterExceptionHandler.handle(res, e);
         } catch (Exception e) {
-            filterExceptionHandler.handle(res, e);
+            customFilterExceptionHandler.handle(res, e);
         }
     }
 

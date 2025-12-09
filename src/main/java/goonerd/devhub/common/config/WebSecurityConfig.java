@@ -2,10 +2,12 @@ package goonerd.devhub.common.config;
 
 import goonerd.devhub.common.auth.RefreshTokenService;
 import goonerd.devhub.common.auth.UserDetailsServiceImpl;
-import goonerd.devhub.common.exception.FilterExceptionHandler;
+import goonerd.devhub.common.component.CustomAuthenticationEntryPoint;
+import goonerd.devhub.common.component.CustomFilterExceptionHandler;
 import goonerd.devhub.common.filter.JwtAuthenticationFilter;
 import goonerd.devhub.common.filter.JwtAuthorizationFilter;
 import goonerd.devhub.common.filter.JwtExceptionFilter;
+import goonerd.devhub.common.component.CustomAccessDeniedHandler;
 import goonerd.devhub.common.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -36,7 +38,9 @@ public class WebSecurityConfig {
     private final RefreshTokenService refreshTokenService;
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthenticationConfiguration authenticationConfiguration;
-    private final FilterExceptionHandler filterExceptionHandler;
+    private final CustomFilterExceptionHandler customFilterExceptionHandler;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     @Bean
     public JwtExceptionFilter jwtExceptionFilter() {
@@ -57,7 +61,7 @@ public class WebSecurityConfig {
 
     @Bean
     public JwtAuthorizationFilter jwtAuthorizationFilter() {
-        return new JwtAuthorizationFilter(jwtUtil, userDetailsService, filterExceptionHandler);
+        return new JwtAuthorizationFilter(jwtUtil, userDetailsService, customFilterExceptionHandler);
     }
 
     @Bean
@@ -78,9 +82,11 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        // CSRF 설정, CORS 설정, 기존 세션 방식 -> JWT 방식
         http
                 .csrf((csrf) -> csrf.disable())
+                .exceptionHandling(ex -> ex
+                        .accessDeniedHandler(customAccessDeniedHandler)
+                        .authenticationEntryPoint(customAuthenticationEntryPoint))
                 .cors(withDefaults())
                 .sessionManagement((sessionManagement) ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

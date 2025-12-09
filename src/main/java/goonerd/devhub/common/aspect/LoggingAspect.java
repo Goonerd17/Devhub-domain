@@ -2,6 +2,7 @@ package goonerd.devhub.common.aspect;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -15,13 +16,10 @@ import java.util.stream.Collectors;
 @Slf4j
 @Aspect
 @Component
+@RequiredArgsConstructor
 public class LoggingAspect {
 
     private final ObjectMapper objectMapper;
-
-    public LoggingAspect(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
-    }
 
     @Around("execution(* goonerd.devhub..controller..*(..)) || " +
             "execution(* goonerd.devhub..service..*(..)) || " +
@@ -32,12 +30,15 @@ public class LoggingAspect {
         String className = joinPoint.getSignature().getDeclaringTypeName();
         String methodName = joinPoint.getSignature().getName();
         String params = getParamsAsJson(joinPoint.getArgs());
+
         log.info("START {}.{}() with params: {}", className, methodName, params);
 
         Object result = joinPoint.proceed();
         long elapsed = System.currentTimeMillis() - start;
         String resultLog = summarizeResult(result);
+
         log.info("END {}.{}() in {} ms with result: {}", className, methodName, elapsed, resultLog);
+
         return result;
     }
 
