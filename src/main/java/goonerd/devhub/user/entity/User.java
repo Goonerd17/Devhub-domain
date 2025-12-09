@@ -40,4 +40,8 @@ public class User extends BaseEntity {
     public static User createLocalUser(String username, String password, UserRoleEnum role) {
         return new User(username, password, role);
     }
+
+    public static User createAdminUser(String username, String password, UserRoleEnum role) {
+        return new User(username, password, role);
+    }
 }

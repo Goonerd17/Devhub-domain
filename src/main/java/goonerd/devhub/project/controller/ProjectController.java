@@ -1,6 +1,6 @@
 package goonerd.devhub.project.controller;
 
-import goonerd.devhub.common.dto.PageRequestDto;
+import goonerd.devhub.common.vo.PageRequestVo;
 import goonerd.devhub.common.vo.ApiResponseVo;
 import goonerd.devhub.common.vo.PageVo;
 import goonerd.devhub.project.dto.ProjectCreateRequestDto;
@@ -20,7 +20,7 @@ public class ProjectController {
     private final ProjectService projectService;
 
     @GetMapping()
-    public ResponseEntity<ApiResponseVo<PageVo<ProjectResponseDto>>> listProject(ProjectSearchRequestDto projectSearchRequestDto,PageRequestDto pageable) {
+    public ResponseEntity<ApiResponseVo<PageVo<ProjectResponseDto>>> listProject(ProjectSearchRequestDto projectSearchRequestDto, PageRequestVo pageable) {
         return ResponseEntity.ok(projectService.listProject(projectSearchRequestDto, pageable));
     }
 

@@ -1,6 +1,6 @@
 package goonerd.devhub.project.service;
 
-import goonerd.devhub.common.dto.PageRequestDto;
+import goonerd.devhub.common.vo.PageRequestVo;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
 import goonerd.devhub.common.converter.PageConverter;
 import goonerd.devhub.common.vo.ApiResponseVo;
@@ -20,7 +20,7 @@ public class ProjectService {
 
     private final ProjectRepository projectRepository;
 
-    public ApiResponseVo<PageVo<ProjectResponseDto>> listProject(ProjectSearchRequestDto projectSearchRequestDto, PageRequestDto pageable) {
+    public ApiResponseVo<PageVo<ProjectResponseDto>> listProject(ProjectSearchRequestDto projectSearchRequestDto, PageRequestVo pageable) {
         Page<Project> projectPage = projectRepository.findAll(pageable.toPageable());
         PageVo<ProjectResponseDto> projectResponse = PageConverter.convert(projectPage, ProjectResponseDto::fromEntity);
         return ApiResponseVo.successWithData(SuccessCodeEnum.READ_SUCCESS, projectResponse);

@@ -1,4 +1,4 @@
-package goonerd.devhub.common.auth;
+package goonerd.devhub.common.auth.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

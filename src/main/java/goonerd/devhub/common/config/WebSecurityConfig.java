@@ -1,7 +1,7 @@
 package goonerd.devhub.common.config;
 
-import goonerd.devhub.common.auth.RefreshTokenService;
-import goonerd.devhub.common.auth.UserDetailsServiceImpl;
+import goonerd.devhub.common.auth.service.RefreshTokenService;
+import goonerd.devhub.common.auth.userdetails.UserDetailsServiceImpl;
 import goonerd.devhub.common.component.CustomAuthenticationEntryPoint;
 import goonerd.devhub.common.component.CustomFilterExceptionHandler;
 import goonerd.devhub.common.filter.JwtAuthenticationFilter;

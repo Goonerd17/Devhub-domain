@@ -10,7 +10,7 @@ public enum SuccessCodeEnum {
     UPDATE_SUCCESS("SUC.DVH.003", "수정 성공"),
     DELETE_SUCCESS("SUC.DVH.004", "삭제 성공"),
 
-    LOGIN_SUCCESS("SUC.DVH.013", "로그인성공");
+    LOGIN_SUCCESS("SUC.DVH.010", "로그인성공");
 
     private final String code;
     private final String message;

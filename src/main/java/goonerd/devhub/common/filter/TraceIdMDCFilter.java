@@ -1,7 +1,5 @@
 package goonerd.devhub.common.filter;
 
-import brave.Span;
-import brave.Tracer;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,12 +14,7 @@ import java.util.UUID;
 @Component
 public class TraceIdMDCFilter extends OncePerRequestFilter {
 
-    private final Tracer tracer;
     private static final String TRACE_ID_KEY = "traceId";
-
-    public TraceIdMDCFilter(Tracer tracer) {
-        this.tracer = tracer;
-    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,

@@ -1,8 +1,8 @@
 package goonerd.devhub.common.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import goonerd.devhub.common.auth.RefreshTokenService;
-import goonerd.devhub.common.auth.UserDetailsImpl;
+import goonerd.devhub.common.auth.service.RefreshTokenService;
+import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
 import goonerd.devhub.common.enums.UserRoleEnum;
@@ -19,7 +19,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Map;
 
 @Slf4j

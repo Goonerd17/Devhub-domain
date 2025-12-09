@@ -1,6 +1,6 @@
 package goonerd.devhub.common.filter;
 
-import goonerd.devhub.common.auth.UserDetailsServiceImpl;
+import goonerd.devhub.common.auth.userdetails.UserDetailsServiceImpl;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.JwtStatusEnum;
 import goonerd.devhub.common.component.CustomFilterExceptionHandler;

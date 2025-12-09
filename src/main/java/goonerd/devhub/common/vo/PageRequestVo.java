@@ -1,4 +1,4 @@
-package goonerd.devhub.common.dto;
+package goonerd.devhub.common.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PageRequestDto {
+public class PageRequestVo {
 
     private int page = 0;
     private int size = 10;

@@ -17,12 +17,9 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
-    public void handle(HttpServletRequest request,
-                       HttpServletResponse response,
-                       AccessDeniedException accessDeniedException) throws IOException {
+    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
 
         ApiResponseVo<?> result = ApiResponseVo.failureFromThrowable(accessDeniedException);
-
         response.setStatus(HttpStatus.FORBIDDEN.value());
         response.setContentType("application/json;charset=UTF-8");
 

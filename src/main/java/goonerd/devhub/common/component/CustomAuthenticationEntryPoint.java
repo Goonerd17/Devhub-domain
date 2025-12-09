@@ -19,14 +19,9 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
-    public void commence(HttpServletRequest request,
-                         HttpServletResponse response,
-                         AuthenticationException authException) throws IOException {
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
 
-        ApiResponseVo<?> result = ApiResponseVo.failureWithData(
-                ErrorCodeEnum.AUTH_INVALID,
-                Map.of("reason", authException.getMessage())
-        );
+        ApiResponseVo<?> result = ApiResponseVo.failureWithData(ErrorCodeEnum.AUTH_INVALID, Map.of("reason", authException.getMessage()));
 
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setContentType("application/json;charset=UTF-8");

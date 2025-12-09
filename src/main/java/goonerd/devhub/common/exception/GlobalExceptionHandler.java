@@ -44,8 +44,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponseVo<?>> handleValidationException(MethodArgumentNotValidException e) {
         logException(e);
         Map<String, String> errors = new HashMap<>();
-        e.getBindingResult().getFieldErrors().
-                forEach(err -> errors.put(err.getField(), err.getDefaultMessage()));
+        e.getBindingResult().getFieldErrors().forEach(err -> errors.put(err.getField(), err.getDefaultMessage()));
         return ResponseEntity.badRequest()
                 .body(ApiResponseVo.failureWithParam(ErrorCodeEnum.VALIDATION_FAIL, errors)
         );

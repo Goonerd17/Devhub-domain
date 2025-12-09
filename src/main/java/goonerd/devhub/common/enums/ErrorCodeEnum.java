@@ -29,7 +29,7 @@ public enum ErrorCodeEnum {
     PROJECT_PERIOD_FAIL("ERR.DVH.052", "프로젝트 종료일은 시작일 이후여야 합니다.",BAD_REQUEST),
     PROJECT_DESCRIPTION_FAIL("ERR.DVH.052", "프로젝트 설명은 100자를 넘길 수 없습니다.",BAD_REQUEST),
 
-    UNKNOWN_FAIL("ERR.DVH.999", "에러 발생",BAD_REQUEST);
+    UNKNOWN_FAIL("ERR.DVH.999", "원인 미상의 에러가 발생했습니다.",BAD_REQUEST);
 
     private final String code;
     private final String message;

@@ -1,4 +1,4 @@
-package goonerd.devhub.common.auth;
+package goonerd.devhub.common.auth.userdetails;
 
 import goonerd.devhub.user.entity.User;
 import goonerd.devhub.user.repository.UserRepository;

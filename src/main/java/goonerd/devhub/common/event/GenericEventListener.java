@@ -1,18 +1,18 @@
-package goonerd.devhub.common.event;
-
-import goonerd.devhub.common.mail.EmailService;
-import org.springframework.context.event.EventListener;
-
-import java.util.Map;
-
-public class GenericEventListener {
-
-    private final EmailService emailService;
-
-    public GenericEventListener(EmailService emailService) {
-        this.emailService = emailService;
-    }
-
+//package goonerd.devhub.common.event;
+//
+//import goonerd.devhub.common.mail.EmailService;
+//import org.springframework.context.event.EventListener;
+//
+//import java.util.Map;
+//
+//public class GenericEventListener {
+//
+//    private final EmailService emailService;
+//
+//    public GenericEventListener(EmailService emailService) {
+//        this.emailService = emailService;
+//    }
+//
 //    @EventListener
 //    public void handleGenericEvent(GenericEvent<?> event) {
 //        if ("PROJECT_COMPLETED".equals(event.getType())) {
@@ -26,4 +26,4 @@ public class GenericEventListener {
 //            emailService.sendEmail(email, "프로젝트 완료 알림", htmlContent);
 //        }
 //    }
-}
+//}

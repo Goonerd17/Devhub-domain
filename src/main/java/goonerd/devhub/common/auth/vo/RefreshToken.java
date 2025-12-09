@@ -1,4 +1,4 @@
-package goonerd.devhub.common.auth;
+package goonerd.devhub.common.auth.vo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

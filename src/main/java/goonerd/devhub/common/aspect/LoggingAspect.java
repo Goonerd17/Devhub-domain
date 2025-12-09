@@ -9,9 +9,9 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Aspect
@@ -20,6 +20,9 @@ import java.util.stream.Collectors;
 public class LoggingAspect {
 
     private final ObjectMapper objectMapper;
+    private static final String EMPTY_JSON = "[]";
+    private static final String NULL_JSON = "null";
+    private static final int SAMPLE_LIMIT = 5;
 
     @Around("execution(* goonerd.devhub..controller..*(..)) || " +
             "execution(* goonerd.devhub..service..*(..)) || " +
@@ -43,40 +46,42 @@ public class LoggingAspect {
     }
 
     private String getParamsAsJson(Object[] args) {
-        if (args == null || args.length == 0) return "[]";
-        try {
-            return objectMapper.writeValueAsString(args);
-        } catch (JsonProcessingException e) {
-            return Arrays.toString(args);
+        if (args == null || args.length == 0) {
+            return EMPTY_JSON;
         }
+        return toSafeJson(args);
     }
 
     private String summarizeResult(Object result) {
-        if (result == null) return "null";
-
-        if (result instanceof Collection<?> coll) {
-            int size = coll.size();
-            int limit = 5;
-            if (size > limit) {
-                try {
-                    String sample = objectMapper.writeValueAsString(coll.stream().limit(limit).collect(Collectors.toList()));
-                    return String.format("%s... (total %d items)", sample, size);
-                } catch (JsonProcessingException e) {
-                    return String.format("[Collection of %d items]", size);
-                }
-            } else {
-                try {
-                    return objectMapper.writeValueAsString(coll);
-                } catch (JsonProcessingException e) {
-                    return coll.toString();
-                }
-            }
+        if (result == null) {
+            return NULL_JSON;
         }
 
+        if (result instanceof Collection<?> coll) {
+            return summarizeCollection(coll);
+        }
+
+        return toSafeJson(result);
+    }
+
+    private String summarizeCollection(Collection<?> coll) {
+        int size = coll.size();
+
+        if (size <= SAMPLE_LIMIT) {
+            return toSafeJson(coll);
+        }
+
+        List<?> sample = coll.stream().limit(SAMPLE_LIMIT).toList();
+        return "%s... (total %d items)".formatted(toSafeJson(sample), size);
+    }
+
+    private String toSafeJson(Object obj) {
         try {
-            return objectMapper.writeValueAsString(result);
+            return objectMapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
-            return result.toString();
+            return Optional.ofNullable(obj)
+                    .map(Object::toString)
+                    .orElse(NULL_JSON);
         }
     }
 }

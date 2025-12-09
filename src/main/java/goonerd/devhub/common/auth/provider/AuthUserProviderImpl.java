@@ -1,5 +1,6 @@
-package goonerd.devhub.common.auth;
+package goonerd.devhub.common.auth.provider;
 
+import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;

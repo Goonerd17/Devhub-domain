@@ -1,5 +1,6 @@
-package goonerd.devhub.common.auth;
+package goonerd.devhub.common.auth.service;
 
+import goonerd.devhub.common.auth.dto.TokenResponseDto;
 import goonerd.devhub.common.enums.JwtStatusEnum;
 import goonerd.devhub.common.utils.JwtUtil;
 import goonerd.devhub.user.dto.LoginRequestDto;

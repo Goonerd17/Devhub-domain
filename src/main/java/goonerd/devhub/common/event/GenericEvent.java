@@ -1,6 +1,7 @@
 package goonerd.devhub.common.event;
 
 public class GenericEvent<T> {
+
     private final String type;
     private final T payload;
 
