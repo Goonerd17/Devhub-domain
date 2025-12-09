@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
-public class ProjectRequestDto {
+public class ProjectCreateRequestDto {
 
     @NotBlank
     @RegexMatch(RegexPatternEnum.USERNAME)

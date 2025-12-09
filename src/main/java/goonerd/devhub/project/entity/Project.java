@@ -3,7 +3,7 @@ package goonerd.devhub.project.entity;
 import goonerd.devhub.common.entity.BaseEntity;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.exception.DomainRuleException;
-import goonerd.devhub.project.dto.ProjectRequestDto;
+import goonerd.devhub.project.dto.ProjectCreateRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,35 +36,35 @@ public class Project extends BaseEntity {
     @Column
     private LocalDate endDate;
 
-    private Project(ProjectRequestDto projectRequestDto) {
-        validateRecruitCount(projectRequestDto);
-        validateProjectPeriod(projectRequestDto);
-        validateProjectDescription(projectRequestDto);
-        this.username = projectRequestDto.getUsername();
-        this.description = projectRequestDto.getDescription();
-        this.recruitCount = projectRequestDto.getRecruitCount();
-        this.startDate = projectRequestDto.getStartDate();
-        this.endDate = projectRequestDto.getEndDate();
+    private Project(ProjectCreateRequestDto projectCreateRequestDto) {
+        validateRecruitCount(projectCreateRequestDto);
+        validateProjectPeriod(projectCreateRequestDto);
+        validateProjectDescription(projectCreateRequestDto);
+        this.username = projectCreateRequestDto.getUsername();
+        this.description = projectCreateRequestDto.getDescription();
+        this.recruitCount = projectCreateRequestDto.getRecruitCount();
+        this.startDate = projectCreateRequestDto.getStartDate();
+        this.endDate = projectCreateRequestDto.getEndDate();
     }
 
-    public static Project create(ProjectRequestDto projectRequestDto) {
-        return new Project(projectRequestDto);
+    public static Project create(ProjectCreateRequestDto projectCreateRequestDto) {
+        return new Project(projectCreateRequestDto);
     }
 
-    private void validateRecruitCount(ProjectRequestDto projectRequestDto) {
-        if(projectRequestDto.getRecruitCount() < 1) {
+    private void validateRecruitCount(ProjectCreateRequestDto projectCreateRequestDto) {
+        if (projectCreateRequestDto.getRecruitCount() < 1) {
             throw DomainRuleException.of(ErrorCodeEnum.PROJECT_RECRUITCOUNT_FAIL);
         }
     }
 
-    private void validateProjectPeriod(ProjectRequestDto projectRequestDto) {
-        if(projectRequestDto.getEndDate().isBefore(projectRequestDto.getStartDate())) {
+    private void validateProjectPeriod(ProjectCreateRequestDto projectCreateRequestDto) {
+        if (projectCreateRequestDto.getEndDate().isBefore(projectCreateRequestDto.getStartDate())) {
             throw DomainRuleException.of(ErrorCodeEnum.PROJECT_PERIOD_FAIL);
         }
     }
 
-    private void validateProjectDescription(ProjectRequestDto projectRequestDto) {
-        if(projectRequestDto.getDescription().length() > 100) {
+    private void validateProjectDescription(ProjectCreateRequestDto projectCreateRequestDto) {
+        if (projectCreateRequestDto.getDescription().length() > 100) {
             throw DomainRuleException.of(ErrorCodeEnum.PROJECT_DESCRIPTION_FAIL);
         }
     }
