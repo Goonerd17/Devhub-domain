@@ -11,8 +11,10 @@ import java.time.LocalDateTime;
 @Builder
 public class ProjectResponseDto {
 
-    private String id;
+    private String projectGuid;
+    private String userId;
     private String username;
+    private String title;
     private String description;
     private int recruitCount;
     private LocalDate startDate;
@@ -24,8 +26,10 @@ public class ProjectResponseDto {
 
     public static ProjectResponseDto fromEntity(Project project) {
         return ProjectResponseDto.builder()
-                .id(project.getProjectId())
+                .projectGuid(project.getProjectGuid())
+                .userId(project.getUserId())
                 .username(project.getUsername())
+                .title(project.getTitle())
                 .description(project.getDescription())
                 .recruitCount(project.getRecruitCount())
                 .startDate(project.getStartDate())

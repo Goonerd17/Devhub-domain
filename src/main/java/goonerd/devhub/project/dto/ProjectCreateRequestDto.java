@@ -1,8 +1,9 @@
 package goonerd.devhub.project.dto;
 
-import goonerd.devhub.common.enums.RegexPatternEnum;
-import goonerd.devhub.common.validation.RegexMatch;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,8 +14,11 @@ import java.time.LocalDate;
 public class ProjectCreateRequestDto {
 
     @NotBlank
-    @RegexMatch(RegexPatternEnum.USERNAME)
+    private String userId;
+    @NotBlank
     private String username;
+    @NotNull
+    private String title;
     @NotNull
     private String description;
     @Positive

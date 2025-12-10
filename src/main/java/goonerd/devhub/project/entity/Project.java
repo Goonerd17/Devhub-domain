@@ -24,9 +24,13 @@ public class Project extends BaseEntity {
     @GeneratedValue
     @UuidGenerator
     @Column(length = 36, nullable = false, unique = true)
-    private String projectId;
+    private String projectGuid;
+    @Column
+    private String userId;
     @Column
     private String username;
+    @Column
+    private String title;
     @Column
     private String description;
     @Column
@@ -40,6 +44,8 @@ public class Project extends BaseEntity {
         validateRecruitCount(projectCreateRequestDto);
         validateProjectPeriod(projectCreateRequestDto);
         validateProjectDescription(projectCreateRequestDto);
+        this.userId = projectCreateRequestDto.getUserId();
+        this.title = projectCreateRequestDto.getTitle();
         this.username = projectCreateRequestDto.getUsername();
         this.description = projectCreateRequestDto.getDescription();
         this.recruitCount = projectCreateRequestDto.getRecruitCount();

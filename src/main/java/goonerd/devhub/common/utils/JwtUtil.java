@@ -80,11 +80,11 @@ public class JwtUtil {
     }
 
     // AccessToken 생성
-    public String createAccessToken(String username, UserRoleEnum role) {
+    public String createAccessToken(String userId, UserRoleEnum role) {
         Date now = new Date();
         return BEARER_PREFIX +
                 Jwts.builder()
-                        .setSubject(username)
+                        .setSubject(userId)
                         .claim(AUTHORIZATION_KEY, role)
                         .setExpiration(new Date(now.getTime() + ACCESS_TOKEN_TIME))
                         .setIssuedAt(now)
@@ -93,11 +93,11 @@ public class JwtUtil {
     }
 
     // RefreshToken 생성
-    public String createRefreshToken(String username) {
+    public String createRefreshToken(String userId) {
         Date now = new Date();
         return BEARER_PREFIX +
                 Jwts.builder()
-                        .setSubject(username)
+                        .setSubject(userId)
                         .setExpiration(new Date(now.getTime() + REFRESH_TOKEN_TIME))
                         .setIssuedAt(now)
                         .signWith(key, signatureAlgorithm)

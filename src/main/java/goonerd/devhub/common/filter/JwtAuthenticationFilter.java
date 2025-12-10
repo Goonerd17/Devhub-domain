@@ -44,7 +44,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
             return getAuthenticationManager().authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            loginRequestDto.getUsername(),
+                            loginRequestDto.getUserId(),
                             loginRequestDto.getPassword()
                     )
             );
@@ -63,12 +63,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         log.info("로그인 성공 및 JWT 생성");
         ObjectMapper objectMapper = new ObjectMapper();
         UserDetailsImpl userDetails = (UserDetailsImpl) authResult.getPrincipal();
-        String username = userDetails.getUsername();
+        String userId = userDetails.getUsername();
         UserRoleEnum role = userDetails.getUser().getRole();
 
-        String accessToken = jwtUtil.substringHeaderToken(jwtUtil.createAccessToken(username, role));
-        String refreshToken = jwtUtil.substringHeaderToken(jwtUtil.createRefreshToken(username));
-        refreshTokenService.save(username, refreshToken);
+        String accessToken = jwtUtil.substringHeaderToken(jwtUtil.createAccessToken(userId, role));
+        String refreshToken = jwtUtil.substringHeaderToken(jwtUtil.createRefreshToken(userId));
+        refreshTokenService.save(userId, refreshToken);
 
         // 응답 JSON 생성
         ApiResponseVo<?> responseBody = ApiResponseVo.successWithData(

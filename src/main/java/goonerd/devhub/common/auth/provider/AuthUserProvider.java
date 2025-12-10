@@ -4,6 +4,7 @@ import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
 
 public interface AuthUserProvider {
     UserDetailsImpl getCurrentUser();
-    String getCurrentUserName();
+    String getCurrentUserId();
+    String getCurrentUsername();
     String getCurrentUserEmail();
 }

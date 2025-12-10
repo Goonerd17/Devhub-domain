@@ -19,13 +19,13 @@ public class AuthService {
     private final RefreshTokenService refreshTokenService;
 
     public TokenResponseDto login(LoginRequestDto req) {
-        User user = userRepository.findByUsername(req.getUsername())
+        User user = userRepository.findByUserId(req.getUserId())
                 .orElseThrow(() -> new RuntimeException("Not Found"));
 
-        String accessToken = jwtUtil.createAccessToken(user.getUsername(), user.getRole());
-        String refreshToken = jwtUtil.createRefreshToken(user.getUsername());
+        String accessToken = jwtUtil.createAccessToken(user.getUserId(), user.getRole());
+        String refreshToken = jwtUtil.createRefreshToken(user.getUserId());
 
-        refreshTokenService.save(user.getUsername(), refreshToken);
+        refreshTokenService.save(user.getUserId(), refreshToken);
 
         return new TokenResponseDto(accessToken, refreshToken);
     }
@@ -39,17 +39,17 @@ public class AuthService {
         }
 
         Claims claims = jwtUtil.getUserInfo(refreshToken);
-        String username = claims.getSubject();
+        String userId = claims.getSubject();
 
-        String stored = refreshTokenService.findByUsername(username);
+        String stored = refreshTokenService.findByUserId(userId);
         if (!stored.equals("Bearer " + refreshToken)) {
             throw new RuntimeException("RefreshToken mismatch");
         }
 
-        User user = userRepository.findByUsername(username)
+        User user = userRepository.findByUserId(userId)
                 .orElseThrow();
 
-        String newAccessToken = jwtUtil.createAccessToken(username, user.getRole());
+        String newAccessToken = jwtUtil.createAccessToken(userId, user.getRole());
 
         return new TokenResponseDto(newAccessToken, refreshToken);
     }

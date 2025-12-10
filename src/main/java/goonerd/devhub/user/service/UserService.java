@@ -27,19 +27,20 @@ public class UserService {
 
     public ApiResponseVo<Map<String, Object>> signup(SignupRequestDto signupRequestDto) {
 
+        String userId = signupRequestDto.getUserId();
         String username = signupRequestDto.getUsername();
         String password = passwordEncoder.encode(signupRequestDto.getPassword());
         UserRoleEnum role = UserRoleEnum.USER;
 
-        checkDuplicatedUsername(username);
+        checkDuplicatedUserId(userId);
 
-        User user = User.createLocalUser(username, password, role);
+        User user = User.createLocalUser(userId, username, password, role);
         userRepository.save(user);
         return ApiResponseVo.successWithParam(SuccessCodeEnum.CREATE_SUCCESS, signupRequestDto);
     }
 
-    private void checkDuplicatedUsername(String username) {
-        Optional<User> result = userRepository.findByUsername(username);
+    private void checkDuplicatedUserId(String userId) {
+        Optional<User> result = userRepository.findByUserId(userId);
         if (result.isPresent()) {
             throw BusinessRuleException.of(ErrorCodeEnum.DUPLICATE_USERNAME);
         }

@@ -18,7 +18,11 @@ public class AuthUserProviderImpl implements AuthUserProvider {
         return (UserDetailsImpl) authentication.getPrincipal();
     }
 
-    public String getCurrentUserName() {
+    public String getCurrentUserId() {
+        return getPrincipal().getUserId();
+    }
+
+    public String getCurrentUsername() {
         return getPrincipal().getUsername();
     }
 

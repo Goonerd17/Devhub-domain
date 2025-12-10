@@ -22,9 +22,9 @@ public class AdminInitializer implements CommandLineRunner {
         boolean existAdmin = userRepository.existsByRole(UserRoleEnum.ADMIN);
 
         if (!existAdmin) {
-            User admin = User.createAdminUser("admin", passwordEncoder.encode("admin1234!"), UserRoleEnum.ADMIN);
+            User admin = User.createAdminUser("admin@admin.co.kr", "admin", passwordEncoder.encode("admin1234!"), UserRoleEnum.ADMIN);
             userRepository.save(admin);
-            log.info("기본 ADMIN 계정 생성됨 - ID : admin / PW : admin1234!");
+            log.info("기본 ADMIN 계정 생성됨 - ID : admin@admin.co.kr / PW : admin1234!");
         }
     }
 }
