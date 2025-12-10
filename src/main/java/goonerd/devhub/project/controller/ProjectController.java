@@ -35,12 +35,6 @@ public class ProjectController {
             description = "검색 조건과 페이징 정보에 따라 프로젝트 목록을 조회합니다.",
             security = {@SecurityRequirement(name = "BearerAuth")}
     )
-    @Parameters({
-            @Parameter(name = "title", description = "프로젝트 제목 검색"),
-            @Parameter(name = "username", description = "등록자 검색"),
-            @Parameter(name = "page", description = "페이지 번호(기본 0)"),
-            @Parameter(name = "size", description = "페이지 사이즈(기본 10)")
-    })
     @GetMapping()
     public ResponseEntity<ApiResponseVo<PageVo<ProjectResponseDto>>> listProject(@ParameterObject ProjectSearchRequestDto projectSearchRequestDto, @ParameterObject PageRequestVo pageable) {
         return ResponseEntity.ok(projectFacade.listProject(projectSearchRequestDto, pageable));

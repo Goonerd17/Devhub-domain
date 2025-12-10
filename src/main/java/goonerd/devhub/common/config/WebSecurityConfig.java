@@ -93,9 +93,14 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((authorizeHttpRequests) ->
                         authorizeHttpRequests
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                                .requestMatchers(
+                                        "/swagger-ui/**",
+                                        "/swagger-resources/**",
+                                        "/v3/api-docs/**",
+                                        "/webjars/**"
+                                ).permitAll()
                                 .requestMatchers("/auth/**").permitAll()
-                                .requestMatchers(GET, "/post/**").permitAll()
-                                .anyRequest().authenticated()) // 그 외 모든 요청 인증처리
+                                .anyRequest().authenticated())
                 .addFilterBefore(jwtExceptionFilter(), JwtAuthenticationFilter.class)
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

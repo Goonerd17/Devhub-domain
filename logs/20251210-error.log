@@ -1,0 +1,95 @@
+2025-12-10 00:38:43.031 [http-nio-8080-exec-3] ERROR ERROR_FILE [50a4f89ea4] - [50a4f89ea4] -----GlobalExceptionHandler-----: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<goonerd.devhub.common.vo.ApiResponseVo<goonerd.devhub.project.dto.ProjectResponseDto>> goonerd.devhub.project.controller.ProjectController.createProject(goonerd.devhub.project.dto.ProjectCreateRequestDto): [Field error in object 'projectCreateRequestDto' on field 'endDate': rejected value [2025-12-09]; codes [FutureOrPresent.projectCreateRequestDto.endDate,FutureOrPresent.endDate,FutureOrPresent.java.time.LocalDate,FutureOrPresent]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [projectCreateRequestDto.endDate,endDate]; arguments []; default message [endDate]]; default message [현재 또는 미래의 날짜여야 합니다]]
+org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<goonerd.devhub.common.vo.ApiResponseVo<goonerd.devhub.project.dto.ProjectResponseDto>> goonerd.devhub.project.controller.ProjectController.createProject(goonerd.devhub.project.dto.ProjectCreateRequestDto): [Field error in object 'projectCreateRequestDto' on field 'endDate': rejected value [2025-12-09]; codes [FutureOrPresent.projectCreateRequestDto.endDate,FutureOrPresent.endDate,FutureOrPresent.java.time.LocalDate,FutureOrPresent]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [projectCreateRequestDto.endDate,endDate]; arguments []; default message [endDate]]; default message [현재 또는 미래의 날짜여야 합니다]]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:159)
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122)
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:227)
+2025-12-10 00:38:58.272 [http-nio-8080-exec-10] ERROR ERROR_FILE [dd2aa9c663] - [dd2aa9c663] -----GlobalExceptionHandler-----: 프로젝트 종료일은 시작일 이후여야 합니다.
+goonerd.devhub.common.exception.DomainRuleException: 프로젝트 종료일은 시작일 이후여야 합니다.
+	at goonerd.devhub.common.exception.DomainRuleException.of(DomainRuleException.java:17)
+	at goonerd.devhub.project.entity.Project.validateProjectPeriod(Project.java:62)
+	at goonerd.devhub.project.entity.Project.<init>(Project.java:41)
+2025-12-10 01:45:41.777 [http-nio-8080-exec-4] ERROR ERROR_FILE [bc6d1b15bf] - [bc6d1b15bf] -----GlobalExceptionHandler-----: 프로젝트 종료일은 시작일 이후여야 합니다.
+goonerd.devhub.common.exception.DomainRuleException: 프로젝트 종료일은 시작일 이후여야 합니다.
+	at goonerd.devhub.common.exception.DomainRuleException.of(DomainRuleException.java:17)
+	at goonerd.devhub.project.entity.Project.validateProjectPeriod(Project.java:62)
+	at goonerd.devhub.project.entity.Project.<init>(Project.java:41)
+2025-12-10 01:46:28.942 [http-nio-8080-exec-4] ERROR ERROR_FILE [35fae014f4] - [35fae014f4] -----GlobalExceptionHandler-----: Type definition error: [simple type, class goonerd.devhub.common.vo.PageVo]
+org.springframework.http.converter.HttpMessageConversionException: Type definition error: [simple type, class goonerd.devhub.common.vo.PageVo]
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.writeInternal(AbstractJackson2HttpMessageConverter.java:491)
+	at org.springframework.http.converter.AbstractGenericHttpMessageConverter.write(AbstractGenericHttpMessageConverter.java:126)
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:345)
+Caused by: com.fasterxml.jackson.databind.exc.InvalidDefinitionException: No serializer found for class goonerd.devhub.common.vo.PageVo and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) (through reference chain: goonerd.devhub.common.vo.ApiResponseVo["data"])
+	at com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:77)
+	at com.fasterxml.jackson.databind.SerializerProvider.reportBadDefinition(SerializerProvider.java:1359)
+	at com.fasterxml.jackson.databind.DatabindContext.reportBadDefinition(DatabindContext.java:415)
+2025-12-10 22:37:09.653 [http-nio-8080-exec-9] ERROR ERROR_FILE [7ba5b5d29e] - [7ba5b5d29e] -----GlobalExceptionHandler-----: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<goonerd.devhub.common.vo.ApiResponseVo<?>> goonerd.devhub.user.controller.UserController.signup(goonerd.devhub.user.dto.SignupRequestDto): [Field error in object 'signupRequestDto' on field 'username': rejected value [null]; codes [NotBlank.signupRequestDto.username,NotBlank.username,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [signupRequestDto.username,username]; arguments []; default message [username]]; default message [공백일 수 없습니다]] 
+org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<goonerd.devhub.common.vo.ApiResponseVo<?>> goonerd.devhub.user.controller.UserController.signup(goonerd.devhub.user.dto.SignupRequestDto): [Field error in object 'signupRequestDto' on field 'username': rejected value [null]; codes [NotBlank.signupRequestDto.username,NotBlank.username,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [signupRequestDto.username,username]; arguments []; default message [username]]; default message [공백일 수 없습니다]] 
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:159)
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122)
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:227)
+2025-12-10 22:38:29.329 [http-nio-8080-exec-8] ERROR ERROR_FILE [be05937ec4] - [be05937ec4] -----GlobalExceptionHandler-----: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<goonerd.devhub.common.vo.ApiResponseVo<goonerd.devhub.project.dto.ProjectResponseDto>> goonerd.devhub.project.controller.ProjectController.createProject(goonerd.devhub.project.dto.ProjectCreateRequestDto) with 2 errors: [Field error in object 'projectCreateRequestDto' on field 'title': rejected value [null]; codes [NotNull.projectCreateRequestDto.title,NotNull.title,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [projectCreateRequestDto.title,title]; arguments []; default message [title]]; default message [널이어서는 안됩니다]] [Field error in object 'projectCreateRequestDto' on field 'userId': rejected value [null]; codes [NotBlank.projectCreateRequestDto.userId,NotBlank.userId,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [projectCreateRequestDto.userId,userId]; arguments []; default message [userId]]; default message [공백일 수 없습니다]] 
+org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<goonerd.devhub.common.vo.ApiResponseVo<goonerd.devhub.project.dto.ProjectResponseDto>> goonerd.devhub.project.controller.ProjectController.createProject(goonerd.devhub.project.dto.ProjectCreateRequestDto) with 2 errors: [Field error in object 'projectCreateRequestDto' on field 'title': rejected value [null]; codes [NotNull.projectCreateRequestDto.title,NotNull.title,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [projectCreateRequestDto.title,title]; arguments []; default message [title]]; default message [널이어서는 안됩니다]] [Field error in object 'projectCreateRequestDto' on field 'userId': rejected value [null]; codes [NotBlank.projectCreateRequestDto.userId,NotBlank.userId,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [projectCreateRequestDto.userId,userId]; arguments []; default message [userId]]; default message [공백일 수 없습니다]] 
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:159)
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122)
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:227)
+2025-12-10 23:50:23.396 [http-nio-8080-exec-3] ERROR ERROR_FILE [6dfce31a9c] - [6dfce31a9c] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-10 23:50:35.099 [http-nio-8080-exec-5] ERROR ERROR_FILE [b4d447ac0f] - [b4d447ac0f] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-10 23:51:03.581 [http-nio-8080-exec-6] ERROR ERROR_FILE [182d17201c] - [182d17201c] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-10 23:51:11.766 [http-nio-8080-exec-8] ERROR ERROR_FILE [da8e862397] - [da8e862397] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-10 23:54:52.693 [http-nio-8080-exec-9] ERROR ERROR_FILE [7ac76dfda3] - [7ac76dfda3] -----GlobalExceptionHandler-----: Handler dispatch failed: java.lang.NoSuchMethodError: 'void org.springframework.web.method.ControllerAdviceBean.<init>(java.lang.Object)'
+jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'void org.springframework.web.method.ControllerAdviceBean.<init>(java.lang.Object)'
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1104)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+Caused by: java.lang.NoSuchMethodError: 'void org.springframework.web.method.ControllerAdviceBean.<init>(java.lang.Object)'
+	at org.springdoc.core.service.GenericResponseService.lambda$getGenericMapResponse$8(GenericResponseService.java:702)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:178)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:992)
+2025-12-10 23:55:10.115 [http-nio-8080-exec-2] ERROR ERROR_FILE [84b85926c5] - [84b85926c5] -----GlobalExceptionHandler-----: Handler dispatch failed: java.lang.NoSuchMethodError: 'void org.springframework.web.method.ControllerAdviceBean.<init>(java.lang.Object)'
+jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'void org.springframework.web.method.ControllerAdviceBean.<init>(java.lang.Object)'
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1104)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+Caused by: java.lang.NoSuchMethodError: 'void org.springframework.web.method.ControllerAdviceBean.<init>(java.lang.Object)'
+	at org.springdoc.core.service.GenericResponseService.lambda$getGenericMapResponse$8(GenericResponseService.java:702)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:178)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:992)
+2025-12-10 23:56:37.991 [http-nio-8080-exec-10] ERROR ERROR_FILE [14c6c9b03c] - [14c6c9b03c] -----GlobalExceptionHandler-----: Handler dispatch failed: java.lang.NoSuchMethodError: 'void org.springframework.web.method.ControllerAdviceBean.<init>(java.lang.Object)'
+jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'void org.springframework.web.method.ControllerAdviceBean.<init>(java.lang.Object)'
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1104)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+Caused by: java.lang.NoSuchMethodError: 'void org.springframework.web.method.ControllerAdviceBean.<init>(java.lang.Object)'
+	at org.springdoc.core.service.GenericResponseService.lambda$getGenericMapResponse$8(GenericResponseService.java:706)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:178)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:992)
+2025-12-10 23:57:55.816 [http-nio-8080-exec-7] ERROR ERROR_FILE [8e06243d82] - [8e06243d82] -----GlobalExceptionHandler-----: Handler dispatch failed: java.lang.NoSuchMethodError: 'void org.springframework.web.method.ControllerAdviceBean.<init>(java.lang.Object)'
+jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'void org.springframework.web.method.ControllerAdviceBean.<init>(java.lang.Object)'
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1104)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+Caused by: java.lang.NoSuchMethodError: 'void org.springframework.web.method.ControllerAdviceBean.<init>(java.lang.Object)'
+	at org.springdoc.core.service.GenericResponseService.lambda$getGenericMapResponse$8(GenericResponseService.java:706)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:178)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:992)
+2025-12-10 23:57:55.881 [http-nio-8080-exec-2] ERROR ERROR_FILE [90688c867a] - [90688c867a] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)

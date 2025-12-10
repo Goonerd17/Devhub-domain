@@ -15,12 +15,11 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI jwtOpenAPI() {
         final String securitySchemeName = "BearerAuth";
-
         return new OpenAPI()
                 .info(new Info()
-                        .title("Project API")
+                        .title("DevHub API")
                         .description("""
-                                프로젝트 관련 API 문서입니다.
+                                DevHub API 문서입니다.
                                 인증 시 Authorization 탭을 눌러 Bearer Token을 입력하세요.
                                 """)
                         .version("v1.0.0")
