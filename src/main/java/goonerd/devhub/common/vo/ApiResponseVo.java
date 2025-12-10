@@ -2,6 +2,7 @@ package goonerd.devhub.common.vo;
 
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,12 +14,18 @@ import java.util.Map;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(name = "ApiResponse", description = "표준 API 응답 구조")
 public class ApiResponseVo <T> {
 
+    @Schema(description = "성공 여부")
     private boolean success;
+    @Schema(description = "응답 코드")
     private String code;
+    @Schema(description = "파라미터")
     private Object param;
+    @Schema(description = "정상 응답 데이터")
     private T data;
+    @Schema(description = "에러 발생 시 상세 정보")
     private ErrorResponseVo error;
     
     public static <T> ApiResponseVo<T> successWithParamAndData(SuccessCodeEnum codeEnum, Object param, T data) {

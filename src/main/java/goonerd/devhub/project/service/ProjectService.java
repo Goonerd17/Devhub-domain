@@ -3,7 +3,6 @@ package goonerd.devhub.project.service;
 import goonerd.devhub.common.vo.PageRequestVo;
 import goonerd.devhub.project.command.ProjectCreateCommand;
 import goonerd.devhub.project.command.ProjectSearchCommand;
-import goonerd.devhub.project.dto.ProjectCreateRequestDto;
 import goonerd.devhub.project.entity.Project;
 import goonerd.devhub.project.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
