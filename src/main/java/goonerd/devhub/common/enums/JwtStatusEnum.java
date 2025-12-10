@@ -1,22 +1,22 @@
 package goonerd.devhub.common.enums;
 
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+import static org.springframework.http.HttpStatus.*;
+
+@Getter
 public enum JwtStatusEnum {
 
-    VALID(HttpStatus.OK, "유효한 토큰입니다."),
-    INVALID(HttpStatus.FORBIDDEN, "유효하지않은 토큰입니다."),
-    EXPIRED(HttpStatus.UNAUTHORIZED, "토큰이 만료되었습니다.");
+    VALID("유효한 토큰입니다.", OK),
+    INVALID("유효하지않은 토큰입니다.", FORBIDDEN),
+    EXPIRED("토큰이 만료되었습니다.", UNAUTHORIZED);
 
-    private final HttpStatus status;
     private final String message;
+    private final HttpStatus status;
 
-    JwtStatusEnum(HttpStatus status, String message) {
-        this.status = status;
+    JwtStatusEnum(String message, HttpStatus status) {
         this.message = message;
+        this.status = status;
     }
-
-    public HttpStatus getStatus() { return status; }
-
-    public String getMessage() { return message; }
 }

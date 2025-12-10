@@ -1,6 +1,8 @@
 package goonerd.devhub.common.auth.provider;
 
 import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
+import goonerd.devhub.common.enums.ErrorCodeEnum;
+import goonerd.devhub.common.exception.AuthRuleException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -12,7 +14,7 @@ public class AuthUserProviderImpl implements AuthUserProvider {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null || authentication.getPrincipal().equals("anonymousUser")) {
-            throw new IllegalStateException("로그인된 사용자가 존재하지 않습니다.");
+            throw AuthRuleException.of(ErrorCodeEnum.USER_NOT_FOUND);
         }
 
         return (UserDetailsImpl) authentication.getPrincipal();
@@ -33,5 +35,4 @@ public class AuthUserProviderImpl implements AuthUserProvider {
     public UserDetailsImpl getCurrentUser() {
         return getPrincipal();
     }
-
 }

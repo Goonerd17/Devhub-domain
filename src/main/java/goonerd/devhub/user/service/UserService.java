@@ -13,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
@@ -36,13 +35,13 @@ public class UserService {
 
         User user = User.createLocalUser(userId, username, password, role);
         userRepository.save(user);
-        return ApiResponseVo.successWithParam(SuccessCodeEnum.CREATE_SUCCESS, signupRequestDto);
+        return ApiResponseVo.successWithParam(SuccessCodeEnum.SIGNUP_SUCCESS, signupRequestDto);
     }
 
     private void checkDuplicatedUserId(String userId) {
         Optional<User> result = userRepository.findByUserId(userId);
         if (result.isPresent()) {
-            throw BusinessRuleException.of(ErrorCodeEnum.DUPLICATE_USERNAME);
+            throw BusinessRuleException.of(ErrorCodeEnum.DUPLICATE_USERID);
         }
     }
 }

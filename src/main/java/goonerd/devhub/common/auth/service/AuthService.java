@@ -1,7 +1,9 @@
 package goonerd.devhub.common.auth.service;
 
 import goonerd.devhub.common.auth.dto.TokenResponseDto;
+import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.JwtStatusEnum;
+import goonerd.devhub.common.exception.AuthRuleException;
 import goonerd.devhub.common.utils.JwtUtil;
 import goonerd.devhub.user.dto.LoginRequestDto;
 import goonerd.devhub.user.entity.User;
@@ -20,7 +22,7 @@ public class AuthService {
 
     public TokenResponseDto login(LoginRequestDto req) {
         User user = userRepository.findByUserId(req.getUserId())
-                .orElseThrow(() -> new RuntimeException("Not Found"));
+                .orElseThrow(() -> AuthRuleException.of(ErrorCodeEnum.LOGIN_FAIL));
 
         String accessToken = jwtUtil.createAccessToken(user.getUserId(), user.getRole());
         String refreshToken = jwtUtil.createRefreshToken(user.getUserId());
@@ -35,7 +37,7 @@ public class AuthService {
 
         JwtStatusEnum status = jwtUtil.validateToken(refreshToken);
         if (status != JwtStatusEnum.VALID) {
-            throw new RuntimeException("RefreshToken Invalid");
+            throw AuthRuleException.of(ErrorCodeEnum.REFRESH_TOKEN_INVALID);
         }
 
         Claims claims = jwtUtil.getUserInfo(refreshToken);
@@ -43,7 +45,7 @@ public class AuthService {
 
         String stored = refreshTokenService.findByUserId(userId);
         if (!stored.equals("Bearer " + refreshToken)) {
-            throw new RuntimeException("RefreshToken mismatch");
+            throw AuthRuleException.of(ErrorCodeEnum.REFRESH_TOKEN_MISMATCH);
         }
 
         User user = userRepository.findByUserId(userId)

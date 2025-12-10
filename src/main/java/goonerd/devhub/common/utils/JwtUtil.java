@@ -1,7 +1,9 @@
 package goonerd.devhub.common.utils;
 
+import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.JwtStatusEnum;
 import goonerd.devhub.common.enums.UserRoleEnum;
+import goonerd.devhub.common.exception.AuthRuleException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -52,7 +54,7 @@ public class JwtUtil {
     // Header 토큰을 가져오기
     public String substringHeaderToken(String token) {
         if (StringUtils.hasText(token) && token.startsWith(BEARER_PREFIX)) { return token.substring(7);}
-        throw new NullPointerException("유효한 토큰이 아닙니다");
+        throw AuthRuleException.of(ErrorCodeEnum.TOKEN_INVALID);
     }
 
     // Header 토큰 담기

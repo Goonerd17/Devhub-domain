@@ -1,13 +1,9 @@
 package goonerd.devhub.project.service;
 
 import goonerd.devhub.common.vo.PageRequestVo;
-import goonerd.devhub.common.enums.SuccessCodeEnum;
-import goonerd.devhub.common.converter.PageConverter;
-import goonerd.devhub.common.vo.ApiResponseVo;
-import goonerd.devhub.common.vo.PageVo;
+import goonerd.devhub.project.command.ProjectCreateCommand;
+import goonerd.devhub.project.command.ProjectSearchCommand;
 import goonerd.devhub.project.dto.ProjectCreateRequestDto;
-import goonerd.devhub.project.dto.ProjectResponseDto;
-import goonerd.devhub.project.dto.ProjectSearchRequestDto;
 import goonerd.devhub.project.entity.Project;
 import goonerd.devhub.project.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,16 +16,12 @@ public class ProjectService {
 
     private final ProjectRepository projectRepository;
 
-    public ApiResponseVo<PageVo<ProjectResponseDto>> listProject(ProjectSearchRequestDto projectSearchRequestDto, PageRequestVo pageable) {
-        Page<Project> projectPage = projectRepository.findAll(pageable.toPageable());
-        PageVo<ProjectResponseDto> projectResponse = PageConverter.convert(projectPage, ProjectResponseDto::fromEntity);
-        return ApiResponseVo.successWithData(SuccessCodeEnum.READ_SUCCESS, projectResponse);
+    public Page<Project> listProject(ProjectSearchCommand projectSearchCommand, PageRequestVo pageable) {
+        return projectRepository.findAll(pageable.toPageable());
     }
 
-    public ApiResponseVo<ProjectResponseDto> createProject(ProjectCreateRequestDto projectCreateRequestDto) {
-        Project project = Project.create(projectCreateRequestDto);
-        projectRepository.save(project);
-        ProjectResponseDto projectResponseDto = ProjectResponseDto.fromEntity(project);
-        return ApiResponseVo.successWithParamAndData(SuccessCodeEnum.CREATE_SUCCESS, projectCreateRequestDto, projectResponseDto);
+    public Project createProject(ProjectCreateCommand projectCreateCommand) {
+        Project project = Project.create(projectCreateCommand);
+        return projectRepository.save(project);
     }
 }

@@ -34,20 +34,16 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
-            throws AuthenticationException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
-        log.info("로그인 시도");
         try {
             LoginRequestDto loginRequestDto =
                     new ObjectMapper().readValue(request.getInputStream(), LoginRequestDto.class);
 
             return getAuthenticationManager().authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            loginRequestDto.getUserId(),
-                            loginRequestDto.getPassword()
-                    )
-            );
+                            new UsernamePasswordAuthenticationToken(
+                                    loginRequestDto.getUserId(),
+                                    loginRequestDto.getPassword()));
         } catch (IOException e) {
             log.error(e.getMessage());
             throw new RuntimeException(e.getMessage());
@@ -60,7 +56,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain chain,
                                             Authentication authResult) throws IOException {
 
-        log.info("로그인 성공 및 JWT 생성");
         ObjectMapper objectMapper = new ObjectMapper();
         UserDetailsImpl userDetails = (UserDetailsImpl) authResult.getPrincipal();
         String userId = userDetails.getUsername();
@@ -77,7 +72,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String jsonResponse = objectMapper.writeValueAsString(responseBody);
 
-        // 응답 헤더에 AccessToken 넣기 (선택)
+        // 응답 헤더에 AccessToken 넣기
         jwtUtil.addJwtHeader(accessToken, response);
 
         response.setContentType("application/json");
@@ -91,11 +86,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                               HttpServletResponse response,
                                               AuthenticationException failed) throws IOException {
 
-        log.info("로그인 실패");
         ObjectMapper objectMapper = new ObjectMapper();
-
         ApiResponseVo<?> apiResponse = ApiResponseVo.failureWithoutParam(ErrorCodeEnum.LOGIN_FAIL);
-
         String jsonResponse = objectMapper.writeValueAsString(apiResponse);
 
         response.setContentType("application/json");
