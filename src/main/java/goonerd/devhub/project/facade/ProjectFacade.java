@@ -12,7 +12,7 @@ import goonerd.devhub.project.dto.ProjectResponseDto;
 import goonerd.devhub.project.dto.ProjectSearchRequestDto;
 import goonerd.devhub.project.entity.Project;
 import goonerd.devhub.project.service.ProjectService;
-import goonerd.devhub.user.service.UserService;
+import goonerd.devhub.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
