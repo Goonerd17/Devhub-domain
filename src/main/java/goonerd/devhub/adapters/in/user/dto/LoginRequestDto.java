@@ -1,15 +1,15 @@
-package goonerd.devhub.user.dto;
+package goonerd.devhub.adapters.in.user.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
-public class SignupRequestDto {
+@NoArgsConstructor
+public class LoginRequestDto {
 
     @NotBlank
     private String userId;
-    @NotBlank
-    private String username;
     @NotBlank
     private String password;
 }

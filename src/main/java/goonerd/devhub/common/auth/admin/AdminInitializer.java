@@ -1,8 +1,10 @@
 package goonerd.devhub.common.auth.admin;
 
-import goonerd.devhub.common.enums.UserRoleEnum;
-import goonerd.devhub.user.entity.User;
-import goonerd.devhub.user.repository.UserRepository;
+import goonerd.devhub.domain.user.User;
+import goonerd.devhub.domain.user.UserRoleEnum;
+import goonerd.devhub.adapters.out.user.UserEntity;
+import goonerd.devhub.adapters.out.user.UserRepositoryJpa;
+import goonerd.devhub.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -14,16 +16,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class AdminInitializer implements CommandLineRunner {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
 
     @Override
     public void run(String... args) {
-        boolean existAdmin = userRepository.existsByRole(UserRoleEnum.ADMIN);
-
+        boolean existAdmin = userService.existsByRole(UserRoleEnum.ADMIN);
         if (!existAdmin) {
-            User admin = User.createAdminUser("admin@admin.co.kr", "admin", passwordEncoder.encode("admin1234!"), UserRoleEnum.ADMIN);
-            userRepository.save(admin);
+            userService.createAdminUser("admin@admin.co.kr", "admin", "admin1234!");
             log.info("기본 ADMIN 계정 생성됨 - ID : admin@admin.co.kr / PW : admin1234!");
         }
     }

@@ -1,4 +1,4 @@
-package goonerd.devhub.common.enums;
+package goonerd.devhub.domain.user;
 
 public enum UserRoleEnum {
 

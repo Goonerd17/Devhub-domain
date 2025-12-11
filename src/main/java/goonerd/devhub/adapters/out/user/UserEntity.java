@@ -1,7 +1,8 @@
-package goonerd.devhub.user.entity;
+package goonerd.devhub.adapters.out.user;
 
 import goonerd.devhub.common.entity.BaseEntity;
-import goonerd.devhub.common.enums.UserRoleEnum;
+import goonerd.devhub.domain.user.UserRoleEnum;
+import goonerd.devhub.domain.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @NoArgsConstructor(access = PROTECTED)
 @Table(name = "users")
-public class User extends BaseEntity {
+public class UserEntity extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -30,18 +31,18 @@ public class User extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
-    public User(String userId, String username, String password, UserRoleEnum role) {
-        this.userId = userId;
-        this.username = username;
-        this.password = password;
-        this.role = role;
+    // Domain → Entity 변환
+    public static UserEntity createUserEntity(User user) {
+        UserEntity entity = new UserEntity();
+        entity.userId = user.getUserId();
+        entity.username = user.getUsername();
+        entity.password = user.getPassword();
+        entity.role = user.getRole();
+        return entity;
     }
 
-    public static User createLocalUser(String userId, String username, String password, UserRoleEnum role) {
-        return new User(userId, username, password, role);
-    }
-
-    public static User createAdminUser(String userId, String username, String password, UserRoleEnum role) {
+    // Entity → Domain 변환
+    public User createUserDomain() {
         return new User(userId, username, password, role);
     }
 }
