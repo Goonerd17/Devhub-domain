@@ -13,11 +13,11 @@ public class SignupUserCommand {
     private final String username;
     private final String password;
 
-    public static SignupUserCommand createSignupUserCommand(SignupRequestDto signupRequestDto) {
+    public static SignupUserCommand fromSignupUserRequestDto(SignupUserRequestDto signupUserRequestDto) {
         return SignupUserCommand.builder()
-                .userId(signupRequestDto.getUserId())
-                .username(signupRequestDto.getUsername())
-                .password(signupRequestDto.getPassword())
+                .userId(signupUserRequestDto.getUserId())
+                .username(signupUserRequestDto.getUsername())
+                .password(signupUserRequestDto.getPassword())
                 .build();
     }
 }

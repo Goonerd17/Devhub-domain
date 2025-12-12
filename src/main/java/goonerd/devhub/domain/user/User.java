@@ -2,9 +2,7 @@ package goonerd.devhub.domain.user;
 
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.exception.DomainRuleException;
-import lombok.Getter;
 
-@Getter
 public class User {
 
     private final String userId;
@@ -40,4 +38,9 @@ public class User {
     public User changeUsername(String newUsername) {
         return new User(this.userId, newUsername, this.password, this.role);
     }
+
+    public String getUserId() {return userId;}
+    public String getUsername() {return username;}
+    public String getPassword() {return password;}
+    public UserRoleEnum getRole() {return role;}
 }

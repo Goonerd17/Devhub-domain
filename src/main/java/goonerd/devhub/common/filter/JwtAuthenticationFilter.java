@@ -8,7 +8,7 @@ import goonerd.devhub.common.enums.SuccessCodeEnum;
 import goonerd.devhub.domain.user.UserRoleEnum;
 import goonerd.devhub.common.utils.JwtUtil;
 import goonerd.devhub.common.vo.ApiResponseVo;
-import goonerd.devhub.adapters.in.user.dto.LoginRequestDto;
+import goonerd.devhub.adapters.in.user.dto.LoginUserRequestDto;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -37,13 +37,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
         try {
-            LoginRequestDto loginRequestDto =
-                    new ObjectMapper().readValue(request.getInputStream(), LoginRequestDto.class);
+            LoginUserRequestDto loginUserRequestDto =
+                    new ObjectMapper().readValue(request.getInputStream(), LoginUserRequestDto.class);
 
             return getAuthenticationManager().authenticate(
                             new UsernamePasswordAuthenticationToken(
-                                    loginRequestDto.getUserId(),
-                                    loginRequestDto.getPassword()));
+                                    loginUserRequestDto.getUserId(),
+                                    loginUserRequestDto.getPassword()));
         } catch (IOException e) {
             log.error(e.getMessage());
             throw new RuntimeException(e.getMessage());

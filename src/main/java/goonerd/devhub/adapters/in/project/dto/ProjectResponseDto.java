@@ -1,6 +1,7 @@
-package goonerd.devhub.project.dto;
+package goonerd.devhub.adapters.in.project.dto;
 
-import goonerd.devhub.project.entity.Project;
+import goonerd.devhub.adapters.out.project.ProjectEntity;
+import goonerd.devhub.domain.project.Project;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,20 +39,20 @@ public class ProjectResponseDto {
     @Schema(description = "수정자")
     private String modifiedBy;
 
-    public static ProjectResponseDto fromEntity(Project project) {
+    public static ProjectResponseDto fromDomain(Project project) {
         return ProjectResponseDto.builder()
                 .projectGuid(project.getProjectGuid())
                 .userId(project.getUserId())
                 .username(project.getUsername())
                 .title(project.getTitle())
-                .description(project.getDescription())
+                .description(project.getContent())
                 .recruitCount(project.getRecruitCount())
                 .startDate(project.getStartDate())
                 .endDate(project.getEndDate())
-                .createdAt(project.getCreatedAt())
-                .modifiedAt(project.getModifiedAt())
-                .createdBy(project.getCreatedBy())
-                .modifiedBy(project.getModifiedBy())
+                .createdAt(project.getAuditInfo().getCreatedAt())
+                .modifiedAt(project.getAuditInfo().getModifiedAt())
+                .createdBy(project.getAuditInfo().getCreatedBy())
+                .modifiedBy(project.getAuditInfo().getModifiedBy())
                 .build();
     }
 }
