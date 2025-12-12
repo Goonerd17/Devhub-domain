@@ -1,16 +1,13 @@
-package goonerd.devhub.project.controller;
+package goonerd.devhub.adapters.in.project;
 
+import goonerd.devhub.adapters.in.project.dto.*;
+import goonerd.devhub.common.vo.PageCommand;
 import goonerd.devhub.common.vo.PageRequestVo;
 import goonerd.devhub.common.vo.ApiResponseVo;
 import goonerd.devhub.common.vo.PageVo;
-import goonerd.devhub.project.dto.ProjectCreateRequestDto;
-import goonerd.devhub.project.dto.ProjectResponseDto;
-import goonerd.devhub.project.dto.ProjectSearchRequestDto;
-import goonerd.devhub.project.facade.ProjectFacade;
-import goonerd.devhub.project.service.ProjectService;
+import goonerd.devhub.ports.in.ProjectUseCase;
+import goonerd.devhub.service.facade.project.ProjectFacade;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -28,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Project API", description = "프로젝트 API")
 public class ProjectController {
 
-    private final ProjectFacade projectFacade;
+    private final ProjectUseCase projectUseCase;
 
     @Operation(
             summary = "프로젝트 목록 조회",
@@ -36,8 +33,11 @@ public class ProjectController {
             security = {@SecurityRequirement(name = "BearerAuth")}
     )
     @GetMapping()
-    public ResponseEntity<ApiResponseVo<PageVo<ProjectResponseDto>>> listProject(@ParameterObject ProjectSearchRequestDto projectSearchRequestDto, @ParameterObject PageRequestVo pageable) {
-        return ResponseEntity.ok(projectFacade.listProject(projectSearchRequestDto, pageable));
+    public ResponseEntity<ApiResponseVo<PageVo<ProjectResponseDto>>> listProject(SearchProjectRequestDto searchProjectRequestDto, PageRequestVo pageRequestVo) {
+
+        SearchProjectCommand searchProjectCommand = SearchProjectCommand.fromProjectSearchRequestDto(searchProjectRequestDto);
+        PageCommand pageCommand = PageCommand.of(pageRequestVo);
+        return ResponseEntity.ok(projectUseCase.listProject(searchProjectCommand, pageCommand));
     }
 
     @Operation(
@@ -51,7 +51,8 @@ public class ProjectController {
             content = @Content(schema = @Schema(implementation = ProjectResponseDto.class))
     )
     @PostMapping()
-    public ResponseEntity<ApiResponseVo<ProjectResponseDto>> createProject(@Valid @RequestBody ProjectCreateRequestDto projectCreateRequestDto) {
-        return ResponseEntity.ok(projectFacade.createProject(projectCreateRequestDto));
+    public ResponseEntity<ApiResponseVo<ProjectResponseDto>> createProject(@Valid @RequestBody CreateProjectRequestDto createProjectRequestDto) {
+        CreateProjectCommand createProjectCommand = CreateProjectCommand.fromCreateProjectRequestDto(createProjectRequestDto);
+        return ResponseEntity.ok(projectUseCase.createProject(createProjectCommand));
     }
 }

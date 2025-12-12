@@ -6,7 +6,7 @@ import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.JwtStatusEnum;
 import goonerd.devhub.common.exception.AuthRuleException;
 import goonerd.devhub.common.utils.JwtUtil;
-import goonerd.devhub.adapters.in.user.dto.LoginRequestDto;
+import goonerd.devhub.adapters.in.user.dto.LoginUserRequestDto;
 import goonerd.devhub.adapters.out.user.UserRepositoryJpa;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class AuthService {
     private final UserRepositoryJpa userRepositoryJpa;
     private final RefreshTokenService refreshTokenService;
 
-    public TokenResponseDto login(LoginRequestDto req) {
+    public TokenResponseDto login(LoginUserRequestDto req) {
         UserEntity userEntity = userRepositoryJpa.findByUserId(req.getUserId())
                 .orElseThrow(() -> AuthRuleException.of(ErrorCodeEnum.LOGIN_FAIL));
 

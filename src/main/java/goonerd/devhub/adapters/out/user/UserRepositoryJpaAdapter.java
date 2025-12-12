@@ -15,8 +15,10 @@ public class UserRepositoryJpaAdapter implements UserRepository {
     private final UserRepositoryJpa userRepositoryJpa;
 
     @Override
-    public void save(User user) {
-        userRepositoryJpa.save(UserEntity.createUserEntity(user));
+    public User createUser(User user) {
+        UserEntity userEntity = UserMapper.toEntity(user);
+        UserEntity createdUserEntity = userRepositoryJpa.save(userEntity);
+        return UserMapper.toDomain(createdUserEntity);
     }
 
     @Override
@@ -27,11 +29,11 @@ public class UserRepositoryJpaAdapter implements UserRepository {
     @Override
     public Optional<User> findByUserId(String userId) {
         return userRepositoryJpa.findByUserId(userId)
-                .map(UserEntity::createUserDomain);
+                .map(UserMapper::toDomain);
     }
 
     @Override
-    public boolean existsByRole(UserRoleEnum userRole) {
-        return userRepositoryJpa.existsByRole(userRole);
+    public boolean existsByRole(UserRoleEnum role) {
+        return userRepositoryJpa.existsByRole(role);
     }
 }

@@ -25,21 +25,17 @@ public class UserService {
         }
         String encodedPassword = passwordEncoder.encode(signupUserCommand.getPassword());
         User user = User.createUser(signupUserCommand.getUserId(), signupUserCommand.getUsername(), encodedPassword);
-        userRepository.save(user);
+        userRepository.createUser(user);
         return user;
     }
 
     public void createAdminUser(String userId, String username, String rawPassword) {
         String encodedPassword = passwordEncoder.encode(rawPassword);
-        User adminUser = User.createAdmin(
-                userId,
-                username,
-                encodedPassword
-        );
-        userRepository.save(adminUser);
+        User adminUser = User.createAdmin(userId, username, encodedPassword);
+        userRepository.createUser(adminUser);
     }
 
-    public boolean existsByRole(UserRoleEnum userRole) {
-        return userRepository.existsByRole(userRole);
+    public boolean existsByRole(UserRoleEnum role) {
+        return userRepository.existsByRole(role);
     }
 }

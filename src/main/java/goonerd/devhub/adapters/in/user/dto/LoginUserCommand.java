@@ -12,10 +12,10 @@ public class LoginUserCommand {
     private final String userId;
     private final String password;
 
-    public static LoginUserCommand createLoginUserCommand(LoginRequestDto loginRequestDto) {
+    public static LoginUserCommand fromLoginUserRequestDto(LoginUserRequestDto loginUserRequestDto) {
         return LoginUserCommand.builder()
-                .userId(loginRequestDto.getUserId())
-                .password(loginRequestDto.getPassword())
+                .userId(loginUserRequestDto.getUserId())
+                .password(loginUserRequestDto.getPassword())
                 .build();
     }
 }

@@ -4,6 +4,8 @@ import goonerd.devhub.common.entity.BaseEntity;
 import goonerd.devhub.domain.user.UserRoleEnum;
 import goonerd.devhub.domain.user.User;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UuidGenerator;
@@ -12,6 +14,8 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
 @Table(name = "users")
 public class UserEntity extends BaseEntity {
@@ -31,18 +35,4 @@ public class UserEntity extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
-    // Domain → Entity 변환
-    public static UserEntity createUserEntity(User user) {
-        UserEntity entity = new UserEntity();
-        entity.userId = user.getUserId();
-        entity.username = user.getUsername();
-        entity.password = user.getPassword();
-        entity.role = user.getRole();
-        return entity;
-    }
-
-    // Entity → Domain 변환
-    public User createUserDomain() {
-        return new User(userId, username, password, role);
-    }
 }

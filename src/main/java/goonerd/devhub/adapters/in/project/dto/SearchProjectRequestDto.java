@@ -1,4 +1,4 @@
-package goonerd.devhub.project.dto;
+package goonerd.devhub.adapters.in.project.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
-public class ProjectSearchRequestDto {
+public class SearchProjectRequestDto {
 
     private String username;
 
