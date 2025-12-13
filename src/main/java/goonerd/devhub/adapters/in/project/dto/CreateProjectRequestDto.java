@@ -1,6 +1,7 @@
 package goonerd.devhub.adapters.in.project.dto;
 
-import goonerd.devhub.domain.project.DeliveryType;
+import goonerd.devhub.domain.project.ProjectProgressType;
+import goonerd.devhub.domain.project.PositionSlot;
 import goonerd.devhub.domain.project.RecruitmentType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.FutureOrPresent;
@@ -36,7 +37,7 @@ public class CreateProjectRequestDto {
 
     @NotNull
     @Schema(description = "모집 포지션 목록")
-    private List<String> positions;
+    private List<PositionSlot> positions;
 
     @NotNull
     @Schema(description = "필요 기술 목록")
@@ -48,7 +49,7 @@ public class CreateProjectRequestDto {
 
     @NotNull
     @Schema(description = "진행 방식")
-    private DeliveryType deliveryType;
+    private ProjectProgressType projectProgressType;
 
     @Positive
     @Schema(description = "모집 인원")

@@ -1,7 +1,8 @@
 package goonerd.devhub.adapters.in.project.command;
 
 import goonerd.devhub.adapters.in.project.dto.CreateProjectRequestDto;
-import goonerd.devhub.domain.project.DeliveryType;
+import goonerd.devhub.domain.project.ProjectProgressType;
+import goonerd.devhub.domain.project.PositionSlot;
 import goonerd.devhub.domain.project.RecruitmentType;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,11 +19,11 @@ public class CreateProjectCommand {
     private String title;
     private String content;
     private RecruitmentType recruitmentType;
-    private DeliveryType deliveryType;
+    private ProjectProgressType projectProgressType;
     private int recruitCount;
     private LocalDate startDate;
     private LocalDate endDate;
-    private List<String> positions;
+    List<PositionSlot> positions;
     private List<String> skills;
 
     public static CreateProjectCommand fromCreateProjectRequestDto(CreateProjectRequestDto createProjectRequestDto) {

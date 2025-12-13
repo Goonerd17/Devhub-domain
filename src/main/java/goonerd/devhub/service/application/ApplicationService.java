@@ -30,8 +30,14 @@ public class ApplicationService {
             throw new IllegalStateException("모집 기간이 종료되었습니다.");
         }
 
-        Application app = Application.createApplication();
-        return applicationRepository.applyApplication(app);
+        Application app = Application.createApplication(
+                applyApplicationCommand.getProjectGuid(),
+                applyApplicationCommand.getUserId(),
+                applyApplicationCommand.getApplicantName(),
+                applyApplicationCommand.getMotivation(),
+                applyApplicationCommand.getRequirement()
+        );
+        return applicationRepository.apply(app);
     }
 
 //    @Override

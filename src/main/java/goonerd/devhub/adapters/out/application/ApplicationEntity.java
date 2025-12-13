@@ -35,16 +35,8 @@ public class ApplicationEntity {
     @Column(name = "motivation", columnDefinition = "TEXT")
     private String motivation;
 
-    @Column(name = "position", nullable = false)
-    private String position;
-
-    @ElementCollection
-    @CollectionTable(name = "application_skills", joinColumns = @JoinColumn(name = "application_guid"))
-    @Column(name = "skill")
-    private List<String> skills = new ArrayList<>();
-
-    @Column(name = "proficiency")
-    private String proficiency;
+    @Embedded
+    private PositionRequirementEmbeddable requirement;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")

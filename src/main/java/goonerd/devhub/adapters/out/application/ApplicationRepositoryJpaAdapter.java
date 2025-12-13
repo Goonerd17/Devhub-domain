@@ -12,7 +12,7 @@ public class ApplicationRepositoryJpaAdapter implements ApplicationRepository {
     private final ApplicationRepositoryJpa applicationRepositoryJpa;
 
     @Override
-    public Application applyApplication(Application application) {
+    public Application apply(Application application) {
         ApplicationEntity applicationEntity = ApplicationMapper.toEntity(application);
         ApplicationEntity appliedApplicationEntity = applicationRepositoryJpa.save(applicationEntity);
         return ApplicationMapper.toDomain(appliedApplicationEntity);

@@ -6,8 +6,10 @@ import goonerd.devhub.common.exception.DomainRuleException;
 public class User {
 
     private final String userId;
-    private final String username;
     private final String password;
+
+    private final String username;
+
     private final UserRole role;
 
     public User(String userId, String username, String password, UserRole role) {
@@ -23,11 +25,11 @@ public class User {
         this.role = role;
     }
 
-    public static User createUser(String userId, String username, String password) {
+    public static User createGeneralUser(String userId, String username, String password) {
         return new User(userId, username, password, UserRole.USER);
     }
 
-    public static User createAdmin(String userId, String username, String password) {
+    public static User createAdminUser(String userId, String username, String password) {
         return new User(userId, username, password, UserRole.ADMIN);
     }
 
@@ -39,8 +41,8 @@ public class User {
         return new User(this.userId, newUsername, this.password, this.role);
     }
 
-    public String getUserId() {return userId;}
-    public String getUsername() {return username;}
-    public String getPassword() {return password;}
-    public UserRole getRole() {return role;}
+    public String getUserId() { return userId; }
+    public String getUsername() { return username; }
+    public String getPassword() { return password; }
+    public UserRole getRole() { return role; }
 }

@@ -18,7 +18,7 @@ public class ApplicationFacade implements ApplicationUseCase {
 
     public ApiResponseVo<ApplyApplicationResponseDto> apply (ApplyApplicationCommand applyApplicationCommand) {
         Application application = applicationService.apply(applyApplicationCommand);
-        ApplyApplicationResponseDto applicationResponseDto = ApplicationResponseDto.fromDomain(application);
+        ApplyApplicationResponseDto applicationResponseDto = ApplyApplicationResponseDto.fromDomain(application);
         return ApiResponseVo.successWithParamAndData(SuccessCodeEnum.CREATE_SUCCESS, applyApplicationCommand, applicationResponseDto);
     }
 }
