@@ -3,16 +3,14 @@ package goonerd.devhub.adapters.in.application;
 import goonerd.devhub.adapters.in.application.command.ApplyApplicationCommand;
 import goonerd.devhub.adapters.in.application.dto.ApplyApplicationRequestDto;
 import goonerd.devhub.adapters.in.application.dto.ApplyApplicationResponseDto;
-import goonerd.devhub.adapters.in.project.dto.ProjectResponseDto;
 import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
+import goonerd.devhub.common.enums.SuccessCodeEnum;
 import goonerd.devhub.common.vo.ApiResponseVo;
 import goonerd.devhub.ports.in.ApplicationUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.nio.file.attribute.UserPrincipal;
 
 @RestController
 @RequestMapping("/api/projects/{projectGuid}/applications")
@@ -24,7 +22,12 @@ public class ApplicationController {
     @PostMapping
     public ResponseEntity<ApiResponseVo<ApplyApplicationResponseDto>> apply(@PathVariable String projectGuid, @RequestBody ApplyApplicationRequestDto applyApplicationRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
         ApplyApplicationCommand applyApplicationCommand = ApplyApplicationCommand.fromApplyApplicationRequestDto(projectGuid, userDetailsImpl.getUserId(), applyApplicationRequestDto);
-        return ResponseEntity.ok(applicationUseCase.apply(applyApplicationCommand));
+        return ResponseEntity.ok(ApiResponseVo.
+                successWithParamAndData(
+                        SuccessCodeEnum.CREATE_SUCCESS,
+                        applyApplicationCommand, applicationUseCase.apply(applyApplicationCommand)
+                )
+        );
     }
 
 //    @PostMapping("/{applicationId}/approve")

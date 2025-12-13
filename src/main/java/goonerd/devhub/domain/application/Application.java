@@ -1,21 +1,24 @@
 package goonerd.devhub.domain.application;
 
+import goonerd.devhub.domain.common.AuditInfo;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Application {
 
-    private final String applicationGuid;
-    private final String projectGuid;
-    private final String userId;
+    private String applicationGuid;
+    private String projectGuid;
+    private String userId;
 
-    private final String username;
-    private final String motivation;
-    private final PositionRequirement requirement;
+    private String username;
+    private String motivation;
+    private PositionRequirement positionRequirement;
 
     private ApplicationStatus status;
 
-    private final LocalDateTime appliedAt;
+    private LocalDateTime appliedAt;
+    private AuditInfo auditInfo;
 
     private Application(
             String applicationGuid,
@@ -23,9 +26,10 @@ public class Application {
             String userId,
             String username,
             String motivation,
-            PositionRequirement requirement,
+            PositionRequirement positionRequirement,
             ApplicationStatus status,
-            LocalDateTime appliedAt
+            LocalDateTime appliedAt,
+            AuditInfo auditInfo
     ) {
         this.applicationGuid = applicationGuid;
 
@@ -36,13 +40,15 @@ public class Application {
         if (userId == null || userId.isBlank())
             throw new IllegalArgumentException("userId는 필수입니다.");
         this.userId = userId;
-
         this.username = Objects.requireNonNull(username);
         this.motivation = Objects.requireNonNull(motivation);
-        this.requirement = Objects.requireNonNull(requirement);
+
+        this.positionRequirement = Objects.requireNonNull(positionRequirement);
 
         this.status = Objects.requireNonNull(status);
+
         this.appliedAt = appliedAt != null ? appliedAt : LocalDateTime.now();
+        this.auditInfo = auditInfo != null ? auditInfo : AuditInfo.empty();
     }
 
     public static Application createApplication(
@@ -50,7 +56,7 @@ public class Application {
             String userId,
             String username,
             String motivation,
-            PositionRequirement requirement
+            PositionRequirement positionRequirement
     ) {
         return new Application(
                 null,
@@ -58,9 +64,10 @@ public class Application {
                 userId,
                 username,
                 motivation,
-                requirement,
+                positionRequirement,
                 ApplicationStatus.PENDING,
-                LocalDateTime.now()
+                LocalDateTime.now(),
+                AuditInfo.empty()
         );
     }
 
@@ -70,9 +77,10 @@ public class Application {
             String userId,
             String username,
             String motivation,
-            PositionRequirement requirement,
+            PositionRequirement positionRequirement,
             ApplicationStatus status,
-            LocalDateTime appliedAt
+            LocalDateTime appliedAt,
+            AuditInfo auditInfo
     ) {
         return new Application(
                 applicationGuid,
@@ -80,9 +88,10 @@ public class Application {
                 userId,
                 username,
                 motivation,
-                requirement,
+                positionRequirement,
                 status,
-                appliedAt
+                appliedAt,
+                auditInfo
         );
     }
 
@@ -109,7 +118,8 @@ public class Application {
     public String getUserId() { return userId; }
     public String getUsername() { return username; }
     public String getMotivation() { return motivation; }
-    public PositionRequirement getRequirement() { return requirement; }
+    public PositionRequirement getPositionRequirement() { return positionRequirement; }
     public ApplicationStatus getStatus() { return status; }
     public LocalDateTime getAppliedAt() { return appliedAt; }
+    public AuditInfo getAuditInfo() { return auditInfo; }
 }

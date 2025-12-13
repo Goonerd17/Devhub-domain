@@ -29,7 +29,7 @@ public class Project {
     private List<PositionSlot> positionSlots;
     private List<String> skills;
 
-    private final AuditInfo auditInfo;
+    private AuditInfo auditInfo;
 
     private Project(
             String projectGuid,

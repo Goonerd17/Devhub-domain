@@ -1,9 +1,16 @@
 package goonerd.devhub.adapters.in.application.dto;
 
 import goonerd.devhub.domain.application.Application;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
+@Builder
+@AllArgsConstructor
 public class ApplyApplicationResponseDto {
 
     private String applicationGuid;
@@ -15,42 +22,32 @@ public class ApplyApplicationResponseDto {
     private String status;
     private LocalDateTime appliedAt;
 
-    // 생성자
-    public ApplyApplicationResponseDto(String applicationGuid, String projectGuid,
-                                       String userId, String username,
-                                       String position, String proficiency,
-                                       String status, LocalDateTime appliedAt) {
-        this.applicationGuid = applicationGuid;
-        this.projectGuid = projectGuid;
-        this.userId = userId;
-        this.username = username;
-        this.position = position;
-        this.proficiency = proficiency;
-        this.status = status;
-        this.appliedAt = appliedAt;
-    }
+    @Schema(description = "생성일")
+    private LocalDateTime createdAt;
 
-    // Domain → DTO 변환
+    @Schema(description = "수정일")
+    private LocalDateTime modifiedAt;
+
+    @Schema(description = "생성자")
+    private String createdBy;
+
+    @Schema(description = "수정자")
+    private String modifiedBy;
+
     public static ApplyApplicationResponseDto fromDomain(Application application) {
-        return new ApplyApplicationResponseDto(
-                application.getApplicationGuid(),
-                application.getProjectGuid(),
-                application.getUserId(),
-                application.getUsername(),
-                application.getRequirement().position(),
-                application.getRequirement().skillLevel().name(),
-                application.getStatus().name(), // Enum → String
-                application.getAppliedAt()
-        );
+        return ApplyApplicationResponseDto.builder()
+                .applicationGuid(application.getApplicationGuid())
+                .projectGuid(application.getProjectGuid())
+                .userId(application.getUserId())
+                .username(application.getUsername())
+                .position(application.getPositionRequirement().getPosition())
+                .proficiency(application.getPositionRequirement().getSkillLevel().name())
+                .status(application.getStatus().name())
+                .appliedAt(application.getAppliedAt())
+                .createdAt(application.getAuditInfo().getCreatedAt())
+                .modifiedAt(application.getAuditInfo().getModifiedAt())
+                .createdBy(application.getAuditInfo().getCreatedBy())
+                .modifiedBy(application.getAuditInfo().getModifiedBy())
+                .build();
     }
-
-    // getter
-    public String getApplicationGuid() { return applicationGuid; }
-    public String getProjectGuid() { return projectGuid; }
-    public String getUserId() { return userId; }
-    public String getUsername() { return username; }
-    public String getPosition() { return position; }
-    public String getProficiency() { return proficiency; }
-    public String getStatus() { return status; }
-    public LocalDateTime getAppliedAt() { return appliedAt; }
 }

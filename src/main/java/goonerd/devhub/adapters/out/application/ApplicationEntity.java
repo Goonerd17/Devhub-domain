@@ -1,5 +1,6 @@
 package goonerd.devhub.adapters.out.application;
 
+import goonerd.devhub.common.entity.BaseEntity;
 import goonerd.devhub.domain.application.ApplicationStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "applications")
-public class ApplicationEntity {
+public class ApplicationEntity extends BaseEntity {
 
     @Id
     @Column(name = "application_guid", length = 36)
