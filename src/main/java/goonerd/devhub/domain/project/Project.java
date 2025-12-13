@@ -11,17 +11,17 @@ import java.util.Objects;
 public class Project {
 
     private String projectGuid;
+
     private String userId;
     private String username;
     private String title;
     private String content;
+    private int recruitCount;
+    private int likes;
 
     private RecruitmentType recruitmentType;
     private ProjectStatus status;
-
-    private DeliveryType deliveryType;
-    private int recruitCount;
-    private int likes;
+    private ProjectProgressType projectProgressType;
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -37,11 +37,11 @@ public class Project {
             String username,
             String title,
             String content,
-            RecruitmentType recruitmentType,
-            ProjectStatus status,
-            DeliveryType deliveryType,
             int recruitCount,
             int likes,
+            RecruitmentType recruitmentType,
+            ProjectStatus status,
+            ProjectProgressType projectProgressType,
             LocalDate startDate,
             LocalDate endDate,
             List<PositionSlot> positions,
@@ -59,17 +59,15 @@ public class Project {
 
         this.title = title;
         this.content = content;
-        this.recruitmentType = Objects.requireNonNull(recruitmentType);
-        this.status = Objects.requireNonNull(status);
-        this.deliveryType = Objects.requireNonNull(deliveryType);
         this.recruitCount = recruitCount;
         this.likes = likes;
+        this.recruitmentType = Objects.requireNonNull(recruitmentType);
+        this.status = Objects.requireNonNull(status);
+        this.projectProgressType = Objects.requireNonNull(projectProgressType);
         this.startDate = Objects.requireNonNull(startDate);
         this.endDate = Objects.requireNonNull(endDate);
-
         this.positions = positions != null ? new ArrayList<>(positions) : new ArrayList<>();
         this.skills = skills != null ? List.copyOf(skills) : Collections.emptyList();
-
         this.auditInfo = auditInfo != null ? auditInfo : AuditInfo.empty();
     }
 
@@ -78,9 +76,9 @@ public class Project {
             String username,
             String title,
             String content,
-            RecruitmentType recruitmentType,
-            DeliveryType deliveryType,
             int recruitCount,
+            RecruitmentType recruitmentType,
+            ProjectProgressType projectProgressType,
             LocalDate startDate,
             LocalDate endDate,
             List<PositionSlot> positions,
@@ -92,11 +90,11 @@ public class Project {
                 username,
                 title,
                 content,
-                recruitmentType,
-                ProjectStatus.RECRUITING,
-                deliveryType,
                 recruitCount,
                 0,
+                recruitmentType,
+                ProjectStatus.RECRUITING,
+                projectProgressType,
                 startDate,
                 endDate,
                 positions,
@@ -113,7 +111,7 @@ public class Project {
             String content,
             RecruitmentType recruitmentType,
             ProjectStatus status,
-            DeliveryType deliveryType,
+            ProjectProgressType projectProgressType,
             int recruitCount,
             int likes,
             LocalDate startDate,
@@ -128,17 +126,21 @@ public class Project {
                 username,
                 title,
                 content,
-                recruitmentType,
-                status,
-                deliveryType,
                 recruitCount,
                 likes,
+                recruitmentType,
+                status,
+                projectProgressType,
                 startDate,
                 endDate,
                 positions,
                 skills,
                 auditInfo
         );
+    }
+
+    public boolean isClosed() {
+        return status == ProjectStatus.CLOSED || LocalDate.now().isAfter(endDate);
     }
 
     public void changeTitle(String newTitle) {
@@ -160,10 +162,6 @@ public class Project {
         List<String> newList = new ArrayList<>(original);
         newList.add(newItem);
         return List.copyOf(newList);
-    }
-
-    public boolean isClosed() {
-        return status == ProjectStatus.CLOSED || LocalDate.now().isAfter(endDate);
     }
 
     public void acceptUser(String userId, String position, String proficiency) {
@@ -188,14 +186,12 @@ public class Project {
     public String getContent() { return content; }
     public RecruitmentType getRecruitmentType() { return recruitmentType; }
     public ProjectStatus getStatus() { return status; }
-    public DeliveryType getDeliveryType() { return deliveryType; }
+    public ProjectProgressType getDeliveryType() { return projectProgressType; }
     public int getRecruitCount() { return recruitCount; }
     public int getLikes() { return likes; }
     public LocalDate getStartDate() { return startDate; }
     public LocalDate getEndDate() { return endDate; }
-    public List<PositionSlot> getPositions() {
-        return List.copyOf(positions); // 외부에서 수정 불가
-    }
+    public List<PositionSlot> getPositions() {return List.copyOf(positions); }
     public List<String> getSkills() { return skills; }
     public AuditInfo getAuditInfo() { return auditInfo; }
 }

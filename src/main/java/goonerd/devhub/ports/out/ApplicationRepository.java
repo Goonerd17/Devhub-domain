@@ -4,7 +4,7 @@ import goonerd.devhub.domain.application.Application;
 
 public interface ApplicationRepository {
 
-    Application applyApplication(Application application);
+    Application apply(Application application);
 
     boolean existsByProjectGuidAndUserId(String projectGuid, String userId);
 

@@ -7,15 +7,14 @@ public class Application {
 
     private final String applicationGuid;
     private final String projectGuid;
-
     private final String userId;
-    private final String username;
 
+    private final String username;
     private final String motivation;
-    private final String position;
-    private final String proficiency;
+    private final PositionRequirement requirement;
 
     private ApplicationStatus status;
+
     private final LocalDateTime appliedAt;
 
     private Application(
@@ -24,8 +23,7 @@ public class Application {
             String userId,
             String username,
             String motivation,
-            String position,
-            String proficiency,
+            PositionRequirement requirement,
             ApplicationStatus status,
             LocalDateTime appliedAt
     ) {
@@ -41,22 +39,18 @@ public class Application {
 
         this.username = Objects.requireNonNull(username);
         this.motivation = Objects.requireNonNull(motivation);
-        this.position = Objects.requireNonNull(position);
-
-        this.proficiency = Objects.requireNonNull(proficiency);
+        this.requirement = Objects.requireNonNull(requirement);
 
         this.status = Objects.requireNonNull(status);
         this.appliedAt = appliedAt != null ? appliedAt : LocalDateTime.now();
     }
 
-    // 신규 생성
     public static Application createApplication(
             String projectGuid,
             String userId,
             String username,
             String motivation,
-            String position,
-            String proficiency
+            PositionRequirement requirement
     ) {
         return new Application(
                 null,
@@ -64,22 +58,19 @@ public class Application {
                 userId,
                 username,
                 motivation,
-                position,
-                proficiency,
+                requirement,
                 ApplicationStatus.PENDING,
                 LocalDateTime.now()
         );
     }
 
-    // DB 복구
     public static Application reconstruct(
             String applicationGuid,
             String projectGuid,
             String userId,
             String username,
             String motivation,
-            String position,
-            String proficiency,
+            PositionRequirement requirement,
             ApplicationStatus status,
             LocalDateTime appliedAt
     ) {
@@ -89,8 +80,7 @@ public class Application {
                 userId,
                 username,
                 motivation,
-                position,
-                proficiency,
+                requirement,
                 status,
                 appliedAt
         );
@@ -119,8 +109,7 @@ public class Application {
     public String getUserId() { return userId; }
     public String getUsername() { return username; }
     public String getMotivation() { return motivation; }
-    public String getPosition() { return position; }
-    public String getProficiency() { return proficiency; }
+    public PositionRequirement getRequirement() { return requirement; }
     public ApplicationStatus getStatus() { return status; }
     public LocalDateTime getAppliedAt() { return appliedAt; }
 }

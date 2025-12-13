@@ -8,7 +8,7 @@ public class PositionSlot {
 
     private final String position;
     private final String proficiency;
-    private final int capacity; // 모집 인원
+    private final int capacity;
     private List<String> acceptedUserIds;
 
     public PositionSlot(String position, String proficiency, int capacity, List<String> acceptedUserIds) {

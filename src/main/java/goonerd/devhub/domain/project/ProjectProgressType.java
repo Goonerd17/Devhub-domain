@@ -1,6 +1,6 @@
 package goonerd.devhub.domain.project;
 
-public enum DeliveryType {
+public enum ProjectProgressType {
     ONLINE,
     OFFLINE,
     HYBRID;

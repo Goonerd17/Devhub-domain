@@ -24,14 +24,14 @@ public class UserService {
             throw BusinessRuleException.of(ErrorCodeEnum.DUPLICATE_USERID);
         }
         String encodedPassword = passwordEncoder.encode(signupUserCommand.getPassword());
-        User user = User.createUser(signupUserCommand.getUserId(), signupUserCommand.getUsername(), encodedPassword);
+        User user = User.createGeneralUser(signupUserCommand.getUserId(), signupUserCommand.getUsername(), encodedPassword);
         userRepository.createUser(user);
         return user;
     }
 
     public void createAdminUser(String userId, String username, String rawPassword) {
         String encodedPassword = passwordEncoder.encode(rawPassword);
-        User adminUser = User.createAdmin(userId, username, encodedPassword);
+        User adminUser = User.createAdminUser(userId, username, encodedPassword);
         userRepository.createUser(adminUser);
     }
 

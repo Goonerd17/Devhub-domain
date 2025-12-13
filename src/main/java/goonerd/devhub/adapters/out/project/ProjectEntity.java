@@ -1,7 +1,7 @@
 package goonerd.devhub.adapters.out.project;
 
 import goonerd.devhub.common.entity.BaseEntity;
-import goonerd.devhub.domain.project.DeliveryType;
+import goonerd.devhub.domain.project.ProjectProgressType;
 import goonerd.devhub.domain.project.ProjectStatus;
 import goonerd.devhub.domain.project.RecruitmentType;
 import jakarta.persistence.*;
@@ -39,7 +39,7 @@ public class ProjectEntity extends BaseEntity {
     private ProjectStatus status;
 
     @Enumerated(EnumType.STRING)
-    private DeliveryType deliveryType;
+    private ProjectProgressType projectProgressType;
 
     private int recruitCount;
     private String authorId; // UserId 참조
