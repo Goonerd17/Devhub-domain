@@ -9,7 +9,7 @@ import java.util.List;
 public class ProjectMapper {
 
     public static ProjectEntity toEntity(Project project) {
-        List<PositionSlotEmbeddable> embeddables = project.getPositions().stream()
+        List<PositionSlotEmbeddable> embeddables = project.getPositionSlots().stream()
                 .map(d -> new PositionSlotEmbeddable(
                         d.getPosition(),
                         d.getProficiency(),

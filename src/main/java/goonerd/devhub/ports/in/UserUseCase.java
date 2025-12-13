@@ -1,9 +1,8 @@
 package goonerd.devhub.ports.in;
 
 import goonerd.devhub.adapters.in.user.command.SignupUserCommand;
-import goonerd.devhub.common.vo.ApiResponseVo;
-import goonerd.devhub.domain.user.User;
+import goonerd.devhub.adapters.in.user.dto.SignupUserResponseDto;
 
 public interface UserUseCase {
-    ApiResponseVo<User> signup(SignupUserCommand command);
+    SignupUserResponseDto signup(SignupUserCommand command);
 }

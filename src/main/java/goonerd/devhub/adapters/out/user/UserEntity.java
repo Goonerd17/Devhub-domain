@@ -19,16 +19,14 @@ import static lombok.AccessLevel.PROTECTED;
 @Table(name = "users")
 public class UserEntity extends BaseEntity {
 
-    @Id
-    @GeneratedValue
-    @UuidGenerator
-    @Column(length = 36, nullable = false, unique = true)
+    @Id @GeneratedValue
+    @UuidGenerator @Column(length = 36, nullable = false, unique = true)
     private String userGuid;
 
     @Column(unique = true)
     private String userId;
 
-    @Column(unique = true)
+    @Column
     private String username;
 
     @Column(nullable = false)
