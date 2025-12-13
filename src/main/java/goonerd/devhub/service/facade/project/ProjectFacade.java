@@ -1,8 +1,8 @@
 package goonerd.devhub.service.facade.project;
 
-import goonerd.devhub.adapters.in.project.dto.CreateProjectCommand;
+import goonerd.devhub.adapters.in.project.command.CreateProjectCommand;
 import goonerd.devhub.adapters.in.project.dto.ProjectResponseDto;
-import goonerd.devhub.adapters.in.project.dto.SearchProjectCommand;
+import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import goonerd.devhub.common.converter.PageConverter;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
 import goonerd.devhub.common.vo.ApiResponseVo;

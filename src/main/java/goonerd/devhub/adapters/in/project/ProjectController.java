@@ -1,12 +1,13 @@
 package goonerd.devhub.adapters.in.project;
 
+import goonerd.devhub.adapters.in.project.command.CreateProjectCommand;
+import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import goonerd.devhub.adapters.in.project.dto.*;
 import goonerd.devhub.common.vo.PageCommand;
 import goonerd.devhub.common.vo.PageRequestVo;
 import goonerd.devhub.common.vo.ApiResponseVo;
 import goonerd.devhub.common.vo.PageVo;
 import goonerd.devhub.ports.in.ProjectUseCase;
-import goonerd.devhub.service.facade.project.ProjectFacade;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,7 +16,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,5 +1,6 @@
-package goonerd.devhub.adapters.in.project.dto;
+package goonerd.devhub.adapters.in.project.command;
 
+import goonerd.devhub.adapters.in.project.dto.SearchProjectRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 

@@ -8,9 +8,9 @@ public class User {
     private final String userId;
     private final String username;
     private final String password;
-    private final UserRoleEnum role;
+    private final UserRole role;
 
-    public User(String userId, String username, String password, UserRoleEnum role) {
+    public User(String userId, String username, String password, UserRole role) {
         if (userId == null || userId.isBlank()) {
             throw DomainRuleException.of(ErrorCodeEnum.UNKNOWN_FAIL);
         }
@@ -24,14 +24,14 @@ public class User {
     }
 
     public static User createUser(String userId, String username, String password) {
-        return new User(userId, username, password, UserRoleEnum.USER);
+        return new User(userId, username, password, UserRole.USER);
     }
 
     public static User createAdmin(String userId, String username, String password) {
-        return new User(userId, username, password, UserRoleEnum.ADMIN);
+        return new User(userId, username, password, UserRole.ADMIN);
     }
 
-    public boolean hasRole(UserRoleEnum checkRole) {
+    public boolean hasRole(UserRole checkRole) {
         return this.role == checkRole;
     }
 
@@ -42,5 +42,5 @@ public class User {
     public String getUserId() {return userId;}
     public String getUsername() {return username;}
     public String getPassword() {return password;}
-    public UserRoleEnum getRole() {return role;}
+    public UserRole getRole() {return role;}
 }

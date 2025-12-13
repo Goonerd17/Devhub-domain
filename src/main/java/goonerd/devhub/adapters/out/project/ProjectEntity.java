@@ -26,26 +26,30 @@ public class ProjectEntity extends BaseEntity {
     @UuidGenerator
     @Column(length = 36, nullable = false, unique = true)
     private String projectGuid;
+
     private String userId;
     private String username;
     private String title;
     private String content;
+
     @Enumerated(EnumType.STRING)
     private RecruitmentType recruitmentType;
+
     @Enumerated(EnumType.STRING)
     private ProjectStatus status;
+
     @Enumerated(EnumType.STRING)
     private DeliveryType deliveryType;
+
     private int recruitCount;
     private String authorId; // UserId 참조
     private int likes;
     private LocalDate startDate;
     private LocalDate endDate;
+
     @ElementCollection
-    private List<String> positions;
+    private List<PositionSlotEmbeddable> positions;
+
     @ElementCollection
     private List<String> skills;
-    @ElementCollection
-    private List<String> acceptedUserIds;
-
 }

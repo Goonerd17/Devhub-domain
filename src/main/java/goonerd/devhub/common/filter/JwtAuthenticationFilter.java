@@ -5,7 +5,7 @@ import goonerd.devhub.common.auth.service.RefreshTokenService;
 import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
-import goonerd.devhub.domain.user.UserRoleEnum;
+import goonerd.devhub.domain.user.UserRole;
 import goonerd.devhub.common.utils.JwtUtil;
 import goonerd.devhub.common.vo.ApiResponseVo;
 import goonerd.devhub.adapters.in.user.dto.LoginUserRequestDto;
@@ -59,7 +59,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         ObjectMapper objectMapper = new ObjectMapper();
         UserDetailsImpl userDetails = (UserDetailsImpl) authResult.getPrincipal();
         String userId = userDetails.getUsername();
-        UserRoleEnum role = userDetails.getUser().getRole();
+        UserRole role = userDetails.getUser().getRole();
 
         String accessToken = jwtUtil.substringHeaderToken(jwtUtil.createAccessToken(userId, role));
         String refreshToken = jwtUtil.substringHeaderToken(jwtUtil.createRefreshToken(userId));

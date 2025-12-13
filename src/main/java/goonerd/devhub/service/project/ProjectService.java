@@ -1,7 +1,7 @@
 package goonerd.devhub.service.project;
 
-import goonerd.devhub.adapters.in.project.dto.CreateProjectCommand;
-import goonerd.devhub.adapters.in.project.dto.SearchProjectCommand;
+import goonerd.devhub.adapters.in.project.command.CreateProjectCommand;
+import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import goonerd.devhub.common.vo.PageCommand;
 import goonerd.devhub.domain.project.Project;
 import goonerd.devhub.ports.out.ProjectRepository;

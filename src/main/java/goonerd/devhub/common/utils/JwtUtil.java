@@ -2,7 +2,7 @@ package goonerd.devhub.common.utils;
 
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.JwtStatusEnum;
-import goonerd.devhub.domain.user.UserRoleEnum;
+import goonerd.devhub.domain.user.UserRole;
 import goonerd.devhub.common.exception.AuthRuleException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -82,7 +82,7 @@ public class JwtUtil {
     }
 
     // AccessToken 생성
-    public String createAccessToken(String userId, UserRoleEnum role) {
+    public String createAccessToken(String userId, UserRole role) {
         Date now = new Date();
         return BEARER_PREFIX +
                 Jwts.builder()

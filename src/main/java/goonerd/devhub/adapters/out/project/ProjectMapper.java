@@ -1,11 +1,22 @@
 package goonerd.devhub.adapters.out.project;
 
 import goonerd.devhub.domain.common.AuditInfo;
+import goonerd.devhub.domain.project.PositionSlot;
 import goonerd.devhub.domain.project.Project;
+
+import java.util.List;
 
 public class ProjectMapper {
 
     public static ProjectEntity toEntity(Project project) {
+        List<PositionSlotEmbeddable> embeddables = project.getPositions().stream()
+                .map(d -> new PositionSlotEmbeddable(
+                        d.getPosition(),
+                        d.getProficiency(),
+                        d.getCapacity(),
+                        d.getAcceptedUserIds()
+                ))
+                .toList();
         return ProjectEntity.builder()
                 .userId(project.getUserId())
                 .username(project.getUsername())
@@ -18,13 +29,21 @@ public class ProjectMapper {
                 .likes(project.getLikes())
                 .startDate(project.getStartDate())
                 .endDate(project.getEndDate())
-                .positions(project.getPositions())
+                .positions(embeddables)
                 .skills(project.getSkills())
-                .acceptedUserIds(project.getAcceptedUserIds())
                 .build();
     }
 
     public static Project toDomain(ProjectEntity projectEntity) {
+
+        List<PositionSlot> slots = projectEntity.getPositions().stream()
+                .map(e -> new PositionSlot(
+                        e.getPosition(),
+                        e.getProficiency(),
+                        e.getCapacity(),
+                        e.getAcceptedUserIds()
+                ))
+                .toList();
         return Project.reconstruct(
                 projectEntity.getProjectGuid(),
                 projectEntity.getUserId(),
@@ -38,9 +57,8 @@ public class ProjectMapper {
                 projectEntity.getLikes(),
                 projectEntity.getStartDate(),
                 projectEntity.getEndDate(),
-                projectEntity.getPositions(),
+                slots,
                 projectEntity.getSkills(),
-                projectEntity.getAcceptedUserIds(),
                 toAuditInfo(projectEntity)
         );
     }

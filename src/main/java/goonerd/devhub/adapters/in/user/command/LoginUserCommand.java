@@ -1,5 +1,6 @@
-package goonerd.devhub.adapters.in.user.dto;
+package goonerd.devhub.adapters.in.user.command;
 
+import goonerd.devhub.adapters.in.user.dto.LoginUserRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
