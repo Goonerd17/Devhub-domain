@@ -2,8 +2,6 @@ package goonerd.devhub.service.facade.application;
 
 import goonerd.devhub.adapters.in.application.command.ApplyApplicationCommand;
 import goonerd.devhub.adapters.in.application.dto.ApplyApplicationResponseDto;
-import goonerd.devhub.common.enums.SuccessCodeEnum;
-import goonerd.devhub.common.vo.ApiResponseVo;
 import goonerd.devhub.domain.application.Application;
 import goonerd.devhub.ports.in.ApplicationUseCase;
 import goonerd.devhub.service.application.ApplicationService;
@@ -16,9 +14,8 @@ public class ApplicationFacade implements ApplicationUseCase {
 
     private final ApplicationService applicationService;
 
-    public ApiResponseVo<ApplyApplicationResponseDto> apply (ApplyApplicationCommand applyApplicationCommand) {
+    public ApplyApplicationResponseDto apply (ApplyApplicationCommand applyApplicationCommand) {
         Application application = applicationService.apply(applyApplicationCommand);
-        ApplyApplicationResponseDto applicationResponseDto = ApplyApplicationResponseDto.fromDomain(application);
-        return ApiResponseVo.successWithParamAndData(SuccessCodeEnum.CREATE_SUCCESS, applyApplicationCommand, applicationResponseDto);
+        return ApplyApplicationResponseDto.fromDomain(application);
     }
 }

@@ -2,6 +2,8 @@ package goonerd.devhub.service.application;
 
 import goonerd.devhub.adapters.in.application.command.ApplyApplicationCommand;
 import goonerd.devhub.domain.application.Application;
+import goonerd.devhub.domain.application.PositionRequirement;
+import goonerd.devhub.domain.common.SkillLevel;
 import goonerd.devhub.domain.project.Project;
 import goonerd.devhub.ports.out.ApplicationRepository;
 import goonerd.devhub.ports.out.ProjectRepository;
@@ -18,6 +20,8 @@ public class ApplicationService {
     private final ProjectRepository projectRepository;
 
     public Application apply(ApplyApplicationCommand applyApplicationCommand) {
+        SkillLevel skillLevel = SkillLevel.fromCommand(applyApplicationCommand.getSkillLevel());
+        PositionRequirement requirement = PositionRequirement.fromApplyApplicationCommand(applyApplicationCommand.getPosition(), skillLevel);
 
         if (applicationRepository.existsByProjectGuidAndUserId(applyApplicationCommand.getProjectGuid(), applyApplicationCommand.getUserId())) {
             throw new IllegalStateException("이미 지원한 사용자입니다.");
@@ -35,7 +39,7 @@ public class ApplicationService {
                 applyApplicationCommand.getUserId(),
                 applyApplicationCommand.getApplicantName(),
                 applyApplicationCommand.getMotivation(),
-                applyApplicationCommand.getRequirement()
+                requirement
         );
         return applicationRepository.apply(app);
     }
