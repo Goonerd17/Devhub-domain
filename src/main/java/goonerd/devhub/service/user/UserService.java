@@ -1,10 +1,10 @@
 package goonerd.devhub.service.user;
 
-import goonerd.devhub.adapters.in.user.dto.SignupUserCommand;
+import goonerd.devhub.adapters.in.user.command.SignupUserCommand;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.exception.BusinessRuleException;
 import goonerd.devhub.domain.user.User;
-import goonerd.devhub.domain.user.UserRoleEnum;
+import goonerd.devhub.domain.user.UserRole;
 import goonerd.devhub.ports.out.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,7 +35,7 @@ public class UserService {
         userRepository.createUser(adminUser);
     }
 
-    public boolean existsByRole(UserRoleEnum role) {
+    public boolean existsByRole(UserRole role) {
         return userRepository.existsByRole(role);
     }
 }

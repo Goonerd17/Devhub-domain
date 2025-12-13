@@ -1,0 +1,55 @@
+package goonerd.devhub.adapters.out.application;
+
+import goonerd.devhub.domain.application.ApplicationStatus;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "applications")
+public class ApplicationEntity {
+
+    @Id
+    @Column(name = "application_guid", length = 36)
+    private String applicationGuid;
+
+    @Column(name = "project_guid", nullable = false)
+    private String projectGuid;
+
+    @Column(name = "user_id", nullable = false)
+    private String userId;
+
+    @Column(name = "username", nullable = false)
+    private String username;
+
+    @Column(name = "motivation", columnDefinition = "TEXT")
+    private String motivation;
+
+    @Column(name = "position", nullable = false)
+    private String position;
+
+    @ElementCollection
+    @CollectionTable(name = "application_skills", joinColumns = @JoinColumn(name = "application_guid"))
+    @Column(name = "skill")
+    private List<String> skills = new ArrayList<>();
+
+    @Column(name = "proficiency")
+    private String proficiency;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private ApplicationStatus status;
+
+    @Column(name = "applied_at")
+    private LocalDateTime appliedAt;
+}

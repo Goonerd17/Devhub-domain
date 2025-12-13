@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
 public class ProjectRepositoryJpaAdapter implements ProjectRepository {
@@ -17,9 +19,7 @@ public class ProjectRepositoryJpaAdapter implements ProjectRepository {
     @Override
     public Page<Project> listProject(PageCommand pageCommand) {
         Pageable pageable = pageCommand.toPageable();
-
         Page<ProjectEntity> entityPage = projectRepositoryJpa.findAll(pageable);
-
         return entityPage.map(ProjectMapper::toDomain);
     }
 
@@ -28,5 +28,12 @@ public class ProjectRepositoryJpaAdapter implements ProjectRepository {
         ProjectEntity entity = ProjectMapper.toEntity(project);
         ProjectEntity saved = projectRepositoryJpa.save(entity);
         return ProjectMapper.toDomain(saved);
+    }
+
+    @Override
+    public Optional<Project> findByProjectGuId(String projectGuid) {
+        return Optional.ofNullable(projectRepositoryJpa.findByProjectGuid(projectGuid)
+                .map(ProjectMapper::toDomain)
+                .orElseThrow(() -> new IllegalStateException("프로젝트를 찾을 수 없습니다.")));
     }
 }

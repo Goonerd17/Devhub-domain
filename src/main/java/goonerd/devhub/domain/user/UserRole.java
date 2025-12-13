@@ -1,13 +1,13 @@
 package goonerd.devhub.domain.user;
 
-public enum UserRoleEnum {
+public enum UserRole {
 
     ADMIN(Authority.ADMIN),
     USER(Authority.USER);
 
     private final String authority;
 
-    UserRoleEnum(String authority) {
+    UserRole(String authority) {
         this.authority = authority;
     }
 

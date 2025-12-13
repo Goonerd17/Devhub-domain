@@ -1,6 +1,6 @@
 package goonerd.devhub.adapters.out.user;
 
-import goonerd.devhub.domain.user.UserRoleEnum;
+import goonerd.devhub.domain.user.UserRole;
 import goonerd.devhub.domain.user.User;
 import goonerd.devhub.ports.out.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +33,7 @@ public class UserRepositoryJpaAdapter implements UserRepository {
     }
 
     @Override
-    public boolean existsByRole(UserRoleEnum role) {
+    public boolean existsByRole(UserRole role) {
         return userRepositoryJpa.existsByRole(role);
     }
 }

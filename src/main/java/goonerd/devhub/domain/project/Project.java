@@ -3,6 +3,7 @@ package goonerd.devhub.domain.project;
 import goonerd.devhub.domain.common.AuditInfo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -14,16 +15,19 @@ public class Project {
     private String username;
     private String title;
     private String content;
+
     private RecruitmentType recruitmentType;
     private ProjectStatus status;
+
     private DeliveryType deliveryType;
     private int recruitCount;
     private int likes;
+
     private LocalDate startDate;
     private LocalDate endDate;
-    private List<String> positions;
+
+    private List<PositionSlot> positions;
     private List<String> skills;
-    private List<String> acceptedUserIds;
 
     private final AuditInfo auditInfo;
 
@@ -40,9 +44,8 @@ public class Project {
             int likes,
             LocalDate startDate,
             LocalDate endDate,
-            List<String> positions,
+            List<PositionSlot> positions,
             List<String> skills,
-            List<String> acceptedUserIds,
             AuditInfo auditInfo
     ) {
         this.projectGuid = projectGuid;
@@ -64,15 +67,12 @@ public class Project {
         this.startDate = Objects.requireNonNull(startDate);
         this.endDate = Objects.requireNonNull(endDate);
 
-        this.positions = positions != null ? List.copyOf(positions) : Collections.emptyList();
+        this.positions = positions != null ? new ArrayList<>(positions) : new ArrayList<>();
         this.skills = skills != null ? List.copyOf(skills) : Collections.emptyList();
-        this.acceptedUserIds = acceptedUserIds != null ? List.copyOf(acceptedUserIds) : Collections.emptyList();
 
         this.auditInfo = auditInfo != null ? auditInfo : AuditInfo.empty();
     }
 
-
-    // --- 신규 프로젝트 생성 ---
     public static Project createNew(
             String userId,
             String username,
@@ -83,7 +83,7 @@ public class Project {
             int recruitCount,
             LocalDate startDate,
             LocalDate endDate,
-            List<String> positions,
+            List<PositionSlot> positions,
             List<String> skills
     ) {
         return new Project(
@@ -101,7 +101,6 @@ public class Project {
                 endDate,
                 positions,
                 skills,
-                Collections.emptyList(),
                 AuditInfo.empty()
         );
     }
@@ -119,9 +118,8 @@ public class Project {
             int likes,
             LocalDate startDate,
             LocalDate endDate,
-            List<String> positions,
+            List<PositionSlot> positions,
             List<String> skills,
-            List<String> acceptedUserIds,
             AuditInfo auditInfo
     ) {
         return new Project(
@@ -139,12 +137,10 @@ public class Project {
                 endDate,
                 positions,
                 skills,
-                acceptedUserIds,
                 auditInfo
         );
     }
 
-    // --- 도메인 행동들 ---
     public void changeTitle(String newTitle) {
         if (newTitle == null || newTitle.isBlank()) {
             throw new IllegalArgumentException("title은 비어 있을 수 없습니다.");
@@ -160,20 +156,31 @@ public class Project {
         this.likes++;
     }
 
-    public void acceptUser(String userId) {
-        if (acceptedUserIds.size() >= recruitCount) {
-            throw new IllegalStateException("모집 인원을 초과할 수 없습니다.");
-        }
-        this.acceptedUserIds = mergeList(acceptedUserIds, userId);
-    }
-
     private List<String> mergeList(List<String> original, String newItem) {
-        List<String> newList = new java.util.ArrayList<>(original);
+        List<String> newList = new ArrayList<>(original);
         newList.add(newItem);
         return List.copyOf(newList);
     }
 
-    // --- getters ---
+    public boolean isClosed() {
+        return status == ProjectStatus.CLOSED || LocalDate.now().isAfter(endDate);
+    }
+
+    public void acceptUser(String userId, String position, String proficiency) {
+        PositionSlot slot = positions.stream()
+                .filter(p -> p.getPosition().equals(position) && p.getProficiency().equals(proficiency))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("해당 포지션-숙련도 모집이 없습니다."));
+
+        slot.acceptUser(userId); // 내부에서 인원 초과 체크
+    }
+
+    public boolean canApply(String position, String proficiency) {
+        return positions.stream()
+                .filter(p -> p.getPosition().equals(position) && p.getProficiency().equals(proficiency))
+                .anyMatch(p -> !p.isFull());
+    }
+
     public String getProjectGuid() { return projectGuid; }
     public String getUserId() { return userId; }
     public String getUsername() { return username; }
@@ -186,8 +193,9 @@ public class Project {
     public int getLikes() { return likes; }
     public LocalDate getStartDate() { return startDate; }
     public LocalDate getEndDate() { return endDate; }
-    public List<String> getPositions() { return positions; }
+    public List<PositionSlot> getPositions() {
+        return List.copyOf(positions); // 외부에서 수정 불가
+    }
     public List<String> getSkills() { return skills; }
-    public List<String> getAcceptedUserIds() { return acceptedUserIds; }
     public AuditInfo getAuditInfo() { return auditInfo; }
 }

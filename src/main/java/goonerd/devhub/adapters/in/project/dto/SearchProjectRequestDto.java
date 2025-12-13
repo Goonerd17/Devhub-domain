@@ -11,11 +11,9 @@ import java.time.LocalDate;
 public class SearchProjectRequestDto {
 
     private String username;
-
     private String keyword;
-
-    private Integer minRecruitCount;
-    private Integer maxRecruitCount;
+    private int minRecruitCount;
+    private int maxRecruitCount;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDateFrom;

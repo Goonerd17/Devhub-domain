@@ -1,8 +1,7 @@
 package goonerd.devhub.adapters.out.user;
 
 import goonerd.devhub.common.entity.BaseEntity;
-import goonerd.devhub.domain.user.UserRoleEnum;
-import goonerd.devhub.domain.user.User;
+import goonerd.devhub.domain.user.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,14 +24,17 @@ public class UserEntity extends BaseEntity {
     @UuidGenerator
     @Column(length = 36, nullable = false, unique = true)
     private String userGuid;
+
     @Column(unique = true)
     private String userId;
+
     @Column(unique = true)
     private String username;
+
     @Column(nullable = false)
     private String password;
+
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private UserRoleEnum role;
-
+    private UserRole role;
 }
