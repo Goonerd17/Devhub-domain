@@ -14,8 +14,25 @@ public class PositionSlot {
     public PositionSlot(String position, String proficiency, int capacity, List<String> acceptedUserIds) {
         this.position = Objects.requireNonNull(position);
         this.proficiency = Objects.requireNonNull(proficiency);
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("capacity는 1 이상이어야 합니다.");
+        }
         this.capacity = capacity;
         this.acceptedUserIds = acceptedUserIds != null ? new ArrayList<>(acceptedUserIds) : new ArrayList<>();
+    }
+
+    public static PositionSlot reconstruct(
+            String position,
+            String proficiency,
+            int capacity,
+            List<String> acceptedUserIds
+    ) {
+        return new PositionSlot(
+                position,
+                proficiency,
+                capacity,
+                new ArrayList<>(acceptedUserIds)
+        );
     }
 
     public void acceptUser(String userId) {

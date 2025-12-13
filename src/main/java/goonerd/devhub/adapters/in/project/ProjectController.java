@@ -3,6 +3,7 @@ package goonerd.devhub.adapters.in.project;
 import goonerd.devhub.adapters.in.project.command.CreateProjectCommand;
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import goonerd.devhub.adapters.in.project.dto.*;
+import goonerd.devhub.common.enums.SuccessCodeEnum;
 import goonerd.devhub.common.vo.PageCommand;
 import goonerd.devhub.common.vo.PageRequestVo;
 import goonerd.devhub.common.vo.ApiResponseVo;
@@ -34,10 +35,14 @@ public class ProjectController {
     )
     @GetMapping()
     public ResponseEntity<ApiResponseVo<PageVo<ProjectResponseDto>>> listProject(SearchProjectRequestDto searchProjectRequestDto, PageRequestVo pageRequestVo) {
-
         SearchProjectCommand searchProjectCommand = SearchProjectCommand.fromProjectSearchRequestDto(searchProjectRequestDto);
         PageCommand pageCommand = PageCommand.of(pageRequestVo);
-        return ResponseEntity.ok(projectUseCase.listProject(searchProjectCommand, pageCommand));
+        return ResponseEntity.ok(
+                ApiResponseVo.successWithData(
+                        SuccessCodeEnum.READ_SUCCESS,
+                        projectUseCase.listProject(searchProjectCommand, pageCommand)
+                )
+        );
     }
 
     @Operation(
@@ -53,6 +58,12 @@ public class ProjectController {
     @PostMapping()
     public ResponseEntity<ApiResponseVo<ProjectResponseDto>> createProject(@Valid @RequestBody CreateProjectRequestDto createProjectRequestDto) {
         CreateProjectCommand createProjectCommand = CreateProjectCommand.fromCreateProjectRequestDto(createProjectRequestDto);
-        return ResponseEntity.ok(projectUseCase.createProject(createProjectCommand));
+        return ResponseEntity.ok(
+                ApiResponseVo.successWithParamAndData(
+                        SuccessCodeEnum.CREATE_SUCCESS,
+                        createProjectCommand,
+                        projectUseCase.createProject(createProjectCommand)
+                )
+        );
     }
 }

@@ -26,7 +26,7 @@ public class Project {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    private List<PositionSlot> positions;
+    private List<PositionSlot> positionSlots;
     private List<String> skills;
 
     private final AuditInfo auditInfo;
@@ -44,7 +44,7 @@ public class Project {
             ProjectProgressType projectProgressType,
             LocalDate startDate,
             LocalDate endDate,
-            List<PositionSlot> positions,
+            List<PositionSlot> positionSlot,
             List<String> skills,
             AuditInfo auditInfo
     ) {
@@ -66,7 +66,7 @@ public class Project {
         this.projectProgressType = Objects.requireNonNull(projectProgressType);
         this.startDate = Objects.requireNonNull(startDate);
         this.endDate = Objects.requireNonNull(endDate);
-        this.positions = positions != null ? new ArrayList<>(positions) : new ArrayList<>();
+        this.positionSlots = positionSlot != null ? new ArrayList<>(positionSlot) : new ArrayList<>();
         this.skills = skills != null ? List.copyOf(skills) : Collections.emptyList();
         this.auditInfo = auditInfo != null ? auditInfo : AuditInfo.empty();
     }
@@ -81,7 +81,7 @@ public class Project {
             ProjectProgressType projectProgressType,
             LocalDate startDate,
             LocalDate endDate,
-            List<PositionSlot> positions,
+            List<PositionSlot> positionSlots,
             List<String> skills
     ) {
         return new Project(
@@ -97,7 +97,7 @@ public class Project {
                 projectProgressType,
                 startDate,
                 endDate,
-                positions,
+                positionSlots,
                 skills,
                 AuditInfo.empty()
         );
@@ -165,7 +165,7 @@ public class Project {
     }
 
     public void acceptUser(String userId, String position, String proficiency) {
-        PositionSlot slot = positions.stream()
+        PositionSlot slot = positionSlots.stream()
                 .filter(p -> p.getPosition().equals(position) && p.getProficiency().equals(proficiency))
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException("해당 포지션-숙련도 모집이 없습니다."));
@@ -174,7 +174,7 @@ public class Project {
     }
 
     public boolean canApply(String position, String proficiency) {
-        return positions.stream()
+        return positionSlots.stream()
                 .filter(p -> p.getPosition().equals(position) && p.getProficiency().equals(proficiency))
                 .anyMatch(p -> !p.isFull());
     }
@@ -191,7 +191,7 @@ public class Project {
     public int getLikes() { return likes; }
     public LocalDate getStartDate() { return startDate; }
     public LocalDate getEndDate() { return endDate; }
-    public List<PositionSlot> getPositions() {return List.copyOf(positions); }
+    public List<PositionSlot> getPositionSlots() {return List.copyOf(positionSlots); }
     public List<String> getSkills() { return skills; }
     public AuditInfo getAuditInfo() { return auditInfo; }
 }

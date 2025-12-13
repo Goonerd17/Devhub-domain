@@ -1,9 +1,10 @@
 package goonerd.devhub.adapters.in.user;
 
-import goonerd.devhub.adapters.in.user.dto.SignupUserRequestDto;
 import goonerd.devhub.adapters.in.user.command.SignupUserCommand;
+import goonerd.devhub.adapters.in.user.dto.SignupUserRequestDto;
+import goonerd.devhub.adapters.in.user.dto.SignupUserResponseDto;
+import goonerd.devhub.common.enums.SuccessCodeEnum;
 import goonerd.devhub.common.vo.ApiResponseVo;
-import goonerd.devhub.domain.user.User;
 import goonerd.devhub.ports.in.UserUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,12 @@ public class UserController {
     private final UserUseCase userUseCase;
 
     @PostMapping("/signup")
-    public ResponseEntity<ApiResponseVo<User>> signup(@Valid @RequestBody SignupUserRequestDto signupUserRequestDto) {
+    public ResponseEntity<ApiResponseVo<SignupUserResponseDto>> signup(@Valid @RequestBody SignupUserRequestDto signupUserRequestDto) {
         SignupUserCommand signupUserCommand = SignupUserCommand.fromSignupUserRequestDto(signupUserRequestDto);
-        return ResponseEntity.ok(userUseCase.signup(signupUserCommand));
+        return ResponseEntity.ok(
+                ApiResponseVo.successWithParamAndData(
+                        SuccessCodeEnum.SIGNUP_SUCCESS,
+                        signupUserCommand,
+                        userUseCase.signup(signupUserCommand)));
     }
 }

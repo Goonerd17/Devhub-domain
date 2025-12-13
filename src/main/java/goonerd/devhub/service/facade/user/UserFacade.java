@@ -1,8 +1,7 @@
 package goonerd.devhub.service.facade.user;
 
 import goonerd.devhub.adapters.in.user.command.SignupUserCommand;
-import goonerd.devhub.common.enums.SuccessCodeEnum;
-import goonerd.devhub.common.vo.ApiResponseVo;
+import goonerd.devhub.adapters.in.user.dto.SignupUserResponseDto;
 import goonerd.devhub.domain.user.User;
 import goonerd.devhub.ports.in.UserUseCase;
 import goonerd.devhub.service.user.UserService;
@@ -15,7 +14,8 @@ public class UserFacade implements UserUseCase {
 
     private final UserService userService;
 
-    public ApiResponseVo<User> signup(SignupUserCommand signupUserCommand) {
-        return ApiResponseVo.successWithParamAndData(SuccessCodeEnum.SIGNUP_SUCCESS, signupUserCommand, userService.signup(signupUserCommand));
+    public SignupUserResponseDto signup(SignupUserCommand signupUserCommand) {
+        User user = userService.signup(signupUserCommand);
+        return SignupUserResponseDto.fromUserDomain(user);
     }
 }

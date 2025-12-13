@@ -1,5 +1,6 @@
 package goonerd.devhub.adapters.out.user;
 
+import goonerd.devhub.domain.common.AuditInfo;
 import goonerd.devhub.domain.user.User;
 
 public class UserMapper {
@@ -13,12 +14,22 @@ public class UserMapper {
                 .build();
     }
 
-    public static User toDomain(UserEntity entity) {
+    public static User toDomain(UserEntity userEntity) {
         return new User(
-                entity.getUserId(),
-                entity.getUsername(),
-                entity.getPassword(),
-                entity.getRole()
+                userEntity.getUserId(),
+                userEntity.getUsername(),
+                userEntity.getPassword(),
+                userEntity.getRole(),
+                toAuditInfo(userEntity)
+        );
+    }
+
+    private static AuditInfo toAuditInfo(UserEntity userEntity) {
+        return AuditInfo.of(
+                userEntity.getCreatedBy(),
+                userEntity.getCreatedAt(),
+                userEntity.getModifiedBy(),
+                userEntity.getModifiedAt()
         );
     }
 }
