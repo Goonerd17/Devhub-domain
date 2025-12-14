@@ -2,14 +2,16 @@ package goonerd.devhub.adapters.in.project;
 
 import goonerd.devhub.adapters.in.project.command.CreateProjectCommand;
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
-import goonerd.devhub.adapters.in.project.dto.*;
-import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
-import goonerd.devhub.common.enums.SuccessCodeEnum;
+import goonerd.devhub.adapters.in.project.dto.CreateProjectRequestDto;
+import goonerd.devhub.adapters.in.project.dto.ProjectResponseDto;
+import goonerd.devhub.service.facade.project.ProjectFacade;
+import goonerd.devhub.adapters.in.project.dto.SearchProjectRequestDto;
+import goonerd.devhub.adapters.in.vo.ApiResponseVo;
 import goonerd.devhub.adapters.in.vo.PageCommand;
 import goonerd.devhub.adapters.in.vo.PageRequestVo;
-import goonerd.devhub.adapters.in.vo.ApiResponseVo;
 import goonerd.devhub.adapters.in.vo.PageVo;
-import goonerd.devhub.ports.in.ProjectUseCase;
+import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
+import goonerd.devhub.common.enums.SuccessCodeEnum;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,7 +30,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Project API", description = "프로젝트 API")
 public class ProjectController {
 
-    private final ProjectUseCase projectUseCase;
+    private final ProjectFacade projectFacade;
 
     @Operation(
             summary = "프로젝트 목록 조회",
@@ -42,7 +44,7 @@ public class ProjectController {
         return ResponseEntity.ok(
                 ApiResponseVo.successWithData(
                         SuccessCodeEnum.READ_SUCCESS,
-                        projectUseCase.listProject(searchProjectCommand, pageCommand)
+                        projectFacade.listProject(searchProjectCommand, pageCommand)
                 )
         );
     }
@@ -64,7 +66,7 @@ public class ProjectController {
                 ApiResponseVo.successWithParamAndData(
                         SuccessCodeEnum.CREATE_SUCCESS,
                         createProjectCommand,
-                        projectUseCase.createProject(createProjectCommand)
+                        projectFacade.createProject(createProjectCommand)
                 )
         );
     }

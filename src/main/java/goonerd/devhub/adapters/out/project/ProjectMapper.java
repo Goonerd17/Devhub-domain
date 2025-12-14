@@ -10,10 +10,10 @@ public class ProjectMapper {
 
     public static ProjectEntity toEntity(Project project) {
         return ProjectEntity.builder()
-                .authorId(project.getUserId())
-                .username(project.getUsername())
+                .authorId(project.getAuthorId())
+                .authorName(project.getAuthorName())
                 .title(project.getTitle())
-                .content(project.getContent())
+                .description(project.getDescription())
                 .recruitmentType(project.getRecruitmentType())
                 .status(project.getStatus())
                 .projectProgressType(project.getDeliveryType())
@@ -33,9 +33,9 @@ public class ProjectMapper {
         return Project.reconstruct(
                 projectEntity.getProjectGuid(),
                 projectEntity.getAuthorId(),
-                projectEntity.getUsername(),
+                projectEntity.getAuthorName(),
                 projectEntity.getTitle(),
-                projectEntity.getContent(),
+                projectEntity.getDescription(),
                 projectEntity.getRecruitmentType(),
                 projectEntity.getStatus(),
                 projectEntity.getProjectProgressType(),

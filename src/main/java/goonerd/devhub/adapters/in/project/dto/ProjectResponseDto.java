@@ -52,10 +52,10 @@ public class ProjectResponseDto {
     public static ProjectResponseDto fromDomain(Project project) {
         return ProjectResponseDto.builder()
                 .projectGuid(project.getProjectGuid())
-                .userId(project.getUserId())
-                .username(project.getUsername())
+                .userId(project.getAuthorId())
+                .username(project.getAuthorName())
                 .title(project.getTitle())
-                .description(project.getContent())
+                .description(project.getDescription())
                 .recruitCount(project.getRecruitCount())
                 .startDate(project.getStartDate())
                 .endDate(project.getEndDate())

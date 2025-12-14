@@ -18,7 +18,7 @@ public class CreateProjectRequestDto {
 
     @NotBlank
     @Schema(description = "프로젝트 작성자 사용자명")
-    private String username;
+    private String authorName;
 
     @NotNull
     @Schema(description = "프로젝트 제목")
@@ -26,7 +26,7 @@ public class CreateProjectRequestDto {
 
     @NotNull
     @Schema(description = "프로젝트 내용")
-    private String content;
+    private String description;
 
     @NotNull
     @Schema(description = "모집 유형")

@@ -1,3 +1,4 @@
+
 # DevHub
 ---
 
@@ -20,94 +21,159 @@
 
 ---
 
-## 프로젝트 구조
+[//]: # (## 프로젝트 구조)
 
-```
-devhub
-├─ adapters
-│   ├─ in           # Controller, 외부요청 Request/ResponseDTO -> 시스템 입력 Command
-│   └─ out          # RepositoryAdapter 등 외부 시스템 연결
-├─ common           # 프로젝트 전반에 걸친 공통 기능
-├─ domain           # 핵심 도메인 (POJO 패턴)
-│   ├─ project
-│   ├─ user
-│   └─ application
-├─ ports
-│   ├─ in           # UseCase 인터페이스
-│   └─ out          # Repository 인터페이스
-├─ service
-│   ├─ application  
-│   ├─ facade       # 여러 서비스 호출 후 응답 조립
-│   ├─ project
-│   └─ user
-└─ DevHubApplication (Spring Boot Application)
-```
+[//]: # ()
+[//]: # (```)
 
----
+[//]: # (devhub)
 
-## 흐름
+[//]: # (├─ adapters)
 
-### 1. [Adapter In] Controller(Class)
+[//]: # (│   ├─ in           # Controller, 외부요청 Request/ResponseDTO -> 시스템 입력 Command)
 
-* 외부 요청 수신
-* Request DTO → Command 변환
-* 공통 응답(`ApiResponseVo`) 및 ResponseEntity로 Wrapping
-* 단순 전달자, 비즈니스 로직 없음(단, 기본적인 입력값 또는 입력양식은 RequestDto에서 수행 예정)
+[//]: # (│   └─ out          # RepositoryAdapter 등 외부 시스템 연결)
 
-### 2. [Port In] UseCase(Interface)
+[//]: # (├─ common           # 프로젝트 전반에 걸친 공통 기능)
 
-* Controller와 Service 간 계약
-* 테스트 용이성을 위해 인터페이스 제공
+[//]: # (├─ domain           # 핵심 도메인 &#40;POJO 패턴&#41;)
 
-### 3. [Service] Facade(Class)
+[//]: # (│   ├─ project)
 
-* 여러 서비스 호출 후 응답 조합
-* 기존 레이어드 아키텍처에서 하나의 서비스가 다른 서비스 또는 리포지토리를 다수 참조하게 되는 책임을 해당 Facade 계층에 부여
-* 외부 시스템 호출이나 복잡한 비즈니스 흐름 조립 예정
+[//]: # (│   ├─ user)
 
-### 4. [Service] Domain-Service(Class)
+[//]: # (│   └─ submission)
 
-* 도메인을 이용한 핵심 비즈니스 처리
-* 도메인 상태,행위는 캡슐화된 내부 도메인 메서드를 호출하는 방식으로 도메인 객체 스스로 자신의 상태를 변경하고 책임질 수 있도록 구성 
-* Repository 인터페이스 호출
-* Repository로 넘겨주는 파라미터와 Repository의 반환값 모두 Domain 객체를 이용하여 실제 Domain-Service 계층이 DB 스키마와 동일한 Entity 클래스를 알 수 없도록 적용
+[//]: # (├─ ports)
 
-### 5. [Domain] Domain(Class)
+[//]: # (│   ├─ in           # UseCase 인터페이스)
 
-* 핵심 비즈니스 로직, POJO 기반
-* 필요하다면, 불변 객체 사용
-* 프레임워크와 완전히 분리
+[//]: # (│   └─ out          # Repository 인터페이스)
 
-### 6. [Port Out] Repository(Interface)
+[//]: # (├─ service)
 
-* DB 접근 계약 정의
+[//]: # (│   ├─ submission  )
 
-### 7. [Adapter Out] RepositoryAdapter(Class)
+[//]: # (│   ├─ facade       # 여러 서비스 호출 후 응답 조립)
 
-* 실제 DB 접근 구현
-* DomainMapper 클래스를 이용한 도메인 ↔ 엔티티 변환 담당
-* DB 변경 시 도메인 영향 없음
+[//]: # (│   ├─ project)
 
-### 8. [DB Access] RepositoryJPA
+[//]: # (│   └─ user)
 
-* 현재는 JPA Repository 사용
-* Adapter Out에서 생성자를 이용한 의존성 주입으로 실제 호출
+[//]: # (└─ DevHubApplication &#40;Spring Boot Application&#41;)
 
----
+[//]: # (```)
 
-## 전체 데이터/요청 흐름
+[//]: # ()
+[//]: # (---)
 
-```
-[External Call] <-> [Adapter In] Controller <-> [Port In] UseCase <-> [Service] Facade/Service <-> [Domain]
-                                                                                 ^
-                                                                                 |
-                                                                                 v 
-                                                                        [Port Out] Repository
-                                                                                 ^
-                                                                                 |
-                                                                                 v
-                                                                  [Adapter Out] Repository Adapter <-> [JPA] <-> H2
-```
+[//]: # ()
+[//]: # (## 흐름)
+
+[//]: # ()
+[//]: # (### 1. [Adapter In] Controller&#40;Class&#41;)
+
+[//]: # ()
+[//]: # (* 외부 요청 수신)
+
+[//]: # (* Request DTO → Command 변환)
+
+[//]: # (* 공통 응답&#40;`ApiResponseVo`&#41; 및 ResponseEntity로 Wrapping)
+
+[//]: # (* 단순 전달자, 비즈니스 로직 없음&#40;단, 기본적인 입력값 또는 입력양식은 RequestDto에서 수행 예정&#41;)
+
+[//]: # ()
+[//]: # (### 2. [Port In] UseCase&#40;Interface&#41;)
+
+[//]: # ()
+[//]: # (* Controller와 Service 간 계약)
+
+[//]: # (* 테스트 용이성을 위해 인터페이스 제공)
+
+[//]: # ()
+[//]: # (### 3. [Service] Facade&#40;Class&#41;)
+
+[//]: # ()
+[//]: # (* 여러 서비스 호출 후 응답 조합)
+
+[//]: # (* 기존 레이어드 아키텍처에서 하나의 서비스가 다른 서비스 또는 리포지토리를 다수 참조하게 되는 책임을 해당 Facade 계층에 부여)
+
+[//]: # (* 외부 시스템 호출이나 복잡한 비즈니스 흐름 조립 예정)
+
+[//]: # ()
+[//]: # (### 4. [Service] Domain-Service&#40;Class&#41;)
+
+[//]: # ()
+[//]: # (* 도메인을 이용한 핵심 비즈니스 처리)
+
+[//]: # (* 도메인 상태,행위는 캡슐화된 내부 도메인 메서드를 호출하는 방식으로 도메인 객체 스스로 자신의 상태를 변경하고 책임질 수 있도록 구성 )
+
+[//]: # (* Repository 인터페이스 호출)
+
+[//]: # (* Repository로 넘겨주는 파라미터와 Repository의 반환값 모두 Domain 객체를 이용하여 실제 Domain-Service 계층이 DB 스키마와 동일한 Entity 클래스를 알 수 없도록 적용)
+
+[//]: # ()
+[//]: # (### 5. [Domain] Domain&#40;Class&#41;)
+
+[//]: # ()
+[//]: # (* 핵심 비즈니스 로직, POJO 기반)
+
+[//]: # (* 필요하다면, 불변 객체 사용)
+
+[//]: # (* 프레임워크와 완전히 분리)
+
+[//]: # ()
+[//]: # (### 6. [Port Out] Repository&#40;Interface&#41;)
+
+[//]: # ()
+[//]: # (* DB 접근 계약 정의)
+
+[//]: # ()
+[//]: # (### 7. [Adapter Out] RepositoryAdapter&#40;Class&#41;)
+
+[//]: # ()
+[//]: # (* 실제 DB 접근 구현)
+
+[//]: # (* DomainMapper 클래스를 이용한 도메인 ↔ 엔티티 변환 담당)
+
+[//]: # (* DB 변경 시 도메인 영향 없음)
+
+[//]: # ()
+[//]: # (### 8. [DB Access] RepositoryJPA)
+
+[//]: # ()
+[//]: # (* 현재는 JPA Repository 사용)
+
+[//]: # (* Adapter Out에서 생성자를 이용한 의존성 주입으로 실제 호출)
+
+[//]: # ()
+[//]: # (---)
+
+[//]: # ()
+[//]: # (## 전체 데이터/요청 흐름)
+
+[//]: # ()
+[//]: # (```)
+
+[//]: # ([External Call] <-> [Adapter In] Controller <-> [Port In] UseCase <-> [Service] Facade/Service <-> [Domain])
+
+[//]: # (                                                                                 ^)
+
+[//]: # (                                                                                 |)
+
+[//]: # (                                                                                 v )
+
+[//]: # (                                                                        [Port Out] Repository)
+
+[//]: # (                                                                                 ^)
+
+[//]: # (                                                                                 |)
+
+[//]: # (                                                                                 v)
+
+[//]: # (                                                                  [Adapter Out] Repository Adapter <-> [JPA] <-> H2)
+
+[//]: # (```)
 
 ---
 
@@ -117,9 +183,9 @@ devhub
 
 ```json
 {
-  "username": "Goonerd",
+  "submitterName": "Goonerd",
   "title": "AI 기반 프로젝트 매칭 플랫폼 개발",
-  "content": "사용자의 기술 스택을 기반으로 프로젝트를 자동 추천하는 플랫폼을 개발합니다.",
+  "description": "사용자의 기술 스택을 기반으로 프로젝트를 자동 추천하는 플랫폼을 개발합니다.",
   "recruitmentType": "EXTRA",
   "projectProgressType": "ONLINE",
   "recruitCount": 5,

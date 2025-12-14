@@ -2,11 +2,11 @@ package goonerd.devhub.ports.in;
 
 import goonerd.devhub.adapters.in.project.command.CreateProjectCommand;
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
-import goonerd.devhub.adapters.in.project.dto.ProjectResponseDto;
 import goonerd.devhub.adapters.in.vo.PageCommand;
-import goonerd.devhub.adapters.in.vo.PageVo;
+import goonerd.devhub.domain.project.Project;
+import org.springframework.data.domain.Page;
 
 public interface ProjectUseCase {
-    PageVo<ProjectResponseDto> listProject(SearchProjectCommand searchProjectCommand, PageCommand pageCommand);
-    ProjectResponseDto createProject(CreateProjectCommand createProjectCommand);
+    Page<Project> listProject(SearchProjectCommand searchProjectCommand, PageCommand pageCommand);
+    Project createProject(CreateProjectCommand createProjectCommand);
 }
