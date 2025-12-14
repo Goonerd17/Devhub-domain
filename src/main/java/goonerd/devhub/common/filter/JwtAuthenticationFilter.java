@@ -7,7 +7,7 @@ import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
 import goonerd.devhub.domain.user.UserRole;
 import goonerd.devhub.common.utils.JwtUtil;
-import goonerd.devhub.common.vo.ApiResponseVo;
+import goonerd.devhub.adapters.in.vo.ApiResponseVo;
 import goonerd.devhub.adapters.in.user.dto.LoginUserRequestDto;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;

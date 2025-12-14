@@ -1,4 +1,4 @@
-package goonerd.devhub.common.vo;
+package goonerd.devhub.adapters.in.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

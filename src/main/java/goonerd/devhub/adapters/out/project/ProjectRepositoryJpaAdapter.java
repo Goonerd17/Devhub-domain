@@ -1,7 +1,6 @@
 package goonerd.devhub.adapters.out.project;
 
-import goonerd.devhub.common.vo.PageCommand;
-import goonerd.devhub.domain.project.PositionSlot;
+import goonerd.devhub.adapters.in.vo.PageCommand;
 import goonerd.devhub.domain.project.Project;
 import goonerd.devhub.ports.out.ProjectRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package goonerd.devhub.common.component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import goonerd.devhub.common.vo.ApiResponseVo;
+import goonerd.devhub.adapters.in.vo.ApiResponseVo;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;

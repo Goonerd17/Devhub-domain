@@ -1,6 +1,6 @@
 package goonerd.devhub.adapters.out.user;
 
-import goonerd.devhub.common.entity.BaseEntity;
+import goonerd.devhub.adapters.out.common.BaseEntity;
 import goonerd.devhub.domain.user.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
