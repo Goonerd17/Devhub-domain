@@ -4,7 +4,7 @@ import goonerd.devhub.domain.submission.Submission;
 
 public interface SubmissionRepository {
 
-    Submission apply(Submission submission);
+    Submission createSubmission(Submission submission);
 
     boolean existsByProjectGuidAndUserId(String projectGuid, String userId);
 

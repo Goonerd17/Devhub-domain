@@ -20,9 +20,9 @@ public class SubmissionService implements SubmissionUseCase {
     private final SubmissionRepository submissionRepository;
     private final ProjectRepository projectRepository;
 
-    public Submission apply(SubmissionCommand submissionCommand) {
+    public Submission createSubmission(SubmissionCommand submissionCommand) {
         SkillLevel skillLevel = SkillLevel.fromCommand(submissionCommand.getSkillLevel());
-        PositionRequirement requirement = PositionRequirement.fromApplyApplicationCommand(submissionCommand.getPosition(), skillLevel);
+        PositionRequirement positionRequirement = PositionRequirement.fromApplyApplicationCommand(submissionCommand.getPosition(), skillLevel);
 
         if (submissionRepository.existsByProjectGuidAndUserId(submissionCommand.getProjectGuid(), submissionCommand.getSubmitterId())) {
             throw new IllegalStateException("이미 지원한 사용자입니다.");
@@ -35,14 +35,15 @@ public class SubmissionService implements SubmissionUseCase {
             throw new IllegalStateException("모집 기간이 종료되었습니다.");
         }
 
-        Submission app = Submission.createApplication(
+        Submission submission = Submission.createApplication(
                 submissionCommand.getProjectGuid(),
                 submissionCommand.getSubmitterId(),
                 submissionCommand.getSubmitterName(),
                 submissionCommand.getMotivation(),
-                requirement
+                positionRequirement
         );
-        return submissionRepository.apply(app);
+
+        return submissionRepository.createSubmission(submission);
     }
 
 //    @Override

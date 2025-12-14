@@ -17,7 +17,7 @@ public class PositionSlotMapper {
     }
 
     public static PositionSlot toDomain(PositionSlotEntity positionSlotEntity) {
-        return new PositionSlot(
+        return PositionSlot.of(
                 positionSlotEntity.getPosition(),
                 positionSlotEntity.getProficiency(),
                 positionSlotEntity.getCapacity(),

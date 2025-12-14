@@ -10,17 +10,19 @@ import java.util.Objects;
 
 public class Project {
 
-    private String projectGuid;
+    private final String projectGuid;
 
-    private String authorId;
+    private final String authorId;
     private String authorName;
+
     private String title;
     private String description;
+
     private int recruitCount;
     private int likes;
 
     private RecruitmentType recruitmentType;
-    private ProjectStatus status;
+    private ProjectStatus projectStatus;
     private ProjectProgressType projectProgressType;
 
     private LocalDate startDate;
@@ -40,7 +42,7 @@ public class Project {
             int recruitCount,
             int likes,
             RecruitmentType recruitmentType,
-            ProjectStatus status,
+            ProjectStatus projectStatus,
             ProjectProgressType projectProgressType,
             LocalDate startDate,
             LocalDate endDate,
@@ -62,7 +64,7 @@ public class Project {
         this.recruitCount = recruitCount;
         this.likes = likes;
         this.recruitmentType = Objects.requireNonNull(recruitmentType);
-        this.status = Objects.requireNonNull(status);
+        this.projectStatus = Objects.requireNonNull(projectStatus);
         this.projectProgressType = Objects.requireNonNull(projectProgressType);
         this.startDate = Objects.requireNonNull(startDate);
         this.endDate = Objects.requireNonNull(endDate);
@@ -140,7 +142,7 @@ public class Project {
     }
 
     public boolean isClosed() {
-        return status == ProjectStatus.CLOSED || LocalDate.now().isAfter(endDate);
+        return projectStatus == ProjectStatus.CLOSED || LocalDate.now().isAfter(endDate);
     }
 
     public void changeTitle(String newTitle) {
@@ -185,7 +187,7 @@ public class Project {
     public String getTitle() { return title; }
     public String getDescription() { return description; }
     public RecruitmentType getRecruitmentType() { return recruitmentType; }
-    public ProjectStatus getStatus() { return status; }
+    public ProjectStatus getProjectStatus() { return projectStatus; }
     public ProjectProgressType getDeliveryType() { return projectProgressType; }
     public int getRecruitCount() { return recruitCount; }
     public int getLikes() { return likes; }
