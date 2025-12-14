@@ -11,10 +11,10 @@ import java.util.List;
 @Builder
 public class CreateProjectCommand {
 
-    private String userId;
-    private String username;
+    private String authorId;
+    private String authorName;
     private String title;
-    private String content;
+    private String description;
     private String recruitmentType;
     private String projectProgressType;
     private int recruitCount;
@@ -25,10 +25,10 @@ public class CreateProjectCommand {
 
     public static CreateProjectCommand fromCreateProjectRequestDto(CreateProjectRequestDto createProjectRequestDto, String userId) {
         return CreateProjectCommand.builder()
-                .userId(userId)
-                .username(createProjectRequestDto.getUsername())
+                .authorId(userId)
+                .authorName(createProjectRequestDto.getAuthorName())
                 .title(createProjectRequestDto.getTitle())
-                .content(createProjectRequestDto.getContent())
+                .description(createProjectRequestDto.getDescription())
                 .recruitmentType(createProjectRequestDto.getRecruitmentType())
                 .projectProgressType(createProjectRequestDto.getProjectProgressType())
                 .startDate(createProjectRequestDto.getStartDate())

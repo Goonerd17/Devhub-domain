@@ -12,10 +12,10 @@ public class Project {
 
     private String projectGuid;
 
-    private String userId;
-    private String username;
+    private String authorId;
+    private String authorName;
     private String title;
-    private String content;
+    private String description;
     private int recruitCount;
     private int likes;
 
@@ -33,10 +33,10 @@ public class Project {
 
     private Project(
             String projectGuid,
-            String userId,
-            String username,
+            String authorId,
+            String authorName,
             String title,
-            String content,
+            String description,
             int recruitCount,
             int likes,
             RecruitmentType recruitmentType,
@@ -49,8 +49,8 @@ public class Project {
             AuditInfo auditInfo
     ) {
         this.projectGuid = projectGuid;
-        this.userId = userId;
-        this.username = username;
+        this.authorId = authorId;
+        this.authorName = authorName;
 
         if (title == null || title.isBlank())
             throw new IllegalArgumentException("title은 비어 있을 수 없습니다.");
@@ -58,7 +58,7 @@ public class Project {
             throw new IllegalArgumentException("recruitCount는 0보다 작을 수 없습니다.");
 
         this.title = title;
-        this.content = content;
+        this.description = description;
         this.recruitCount = recruitCount;
         this.likes = likes;
         this.recruitmentType = Objects.requireNonNull(recruitmentType);
@@ -180,10 +180,10 @@ public class Project {
     }
 
     public String getProjectGuid() { return projectGuid; }
-    public String getUserId() { return userId; }
-    public String getUsername() { return username; }
+    public String getAuthorId() { return authorId; }
+    public String getAuthorName() { return authorName; }
     public String getTitle() { return title; }
-    public String getContent() { return content; }
+    public String getDescription() { return description; }
     public RecruitmentType getRecruitmentType() { return recruitmentType; }
     public ProjectStatus getStatus() { return status; }
     public ProjectProgressType getDeliveryType() { return projectProgressType; }

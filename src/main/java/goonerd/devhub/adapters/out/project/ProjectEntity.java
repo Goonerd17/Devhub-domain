@@ -27,9 +27,9 @@ public class ProjectEntity extends BaseEntity {
     private String projectGuid;
 
     private String authorId;
-    private String username;
+    private String authorName;
     private String title;
-    private String content;
+    private String description;
 
     @Enumerated(EnumType.STRING)
     private RecruitmentType recruitmentType;

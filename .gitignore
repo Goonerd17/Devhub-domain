@@ -40,5 +40,5 @@ out/
 /Jenkinsfile-prd
 /Jenkinsfile-dev
 
-/src/main/resources/application.yml
+/src/main/resources/submission.yml
 /logs/error.log

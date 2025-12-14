@@ -1,7 +1,7 @@
 package goonerd.devhub.common.auth.admin;
 
 import goonerd.devhub.domain.user.UserRole;
-import goonerd.devhub.service.user.UserService;
+import goonerd.devhub.application.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
