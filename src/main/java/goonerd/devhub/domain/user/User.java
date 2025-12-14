@@ -36,6 +36,10 @@ public class User {
         return new User(userId, username, password, UserRole.ADMIN, AuditInfo.empty());
     }
 
+    public static User of(String userId, String username, String password, UserRole role, AuditInfo auditInfo) {
+        return new User(userId, username, password, role, auditInfo);
+    }
+
     public boolean hasRole(UserRole checkRole) {
         return this.role == checkRole;
     }

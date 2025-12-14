@@ -7,15 +7,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class SubmissionRepositoryJpaAdapter implements SubmissionRepository {
+public class SubmissionRepositoryAdapter implements SubmissionRepository {
 
     private final SubmissionRepositoryJpa submissionRepositoryJpa;
 
     @Override
-    public Submission apply(Submission submission) {
+    public Submission createSubmission(Submission submission) {
         SubmissionEntity submissionEntity = SubmissionMapper.toEntity(submission);
-        SubmissionEntity appliedSubmissionEntity = submissionRepositoryJpa.save(submissionEntity);
-        return SubmissionMapper.toDomain(appliedSubmissionEntity);
+        SubmissionEntity savedSubmissionEntity = submissionRepositoryJpa.save(submissionEntity);
+        return SubmissionMapper.toDomain(savedSubmissionEntity);
     }
 
     @Override

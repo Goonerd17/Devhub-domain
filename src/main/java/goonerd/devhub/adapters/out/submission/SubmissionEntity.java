@@ -41,7 +41,7 @@ public class SubmissionEntity extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private SubmissionStatus status;
+    private SubmissionStatus submissionStatus;
 
     @Column(name = "submitted_at")
     private LocalDateTime submittedAt;

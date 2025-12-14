@@ -10,14 +10,13 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class UserRepositoryJpaAdapter implements UserRepository {
+public class UserRepositoryAdapter implements UserRepository {
 
     private final UserRepositoryJpa userRepositoryJpa;
 
     @Override
     public User createUser(User user) {
-        UserEntity userEntity = UserMapper.toEntity(user);
-        return UserMapper.toDomain(userRepositoryJpa.save(userEntity));
+        return UserMapper.toDomain(userRepositoryJpa.save(UserMapper.toEntity(user)));
     }
 
     @Override

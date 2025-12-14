@@ -1,4 +1,4 @@
-package goonerd.devhub.service.facade.project;
+package goonerd.devhub.adapters.in.facade.project;
 
 import goonerd.devhub.adapters.in.project.command.CreateProjectCommand;
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;

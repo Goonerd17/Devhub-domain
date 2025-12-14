@@ -6,33 +6,31 @@ import goonerd.devhub.domain.common.AuditInfo;
 
 public class SubmissionMapper {
 
-    public static SubmissionEntity toEntity(Submission domain) {
-        PositionRequirement req = domain.getPositionRequirement();
+    public static SubmissionEntity toEntity(Submission submission) {
+        PositionRequirement positionRequirement = submission.getPositionRequirement();
+        PositionRequirementEmbeddable positionRequirementEmbeddable = PositionRequirementEmbeddable.builder()
+                .position(positionRequirement.getPosition())
+                .skillLevel(positionRequirement.getSkillLevel())
+                .build();
 
-        PositionRequirementEmbeddable embeddable =
-                new PositionRequirementEmbeddable(
-                        req.getPosition(),
-                        req.getSkillLevel()
-                );
         return SubmissionEntity.builder()
-                .submissionGuid(domain.getSubmissionGuid())
-                .projectGuid(domain.getProjectGuid())
-                .submitterId(domain.getSubmitterId())
-                .submitterName(domain.getSubmitterName())
-                .motivation(domain.getMotivation())
-                .requirement(embeddable)
-                .status(domain.getStatus())
-                .submittedAt(domain.getSubmittedAt())
+                .submissionGuid(submission.getSubmissionGuid())
+                .projectGuid(submission.getProjectGuid())
+                .submitterId(submission.getSubmitterId())
+                .submitterName(submission.getSubmitterName())
+                .motivation(submission.getMotivation())
+                .requirement(positionRequirementEmbeddable)
+                .submissionStatus(submission.getSubmissionStatus())
+                .submittedAt(submission.getSubmittedAt())
                 .build();
     }
 
     public static Submission toDomain(SubmissionEntity submissionEntity) {
-        PositionRequirementEmbeddable emb = submissionEntity.getRequirement();
-        PositionRequirement requirement =
-                PositionRequirement.of(
-                        emb.getPosition(),
-                        emb.getSkillLevel()
-                );
+        PositionRequirementEmbeddable positionRequirementEmbeddable = submissionEntity.getRequirement();
+        PositionRequirement positionRequirement = PositionRequirement.of(
+                positionRequirementEmbeddable.getPosition(),
+                positionRequirementEmbeddable.getSkillLevel()
+        );
 
         return Submission.reconstruct(
                 submissionEntity.getSubmissionGuid(),
@@ -40,16 +38,15 @@ public class SubmissionMapper {
                 submissionEntity.getSubmitterId(),
                 submissionEntity.getSubmitterName(),
                 submissionEntity.getMotivation(),
-                requirement,
-                submissionEntity.getStatus(),
+                positionRequirement,
+                submissionEntity.getSubmissionStatus(),
                 submissionEntity.getSubmittedAt(),
                 toAuditInfo(submissionEntity)
         );
     }
 
     private static AuditInfo toAuditInfo(SubmissionEntity submissionEntity) {
-        return AuditInfo.of(
-                submissionEntity.getCreatedBy(),
+        return AuditInfo.of(submissionEntity.getCreatedBy(),
                 submissionEntity.getCreatedAt(),
                 submissionEntity.getModifiedBy(),
                 submissionEntity.getModifiedAt()

@@ -15,7 +15,7 @@ public class ProjectMapper {
                 .title(project.getTitle())
                 .description(project.getDescription())
                 .recruitmentType(project.getRecruitmentType())
-                .status(project.getStatus())
+                .projectStatus(project.getProjectStatus())
                 .projectProgressType(project.getDeliveryType())
                 .recruitCount(project.getRecruitCount())
                 .likes(project.getLikes())
@@ -25,8 +25,8 @@ public class ProjectMapper {
                 .build();
     }
 
-    public static Project toDomain(ProjectEntity projectEntity, List<PositionSlotEntity> positionSlotEntities) {
-        List<PositionSlot> positionSlots = positionSlotEntities
+    public static Project toDomain(ProjectEntity projectEntity, List<PositionSlotEntity> positionSlotEntityList) {
+        List<PositionSlot> positionSlotList = positionSlotEntityList
                 .stream()
                 .map(PositionSlotMapper::toDomain)
                 .toList();
@@ -37,13 +37,13 @@ public class ProjectMapper {
                 projectEntity.getTitle(),
                 projectEntity.getDescription(),
                 projectEntity.getRecruitmentType(),
-                projectEntity.getStatus(),
+                projectEntity.getProjectStatus(),
                 projectEntity.getProjectProgressType(),
                 projectEntity.getRecruitCount(),
                 projectEntity.getLikes(),
                 projectEntity.getStartDate(),
                 projectEntity.getEndDate(),
-                positionSlots,
+                positionSlotList,
                 projectEntity.getSkills(),
                 toAuditInfo(projectEntity)
         );

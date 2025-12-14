@@ -42,7 +42,7 @@ public class SubmissionResponseDto {
                 .submitterName(submission.getSubmitterName())
                 .position(submission.getPositionRequirement().getPosition())
                 .proficiency(submission.getPositionRequirement().getSkillLevel().name())
-                .status(submission.getStatus().name())
+                .status(submission.getSubmissionStatus().name())
                 .appliedAt(submission.getSubmittedAt())
                 .createdAt(submission.getAuditInfo().getCreatedAt())
                 .modifiedAt(submission.getAuditInfo().getModifiedAt())

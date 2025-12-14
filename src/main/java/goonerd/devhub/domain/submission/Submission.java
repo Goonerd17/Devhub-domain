@@ -9,14 +9,14 @@ public class Submission {
 
     private String submissionGuid;
     private String projectGuid;
-    private String submitterId;
 
+    private String submitterId;
     private String submitterName;
+
     private String motivation;
     private PositionRequirement positionRequirement;
 
-    private SubmissionStatus status;
-
+    private SubmissionStatus submissionStatus;
     private LocalDateTime submittedAt;
     private AuditInfo auditInfo;
 
@@ -27,7 +27,7 @@ public class Submission {
             String submitterName,
             String motivation,
             PositionRequirement positionRequirement,
-            SubmissionStatus status,
+            SubmissionStatus submissionStatus,
             LocalDateTime submittedAt,
             AuditInfo auditInfo
     ) {
@@ -45,7 +45,7 @@ public class Submission {
 
         this.positionRequirement = Objects.requireNonNull(positionRequirement);
 
-        this.status = Objects.requireNonNull(status);
+        this.submissionStatus = Objects.requireNonNull(submissionStatus);
 
         this.submittedAt = submittedAt != null ? submittedAt : LocalDateTime.now();
         this.auditInfo = auditInfo != null ? auditInfo : AuditInfo.empty();
@@ -96,21 +96,21 @@ public class Submission {
     }
 
     public void approve() {
-        if (this.status != SubmissionStatus.PENDING)
+        if (this.submissionStatus != SubmissionStatus.PENDING)
             throw new IllegalStateException("승인할 수 없는 상태입니다.");
-        this.status = SubmissionStatus.ACCEPTED;
+        this.submissionStatus = SubmissionStatus.ACCEPTED;
     }
 
     public void reject() {
-        if (this.status != SubmissionStatus.PENDING)
+        if (this.submissionStatus != SubmissionStatus.PENDING)
             throw new IllegalStateException("거절할 수 없는 상태입니다.");
-        this.status = SubmissionStatus.REJECTED;
+        this.submissionStatus = SubmissionStatus.REJECTED;
     }
 
     public void cancel() {
-        if (this.status == SubmissionStatus.ACCEPTED)
+        if (this.submissionStatus == SubmissionStatus.ACCEPTED)
             throw new IllegalStateException("승인된 지원은 취소할 수 없습니다.");
-        this.status = SubmissionStatus.CANCELED;
+        this.submissionStatus = SubmissionStatus.CANCELED;
     }
 
     public String getSubmissionGuid() { return submissionGuid; }
@@ -119,7 +119,7 @@ public class Submission {
     public String getSubmitterName() { return submitterName; }
     public String getMotivation() { return motivation; }
     public PositionRequirement getPositionRequirement() { return positionRequirement; }
-    public SubmissionStatus getStatus() { return status; }
+    public SubmissionStatus getSubmissionStatus() { return submissionStatus; }
     public LocalDateTime getSubmittedAt() { return submittedAt; }
     public AuditInfo getAuditInfo() { return auditInfo; }
 }

@@ -28,9 +28,9 @@ public class ProjectService implements ProjectUseCase {
     public Project createProject(CreateProjectCommand createProjectCommand) {
 
         RecruitmentType recruitmentType = RecruitmentType.from(createProjectCommand.getRecruitmentType());
-        ProjectProgressType progressType = ProjectProgressType.from(createProjectCommand.getProjectProgressType());
-        List<PositionSlot> positionSlots = createProjectCommand.getPositions().stream()
-                        .map(p -> new PositionSlot(
+        ProjectProgressType projectProgressType = ProjectProgressType.from(createProjectCommand.getProjectProgressType());
+        List<PositionSlot> positionSlotList = createProjectCommand.getPositions().stream()
+                        .map(p -> PositionSlot.of(
                                 p.getPosition(),
                                 p.getProficiency(),
                                 p.getCapacity(),
@@ -44,10 +44,10 @@ public class ProjectService implements ProjectUseCase {
                 createProjectCommand.getDescription(),
                 createProjectCommand.getRecruitCount(),
                 recruitmentType,
-                progressType,
+                projectProgressType,
                 createProjectCommand.getStartDate(),
                 createProjectCommand.getEndDate(),
-                positionSlots,
+                positionSlotList,
                 createProjectCommand.getSkills()
         );
 

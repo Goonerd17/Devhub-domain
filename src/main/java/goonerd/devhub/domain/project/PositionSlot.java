@@ -35,6 +35,15 @@ public class PositionSlot {
         );
     }
 
+    public static PositionSlot of(
+            String position,
+            String proficiency,
+            int capacity,
+            List<String> acceptedUserIds
+    ) {
+        return new PositionSlot(position, proficiency, capacity, acceptedUserIds);
+    }
+
     public void acceptUser(String userId) {
         if (acceptedUserIds.size() >= capacity) {
             throw new IllegalStateException("모집 인원을 초과했습니다.");
