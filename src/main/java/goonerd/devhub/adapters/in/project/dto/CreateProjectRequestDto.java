@@ -17,10 +17,6 @@ import java.util.List;
 public class CreateProjectRequestDto {
 
     @NotBlank
-    @Schema(description = "프로젝트 작성자 사용자 ID")
-    private String userId;
-
-    @NotBlank
     @Schema(description = "프로젝트 작성자 사용자명")
     private String username;
 

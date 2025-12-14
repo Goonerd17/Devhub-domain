@@ -35,10 +35,12 @@ public class ProjectRepositoryJpaAdapter implements ProjectRepository {
     public Project createProject (Project project) {
         ProjectEntity savedEntity = projectRepositoryJpa.save(ProjectMapper.toEntity(project));
 
-        List<PositionSlotEntity> positionSlotEntities = positionSlotRepositoryJpa.findByProjectGuid(savedEntity.getProjectGuid())
-                .stream()
+        List<PositionSlotEntity> positionSlotEntities = project.getPositionSlots().stream()
+                .map(slot -> PositionSlotMapper.toEntity(savedEntity.getProjectGuid(), slot))
                 .toList();
-        return ProjectMapper.toDomain(savedEntity, positionSlotEntities);
+        List<PositionSlotEntity> savedPositionSlotEntities = positionSlotRepositoryJpa.saveAll(positionSlotEntities);
+
+        return ProjectMapper.toDomain(savedEntity, savedPositionSlotEntities);
     }
 
     @Override
