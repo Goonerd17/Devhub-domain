@@ -10,7 +10,7 @@ public class ProjectMapper {
 
     public static ProjectEntity toEntity(Project project) {
         return ProjectEntity.builder()
-                .userId(project.getUserId())
+                .authorId(project.getUserId())
                 .username(project.getUsername())
                 .title(project.getTitle())
                 .content(project.getContent())
@@ -32,7 +32,7 @@ public class ProjectMapper {
                 .toList();
         return Project.reconstruct(
                 projectEntity.getProjectGuid(),
-                projectEntity.getUserId(),
+                projectEntity.getAuthorId(),
                 projectEntity.getUsername(),
                 projectEntity.getTitle(),
                 projectEntity.getContent(),

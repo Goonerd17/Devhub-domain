@@ -26,7 +26,7 @@ public class ProjectEntity extends BaseEntity {
     @Column(length = 36, nullable = false, unique = true)
     private String projectGuid;
 
-    private String userId;
+    private String authorId;
     private String username;
     private String title;
     private String content;
@@ -41,7 +41,6 @@ public class ProjectEntity extends BaseEntity {
     private ProjectProgressType projectProgressType;
 
     private int recruitCount;
-    private String authorId;
     private int likes;
     private LocalDate startDate;
     private LocalDate endDate;

@@ -1,9 +1,6 @@
 package goonerd.devhub.adapters.in.project.command;
 
 import goonerd.devhub.adapters.in.project.dto.CreateProjectRequestDto;
-import goonerd.devhub.domain.project.ProjectProgressType;
-import goonerd.devhub.domain.project.PositionSlot;
-import goonerd.devhub.domain.project.RecruitmentType;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -33,6 +30,7 @@ public class CreateProjectCommand {
                 .title(createProjectRequestDto.getTitle())
                 .content(createProjectRequestDto.getContent())
                 .recruitmentType(createProjectRequestDto.getRecruitmentType())
+                .projectProgressType(createProjectRequestDto.getProjectProgressType())
                 .startDate(createProjectRequestDto.getStartDate())
                 .endDate(createProjectRequestDto.getEndDate())
                 .positions(

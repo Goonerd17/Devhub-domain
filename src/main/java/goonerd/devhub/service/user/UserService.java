@@ -25,8 +25,7 @@ public class UserService {
         }
         String encodedPassword = passwordEncoder.encode(signupUserCommand.getPassword());
         User user = User.createGeneralUser(signupUserCommand.getUserId(), signupUserCommand.getUsername(), encodedPassword);
-        userRepository.createUser(user);
-        return user;
+        return userRepository.createUser(user);
     }
 
     public void createAdminUser(String userId, String username, String rawPassword) {
