@@ -1,6 +1,6 @@
 package goonerd.devhub.adapters.out.project;
 
-import goonerd.devhub.common.entity.BaseEntity;
+import goonerd.devhub.adapters.out.common.BaseEntity;
 import goonerd.devhub.domain.project.ProjectProgressType;
 import goonerd.devhub.domain.project.ProjectStatus;
 import goonerd.devhub.domain.project.RecruitmentType;

@@ -1,6 +1,6 @@
 package goonerd.devhub.adapters.out.application;
 
-import goonerd.devhub.common.entity.BaseEntity;
+import goonerd.devhub.adapters.out.common.BaseEntity;
 import goonerd.devhub.domain.application.ApplicationStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package goonerd.devhub.common.vo;
+package goonerd.devhub.adapters.in.vo;
 
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;

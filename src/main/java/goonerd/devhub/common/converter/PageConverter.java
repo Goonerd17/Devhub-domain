@@ -1,6 +1,6 @@
 package goonerd.devhub.common.converter;
 
-import goonerd.devhub.common.vo.PageVo;
+import goonerd.devhub.adapters.in.vo.PageVo;
 import org.springframework.data.domain.Page;
 
 import java.util.function.Function;

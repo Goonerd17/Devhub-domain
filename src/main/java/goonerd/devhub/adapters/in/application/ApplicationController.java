@@ -5,7 +5,7 @@ import goonerd.devhub.adapters.in.application.dto.ApplyApplicationRequestDto;
 import goonerd.devhub.adapters.in.application.dto.ApplyApplicationResponseDto;
 import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
-import goonerd.devhub.common.vo.ApiResponseVo;
+import goonerd.devhub.adapters.in.vo.ApiResponseVo;
 import goonerd.devhub.ports.in.ApplicationUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

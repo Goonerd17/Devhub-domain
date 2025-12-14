@@ -4,7 +4,7 @@ import goonerd.devhub.adapters.in.user.command.SignupUserCommand;
 import goonerd.devhub.adapters.in.user.dto.SignupUserRequestDto;
 import goonerd.devhub.adapters.in.user.dto.SignupUserResponseDto;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
-import goonerd.devhub.common.vo.ApiResponseVo;
+import goonerd.devhub.adapters.in.vo.ApiResponseVo;
 import goonerd.devhub.ports.in.UserUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
