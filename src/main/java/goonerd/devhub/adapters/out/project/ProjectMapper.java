@@ -9,14 +9,6 @@ import java.util.List;
 public class ProjectMapper {
 
     public static ProjectEntity toEntity(Project project) {
-        List<PositionSlotEmbeddable> embeddables = project.getPositionSlots().stream()
-                .map(d -> new PositionSlotEmbeddable(
-                        d.getPosition(),
-                        d.getProficiency(),
-                        d.getCapacity(),
-                        d.getAcceptedUserIds()
-                ))
-                .toList();
         return ProjectEntity.builder()
                 .userId(project.getUserId())
                 .username(project.getUsername())
@@ -29,20 +21,14 @@ public class ProjectMapper {
                 .likes(project.getLikes())
                 .startDate(project.getStartDate())
                 .endDate(project.getEndDate())
-                .positions(embeddables)
                 .skills(project.getSkills())
                 .build();
     }
 
-    public static Project toDomain(ProjectEntity projectEntity) {
-
-        List<PositionSlot> slots = projectEntity.getPositions().stream()
-                .map(e -> new PositionSlot(
-                        e.getPosition(),
-                        e.getProficiency(),
-                        e.getCapacity(),
-                        e.getAcceptedUserIds()
-                ))
+    public static Project toDomain(ProjectEntity projectEntity, List<PositionSlotEntity> positionSlotEntities) {
+        List<PositionSlot> positionSlots = positionSlotEntities
+                .stream()
+                .map(PositionSlotMapper::toDomain)
                 .toList();
         return Project.reconstruct(
                 projectEntity.getProjectGuid(),
@@ -57,7 +43,7 @@ public class ProjectMapper {
                 projectEntity.getLikes(),
                 projectEntity.getStartDate(),
                 projectEntity.getEndDate(),
-                slots,
+                positionSlots,
                 projectEntity.getSkills(),
                 toAuditInfo(projectEntity)
         );

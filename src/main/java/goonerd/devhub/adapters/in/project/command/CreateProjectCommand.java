@@ -26,9 +26,9 @@ public class CreateProjectCommand {
     private List<CreateProjectPositionCommand> positions;
     private List<String> skills;
 
-    public static CreateProjectCommand fromCreateProjectRequestDto(CreateProjectRequestDto createProjectRequestDto) {
+    public static CreateProjectCommand fromCreateProjectRequestDto(CreateProjectRequestDto createProjectRequestDto, String userId) {
         return CreateProjectCommand.builder()
-                .userId(createProjectRequestDto.getUserId())
+                .userId(userId)
                 .username(createProjectRequestDto.getUsername())
                 .title(createProjectRequestDto.getTitle())
                 .content(createProjectRequestDto.getContent())

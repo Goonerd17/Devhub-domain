@@ -3,6 +3,7 @@ package goonerd.devhub.adapters.in.project;
 import goonerd.devhub.adapters.in.project.command.CreateProjectCommand;
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import goonerd.devhub.adapters.in.project.dto.*;
+import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
 import goonerd.devhub.common.vo.PageCommand;
 import goonerd.devhub.common.vo.PageRequestVo;
@@ -18,6 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -56,8 +58,8 @@ public class ProjectController {
             content = @Content(schema = @Schema(implementation = ProjectResponseDto.class))
     )
     @PostMapping()
-    public ResponseEntity<ApiResponseVo<ProjectResponseDto>> createProject(@Valid @RequestBody CreateProjectRequestDto createProjectRequestDto) {
-        CreateProjectCommand createProjectCommand = CreateProjectCommand.fromCreateProjectRequestDto(createProjectRequestDto);
+    public ResponseEntity<ApiResponseVo<ProjectResponseDto>> createProject(@Valid @RequestBody CreateProjectRequestDto createProjectRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
+        CreateProjectCommand createProjectCommand = CreateProjectCommand.fromCreateProjectRequestDto(createProjectRequestDto, userDetailsImpl.getUserId());
         return ResponseEntity.ok(
                 ApiResponseVo.successWithParamAndData(
                         SuccessCodeEnum.CREATE_SUCCESS,

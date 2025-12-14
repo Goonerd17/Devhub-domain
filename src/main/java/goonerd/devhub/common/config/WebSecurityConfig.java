@@ -99,8 +99,13 @@ public class WebSecurityConfig {
                                         "/v3/api-docs/**",
                                         "/webjars/**"
                                 ).permitAll()
+                                .requestMatchers("/h2-console/**").permitAll()
                                 .requestMatchers("/auth/**").permitAll()
-                                .anyRequest().authenticated())
+                                .anyRequest().authenticated()
+                )
+                .headers(headers -> headers
+                        .frameOptions(frameOptions -> frameOptions.disable())
+                )
                 .addFilterBefore(jwtExceptionFilter(), JwtAuthenticationFilter.class)
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
