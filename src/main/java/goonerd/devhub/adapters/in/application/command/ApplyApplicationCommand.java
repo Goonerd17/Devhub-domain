@@ -1,8 +1,6 @@
 package goonerd.devhub.adapters.in.application.command;
 
 import goonerd.devhub.adapters.in.application.dto.ApplyApplicationRequestDto;
-import goonerd.devhub.domain.application.PositionRequirement;
-import goonerd.devhub.domain.common.SkillLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +18,7 @@ public class ApplyApplicationCommand {
     private String position;
     private String skillLevel;
 
-    public static ApplyApplicationCommand fromApplyApplicationRequestDto(String projectGuid, String userId, ApplyApplicationRequestDto applyApplicationRequestDto) {
+    public static ApplyApplicationCommand fromApplyApplicationRequestDto(String projectGuid, ApplyApplicationRequestDto applyApplicationRequestDto, String userId) {
         return ApplyApplicationCommand.builder()
                 .projectGuid(projectGuid)
                 .userId(userId)

@@ -1,6 +1,7 @@
 package goonerd.devhub.adapters.out.project;
 
 import goonerd.devhub.common.vo.PageCommand;
+import goonerd.devhub.domain.project.PositionSlot;
 import goonerd.devhub.domain.project.Project;
 import goonerd.devhub.ports.out.ProjectRepository;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -15,25 +17,38 @@ import java.util.Optional;
 public class ProjectRepositoryJpaAdapter implements ProjectRepository {
 
     private final ProjectRepositoryJpa projectRepositoryJpa;
+    private final PositionSlotRepositoryJpa positionSlotRepositoryJpa;
 
     @Override
     public Page<Project> listProject(PageCommand pageCommand) {
         Pageable pageable = pageCommand.toPageable();
-        Page<ProjectEntity> entityPage = projectRepositoryJpa.findAll(pageable);
-        return entityPage.map(ProjectMapper::toDomain);
+        Page<ProjectEntity> projectEntityPage = projectRepositoryJpa.findAll(pageable);
+        return projectEntityPage.map(savedEntity -> {
+            List<PositionSlotEntity> positionSlotEntities = positionSlotRepositoryJpa.findByProjectGuid(savedEntity.getProjectGuid())
+                    .stream()
+                    .toList();
+            return ProjectMapper.toDomain(savedEntity, positionSlotEntities);
+        });
     }
 
     @Override
     public Project createProject (Project project) {
-        ProjectEntity entity = ProjectMapper.toEntity(project);
-        ProjectEntity saved = projectRepositoryJpa.save(entity);
-        return ProjectMapper.toDomain(saved);
+        ProjectEntity savedEntity = projectRepositoryJpa.save(ProjectMapper.toEntity(project));
+
+        List<PositionSlotEntity> positionSlotEntities = positionSlotRepositoryJpa.findByProjectGuid(savedEntity.getProjectGuid())
+                .stream()
+                .toList();
+        return ProjectMapper.toDomain(savedEntity, positionSlotEntities);
     }
 
     @Override
     public Optional<Project> findByProjectGuId(String projectGuid) {
-        return Optional.ofNullable(projectRepositoryJpa.findByProjectGuid(projectGuid)
-                .map(ProjectMapper::toDomain)
-                .orElseThrow(() -> new IllegalStateException("프로젝트를 찾을 수 없습니다.")));
+        return projectRepositoryJpa.findByProjectGuid(projectGuid)
+                .map(savedEntity -> {
+                    List<PositionSlotEntity> positionSlotEntities = positionSlotRepositoryJpa.findByProjectGuid(savedEntity.getProjectGuid())
+                            .stream()
+                            .toList();
+                    return ProjectMapper.toDomain(savedEntity, positionSlotEntities);
+                });
     }
 }

@@ -21,7 +21,7 @@ public class ApplicationController {
 
     @PostMapping
     public ResponseEntity<ApiResponseVo<ApplyApplicationResponseDto>> apply(@PathVariable String projectGuid, @RequestBody ApplyApplicationRequestDto applyApplicationRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
-        ApplyApplicationCommand applyApplicationCommand = ApplyApplicationCommand.fromApplyApplicationRequestDto(projectGuid, userDetailsImpl.getUserId(), applyApplicationRequestDto);
+        ApplyApplicationCommand applyApplicationCommand = ApplyApplicationCommand.fromApplyApplicationRequestDto(projectGuid, applyApplicationRequestDto, userDetailsImpl.getUserId());
         return ResponseEntity.ok(ApiResponseVo.
                 successWithParamAndData(
                         SuccessCodeEnum.CREATE_SUCCESS,

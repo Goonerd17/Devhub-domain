@@ -49,6 +49,7 @@ public class ProjectService {
                 positionSlots,
                 createProjectCommand.getSkills()
         );
+
         return projectRepository.createProject(project);
     }
 }

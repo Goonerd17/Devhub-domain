@@ -21,8 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ProjectEntity extends BaseEntity {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     @UuidGenerator
     @Column(length = 36, nullable = false, unique = true)
     private String projectGuid;
@@ -42,14 +41,16 @@ public class ProjectEntity extends BaseEntity {
     private ProjectProgressType projectProgressType;
 
     private int recruitCount;
-    private String authorId; // UserId 참조
+    private String authorId;
     private int likes;
     private LocalDate startDate;
     private LocalDate endDate;
 
     @ElementCollection
-    private List<PositionSlotEmbeddable> positions;
-
-    @ElementCollection
+    @CollectionTable(
+            name = "project_skills",
+            joinColumns = @JoinColumn(name = "project_guid")
+    )
+    @Column(name = "skill")
     private List<String> skills;
 }

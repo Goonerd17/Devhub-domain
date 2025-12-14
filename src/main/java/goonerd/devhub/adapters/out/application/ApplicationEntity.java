@@ -7,10 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -20,7 +19,8 @@ import java.util.List;
 @Table(name = "applications")
 public class ApplicationEntity extends BaseEntity {
 
-    @Id
+    @Id @GeneratedValue
+    @UuidGenerator
     @Column(name = "application_guid", length = 36)
     private String applicationGuid;
 
