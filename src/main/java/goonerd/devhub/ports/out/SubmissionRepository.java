@@ -6,7 +6,7 @@ public interface SubmissionRepository {
 
     Submission createSubmission(Submission submission);
 
-    boolean existsByProjectGuidAndUserId(String projectGuid, String userId);
+    boolean existsByProjectGuidAndSubmitterId(String projectGuid, String submitterId);
 
 //    Optional<Application> findById(String applicationGuid);
 //

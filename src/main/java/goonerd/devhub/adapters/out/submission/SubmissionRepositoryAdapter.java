@@ -19,7 +19,7 @@ public class SubmissionRepositoryAdapter implements SubmissionRepository {
     }
 
     @Override
-    public boolean existsByProjectGuidAndUserId(final String projectGuid, final String userGuid) {
-        return submissionRepositoryJpa.existsByProjectGuidAndUserId(projectGuid, userGuid);
+    public boolean existsByProjectGuidAndSubmitterId(final String projectGuid, final String submitterId) {
+        return submissionRepositoryJpa.existsByProjectGuidAndSubmitterId(projectGuid, submitterId);
     }
 }

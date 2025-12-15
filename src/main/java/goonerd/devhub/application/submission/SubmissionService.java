@@ -24,7 +24,7 @@ public class SubmissionService implements SubmissionUseCase {
         SkillLevel skillLevel = SkillLevel.fromCommand(submissionCommand.getSkillLevel());
         PositionRequirement positionRequirement = PositionRequirement.fromApplyApplicationCommand(submissionCommand.getPosition(), skillLevel);
 
-        if (submissionRepository.existsByProjectGuidAndUserId(submissionCommand.getProjectGuid(), submissionCommand.getSubmitterId())) {
+        if (submissionRepository.existsByProjectGuidAndSubmitterId(submissionCommand.getProjectGuid(), submissionCommand.getSubmitterId())) {
             throw new IllegalStateException("이미 지원한 사용자입니다.");
         }
 

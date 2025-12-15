@@ -42,3 +42,4 @@ out/
 
 /src/main/resources/submission.yml
 /logs/error.log
+/src/main/resources/application.yml

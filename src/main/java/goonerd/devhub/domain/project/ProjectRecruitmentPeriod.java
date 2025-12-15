@@ -2,5 +2,8 @@ package goonerd.devhub.domain.project;
 
 import java.time.LocalDate;
 
-public record ProjectRecruitmentPeriod(LocalDate start, LocalDate end) {
+public class ProjectRecruitmentPeriod {
+
+    private LocalDate startDate;
+    private LocalDate endDate;
 }
