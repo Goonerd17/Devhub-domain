@@ -1,5 +1,7 @@
 package goonerd.devhub.domain.project;
 
+import goonerd.devhub.common.enums.ErrorCodeEnum;
+import goonerd.devhub.common.exception.DomainRuleException;
 import goonerd.devhub.domain.common.AuditInfo;
 
 import java.time.LocalDate;
@@ -55,9 +57,9 @@ public class Project {
         this.authorName = authorName;
 
         if (title == null || title.isBlank())
-            throw new IllegalArgumentException("title은 비어 있을 수 없습니다.");
+            throw DomainRuleException.of(ErrorCodeEnum.UNKNOWN_FAIL);
         if (recruitCount < 0)
-            throw new IllegalArgumentException("recruitCount는 0보다 작을 수 없습니다.");
+            throw DomainRuleException.of(ErrorCodeEnum.UNKNOWN_FAIL);
 
         this.title = title;
         this.description = description;
@@ -147,7 +149,7 @@ public class Project {
 
     public void changeTitle(String newTitle) {
         if (newTitle == null || newTitle.isBlank()) {
-            throw new IllegalArgumentException("title은 비어 있을 수 없습니다.");
+            throw DomainRuleException.of(ErrorCodeEnum.UNKNOWN_FAIL);
         }
         this.title = newTitle;
     }
@@ -170,7 +172,7 @@ public class Project {
         PositionSlot slot = positionSlots.stream()
                 .filter(p -> p.getPosition().equals(position) && p.getProficiency().equals(proficiency))
                 .findFirst()
-                .orElseThrow(() -> new IllegalStateException("해당 포지션-숙련도 모집이 없습니다."));
+                .orElseThrow(() -> DomainRuleException.of(ErrorCodeEnum.UNKNOWN_FAIL));
 
         slot.acceptUser(userId); // 내부에서 인원 초과 체크
     }
