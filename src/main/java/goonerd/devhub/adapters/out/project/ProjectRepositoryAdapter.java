@@ -5,6 +5,7 @@ import goonerd.devhub.adapters.in.vo.PageCommand;
 import goonerd.devhub.adapters.out.project.position.PositionSlotEntity;
 import goonerd.devhub.adapters.out.project.position.PositionSlotMapper;
 import goonerd.devhub.adapters.out.project.position.PositionSlotRepositoryJpa;
+import goonerd.devhub.domain.project.PositionSlot;
 import goonerd.devhub.domain.project.Project;
 import goonerd.devhub.ports.out.ProjectRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -27,6 +30,25 @@ public class ProjectRepositoryAdapter implements ProjectRepository {
     public Page<Project> listProject(SearchProjectCommand searchProjectCommand, PageCommand pageCommand) {
         Pageable pageable = pageCommand.toPageable();
         Page<ProjectEntity> pagedProjectEntity = projectQueryRepository.search(searchProjectCommand, pageable);
+
+        List<String> projectGuids = pagedProjectEntity.getContent().stream()
+                .map(ProjectEntity::getProjectGuid)
+                .toList();
+
+        List<PositionSlotEntity> slotEntities =
+                positionSlotRepositoryJpa.findByProjectGuidIn(projectGuids);
+
+        List<String> slotGuids = slotEntities.stream()
+                .map(PositionSlotEntity::getPositionSlotGuid)
+                .toList();
+
+        Map<String, List<PositionSlot>> slotDomainMap =
+                slotEntities.stream()
+                        .map(PositionSlotMapper::toDomain)
+                        .collect(Collectors.groupingBy(
+                                PositionSlot::getProjectGuid
+                        ));
+
         return pagedProjectEntity.map(savedProjectEntity -> {
             List<PositionSlotEntity> positionSlotEntityList = positionSlotRepositoryJpa.findByProjectGuid(savedProjectEntity.getProjectGuid())
                     .stream()

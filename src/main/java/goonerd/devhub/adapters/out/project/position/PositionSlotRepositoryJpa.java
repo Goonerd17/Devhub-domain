@@ -7,4 +7,6 @@ import java.util.List;
 public interface PositionSlotRepositoryJpa extends JpaRepository<PositionSlotEntity, String> {
     List<PositionSlotEntity> findByProjectGuid(String projectGuid);
     void deleteByProjectGuid(String projectGuid);
+
+    List<PositionSlotEntity> findByProjectGuidIn(List<String> projectGuids);
 }

@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class PositionSlot {
 
+    private String projectGuid;
     private final String position;
     private final String proficiency;
     private final int capacity;
@@ -55,8 +56,10 @@ public class PositionSlot {
         return acceptedUserIds.size() >= capacity;
     }
 
+    public String getProjectGuid() { return projectGuid; }
     public String getPosition() { return position; }
     public String getProficiency() { return proficiency; }
     public int getCapacity() { return capacity; }
     public List<String> getAcceptedUserIds() { return List.copyOf(acceptedUserIds); }
+    void assignProject(String projectGuid) { this.projectGuid = projectGuid;}
 }
