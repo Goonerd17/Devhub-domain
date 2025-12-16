@@ -38,7 +38,7 @@ public class ProjectController {
             security = {@SecurityRequirement(name = "BearerAuth")}
     )
     @GetMapping()
-    public ResponseEntity<ApiResponseVo<PageVo<ProjectResponseDto>>> listProject(SearchProjectRequestDto searchProjectRequestDto, PageRequestVo pageRequestVo) {
+    public ResponseEntity<ApiResponseVo<PageVo<ProjectResponseDto>>> listProject(@RequestBody SearchProjectRequestDto searchProjectRequestDto, PageRequestVo pageRequestVo) {
         SearchProjectCommand searchProjectCommand = SearchProjectCommand.fromProjectSearchRequestDto(searchProjectRequestDto);
         PageCommand pageCommand = PageCommand.of(pageRequestVo);
         return ResponseEntity.ok(
