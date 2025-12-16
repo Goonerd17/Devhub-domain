@@ -12,4 +12,8 @@ public enum ProjectProgressType {
             throw new IllegalArgumentException("잘못된 프로젝트 진행 방식입니다.");
         }
     }
+
+    public boolean isOnline() {
+        return this == ONLINE || this == HYBRID;
+    }
 }

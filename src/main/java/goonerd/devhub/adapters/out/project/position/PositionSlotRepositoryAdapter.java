@@ -1,4 +1,4 @@
-package goonerd.devhub.adapters.out.project;
+package goonerd.devhub.adapters.out.project.position;
 
 import goonerd.devhub.domain.project.PositionSlot;
 import goonerd.devhub.ports.out.PositionSlotRepository;

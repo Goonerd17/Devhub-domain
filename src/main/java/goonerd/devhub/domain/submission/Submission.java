@@ -7,10 +7,10 @@ import java.util.Objects;
 
 public class Submission {
 
-    private String submissionGuid;
-    private String projectGuid;
+    private final String submissionGuid;
+    private final String projectGuid;
 
-    private String submitterId;
+    private final String submitterId;
     private String submitterName;
 
     private String motivation;

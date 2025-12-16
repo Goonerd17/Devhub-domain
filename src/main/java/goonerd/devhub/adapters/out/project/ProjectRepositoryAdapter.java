@@ -1,6 +1,10 @@
 package goonerd.devhub.adapters.out.project;
 
+import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import goonerd.devhub.adapters.in.vo.PageCommand;
+import goonerd.devhub.adapters.out.project.position.PositionSlotEntity;
+import goonerd.devhub.adapters.out.project.position.PositionSlotMapper;
+import goonerd.devhub.adapters.out.project.position.PositionSlotRepositoryJpa;
 import goonerd.devhub.domain.project.Project;
 import goonerd.devhub.ports.out.ProjectRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +20,13 @@ import java.util.Optional;
 public class ProjectRepositoryAdapter implements ProjectRepository {
 
     private final ProjectRepositoryJpa projectRepositoryJpa;
+    private final ProjectQueryRepository projectQueryRepository;
     private final PositionSlotRepositoryJpa positionSlotRepositoryJpa;
 
     @Override
-    public Page<Project> listProject(PageCommand pageCommand) {
+    public Page<Project> listProject(SearchProjectCommand searchProjectCommand, PageCommand pageCommand) {
         Pageable pageable = pageCommand.toPageable();
-        Page<ProjectEntity> pagedProjectEntity = projectRepositoryJpa.findAll(pageable);
+        Page<ProjectEntity> pagedProjectEntity = projectQueryRepository.search(searchProjectCommand, pageable);
         return pagedProjectEntity.map(savedProjectEntity -> {
             List<PositionSlotEntity> positionSlotEntityList = positionSlotRepositoryJpa.findByProjectGuid(savedProjectEntity.getProjectGuid())
                     .stream()

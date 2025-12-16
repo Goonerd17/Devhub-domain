@@ -1,4 +1,4 @@
-package goonerd.devhub.adapters.out.project;
+package goonerd.devhub.adapters.out.project.position;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

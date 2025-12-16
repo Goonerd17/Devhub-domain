@@ -6,7 +6,7 @@ import goonerd.devhub.domain.common.AuditInfo;
 
 public class User {
 
-    private String userId;
+    private final String userId;
     private String password;
     private String username;
 

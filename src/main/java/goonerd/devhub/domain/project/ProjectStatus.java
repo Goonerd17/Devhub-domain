@@ -4,5 +4,13 @@ public enum ProjectStatus {
     RECRUITING,
     COMPLETED,
     CLOSED,
-    CANCELLED
+    CANCELLED;
+
+    public boolean isRecruitable() {
+        return this == RECRUITING;
+    }
+
+    public boolean isFinished() {
+        return this == COMPLETED || this == CLOSED || this == CANCELLED;
+    }
 }

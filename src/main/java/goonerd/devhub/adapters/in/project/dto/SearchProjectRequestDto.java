@@ -10,10 +10,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class SearchProjectRequestDto {
 
-    private String username;
     private String keyword;
-    private int minRecruitCount;
-    private int maxRecruitCount;
+    private String projectStatus;
+    private String projectProgressType;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDateFrom;

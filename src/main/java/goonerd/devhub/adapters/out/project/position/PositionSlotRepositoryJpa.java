@@ -1,4 +1,4 @@
-package goonerd.devhub.adapters.out.project;
+package goonerd.devhub.adapters.out.project.position;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
