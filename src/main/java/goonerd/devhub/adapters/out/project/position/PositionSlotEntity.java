@@ -1,5 +1,6 @@
 package goonerd.devhub.adapters.out.project.position;
 
+import goonerd.devhub.adapters.out.project.ProjectEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,8 +25,10 @@ public class PositionSlotEntity {
     @Column(length = 36, nullable = false, unique = true)
     private String positionSlotGuid;
 
+    @ManyToOne
+    @JoinColumn()
     @Column(name = "project_guid", nullable = false, length = 36)
-    private String projectGuid;
+    private ProjectEntity projectEntity;
 
     @Column(nullable = false)
     private String position;
