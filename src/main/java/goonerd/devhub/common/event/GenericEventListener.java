@@ -1,6 +1,6 @@
 package goonerd.devhub.common.event;
 
-import goonerd.devhub.common.mail.EmailService;
+import goonerd.devhub.common.service.mail.EmailService;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 

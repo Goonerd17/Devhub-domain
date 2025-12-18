@@ -1,4 +1,4 @@
-package goonerd.devhub.common.mail;
+package goonerd.devhub.common.service.mail;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;

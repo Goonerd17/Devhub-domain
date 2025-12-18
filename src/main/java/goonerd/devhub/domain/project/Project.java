@@ -162,21 +162,6 @@ public class Project {
         this.likes++;
     }
 
-    private List<String> mergeList(List<String> original, String newItem) {
-        List<String> newList = new ArrayList<>(original);
-        newList.add(newItem);
-        return List.copyOf(newList);
-    }
-
-    public void acceptUser(String userId, String position, String proficiency) {
-        PositionSlot slot = positionSlots.stream()
-                .filter(p -> p.getPosition().equals(position) && p.getProficiency().equals(proficiency))
-                .findFirst()
-                .orElseThrow(() -> DomainRuleException.of(ErrorCodeEnum.UNKNOWN_FAIL));
-
-        slot.acceptUser(userId); // 내부에서 인원 초과 체크
-    }
-
     public boolean canApply(String position, String proficiency) {
         return positionSlots.stream()
                 .filter(p -> p.getPosition().equals(position) && p.getProficiency().equals(proficiency))
