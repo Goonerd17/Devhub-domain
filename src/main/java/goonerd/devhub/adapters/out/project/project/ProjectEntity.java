@@ -1,4 +1,4 @@
-package goonerd.devhub.adapters.out.project;
+package goonerd.devhub.adapters.out.project.project;
 
 import goonerd.devhub.adapters.out.common.BaseEntity;
 import goonerd.devhub.domain.project.ProjectProgressType;
@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDate;
@@ -45,11 +46,12 @@ public class ProjectEntity extends BaseEntity {
     private LocalDate startDate;
     private LocalDate endDate;
 
+    @BatchSize(size = 20)
     @ElementCollection
     @CollectionTable(
             name = "project_skills",
             joinColumns = @JoinColumn(name = "project_guid")
     )
     @Column(name = "skill")
-    private List<String> skills;
+    private List<String> projectSkillList;
 }

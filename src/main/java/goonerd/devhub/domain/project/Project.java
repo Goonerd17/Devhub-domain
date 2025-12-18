@@ -190,7 +190,7 @@ public class Project {
     public String getDescription() { return description; }
     public RecruitmentType getRecruitmentType() { return recruitmentType; }
     public ProjectStatus getProjectStatus() { return projectStatus; }
-    public ProjectProgressType getDeliveryType() { return projectProgressType; }
+    public ProjectProgressType getProjectProgressType() { return projectProgressType; }
     public int getRecruitCount() { return recruitCount; }
     public int getLikes() { return likes; }
     public LocalDate getStartDate() { return startDate; }

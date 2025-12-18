@@ -1,4 +1,4 @@
-package goonerd.devhub.adapters.out.project;
+package goonerd.devhub.adapters.out.project.project;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -14,7 +14,8 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 
-import static goonerd.devhub.adapters.out.project.QProjectEntity.projectEntity;
+import static goonerd.devhub.adapters.out.project.project.QProjectEntity.projectEntity;
+
 
 @Repository
 @RequiredArgsConstructor

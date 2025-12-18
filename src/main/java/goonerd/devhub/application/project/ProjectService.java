@@ -28,11 +28,10 @@ public class ProjectService implements ProjectUseCase {
     public Project createProject(CreateProjectCommand createProjectCommand) {
 
         List<PositionSlot> positionSlotList = createProjectCommand.getPositions().stream()
-                        .map(p -> PositionSlot.of(
+                        .map(p -> PositionSlot.createPositionSlot(
                                 p.getPosition(),
                                 p.getProficiency(),
-                                p.getCapacity(),
-                                List.of()))
+                                p.getCapacity()))
                         .toList();
 
         Project project = Project.createNew(

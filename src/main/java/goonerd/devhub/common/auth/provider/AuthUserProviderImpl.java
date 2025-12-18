@@ -20,18 +20,22 @@ public class AuthUserProviderImpl implements AuthUserProvider {
         return (UserDetailsImpl) authentication.getPrincipal();
     }
 
+    @Override
     public String getCurrentUserId() {
         return getPrincipal().getUserId();
     }
 
+    @Override
     public String getCurrentUsername() {
         return getPrincipal().getUsername();
     }
 
+    @Override
     public String getCurrentUserEmail() {
         return getPrincipal().getUsername();
     }
 
+    @Override
     public UserDetailsImpl getCurrentUser() {
         return getPrincipal();
     }

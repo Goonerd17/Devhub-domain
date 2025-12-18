@@ -1,4 +1,4 @@
-package goonerd.devhub.adapters.out.project;
+package goonerd.devhub.adapters.out.project.project;
 
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import org.springframework.data.domain.Page;

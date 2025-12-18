@@ -1,15 +1,12 @@
 package goonerd.devhub.adapters.out.project.position;
 
-import goonerd.devhub.adapters.out.project.ProjectEntity;
+import goonerd.devhub.adapters.out.project.project.ProjectEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UuidGenerator;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -25,9 +22,12 @@ public class PositionSlotEntity {
     @Column(length = 36, nullable = false, unique = true)
     private String positionSlotGuid;
 
-    @ManyToOne
-    @JoinColumn()
-    @Column(name = "project_guid", nullable = false, length = 36)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(
+            name = "project_guid",
+            nullable = false,
+            foreignKey = @ForeignKey(name = "fk_position_slot_project")
+    )
     private ProjectEntity projectEntity;
 
     @Column(nullable = false)
@@ -39,11 +39,5 @@ public class PositionSlotEntity {
     @Column(nullable = false)
     private int capacity;
 
-    @ElementCollection
-    @CollectionTable(
-            name = "project_position_accepted_users",
-            joinColumns = @JoinColumn(name = "position_slot_id")
-    )
-    @Column(name = "user_id")
-    private List<String> acceptedUserIds = new ArrayList<>();
+    private int approvedCount;
 }

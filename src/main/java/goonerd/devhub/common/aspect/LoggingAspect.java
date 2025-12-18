@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -55,6 +57,21 @@ public class LoggingAspect {
     private String summarizeResult(Object result) {
         if (result == null) {
             return NULL_JSON;
+        }
+
+        if (result instanceof Page<?> page) {
+            return "Page{contentSize=%d, page=%d, size=%d, totalElements=%d}"
+                    .formatted(
+                            page.getNumberOfElements(),
+                            page.getNumber(),
+                            page.getSize(),
+                            page.getTotalElements()
+                    );
+        }
+
+        if (result instanceof Slice<?> slice) {
+            return "Slice{contentSize=%d, hasNext=%s}"
+                    .formatted(slice.getNumberOfElements(), slice.hasNext());
         }
 
         if (result instanceof Collection<?> coll) {

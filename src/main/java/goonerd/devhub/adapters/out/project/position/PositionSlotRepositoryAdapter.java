@@ -1,5 +1,6 @@
 package goonerd.devhub.adapters.out.project.position;
 
+import goonerd.devhub.adapters.out.project.project.ProjectEntity;
 import goonerd.devhub.domain.project.PositionSlot;
 import goonerd.devhub.ports.out.PositionSlotRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,21 +18,21 @@ public class PositionSlotRepositoryAdapter implements PositionSlotRepository {
 
     @Override
     public List<PositionSlot> findByProjectGuid(String projectGuid) {
-        return positionSlotRepositoryJpa.findByProjectGuid(projectGuid).stream()
+        return positionSlotRepositoryJpa.findByProjectEntity_ProjectGuid(projectGuid).stream()
                 .map(PositionSlotMapper::toDomain)
                 .toList();
     }
 
     @Override
-    public void saveAll(String projectGuid, List<PositionSlot> positionSlotList) {
+    public void saveAll(ProjectEntity projectEntity, List<PositionSlot> positionSlotList) {
         List<PositionSlotEntity> positionSlotEntities = positionSlotList.stream()
-                .map(slot -> PositionSlotMapper.toEntity(projectGuid, slot))
+                .map(slot -> PositionSlotMapper.toEntity(projectEntity, slot))
                 .toList();
         positionSlotRepositoryJpa.saveAll(positionSlotEntities);
     }
 
     @Override
     public void deleteByProjectGuid(String projectGuid) {
-        positionSlotRepositoryJpa.deleteByProjectGuid(projectGuid);
+        positionSlotRepositoryJpa.deleteByProjectEntity_ProjectGuid(projectGuid);
     }
 }

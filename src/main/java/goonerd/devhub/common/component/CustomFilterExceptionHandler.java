@@ -20,7 +20,6 @@ public class CustomFilterExceptionHandler {
     public void handle(HttpServletResponse res, ErrorCodeEnum errorCodeEnum) {
 
         try {
-            // 이미 커밋된 응답이 있으면 초기화
             if (res.isCommitted()) {
                 res.resetBuffer();
             }
@@ -47,13 +46,11 @@ public class CustomFilterExceptionHandler {
         res.setContentType("application/json");
         res.setCharacterEncoding("UTF-8");
 
-        // 메시지 null 방지
         String message = ex.getMessage();
         if (message == null || message.isBlank()) {
             message = "An unexpected error occurred";
         }
 
-        // 메시지를 담은 JSON 구조 생성
         Map<String, Object> errorBody = Map.of(
                 "message", message
         );

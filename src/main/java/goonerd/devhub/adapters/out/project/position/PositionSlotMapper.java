@@ -1,27 +1,27 @@
 package goonerd.devhub.adapters.out.project.position;
 
+import goonerd.devhub.adapters.out.project.project.ProjectEntity;
 import goonerd.devhub.domain.project.PositionSlot;
-
-import java.util.ArrayList;
 
 public class PositionSlotMapper {
 
-    public static PositionSlotEntity toEntity(String projectGuid, PositionSlot positionSlot) {
+    public static PositionSlotEntity toEntity(ProjectEntity projectEntity, PositionSlot positionSlot) {
         return PositionSlotEntity.builder()
-                .projectGuid(projectGuid)
+                .projectEntity(projectEntity)
                 .position(positionSlot.getPosition())
                 .proficiency(positionSlot.getProficiency())
                 .capacity(positionSlot.getCapacity())
-                .acceptedUserIds(new ArrayList<>(positionSlot.getAcceptedUserIds()))
+                .approvedCount(positionSlot.getApprovedCount())
                 .build();
     }
 
     public static PositionSlot toDomain(PositionSlotEntity positionSlotEntity) {
-        return PositionSlot.of(
+        PositionSlot positionSlot = PositionSlot.createPositionSlot(
                 positionSlotEntity.getPosition(),
                 positionSlotEntity.getProficiency(),
-                positionSlotEntity.getCapacity(),
-                positionSlotEntity.getAcceptedUserIds()
+                positionSlotEntity.getCapacity()
         );
+        positionSlot.assignProject(positionSlotEntity.getProjectEntity().getProjectGuid());
+        return positionSlot;
     }
 }

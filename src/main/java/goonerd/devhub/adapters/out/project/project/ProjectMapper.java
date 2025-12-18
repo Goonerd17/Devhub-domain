@@ -1,4 +1,4 @@
-package goonerd.devhub.adapters.out.project;
+package goonerd.devhub.adapters.out.project.project;
 
 import goonerd.devhub.adapters.out.project.position.PositionSlotEntity;
 import goonerd.devhub.adapters.out.project.position.PositionSlotMapper;
@@ -6,6 +6,7 @@ import goonerd.devhub.domain.common.AuditInfo;
 import goonerd.devhub.domain.project.PositionSlot;
 import goonerd.devhub.domain.project.Project;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectMapper {
@@ -18,12 +19,12 @@ public class ProjectMapper {
                 .description(project.getDescription())
                 .recruitmentType(project.getRecruitmentType())
                 .projectStatus(project.getProjectStatus())
-                .projectProgressType(project.getDeliveryType())
+                .projectProgressType(project.getProjectProgressType())
                 .recruitCount(project.getRecruitCount())
                 .likes(project.getLikes())
                 .startDate(project.getStartDate())
                 .endDate(project.getEndDate())
-                .skills(project.getSkills())
+                .projectSkillList(new ArrayList<>(project.getSkills()))
                 .build();
     }
 
@@ -46,7 +47,7 @@ public class ProjectMapper {
                 projectEntity.getStartDate(),
                 projectEntity.getEndDate(),
                 positionSlotList,
-                projectEntity.getSkills(),
+                projectEntity.getProjectSkillList(),
                 toAuditInfo(projectEntity)
         );
     }

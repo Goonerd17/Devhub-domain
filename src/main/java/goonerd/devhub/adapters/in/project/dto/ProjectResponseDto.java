@@ -7,6 +7,7 @@ import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Builder
@@ -30,6 +31,11 @@ public class ProjectResponseDto {
 
     @Schema(description = "모집 인원")
     private int recruitCount;
+
+    @Schema(description = "모집 포지션 목록")
+    private List<PositionSlotResponseDto> positionSlotResponseDtoList;
+
+    private List<String> skillList;
 
     @Schema(description = "시작일")
     private LocalDate startDate;
@@ -57,6 +63,11 @@ public class ProjectResponseDto {
                 .title(project.getTitle())
                 .description(project.getDescription())
                 .recruitCount(project.getRecruitCount())
+                .positionSlotResponseDtoList(
+                        project.getPositionSlots().stream()
+                                .map(PositionSlotResponseDto::fromDomain)
+                                .toList())
+                .skillList(project.getSkills())
                 .startDate(project.getStartDate())
                 .endDate(project.getEndDate())
                 .createdAt(project.getAuditInfo().getCreatedAt())
