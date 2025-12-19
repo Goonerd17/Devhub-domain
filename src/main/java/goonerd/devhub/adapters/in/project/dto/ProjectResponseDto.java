@@ -1,6 +1,8 @@
 package goonerd.devhub.adapters.in.project.dto;
 
+import goonerd.devhub.application.project.ProjectWithStatus;
 import goonerd.devhub.domain.project.Project;
+import goonerd.devhub.domain.project.ProjectStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,6 +31,9 @@ public class ProjectResponseDto {
     @Schema(description = "프로젝트 설명")
     private String description;
 
+    @Schema(description = "프로젝트 상태")
+    private String projectStatus;
+
     @Schema(description = "모집 인원")
     private int recruitCount;
 
@@ -55,6 +60,29 @@ public class ProjectResponseDto {
     @Schema(description = "수정자")
     private String modifiedBy;
 
+    public static ProjectResponseDto fromDomainReadModel(ProjectWithStatus projectWithStatus) {
+        return ProjectResponseDto.builder()
+                .projectGuid(projectWithStatus.getProject().getProjectGuid())
+                .userId(projectWithStatus.getProject().getAuthorId())
+                .username(projectWithStatus.getProject().getAuthorName())
+                .title(projectWithStatus.getProject().getTitle())
+                .description(projectWithStatus.getProject().getDescription())
+                .projectStatus(projectWithStatus.getProjectStatus().toString())
+                .recruitCount(projectWithStatus.getProject().getRecruitCount())
+                .positionSlotResponseDtoList(
+                        projectWithStatus.getProject().getPositionSlots().stream()
+                                .map(PositionSlotResponseDto::fromDomain)
+                                .toList())
+                .skillList(projectWithStatus.getProject().getSkills())
+                .startDate(projectWithStatus.getProject().getStartDate())
+                .endDate(projectWithStatus.getProject().getEndDate())
+                .createdAt(projectWithStatus.getProject().getAuditInfo().getCreatedAt())
+                .modifiedAt(projectWithStatus.getProject().getAuditInfo().getModifiedAt())
+                .createdBy(projectWithStatus.getProject().getAuditInfo().getCreatedBy())
+                .modifiedBy(projectWithStatus.getProject().getAuditInfo().getModifiedBy())
+                .build();
+    }
+
     public static ProjectResponseDto fromDomain(Project project) {
         return ProjectResponseDto.builder()
                 .projectGuid(project.getProjectGuid())
@@ -62,6 +90,7 @@ public class ProjectResponseDto {
                 .username(project.getAuthorName())
                 .title(project.getTitle())
                 .description(project.getDescription())
+                .projectStatus(ProjectStatus.RECRUITING.name())
                 .recruitCount(project.getRecruitCount())
                 .positionSlotResponseDtoList(
                         project.getPositionSlots().stream()

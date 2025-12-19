@@ -18,7 +18,6 @@ public class ProjectMapper {
                 .title(project.getTitle())
                 .description(project.getDescription())
                 .recruitmentType(project.getRecruitmentType())
-                .projectStatus(project.getProjectStatus())
                 .projectProgressType(project.getProjectProgressType())
                 .recruitCount(project.getRecruitCount())
                 .likes(project.getLikes())
@@ -40,7 +39,6 @@ public class ProjectMapper {
                 projectEntity.getTitle(),
                 projectEntity.getDescription(),
                 projectEntity.getRecruitmentType(),
-                projectEntity.getProjectStatus(),
                 projectEntity.getProjectProgressType(),
                 projectEntity.getRecruitCount(),
                 projectEntity.getLikes(),

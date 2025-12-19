@@ -28,12 +28,12 @@ public class SubmissionService implements SubmissionUseCase {
             throw new IllegalStateException("이미 지원한 사용자입니다.");
         }
 
-        Project project = projectRepository.findByProjectGuId(submissionCommand.getProjectGuid())
-                .orElseThrow(() -> new IllegalStateException("프로젝트를 찾을 수 없습니다."));
-
-        if (project.isClosed()) {
-            throw new IllegalStateException("모집 기간이 종료되었습니다.");
-        }
+//        Project project = projectRepository.findByProjectGuId(submissionCommand.getProjectGuid())
+//                .orElseThrow(() -> new IllegalStateException("프로젝트를 찾을 수 없습니다."));
+//
+//        if (project.isClosed()) {
+//            throw new IllegalStateException("모집 기간이 종료되었습니다.");
+//        }
 
         Submission submission = Submission.createApplication(
                 submissionCommand.getProjectGuid(),

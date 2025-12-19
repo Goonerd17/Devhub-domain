@@ -5,6 +5,7 @@ import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import goonerd.devhub.adapters.in.project.dto.ProjectResponseDto;
 import goonerd.devhub.adapters.in.vo.PageCommand;
 import goonerd.devhub.adapters.in.vo.PageVo;
+import goonerd.devhub.application.project.ProjectWithStatus;
 import goonerd.devhub.common.converter.PageConverter;
 import goonerd.devhub.domain.project.Project;
 import goonerd.devhub.ports.in.ProjectUseCase;
@@ -19,8 +20,8 @@ public class ProjectFacade {
     private final ProjectUseCase projectUseCase;
 
     public PageVo<ProjectResponseDto> listProject(SearchProjectCommand searchProjectCommand, PageCommand pageCommand) {
-        Page<Project> projectPage = projectUseCase.listProject(searchProjectCommand, pageCommand);
-        return PageConverter.convert(projectPage, ProjectResponseDto::fromDomain);
+        Page<ProjectWithStatus> projectWithStatusPage = projectUseCase.listProject(searchProjectCommand, pageCommand);
+        return PageConverter.convert(projectWithStatusPage, ProjectResponseDto::fromDomainReadModel);
     }
 
     public ProjectResponseDto createProject(CreateProjectCommand createProjectCommand) {

@@ -11,7 +11,7 @@ public class PositionSlotMapper {
                 .position(positionSlot.getPosition())
                 .proficiency(positionSlot.getProficiency())
                 .capacity(positionSlot.getCapacity())
-                .approvedCount(positionSlot.getApprovedCount())
+//                .approvedCount(positionSlot.getApprovedCount())
                 .build();
     }
 

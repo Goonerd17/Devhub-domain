@@ -24,7 +24,6 @@ public class Project {
     private int likes;
 
     private RecruitmentType recruitmentType;
-    private ProjectStatus projectStatus;
     private ProjectProgressType projectProgressType;
 
     private LocalDate startDate;
@@ -44,7 +43,6 @@ public class Project {
             int recruitCount,
             int likes,
             RecruitmentType recruitmentType,
-            ProjectStatus projectStatus,
             ProjectProgressType projectProgressType,
             LocalDate startDate,
             LocalDate endDate,
@@ -66,7 +64,6 @@ public class Project {
         this.recruitCount = recruitCount;
         this.likes = likes;
         this.recruitmentType = Objects.requireNonNull(recruitmentType);
-        this.projectStatus = Objects.requireNonNull(projectStatus);
         this.projectProgressType = Objects.requireNonNull(projectProgressType);
         this.startDate = Objects.requireNonNull(startDate);
         this.endDate = Objects.requireNonNull(endDate);
@@ -97,7 +94,6 @@ public class Project {
                 recruitCount,
                 0,
                 recruitmentType,
-                ProjectStatus.RECRUITING,
                 projectProgressType,
                 startDate,
                 endDate,
@@ -114,7 +110,6 @@ public class Project {
             String title,
             String content,
             RecruitmentType recruitmentType,
-            ProjectStatus status,
             ProjectProgressType projectProgressType,
             int recruitCount,
             int likes,
@@ -133,7 +128,6 @@ public class Project {
                 recruitCount,
                 likes,
                 recruitmentType,
-                status,
                 projectProgressType,
                 startDate,
                 endDate,
@@ -143,8 +137,20 @@ public class Project {
         );
     }
 
-    public boolean isClosed() {
-        return projectStatus == ProjectStatus.CLOSED || LocalDate.now().isAfter(endDate);
+    public ProjectStatus calculateStatus(LocalDate now) {
+
+        if (now.isAfter(endDate)) {
+            return ProjectStatus.CLOSED;
+        }
+
+//        boolean allFull = positionSlots.stream()
+//                .allMatch(PositionSlot::isFull);
+//
+//        if (allFull) {
+//            return ProjectStatus.COMPLETED;
+//        }
+
+        return ProjectStatus.RECRUITING;
     }
 
     public void changeTitle(String newTitle) {
@@ -162,11 +168,11 @@ public class Project {
         this.likes++;
     }
 
-    public boolean canApply(String position, String proficiency) {
-        return positionSlots.stream()
-                .filter(p -> p.getPosition().equals(position) && p.getProficiency().equals(proficiency))
-                .anyMatch(p -> !p.isFull());
-    }
+//    public boolean canApply(String position, String proficiency) {
+//        return positionSlots.stream()
+//                .filter(p -> p.getPosition().equals(position) && p.getProficiency().equals(proficiency))
+//                .anyMatch(p -> !p.isFull());
+//    }
 
     public String getProjectGuid() { return projectGuid; }
     public String getAuthorId() { return authorId; }
@@ -174,7 +180,6 @@ public class Project {
     public String getTitle() { return title; }
     public String getDescription() { return description; }
     public RecruitmentType getRecruitmentType() { return recruitmentType; }
-    public ProjectStatus getProjectStatus() { return projectStatus; }
     public ProjectProgressType getProjectProgressType() { return projectProgressType; }
     public int getRecruitCount() { return recruitCount; }
     public int getLikes() { return likes; }

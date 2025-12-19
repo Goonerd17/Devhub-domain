@@ -11,8 +11,10 @@ import goonerd.devhub.ports.in.ProjectUseCase;
 import goonerd.devhub.ports.out.ProjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -21,8 +23,14 @@ public class ProjectService implements ProjectUseCase {
 
     private final ProjectRepository projectRepository;
 
-    public Page<Project> listProject(SearchProjectCommand searchProjectCommand, PageCommand pageCommand) {
-        return projectRepository.listProject(searchProjectCommand, pageCommand);
+    public Page<ProjectWithStatus> listProject(SearchProjectCommand searchProjectCommand, PageCommand pageCommand) {
+        LocalDate currentLocalDate = LocalDate.now();
+        Page<Project> pagedProjectList = projectRepository.listProject(searchProjectCommand, pageCommand);
+        List<ProjectWithStatus> pagedProjectWithStatusList = pagedProjectList.getContent()
+                .stream()
+                .map(project -> ProjectWithStatus.fromProject(project, project.calculateStatus(currentLocalDate)))
+                .toList();
+        return new PageImpl<>(pagedProjectWithStatusList, pagedProjectList.getPageable(), pagedProjectList.getTotalElements());
     }
 
     public Project createProject(CreateProjectCommand createProjectCommand) {
