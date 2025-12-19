@@ -22,4 +22,9 @@ public class SubmissionRepositoryAdapter implements SubmissionRepository {
     public boolean existsByProjectGuidAndSubmitterId(final String projectGuid, final String submitterId) {
         return submissionRepositoryJpa.existsByProjectGuidAndSubmitterId(projectGuid, submitterId);
     }
+
+    @Override
+    public Submission findBySubmissionId(String submissionGuid) {
+        return SubmissionMapper.toDomain(submissionRepositoryJpa.findBySubmissionGuid(submissionGuid));
+    }
 }

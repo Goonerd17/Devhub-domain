@@ -1,6 +1,8 @@
 package goonerd.devhub.application.submission;
 
 import goonerd.devhub.adapters.in.submission.command.SubmissionCommand;
+import goonerd.devhub.common.exception.DomainRuleException;
+import goonerd.devhub.domain.project.PositionSlot;
 import goonerd.devhub.domain.submission.Submission;
 import goonerd.devhub.domain.submission.PositionRequirement;
 import goonerd.devhub.domain.common.SkillLevel;
@@ -11,6 +13,8 @@ import goonerd.devhub.ports.out.ProjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 
 @Service
 @Transactional
@@ -28,13 +32,6 @@ public class SubmissionService implements SubmissionUseCase {
             throw new IllegalStateException("이미 지원한 사용자입니다.");
         }
 
-//        Project project = projectRepository.findByProjectGuId(submissionCommand.getProjectGuid())
-//                .orElseThrow(() -> new IllegalStateException("프로젝트를 찾을 수 없습니다."));
-//
-//        if (project.isClosed()) {
-//            throw new IllegalStateException("모집 기간이 종료되었습니다.");
-//        }
-
         Submission submission = Submission.createApplication(
                 submissionCommand.getProjectGuid(),
                 submissionCommand.getSubmitterId(),
@@ -46,47 +43,34 @@ public class SubmissionService implements SubmissionUseCase {
         return submissionRepository.createSubmission(submission);
     }
 
-//    @Override
-//    public void approve(String applicationId) {
+//    public void approve(String submissionGuid) {
 //
-//        Application app = applicationRepository.findById(applicationId)
-//                .orElseThrow(() -> new IllegalStateException("신청을 찾을 수 없습니다."));
+//        Submission submission = submissionRepository.findBySubmissionId(submissionGuid);
+//        Project project = projectRepository.findByProjectGuId(submission.getProjectGuid())
+//                .orElseThrow(() -> DomainRuleException.of(ErrorCodeEnum.PROJECT_NOT_FOUND));
 //
-//        Project project = projectRepository.findById(app.getProjectGuid())
-//                .orElseThrow(() -> new IllegalStateException("프로젝트를 찾을 수 없습니다."));
-//
-//        // 정원 체크
-//        int acceptedCount = applicationRepository.countAcceptedByProjectGuid(app.getProjectGuid());
-//        if (acceptedCount >= project.getRecruitCount()) {
-//            throw new IllegalStateException("모집 정원을 초과했습니다.");
+//        if (project.isClosed(LocalDate.now())) {
+//            throw DomainRuleException.of(ErrorCodeEnum.PROJECT_ALREADY_CLOSED);
 //        }
+//        PositionRequirement req = submission.getPositionRequirement();
+//        if (!project.canApply(req.getPosition(), req.getProficiency())) {
+//            throw DomainRuleException.of(ErrorCodeEnum.PROJECT_POSITION_FULL);
+//        }
+//        submission.approve();
+//        increaseApprovedCount(project, req);
 //
-//        // 지원 승인
-//        app.approve();
-//        applicationRepository.save(app);
-//
-//        // 프로젝트에 승인된 사용자 반영
-//        project.acceptUser(app.getAuthorId());
+//        submissionRepository.save(submission);
 //        projectRepository.save(project);
 //    }
 //
-//    @Override
-//    public void reject(String applicationId) {
-//
-//        Application app = applicationRepository.findById(applicationId)
-//                .orElseThrow(() -> new IllegalStateException("신청을 찾을 수 없습니다."));
-//
-//        app.reject();
-//        applicationRepository.save(app);
-//    }
-//
-//    @Override
-//    public void cancel(String applicationId) {
-//
-//        Application app = applicationRepository.findById(applicationId)
-//                .orElseThrow(() -> new IllegalStateException("신청을 찾을 수 없습니다."));
-//
-//        app.cancel();
-//        applicationRepository.save(app);
+//    private void increaseApprovedCount(Project project, PositionSlot positionSlot) {
+//        project.getPositionSlots().stream()
+//                .filter(p ->
+//                        p.getPosition().equals(req.getPosition())
+//                                && p.getProficiency().equals(req.getProficiency())
+//                )
+//                .findFirst()
+//                .orElseThrow(() -> DomainRuleException.of(ErrorCodeEnum.PROJECT_POSITION_NOT_FOUND))
+//                .increaseApprovedCount();
 //    }
 }
