@@ -1,5 +1,8 @@
 package goonerd.devhub.domain.project;
 
+import goonerd.devhub.common.enums.ErrorCodeEnum;
+import goonerd.devhub.common.exception.DomainRuleException;
+
 import java.util.Arrays;
 
 public enum ProjectProgressType {
@@ -15,14 +18,12 @@ public enum ProjectProgressType {
 
     public static ProjectProgressType from(String value) {
         if (value == null || value.isBlank()) {
-            throw new IllegalArgumentException("프로젝트 진행 방식은 비어 있을 수 없습니다.");
+            throw DomainRuleException.of(ErrorCodeEnum.PROJECT_PROGRESS_FAIL);
         }
 
         return Arrays.stream(values())
                 .filter(type -> type.value.equalsIgnoreCase(value))
                 .findFirst()
-                .orElseThrow(() ->
-                        new IllegalArgumentException("잘못된 프로젝트 진행 방식입니다.")
-                );
+                .orElseThrow(() -> DomainRuleException.of(ErrorCodeEnum.PROJECT_WRONG_PROGRESS_FAIL));
     }
 }

@@ -21,10 +21,7 @@ public class TraceIdMDCFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         try {
-            // UUID 기반 10자리 traceId 생성
             String traceId = UUID.randomUUID().toString().replace("-", "").substring(0, 10);
-
-            // MDC에 강제로 넣음
             MDC.put(TRACE_ID_KEY, traceId);
 
             filterChain.doFilter(request, response);

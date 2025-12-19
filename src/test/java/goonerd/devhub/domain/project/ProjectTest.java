@@ -2,14 +2,14 @@ package goonerd.devhub.domain.project;
 
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.exception.DomainRuleException;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ProjectTest {
 
@@ -18,12 +18,6 @@ class ProjectTest {
     @BeforeEach
     void initialize() {
         project = ProjectTestFixture.project();
-    }
-
-    @Test
-    void 프로젝트_생성시_기본상태는_RECRUITING이다() {
-        assertThat(project.getProjectStatus())
-                .isEqualTo(ProjectStatus.RECRUITING);
     }
 
     @Test
@@ -44,7 +38,7 @@ class ProjectTest {
                 List.of("Java")
         );
 
-        boolean closed = project.isClosed();
+        boolean closed = project.isClosed(LocalDate.now());
 
         assertThat(closed).isFalse();
     }
@@ -53,8 +47,8 @@ class ProjectTest {
     void 제목을_빈값으로_변경하면_예외가_발생한다() {
         assertThatThrownBy(() -> project.changeTitle(""))
                 .isInstanceOf(DomainRuleException.class)
-                .hasMessageContaining("원인 미상의 에러가 발생했습니다.")
+                .hasMessageContaining("프로젝트 제목은 공백일 수 없습니다.")
                 .extracting("errorCodeEnum")
-                .isEqualTo(ErrorCodeEnum.UNKNOWN_FAIL);
+                .isEqualTo(ErrorCodeEnum.PROJECT_TITLE_FAIL);
     }
 }

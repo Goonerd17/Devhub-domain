@@ -1,11 +1,12 @@
 package goonerd.devhub.adapters.in.user;
 
-import goonerd.devhub.adapters.in.facade.user.UserFacade;
 import goonerd.devhub.adapters.in.user.command.SignupUserCommand;
 import goonerd.devhub.adapters.in.user.dto.SignupUserRequestDto;
 import goonerd.devhub.adapters.in.user.dto.SignupUserResponseDto;
 import goonerd.devhub.adapters.in.vo.ApiResponseVo;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
+import goonerd.devhub.domain.user.User;
+import goonerd.devhub.ports.in.UserUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,15 +20,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserFacade userFacade;
+    private final UserUseCase userUseCase;
 
     @PostMapping("/signup")
     public ResponseEntity<ApiResponseVo<SignupUserResponseDto>> signup(@Valid @RequestBody SignupUserRequestDto signupUserRequestDto) {
         SignupUserCommand signupUserCommand = SignupUserCommand.fromSignupUserRequestDto(signupUserRequestDto);
+        User user = userUseCase.signup(signupUserCommand);
         return ResponseEntity.ok(
                 ApiResponseVo.successWithParamAndData(
                         SuccessCodeEnum.SIGNUP_SUCCESS,
                         signupUserCommand,
-                        userFacade.signup(signupUserCommand)));
+                        SignupUserResponseDto.fromUserDomain(user)
+                )
+        );
     }
 }

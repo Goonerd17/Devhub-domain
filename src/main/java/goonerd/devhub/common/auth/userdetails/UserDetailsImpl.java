@@ -1,6 +1,6 @@
 package goonerd.devhub.common.auth.userdetails;
 
-import goonerd.devhub.adapters.out.user.UserEntity;
+import goonerd.devhub.domain.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,29 +10,29 @@ import java.util.List;
 
 public class UserDetailsImpl implements UserDetails {
 
-    private final UserEntity userEntity;
+    private final User user;
 
-    public UserDetailsImpl(UserEntity userEntity) {
-        this.userEntity = userEntity;
+    public UserDetailsImpl(User user) {
+        this.user = user;
     }
 
-    public UserEntity getUser() {
-        return userEntity;
+    public User getUser() {
+        return user;
     }
 
     @Override
     public String getPassword() {
-        return userEntity.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userEntity.getUserId();
+        return user.getUserId();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(userEntity.getRole().getAuthority()));
+        return List.of(new SimpleGrantedAuthority(user.getRole().getAuthority()));
     }
 
     @Override
@@ -56,6 +56,6 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     public String getUserId() {
-        return userEntity.getUserId();
+        return user.getUserId();
     }
 }

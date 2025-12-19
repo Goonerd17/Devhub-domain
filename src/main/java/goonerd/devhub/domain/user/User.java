@@ -16,10 +16,10 @@ public class User {
 
     public User(String userId, String username, String password, UserRole role, AuditInfo auditInfo) {
         if (userId == null || userId.isBlank()) {
-            throw DomainRuleException.of(ErrorCodeEnum.UNKNOWN_FAIL);
+            throw DomainRuleException.of(ErrorCodeEnum.USER_ID_FAIL);
         }
         if (password == null || password.length() < 6) {
-            throw DomainRuleException.of(ErrorCodeEnum.UNKNOWN_FAIL);
+            throw DomainRuleException.of(ErrorCodeEnum.USER_PASSWORD_FAIL);
         }
         this.userId = userId;
         this.username = username;

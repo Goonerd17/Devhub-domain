@@ -38,7 +38,6 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
         String token = jwtUtil.getTokenFromHeader(req);
 
-        // 토큰이 없으면 인증 없이 다음 필터로 진행
         if (!StringUtils.hasText(token)) {
             filterChain.doFilter(req, res);
             return;

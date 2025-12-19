@@ -65,14 +65,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String refreshToken = jwtUtil.substringHeaderToken(jwtUtil.createRefreshToken(userId));
         refreshTokenService.save(userId, refreshToken);
 
-        // 응답 JSON 생성
         ApiResponseVo<?> responseBody = ApiResponseVo.successWithData(
                 SuccessCodeEnum.LOGIN_SUCCESS,
                 Map.of("accessToken", accessToken, "refreshToken", refreshToken));
 
         String jsonResponse = objectMapper.writeValueAsString(responseBody);
 
-        // 응답 헤더에 AccessToken 넣기
         jwtUtil.addJwtHeader(accessToken, response);
 
         response.setContentType("application/json");

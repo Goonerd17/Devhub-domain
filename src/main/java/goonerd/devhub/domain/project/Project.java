@@ -55,9 +55,9 @@ public class Project {
         this.authorName = authorName;
 
         if (title == null || title.isBlank())
-            throw DomainRuleException.of(ErrorCodeEnum.UNKNOWN_FAIL);
+            throw DomainRuleException.of(ErrorCodeEnum.PROJECT_TITLE_FAIL);
         if (recruitCount < 0)
-            throw DomainRuleException.of(ErrorCodeEnum.UNKNOWN_FAIL);
+            throw DomainRuleException.of(ErrorCodeEnum.PROJECT_POSITION_RECRUITMENT_FAIL);
 
         this.title = title;
         this.description = description;
@@ -139,23 +139,28 @@ public class Project {
 
     public ProjectStatus calculateStatus(LocalDate now) {
 
-        if (now.isAfter(endDate)) {
+        if (isClosed(now)) {
             return ProjectStatus.CLOSED;
         }
 
-//        boolean allFull = positionSlots.stream()
-//                .allMatch(PositionSlot::isFull);
-//
-//        if (allFull) {
-//            return ProjectStatus.COMPLETED;
-//        }
+        if (isCompleted()) {
+            return ProjectStatus.COMPLETED;
+        }
 
         return ProjectStatus.RECRUITING;
     }
 
+    public boolean isClosed(LocalDate now) {
+        return now.isAfter(endDate);
+    }
+
+    private boolean isCompleted() {
+        return positionSlots.stream().allMatch(PositionSlot::isFull);
+    }
+
     public void changeTitle(String newTitle) {
         if (newTitle == null || newTitle.isBlank()) {
-            throw DomainRuleException.of(ErrorCodeEnum.UNKNOWN_FAIL);
+            throw DomainRuleException.of(ErrorCodeEnum.PROJECT_TITLE_FAIL);
         }
         this.title = newTitle;
     }
@@ -164,15 +169,11 @@ public class Project {
         this.recruitmentType = Objects.requireNonNull(newType);
     }
 
-    public void increaseLikes() {
-        this.likes++;
+    public boolean canApply(String position, String proficiency) {
+        return positionSlots.stream()
+                .filter(p -> p.getPosition().equals(position) && p.getProficiency().equals(proficiency))
+                .anyMatch(p -> !p.isFull());
     }
-
-//    public boolean canApply(String position, String proficiency) {
-//        return positionSlots.stream()
-//                .filter(p -> p.getPosition().equals(position) && p.getProficiency().equals(proficiency))
-//                .anyMatch(p -> !p.isFull());
-//    }
 
     public String getProjectGuid() { return projectGuid; }
     public String getAuthorId() { return authorId; }

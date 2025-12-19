@@ -1,6 +1,5 @@
 package goonerd.devhub.adapters.in.project;
 
-import goonerd.devhub.adapters.in.facade.project.ProjectFacade;
 import goonerd.devhub.adapters.in.project.command.CreateProjectCommand;
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import goonerd.devhub.adapters.in.project.dto.CreateProjectRequestDto;
@@ -10,8 +9,12 @@ import goonerd.devhub.adapters.in.vo.ApiResponseVo;
 import goonerd.devhub.adapters.in.vo.PageCommand;
 import goonerd.devhub.adapters.in.vo.PageRequestVo;
 import goonerd.devhub.adapters.in.vo.PageVo;
+import goonerd.devhub.application.project.ProjectWithStatus;
 import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
+import goonerd.devhub.common.converter.PageConverter;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
+import goonerd.devhub.domain.project.Project;
+import goonerd.devhub.ports.in.ProjectUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -20,6 +23,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +34,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Project API", description = "프로젝트 API")
 public class ProjectController {
 
-    private final ProjectFacade projectFacade;
+    private final ProjectUseCase projectUseCase;
 
     @Operation(
             summary = "프로젝트 목록 조회",
@@ -41,10 +45,11 @@ public class ProjectController {
     public ResponseEntity<ApiResponseVo<PageVo<ProjectResponseDto>>> listProject(@RequestBody SearchProjectRequestDto searchProjectRequestDto, PageRequestVo pageRequestVo) {
         SearchProjectCommand searchProjectCommand = SearchProjectCommand.fromProjectSearchRequestDto(searchProjectRequestDto);
         PageCommand pageCommand = PageCommand.of(pageRequestVo);
+        Page<ProjectWithStatus> projectWithStatusPage = projectUseCase.listProject(searchProjectCommand, pageCommand);
         return ResponseEntity.ok(
                 ApiResponseVo.successWithData(
                         SuccessCodeEnum.READ_SUCCESS,
-                        projectFacade.listProject(searchProjectCommand, pageCommand)
+                        PageConverter.convert(projectWithStatusPage, ProjectResponseDto::fromDomainReadModel)
                 )
         );
     }
@@ -62,11 +67,12 @@ public class ProjectController {
     @PostMapping()
     public ResponseEntity<ApiResponseVo<ProjectResponseDto>> createProject(@Valid @RequestBody CreateProjectRequestDto createProjectRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
         CreateProjectCommand createProjectCommand = CreateProjectCommand.fromCreateProjectRequestDto(createProjectRequestDto, userDetailsImpl.getUserId());
+        Project project = projectUseCase.createProject(createProjectCommand);
         return ResponseEntity.ok(
                 ApiResponseVo.successWithParamAndData(
                         SuccessCodeEnum.CREATE_SUCCESS,
                         createProjectCommand,
-                        projectFacade.createProject(createProjectCommand)
+                        ProjectResponseDto.fromDomain(project)
                 )
         );
     }

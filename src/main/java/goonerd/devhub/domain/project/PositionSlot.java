@@ -1,5 +1,8 @@
 package goonerd.devhub.domain.project;
 
+import goonerd.devhub.common.enums.ErrorCodeEnum;
+import goonerd.devhub.common.exception.DomainRuleException;
+
 import java.util.Objects;
 
 public class PositionSlot {
@@ -8,14 +11,16 @@ public class PositionSlot {
     private final String position;
     private final String proficiency;
     private final int capacity;
+    private int approvedCount;
 
     public PositionSlot(String position, String proficiency, int capacity, int approvedCount) {
+        if (capacity <= 0) {
+            throw DomainRuleException.of(ErrorCodeEnum.PROJECT_POSITION_RECRUITMENT_FAIL);
+        }
         this.position = Objects.requireNonNull(position);
         this.proficiency = Objects.requireNonNull(proficiency);
-        if (capacity <= 0) {
-            throw new IllegalArgumentException("capacity는 1 이상이어야 합니다.");
-        }
         this.capacity = capacity;
+        this.approvedCount = approvedCount;
     }
 
     public static PositionSlot reconstruct(
@@ -40,9 +45,14 @@ public class PositionSlot {
         return new PositionSlot(position, proficiency, capacity, 0);
     }
 
+    public boolean isFull() {
+        return approvedCount >= capacity;
+    }
+
     public String getProjectGuid() { return projectGuid; }
     public String getPosition() { return position; }
     public String getProficiency() { return proficiency; }
     public int getCapacity() { return capacity; }
+    public int getApprovedCount() { return approvedCount; }
     public void assignProject(String projectGuid) { this.projectGuid = projectGuid;}
 }

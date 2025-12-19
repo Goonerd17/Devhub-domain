@@ -4,7 +4,6 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import goonerd.devhub.domain.project.ProjectProgressType;
-import goonerd.devhub.domain.project.ProjectStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -37,7 +36,6 @@ public class ProjectQueryRepositoryImpl implements ProjectQueryRepository {
                                 searchProjectCommand.getEndDateFrom(),
                                 searchProjectCommand.getEndDateTo()
                         ),
-//                        hasStatus(searchProjectCommand.getProjectStatus()),
                         hasProgressType(searchProjectCommand.getProjectProgressType())
                 )
                 .orderBy(projectEntity.createdAt.asc())
@@ -52,7 +50,6 @@ public class ProjectQueryRepositoryImpl implements ProjectQueryRepository {
                         keywordContains(searchProjectCommand.getKeyword()),
                         startDateBetween(searchProjectCommand.getStartDateFrom(), searchProjectCommand.getStartDateTo()),
                         endDateBetween(searchProjectCommand.getEndDateFrom(), searchProjectCommand.getEndDateTo()),
-//                        hasStatus(searchProjectCommand.getProjectStatus()),
                         hasProgressType(searchProjectCommand.getProjectProgressType())
                 )
                 .fetchOne();
@@ -106,13 +103,6 @@ public class ProjectQueryRepositoryImpl implements ProjectQueryRepository {
         }
         return null;
     }
-
-//    private BooleanExpression hasStatus(ProjectStatus status) {
-//        if (status == null) {
-//            return null;
-//        }
-//        return projectEntity.projectStatus.eq(status);
-//    }
 
     private BooleanExpression hasProgressType(ProjectProgressType type) {
         if (type == null) {

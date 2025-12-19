@@ -1,13 +1,13 @@
 package goonerd.devhub.common.auth.service;
 
-import goonerd.devhub.adapters.out.user.UserEntity;
 import goonerd.devhub.common.auth.dto.TokenResponseDto;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.JwtStatusEnum;
 import goonerd.devhub.common.exception.AuthRuleException;
 import goonerd.devhub.common.utils.JwtUtil;
 import goonerd.devhub.adapters.in.user.dto.LoginUserRequestDto;
-import goonerd.devhub.adapters.out.user.UserRepositoryJpa;
+import goonerd.devhub.domain.user.User;
+import goonerd.devhub.ports.out.UserRepository;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,17 +17,17 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     private final JwtUtil jwtUtil;
-    private final UserRepositoryJpa userRepositoryJpa;
+    private final UserRepository userRepository;
     private final RefreshTokenService refreshTokenService;
 
     public TokenResponseDto login(LoginUserRequestDto req) {
-        UserEntity userEntity = userRepositoryJpa.findByUserId(req.getUserId())
+        User user = userRepository.findByUserId(req.getUserId())
                 .orElseThrow(() -> AuthRuleException.of(ErrorCodeEnum.LOGIN_FAIL));
 
-        String accessToken = jwtUtil.createAccessToken(userEntity.getUserId(), userEntity.getRole());
-        String refreshToken = jwtUtil.createRefreshToken(userEntity.getUserId());
+        String accessToken = jwtUtil.createAccessToken(user.getUserId(), user.getRole());
+        String refreshToken = jwtUtil.createRefreshToken(user.getUserId());
 
-        refreshTokenService.save(userEntity.getUserId(), refreshToken);
+        refreshTokenService.save(user.getUserId(), refreshToken);
 
         return new TokenResponseDto(accessToken, refreshToken);
     }
@@ -48,10 +48,8 @@ public class AuthService {
             throw AuthRuleException.of(ErrorCodeEnum.REFRESH_TOKEN_MISMATCH);
         }
 
-        UserEntity userEntity = userRepositoryJpa.findByUserId(userId)
-                .orElseThrow();
-
-        String newAccessToken = jwtUtil.createAccessToken(userId, userEntity.getRole());
+        User user = userRepository.findByUserId(userId).orElseThrow();
+        String newAccessToken = jwtUtil.createAccessToken(userId, user.getRole());
 
         return new TokenResponseDto(newAccessToken, refreshToken);
     }

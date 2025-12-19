@@ -1,5 +1,7 @@
 package goonerd.devhub.domain.submission;
 
+import goonerd.devhub.common.enums.ErrorCodeEnum;
+import goonerd.devhub.common.exception.DomainRuleException;
 import goonerd.devhub.domain.common.AuditInfo;
 
 import java.time.LocalDateTime;
@@ -34,11 +36,11 @@ public class Submission {
         this.submissionGuid = submissionGuid;
 
         if (projectGuid == null || projectGuid.isBlank())
-            throw new IllegalArgumentException("projectGuid는 필수입니다.");
+            throw DomainRuleException.of(ErrorCodeEnum.SUBMISSION_PROJECT_FAIL);
         this.projectGuid = projectGuid;
 
         if (submitterId == null || submitterId.isBlank())
-            throw new IllegalArgumentException("userId는 필수입니다.");
+            throw DomainRuleException.of(ErrorCodeEnum.SUBMISSION_USER_FAIL);
         this.submitterId = submitterId;
         this.submitterName = Objects.requireNonNull(submitterName);
         this.motivation = Objects.requireNonNull(motivation);
@@ -97,19 +99,19 @@ public class Submission {
 
     public void approve() {
         if (this.submissionStatus != SubmissionStatus.PENDING)
-            throw new IllegalStateException("승인할 수 없는 상태입니다.");
+            throw DomainRuleException.of(ErrorCodeEnum.SUBMISSION_APPROVE_FAIL);
         this.submissionStatus = SubmissionStatus.ACCEPTED;
     }
 
     public void reject() {
         if (this.submissionStatus != SubmissionStatus.PENDING)
-            throw new IllegalStateException("거절할 수 없는 상태입니다.");
+            throw DomainRuleException.of(ErrorCodeEnum.SUBMISSION_REJECT_FAIL);
         this.submissionStatus = SubmissionStatus.REJECTED;
     }
 
     public void cancel() {
         if (this.submissionStatus == SubmissionStatus.ACCEPTED)
-            throw new IllegalStateException("승인된 지원은 취소할 수 없습니다.");
+            throw DomainRuleException.of(ErrorCodeEnum.SUBMISSION_CANCEL_FAIL);
         this.submissionStatus = SubmissionStatus.CANCELED;
     }
 
