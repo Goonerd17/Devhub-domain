@@ -3,6 +3,7 @@ package goonerd.devhub.domain.submission;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.exception.DomainRuleException;
 import goonerd.devhub.domain.common.AuditInfo;
+import goonerd.devhub.domain.common.SkillLevel;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -16,7 +17,8 @@ public class Submission {
     private String submitterName;
 
     private String motivation;
-    private PositionRequirement positionRequirement;
+    private String position;
+    private String skillLevel;
 
     private SubmissionStatus submissionStatus;
     private LocalDateTime submittedAt;
@@ -28,7 +30,8 @@ public class Submission {
             String submitterId,
             String submitterName,
             String motivation,
-            PositionRequirement positionRequirement,
+            String position,
+            String skillLevel,
             SubmissionStatus submissionStatus,
             LocalDateTime submittedAt,
             AuditInfo auditInfo
@@ -45,8 +48,8 @@ public class Submission {
         this.submitterName = Objects.requireNonNull(submitterName);
         this.motivation = Objects.requireNonNull(motivation);
 
-        this.positionRequirement = Objects.requireNonNull(positionRequirement);
-
+        this.position = Objects.requireNonNull(position);
+        this.skillLevel = Objects.requireNonNull(skillLevel);
         this.submissionStatus = Objects.requireNonNull(submissionStatus);
 
         this.submittedAt = submittedAt != null ? submittedAt : LocalDateTime.now();
@@ -58,7 +61,8 @@ public class Submission {
             String userId,
             String username,
             String motivation,
-            PositionRequirement positionRequirement
+            String position,
+            String skillLevel
     ) {
         return new Submission(
                 null,
@@ -66,7 +70,8 @@ public class Submission {
                 userId,
                 username,
                 motivation,
-                positionRequirement,
+                position,
+                skillLevel,
                 SubmissionStatus.PENDING,
                 LocalDateTime.now(),
                 AuditInfo.empty()
@@ -79,7 +84,8 @@ public class Submission {
             String userId,
             String username,
             String motivation,
-            PositionRequirement positionRequirement,
+            String position,
+            String skillLevel,
             SubmissionStatus status,
             LocalDateTime appliedAt,
             AuditInfo auditInfo
@@ -90,7 +96,8 @@ public class Submission {
                 userId,
                 username,
                 motivation,
-                positionRequirement,
+                position,
+                skillLevel,
                 status,
                 appliedAt,
                 auditInfo
@@ -120,7 +127,12 @@ public class Submission {
     public String getSubmitterId() { return submitterId; }
     public String getSubmitterName() { return submitterName; }
     public String getMotivation() { return motivation; }
-    public PositionRequirement getPositionRequirement() { return positionRequirement; }
+    public String getPosition() {
+        return position;
+    }
+    public String getSkillLevel() {
+        return skillLevel;
+    }
     public SubmissionStatus getSubmissionStatus() { return submissionStatus; }
     public LocalDateTime getSubmittedAt() { return submittedAt; }
     public AuditInfo getAuditInfo() { return auditInfo; }

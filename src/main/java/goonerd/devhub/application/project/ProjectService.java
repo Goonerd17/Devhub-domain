@@ -5,8 +5,6 @@ import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import goonerd.devhub.adapters.in.vo.PageCommand;
 import goonerd.devhub.domain.project.PositionSlot;
 import goonerd.devhub.domain.project.Project;
-import goonerd.devhub.domain.project.ProjectProgressType;
-import goonerd.devhub.domain.project.RecruitmentType;
 import goonerd.devhub.ports.in.ProjectUseCase;
 import goonerd.devhub.ports.out.ProjectRepository;
 import lombok.RequiredArgsConstructor;
@@ -56,6 +54,6 @@ public class ProjectService implements ProjectUseCase {
                 createProjectCommand.getSkills()
         );
 
-        return projectRepository.createProject(project);
+        return projectRepository.save(project);
     }
 }

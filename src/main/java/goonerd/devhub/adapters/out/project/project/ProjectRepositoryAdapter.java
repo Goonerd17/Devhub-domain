@@ -66,7 +66,7 @@ public class ProjectRepositoryAdapter implements ProjectRepository {
     }
 
     @Override
-    public Project createProject (Project project) {
+    public Project save(Project project) {
         ProjectEntity savedProjectEntity = projectRepositoryJpa.save(ProjectMapper.toEntity(project));
 
         List<PositionSlotEntity> positionSlotEntityList = project.getPositionSlots().stream()

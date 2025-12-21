@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface ProjectRepository {
     Page<Project> listProject(SearchProjectCommand searchProjectCommand, PageCommand pageCommand);
-    Project createProject(Project project);
+    Project save(Project project);
     Optional<Project> findByProjectGuId(String projectGuid);
 }

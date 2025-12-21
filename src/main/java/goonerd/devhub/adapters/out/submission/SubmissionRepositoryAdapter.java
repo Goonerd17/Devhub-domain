@@ -12,7 +12,7 @@ public class SubmissionRepositoryAdapter implements SubmissionRepository {
     private final SubmissionRepositoryJpa submissionRepositoryJpa;
 
     @Override
-    public Submission createSubmission(Submission submission) {
+    public Submission save(Submission submission) {
         SubmissionEntity submissionEntity = SubmissionMapper.toEntity(submission);
         SubmissionEntity savedSubmissionEntity = submissionRepositoryJpa.save(submissionEntity);
         return SubmissionMapper.toDomain(savedSubmissionEntity);
@@ -24,7 +24,7 @@ public class SubmissionRepositoryAdapter implements SubmissionRepository {
     }
 
     @Override
-    public Submission findBySubmissionId(String submissionGuid) {
+    public Submission findBySubmissionGuid(String submissionGuid) {
         return SubmissionMapper.toDomain(submissionRepositoryJpa.findBySubmissionGuid(submissionGuid));
     }
 }

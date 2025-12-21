@@ -36,8 +36,11 @@ public class SubmissionEntity extends BaseEntity {
     @Column(name = "motivation", columnDefinition = "TEXT")
     private String motivation;
 
-    @Embedded
-    private PositionRequirementEmbeddable requirement;
+    @Column(name = "position", nullable = false)
+    private String position;
+
+    @Column(name = "skill_level", nullable = false)
+    private String skillLevel;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")

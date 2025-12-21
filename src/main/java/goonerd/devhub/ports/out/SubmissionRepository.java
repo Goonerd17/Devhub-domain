@@ -3,9 +3,9 @@ package goonerd.devhub.ports.out;
 import goonerd.devhub.domain.submission.Submission;
 
 public interface SubmissionRepository {
-    Submission createSubmission(Submission submission);
+    Submission save(Submission submission);
     boolean existsByProjectGuidAndSubmitterId(String projectGuid, String submitterId);
-    Submission findBySubmissionId(String submissionGuid);
+    Submission findBySubmissionGuid(String submissionGuid);
 //
 //    boolean existsByProjectGuidAndUserId(String projectGuid, String userId);
 //

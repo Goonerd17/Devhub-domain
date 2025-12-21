@@ -49,6 +49,16 @@ public class PositionSlot {
         return approvedCount >= capacity;
     }
 
+    public void ensureCanApprove() {
+        if (approvedCount >= capacity) {
+            throw DomainRuleException.of(ErrorCodeEnum.UNKNOWN_FAIL);
+        }
+    }
+
+    public void increaseApprovedCount() {
+        this.approvedCount++;
+    }
+
     public String getProjectGuid() { return projectGuid; }
     public String getPosition() { return position; }
     public String getProficiency() { return proficiency; }

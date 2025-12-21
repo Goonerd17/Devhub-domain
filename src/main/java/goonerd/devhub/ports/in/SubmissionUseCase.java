@@ -5,8 +5,8 @@ import goonerd.devhub.domain.submission.Submission;
 
 public interface SubmissionUseCase {
 
-    Submission createSubmission(SubmissionCommand submissionCommand);
-//    void approve(String applicationId);
+    Submission applySubmission(SubmissionCommand submissionApplyCommand);
+    Submission approveSubmission(SubmissionCommand submissionApproveCommand);
 //    void reject(String applicationId);
 //    void cancel(String applicationId);
 }

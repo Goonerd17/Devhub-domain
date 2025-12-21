@@ -13,7 +13,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/project/{projectGuid}/applications")
+@RequestMapping("/project/{projectGuid}/submission")
 @RequiredArgsConstructor
 public class SubmissionController {
 
@@ -21,20 +21,27 @@ public class SubmissionController {
 
     @PostMapping
     public ResponseEntity<ApiResponseVo<SubmissionResponseDto>> apply(@PathVariable String projectGuid, @RequestBody SubmissionRequestDto submissionRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
-        SubmissionCommand submissionCommand = SubmissionCommand.fromApplyApplicationRequestDto(projectGuid, submissionRequestDto, userDetailsImpl.getUserId());
+        SubmissionCommand submissionApplyCommand = SubmissionCommand.fromApplySubmissionRequestDto(projectGuid, submissionRequestDto, userDetailsImpl.getUserId());
         return ResponseEntity.ok(ApiResponseVo.
                 successWithParamAndData(
                         SuccessCodeEnum.CREATE_SUCCESS,
-                        submissionCommand,
-                        SubmissionResponseDto.fromDomain(submissionUseCase.createSubmission(submissionCommand))
+                        submissionApplyCommand,
+                        SubmissionResponseDto.fromDomain(submissionUseCase.applySubmission(submissionApplyCommand))
                 )
         );
     }
 
-//    @PostMapping("/{applicationId}/approve")
-//    public void approve(@PathVariable String applicationId) {
-//        applicationUseCase.approve(applicationId);
-//    }
+    @PostMapping("/{submissionGuid}/approve")
+    public ResponseEntity<ApiResponseVo<SubmissionResponseDto>> approve(@PathVariable String projectGuid, @PathVariable String submissionGuid, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
+        SubmissionCommand submissionApproveCommand = SubmissionCommand.fromApproveSubmissionRequestDto(projectGuid, submissionGuid, userDetailsImpl.getUserId());
+        return ResponseEntity.ok(ApiResponseVo.
+                successWithParamAndData(
+                        SuccessCodeEnum.CREATE_SUCCESS,
+                        submissionApproveCommand,
+                        SubmissionResponseDto.fromDomain(submissionUseCase.approveSubmission(submissionApproveCommand))
+                )
+        );
+    }
 //
 //    @PostMapping("/{applicationId}/reject")
 //    public void reject(@PathVariable String applicationId) {

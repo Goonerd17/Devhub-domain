@@ -3,6 +3,7 @@ package goonerd.devhub.domain.project;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.exception.DomainRuleException;
 import goonerd.devhub.domain.common.AuditInfo;
+import goonerd.devhub.domain.submission.Submission;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -173,6 +174,33 @@ public class Project {
         return positionSlots.stream()
                 .filter(p -> p.getPosition().equals(position) && p.getProficiency().equals(proficiency))
                 .anyMatch(p -> !p.isFull());
+    }
+
+    public void approveSubmission(Submission submission) {
+        if (isClosed(LocalDate.now())) {
+            throw DomainRuleException.of(ErrorCodeEnum.PROJECT_PERIOD_FAIL);
+        }
+
+        PositionSlot slot = findPositionSlot(
+                submission.getPosition(),
+                submission.getSkillLevel()
+        );
+
+        slot.ensureCanApprove();   // 정원 체크
+        submission.approve();      // 상태 전이
+        slot.increaseApprovedCount();
+    }
+
+    public PositionSlot findPositionSlot(String position, String skillLevel) {
+        return positionSlots.stream()
+                .filter(slot ->
+                        slot.getPosition().equals(position)
+                                // && slot.getSkillLevel().equals(skillLevel)
+                )
+                .findFirst()
+                .orElseThrow(() ->
+                        DomainRuleException.of(ErrorCodeEnum.UNKNOWN_FAIL)
+                );
     }
 
     public String getProjectGuid() { return projectGuid; }
