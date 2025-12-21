@@ -26,13 +26,13 @@ public class UserService implements UserUseCase {
         }
         String encodedPassword = passwordEncoder.encode(signupUserCommand.getPassword());
         User user = User.createGeneralUser(signupUserCommand.getUserId(), signupUserCommand.getUsername(), encodedPassword);
-        return userRepository.createUser(user);
+        return userRepository.save(user);
     }
 
     public void createAdminUser(String userId, String username, String rawPassword) {
         String encodedPassword = passwordEncoder.encode(rawPassword);
         User adminUser = User.createAdminUser(userId, username, encodedPassword);
-        userRepository.createUser(adminUser);
+        userRepository.save(adminUser);
     }
 
     public boolean existsByRole(UserRole role) {

@@ -22,4 +22,6 @@ public class CreateProjectPositionRequestDto {
     @Positive
     @Schema(description = "모집 인원", example = "2")
     private int capacity;
+
+    private String skillLevel;
 }

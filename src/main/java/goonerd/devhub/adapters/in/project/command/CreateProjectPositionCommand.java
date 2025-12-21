@@ -11,12 +11,14 @@ public class CreateProjectPositionCommand {
     private String position;
     private String proficiency;
     private int capacity;
+    private String skillLevel;
 
     public static CreateProjectPositionCommand fromCreateProjectRequestDto(CreateProjectPositionRequestDto createProjectPositionRequestDto) {
         return new CreateProjectPositionCommand(
                 createProjectPositionRequestDto.getPosition(),
                 createProjectPositionRequestDto.getProficiency(),
-                createProjectPositionRequestDto.getCapacity()
+                createProjectPositionRequestDto.getCapacity(),
+                createProjectPositionRequestDto.getSkillLevel()
         );
     }
 }

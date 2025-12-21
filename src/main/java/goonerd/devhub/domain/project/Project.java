@@ -186,17 +186,15 @@ public class Project {
                 submission.getSkillLevel()
         );
 
-        slot.ensureCanApprove();   // 정원 체크
-        submission.approve();      // 상태 전이
+        slot.ensureCanApprove();
+        submission.approve();
         slot.increaseApprovedCount();
     }
 
     public PositionSlot findPositionSlot(String position, String skillLevel) {
         return positionSlots.stream()
                 .filter(slot ->
-                        slot.getPosition().equals(position)
-                                // && slot.getSkillLevel().equals(skillLevel)
-                )
+                        slot.getPosition().equals(position) && slot.getSkillLevel().equals(skillLevel))
                 .findFirst()
                 .orElseThrow(() ->
                         DomainRuleException.of(ErrorCodeEnum.UNKNOWN_FAIL)

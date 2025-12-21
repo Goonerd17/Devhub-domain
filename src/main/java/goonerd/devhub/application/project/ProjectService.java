@@ -37,7 +37,8 @@ public class ProjectService implements ProjectUseCase {
                         .map(p -> PositionSlot.createPositionSlot(
                                 p.getPosition(),
                                 p.getProficiency(),
-                                p.getCapacity()))
+                                p.getCapacity(),
+                                p.getSkillLevel()))
                         .toList();
 
         Project project = Project.createNew(

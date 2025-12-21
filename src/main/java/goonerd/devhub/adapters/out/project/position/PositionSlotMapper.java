@@ -11,6 +11,7 @@ public class PositionSlotMapper {
                 .position(positionSlot.getPosition())
                 .proficiency(positionSlot.getProficiency())
                 .capacity(positionSlot.getCapacity())
+                .skillLevel(positionSlot.getSkillLevel())
                 .approvedCount(positionSlot.getApprovedCount())
                 .build();
     }
@@ -19,7 +20,8 @@ public class PositionSlotMapper {
         PositionSlot positionSlot = PositionSlot.createPositionSlot(
                 positionSlotEntity.getPosition(),
                 positionSlotEntity.getProficiency(),
-                positionSlotEntity.getCapacity()
+                positionSlotEntity.getCapacity(),
+                positionSlotEntity.getSkillLevel()
         );
         positionSlot.assignProject(positionSlotEntity.getProjectEntity().getProjectGuid());
         return positionSlot;
