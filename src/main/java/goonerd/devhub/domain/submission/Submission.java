@@ -3,7 +3,6 @@ package goonerd.devhub.domain.submission;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.exception.DomainRuleException;
 import goonerd.devhub.domain.common.AuditInfo;
-import goonerd.devhub.domain.common.SkillLevel;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

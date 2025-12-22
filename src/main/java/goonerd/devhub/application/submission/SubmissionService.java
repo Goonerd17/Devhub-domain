@@ -46,7 +46,6 @@ public class SubmissionService implements SubmissionUseCase {
 
         project.approveSubmission(submission);
         submissionRepository.save(submission);
-        projectRepository.save(project);
         return submission;
     }
 }
