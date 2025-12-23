@@ -17,14 +17,11 @@ public class TraceIdMDCFilter extends OncePerRequestFilter {
     private static final String TRACE_ID_KEY = "traceId";
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         try {
             String traceId = UUID.randomUUID().toString().replace("-", "").substring(0, 10);
             MDC.put(TRACE_ID_KEY, traceId);
-
-            filterChain.doFilter(request, response);
+            filterChain.doFilter(httpServletRequest, httpServletResponse);
         } finally {
             MDC.remove(TRACE_ID_KEY);
         }

@@ -62,8 +62,6 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             customFilterExceptionHandler.handle(res, e.getErrorCodeEnum());
         } catch (JwtException e) {
             customFilterExceptionHandler.handle(res, e);
-        } catch (Exception e) {
-            customFilterExceptionHandler.handle(res, e);
         }
     }
 

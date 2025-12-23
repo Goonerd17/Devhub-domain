@@ -86,6 +86,14 @@ public class ApiResponseVo <T> {
                 .build();
     }
 
+    public static ApiResponseVo<?> failureWithMessage(ErrorCodeEnum errorCode, String message) {
+        return ApiResponseVo.builder()
+                .success(false)
+                .code(errorCode.getCode())
+                .error(new ErrorResponseVo(errorCode.getCode(), message))
+                .build();
+    }
+
     public static <T> ApiResponseVo<T> failureFromThrowable(Throwable throwable) {
         return ApiResponseVo.<T>builder()
                 .success(false)
