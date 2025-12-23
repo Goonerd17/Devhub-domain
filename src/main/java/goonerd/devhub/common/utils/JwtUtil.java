@@ -2,13 +2,12 @@ package goonerd.devhub.common.utils;
 
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.JwtStatusEnum;
-import goonerd.devhub.domain.user.UserRole;
 import goonerd.devhub.common.exception.AuthRuleException;
+import goonerd.devhub.domain.user.UserRole;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +16,6 @@ import org.springframework.util.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
@@ -29,7 +27,7 @@ public class JwtUtil {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
     public static final String AUTHORIZATION_KEY = "auth";
-    private static final String BEARER_PREFIX = "Bearer ";
+    public static final String BEARER_PREFIX = "Bearer ";
     private static final long ACCESS_TOKEN_TIME = 30 * 60 * 1000L; // 30분
     private static final long REFRESH_TOKEN_TIME = 14 * 24 * 60 * 60 * 1000L; // 2주
 
@@ -57,16 +55,6 @@ public class JwtUtil {
         throw AuthRuleException.of(ErrorCodeEnum.TOKEN_INVALID);
     }
 
-    // Header 토큰 담기
-    public void addJwtHeader(String token, HttpServletResponse response) {
-        try {
-            token = URLEncoder.encode(token, "utf-8").replaceAll("\\+", "%20");
-            response.setHeader(AUTHORIZATION_HEADER, token);
-        } catch (UnsupportedEncodingException e) {
-            log.info(e.getMessage());
-        }
-    }
-
     // Header 안에 있는 토큰 decode
     public String getTokenFromHeader(HttpServletRequest req) {
         String token = req.getHeader(AUTHORIZATION_HEADER);
@@ -84,8 +72,7 @@ public class JwtUtil {
     // AccessToken 생성
     public String createAccessToken(String userId, UserRole role) {
         Date now = new Date();
-        return BEARER_PREFIX +
-                Jwts.builder()
+        return Jwts.builder()
                         .setSubject(userId)
                         .claim(AUTHORIZATION_KEY, role)
                         .setExpiration(new Date(now.getTime() + ACCESS_TOKEN_TIME))
@@ -97,8 +84,7 @@ public class JwtUtil {
     // RefreshToken 생성
     public String createRefreshToken(String userId) {
         Date now = new Date();
-        return BEARER_PREFIX +
-                Jwts.builder()
+        return Jwts.builder()
                         .setSubject(userId)
                         .setExpiration(new Date(now.getTime() + REFRESH_TOKEN_TIME))
                         .setIssuedAt(now)

@@ -1,6 +1,7 @@
 package goonerd.devhub.common.filter;
 
 import goonerd.devhub.common.auth.userdetails.UserDetailsServiceImpl;
+import goonerd.devhub.common.component.JwtAuthenticationProvider;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.JwtStatusEnum;
 import goonerd.devhub.common.component.CustomFilterExceptionHandler;
@@ -30,54 +31,39 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
+    private final JwtAuthenticationProvider jwtAuthenticationProvider;
     private final CustomFilterExceptionHandler customFilterExceptionHandler;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain)
-            throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
 
-        String token = jwtUtil.getTokenFromHeader(req);
+        String token = jwtUtil.getTokenFromHeader(httpServletRequest);
 
         if (!StringUtils.hasText(token)) {
-            filterChain.doFilter(req, res);
+            filterChain.doFilter(httpServletRequest, httpServletResponse);
             return;
         }
 
         String pureToken = jwtUtil.substringHeaderToken(token);
         JwtStatusEnum status = jwtUtil.validateToken(pureToken);
 
-        try {
-            switch (status) {
-                case EXPIRED:
-                    throw JwtAuthenticationException.of(ErrorCodeEnum.TOKEN_EXPIRED);
-                case INVALID:
-                    throw JwtAuthenticationException.of(ErrorCodeEnum.TOKEN_INVALID);
-                case VALID:
-                    Claims claims = jwtUtil.getUserInfo(pureToken);
-                    setAuthentication(claims.getSubject());
-                    break;
-            }
-            filterChain.doFilter(req, res);
-        } catch (JwtAuthenticationException e) {
-            customFilterExceptionHandler.handle(res, e.getErrorCodeEnum());
-        } catch (JwtException e) {
-            customFilterExceptionHandler.handle(res, e);
+        if (status == JwtStatusEnum.EXPIRED) {
+            customFilterExceptionHandler.handle(httpServletResponse, ErrorCodeEnum.TOKEN_EXPIRED);
+            return;
         }
+
+        if (status == JwtStatusEnum.INVALID) {
+            customFilterExceptionHandler.handle(httpServletResponse, ErrorCodeEnum.TOKEN_INVALID);
+            return;
+        }
+
+        Claims claims = jwtUtil.getUserInfo(pureToken);
+        setAuthentication(claims.getSubject());
+        filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
     public void setAuthentication(String userId) {
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
-        Authentication authentication = createAuthentication(userId);
-        context.setAuthentication(authentication);
-        SecurityContextHolder.setContext(context);
-    }
-
-    private Authentication createAuthentication(String userId) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(userId);
-        return new UsernamePasswordAuthenticationToken(
-                userDetails,
-                null,
-                userDetails.getAuthorities()
-        );
+        Authentication authentication = jwtAuthenticationProvider.authenticate(userId);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }

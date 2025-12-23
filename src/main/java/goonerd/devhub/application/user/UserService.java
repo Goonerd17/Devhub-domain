@@ -20,6 +20,7 @@ public class UserService implements UserUseCase {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Override
     public User signup(SignupUserCommand signupUserCommand) {
         if (userRepository.existsByUserId(signupUserCommand.getUserId())) {
             throw BusinessRuleException.of(ErrorCodeEnum.DUPLICATE_USERID);

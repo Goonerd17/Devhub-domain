@@ -1,9 +1,11 @@
 package goonerd.devhub.common.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import goonerd.devhub.common.auth.service.RefreshTokenService;
 import goonerd.devhub.common.auth.userdetails.UserDetailsServiceImpl;
 import goonerd.devhub.common.component.CustomAuthenticationEntryPoint;
 import goonerd.devhub.common.component.CustomFilterExceptionHandler;
+import goonerd.devhub.common.component.JwtAuthenticationProvider;
 import goonerd.devhub.common.filter.JwtAuthenticationFilter;
 import goonerd.devhub.common.filter.JwtAuthorizationFilter;
 import goonerd.devhub.common.filter.JwtExceptionFilter;
@@ -34,7 +36,9 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
+    private final ObjectMapper objectMapper;
     private final JwtUtil jwtUtil;
+    private final JwtAuthenticationProvider jwtAuthenticationProvider;
     private final RefreshTokenService refreshTokenService;
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthenticationConfiguration authenticationConfiguration;
@@ -43,25 +47,25 @@ public class WebSecurityConfig {
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     @Bean
-    public JwtExceptionFilter jwtExceptionFilter() {
-        return new JwtExceptionFilter();
-    }
-
-    @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
 
     @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
-        JwtAuthenticationFilter filter = new JwtAuthenticationFilter(jwtUtil, refreshTokenService);
-        filter.setAuthenticationManager(authenticationManager(authenticationConfiguration));
+    public JwtAuthenticationFilter jwtAuthenticationFilter(AuthenticationManager authenticationManager) throws Exception {
+        JwtAuthenticationFilter filter = new JwtAuthenticationFilter(jwtUtil, refreshTokenService, objectMapper);
+        filter.setAuthenticationManager(authenticationManager);
         return filter;
     }
 
     @Bean
     public JwtAuthorizationFilter jwtAuthorizationFilter() {
-        return new JwtAuthorizationFilter(jwtUtil, userDetailsService, customFilterExceptionHandler);
+        return new JwtAuthorizationFilter(jwtUtil, userDetailsService, jwtAuthenticationProvider, customFilterExceptionHandler);
+    }
+
+    @Bean
+    public JwtExceptionFilter jwtExceptionFilter() {
+        return new JwtExceptionFilter();
     }
 
     @Bean
@@ -80,16 +84,19 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity,
+                                                   JwtAuthenticationFilter jwtAuthenticationFilter,
+                                                   JwtAuthorizationFilter jwtAuthorizationFilter,
+                                                   JwtExceptionFilter jwtExceptionFilter) throws Exception {
 
-        http
+        httpSecurity
                 .csrf((csrf) -> csrf.disable())
-                .exceptionHandling(ex -> ex
-                        .accessDeniedHandler(customAccessDeniedHandler)
-                        .authenticationEntryPoint(customAuthenticationEntryPoint))
                 .cors(withDefaults())
                 .sessionManagement((sessionManagement) ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .exceptionHandling(ex -> ex
+                        .accessDeniedHandler(customAccessDeniedHandler)
+                        .authenticationEntryPoint(customAuthenticationEntryPoint))
                 .authorizeHttpRequests((authorizeHttpRequests) ->
                         authorizeHttpRequests
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
@@ -100,16 +107,17 @@ public class WebSecurityConfig {
                                         "/webjars/**"
                                 ).permitAll()
                                 .requestMatchers("/h2-console/**").permitAll()
+                                .requestMatchers("/user/signup").permitAll()
                                 .requestMatchers("/auth/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .headers(headers -> headers
                         .frameOptions(frameOptions -> frameOptions.disable())
                 )
-                .addFilterBefore(jwtExceptionFilter(), JwtAuthenticationFilter.class)
-                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtExceptionFilter, JwtAuthenticationFilter.class)
+                .addFilterAt(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
 
-        return http.build();
+        return httpSecurity.build();
     }
 }

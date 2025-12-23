@@ -1,6 +1,6 @@
 package goonerd.devhub.common.auth.service;
 
-import goonerd.devhub.common.auth.vo.RefreshToken;
+import goonerd.devhub.common.auth.entity.RefreshTokenEntity;
 import goonerd.devhub.common.auth.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,19 +9,23 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RefreshTokenService {
 
-    private final RefreshTokenRepository repository;
+    private final RefreshTokenRepository refreshTokenRepository;
 
-    public void save(String userId, String token) {
-        repository.save(new RefreshToken(userId, token));
+    public void save(String userId, String refreshToken) {
+        refreshTokenRepository.findByUserId(userId)
+                .ifPresentOrElse(
+                        entity -> entity.rotate(refreshToken),
+                        () -> refreshTokenRepository.save(
+                                RefreshTokenEntity.of(userId, refreshToken)
+                        )
+                );
     }
 
-    public String findByUserId(String userId) {
-        return repository.findById(userId)
-                .map(RefreshToken::getToken)
-                .orElse(null);
+    public RefreshTokenEntity findByUserId(String userId) {
+        return refreshTokenRepository.findByUserId(userId).orElse(null);
     }
 
     public void delete(String userId) {
-        repository.deleteById(userId);
+        refreshTokenRepository.deleteByUserId(userId);
     }
 }

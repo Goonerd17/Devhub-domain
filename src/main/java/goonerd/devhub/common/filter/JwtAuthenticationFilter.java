@@ -1,18 +1,21 @@
 package goonerd.devhub.common.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import goonerd.devhub.adapters.in.user.dto.LoginUserRequestDto;
+import goonerd.devhub.adapters.in.vo.ApiResponseVo;
 import goonerd.devhub.common.auth.service.RefreshTokenService;
 import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
-import goonerd.devhub.domain.user.UserRole;
 import goonerd.devhub.common.utils.JwtUtil;
-import goonerd.devhub.adapters.in.vo.ApiResponseVo;
-import goonerd.devhub.adapters.in.user.dto.LoginUserRequestDto;
+import goonerd.devhub.domain.user.UserRole;
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -22,14 +25,15 @@ import java.io.IOException;
 import java.util.Map;
 
 @Slf4j
+@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final JwtUtil jwtUtil;
     private final RefreshTokenService refreshTokenService;
+    private final ObjectMapper objectMapper;
 
-    public JwtAuthenticationFilter(JwtUtil jwtUtil, RefreshTokenService refreshTokenService) {
-        this.jwtUtil = jwtUtil;
-        this.refreshTokenService = refreshTokenService;
+    @PostConstruct
+    public void init() {
         setFilterProcessesUrl("/auth/login");
     }
 
@@ -38,7 +42,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         try {
             LoginUserRequestDto loginUserRequestDto =
-                    new ObjectMapper().readValue(request.getInputStream(), LoginUserRequestDto.class);
+                    objectMapper.readValue(request.getInputStream(), LoginUserRequestDto.class);
 
             return getAuthenticationManager().authenticate(
                             new UsernamePasswordAuthenticationToken(
@@ -56,23 +60,19 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain chain,
                                             Authentication authResult) throws IOException {
 
-        ObjectMapper objectMapper = new ObjectMapper();
         UserDetailsImpl userDetails = (UserDetailsImpl) authResult.getPrincipal();
         String userId = userDetails.getUsername();
         UserRole role = userDetails.getUser().getRole();
 
-        String accessToken = jwtUtil.substringHeaderToken(jwtUtil.createAccessToken(userId, role));
-        String refreshToken = jwtUtil.substringHeaderToken(jwtUtil.createRefreshToken(userId));
+        String accessToken = jwtUtil.createAccessToken(userId, role);
+        String refreshToken = jwtUtil.createRefreshToken(userId);
         refreshTokenService.save(userId, refreshToken);
 
-        ApiResponseVo<?> responseBody = ApiResponseVo.successWithData(
-                SuccessCodeEnum.LOGIN_SUCCESS,
-                Map.of("accessToken", accessToken, "refreshToken", refreshToken));
+        ApiResponseVo<?> responseBody = ApiResponseVo.successWithData(SuccessCodeEnum.LOGIN_SUCCESS, Map.of("accessToken", accessToken, "refreshToken", refreshToken));
 
         String jsonResponse = objectMapper.writeValueAsString(responseBody);
 
-        jwtUtil.addJwtHeader(accessToken, response);
-
+        response.setHeader(HttpHeaders.AUTHORIZATION, JwtUtil.BEARER_PREFIX + accessToken);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(jsonResponse);
@@ -80,11 +80,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request,
-                                              HttpServletResponse response,
-                                              AuthenticationException failed) throws IOException {
-
-        ObjectMapper objectMapper = new ObjectMapper();
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException {
         ApiResponseVo<?> apiResponse = ApiResponseVo.failureWithoutParam(ErrorCodeEnum.LOGIN_FAIL);
         String jsonResponse = objectMapper.writeValueAsString(apiResponse);
 
