@@ -9,16 +9,14 @@ import lombok.Getter;
 public class CreateProjectPositionCommand {
 
     private String position;
-    private String proficiency;
     private int capacity;
-    private String skillLevel;
+    private String level;
 
     public static CreateProjectPositionCommand fromCreateProjectRequestDto(CreateProjectPositionRequestDto createProjectPositionRequestDto) {
         return new CreateProjectPositionCommand(
                 createProjectPositionRequestDto.getPosition(),
-                createProjectPositionRequestDto.getProficiency(),
                 createProjectPositionRequestDto.getCapacity(),
-                createProjectPositionRequestDto.getSkillLevel()
+                createProjectPositionRequestDto.getLevel()
         );
     }
 }

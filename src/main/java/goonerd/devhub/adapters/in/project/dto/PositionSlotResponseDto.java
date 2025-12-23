@@ -11,15 +11,14 @@ import lombok.Getter;
 public class PositionSlotResponseDto {
 
     private String position;
-    private String proficiency;
     private int capacity;
+    private String level;
     private int approvedCount;
     private boolean full;
 
     public static PositionSlotResponseDto fromDomain(PositionSlot slot) {
         return PositionSlotResponseDto.builder()
                 .position(slot.getPosition())
-                .proficiency(slot.getProficiency())
                 .capacity(slot.getCapacity())
                 .approvedCount(slot.getApprovedCount())
                 .full(slot.isFull())

@@ -33,7 +33,7 @@ class ProjectTest {
                 LocalDate.now(),
                 LocalDate.now().plusDays(1), // 종료일이 내일
                 List.of(
-                        new PositionSlot("BACKEND", "JUNIOR", 1, "Low",0)
+                        new PositionSlot("BACKEND", 1,"JUNIOR", 0)
                 ),
                 List.of("Java")
         );

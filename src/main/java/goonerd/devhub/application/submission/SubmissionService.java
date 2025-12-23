@@ -12,8 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -24,7 +22,7 @@ public class SubmissionService implements SubmissionUseCase {
 
     public Submission applySubmission(SubmissionCommand submissionApplyCommand) {
         if (submissionRepository.existsByProjectGuidAndSubmitterId(submissionApplyCommand.getProjectGuid(), submissionApplyCommand.getSubmitterId())) {
-            throw new IllegalStateException("이미 지원한 사용자입니다.");
+            throw DomainRuleException.of(ErrorCodeEnum.SUBMISSION_APPLY_FAIL);
         }
 
         Submission submission = Submission.createApplication(
@@ -46,6 +44,7 @@ public class SubmissionService implements SubmissionUseCase {
 
         project.approveSubmission(submission);
         submissionRepository.save(submission);
+        projectRepository.save(project);
         return submission;
     }
 }

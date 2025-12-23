@@ -34,12 +34,10 @@ public class PositionSlotEntity {
     private String position;
 
     @Column(nullable = false)
-    private String proficiency;
-
-    @Column(nullable = false)
     private int capacity;
 
-    private String skillLevel;
+    @Column(nullable = false)
+    private String level;
 
     private int approvedCount;
 }

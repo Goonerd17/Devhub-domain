@@ -170,9 +170,9 @@ public class Project {
         this.recruitmentType = Objects.requireNonNull(newType);
     }
 
-    public boolean canApply(String position, String proficiency) {
+    public boolean canApply(String position, String level) {
         return positionSlots.stream()
-                .filter(p -> p.getPosition().equals(position) && p.getProficiency().equals(proficiency))
+                .filter(p -> p.getPosition().equals(position) && p.getLevel().equals(level))
                 .anyMatch(p -> !p.isFull());
     }
 
@@ -194,7 +194,7 @@ public class Project {
     public PositionSlot findPositionSlot(String position, String skillLevel) {
         return positionSlots.stream()
                 .filter(slot ->
-                        slot.getPosition().equals(position) && slot.getSkillLevel().equals(skillLevel))
+                        slot.getPosition().equals(position) && slot.getLevel().equals(skillLevel))
                 .findFirst()
                 .orElseThrow(() ->
                         DomainRuleException.of(ErrorCodeEnum.UNKNOWN_FAIL)

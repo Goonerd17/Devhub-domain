@@ -42,9 +42,10 @@ public enum ErrorCodeEnum {
 
     SUBMISSION_PROJECT_FAIL("ERR.DVH.0070", "projectGuid는 필수입니다.",BAD_REQUEST),
     SUBMISSION_USER_FAIL("ERR.DVH.0071", "userId는 필수입니다.",BAD_REQUEST),
-    SUBMISSION_APPROVE_FAIL("ERR.DVH.0071", "승인할 수 없는 상태입니다.",BAD_REQUEST),
-    SUBMISSION_REJECT_FAIL("ERR.DVH.0071", "거절할 수 없는 상태입니다.",BAD_REQUEST),
-    SUBMISSION_CANCEL_FAIL("ERR.DVH.0071", "승인된 지원은 취소할 수 없습니다.",BAD_REQUEST),
+    SUBMISSION_APPLY_FAIL("ERR.DVH.0072", "이미 지원한 내역이 존재합니다.",BAD_REQUEST),
+    SUBMISSION_APPROVE_FAIL("ERR.DVH.0073", "승인할 수 없는 상태입니다.",BAD_REQUEST),
+    SUBMISSION_REJECT_FAIL("ERR.DVH.0074", "거절할 수 없는 상태입니다.",BAD_REQUEST),
+    SUBMISSION_CANCEL_FAIL("ERR.DVH.0075", "승인된 지원은 취소할 수 없습니다.",BAD_REQUEST),
 
     UNKNOWN_FAIL("ERR.DVH.9999", "원인 미상의 에러가 발생했습니다.",BAD_REQUEST);
 

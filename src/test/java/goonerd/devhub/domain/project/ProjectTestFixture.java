@@ -17,7 +17,7 @@ class ProjectTestFixture {
                 LocalDate.now(),
                 LocalDate.now().plusDays(10),
                 List.of(
-                        new PositionSlot("BACKEND", "JUNIOR", 1, 0)
+                        new PositionSlot("BACKEND", 1, "JUNIOR", 0)
                 ),
                 List.of("Java")
         );

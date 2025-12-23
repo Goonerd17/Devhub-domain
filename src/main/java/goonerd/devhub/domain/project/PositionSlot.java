@@ -9,45 +9,40 @@ public class PositionSlot {
 
     private String projectGuid;
     private final String position;
-    private final String proficiency;
     private final int capacity;
-    private final String skillLevel;
+    private final String level;
     private int approvedCount;
 
-    public PositionSlot(String position, String proficiency, int capacity, String skillLevel, int approvedCount) {
+    public PositionSlot(String position, int capacity, String level, int approvedCount) {
         if (capacity <= 0) {
             throw DomainRuleException.of(ErrorCodeEnum.PROJECT_POSITION_RECRUITMENT_FAIL);
         }
         this.position = Objects.requireNonNull(position);
-        this.proficiency = Objects.requireNonNull(proficiency);
         this.capacity = capacity;
-        this.skillLevel = Objects.requireNonNull(skillLevel);
+        this.level = Objects.requireNonNull(level);
         this.approvedCount = approvedCount;
     }
 
     public static PositionSlot reconstruct(
             String position,
-            String proficiency,
             int capacity,
-            String skillLevel,
+            String level,
             int approvedCount
     ) {
         return new PositionSlot(
                 position,
-                proficiency,
                 capacity,
-                skillLevel,
+                level,
                 approvedCount
         );
     }
 
     public static PositionSlot createPositionSlot(
             String position,
-            String proficiency,
             int capacity,
-            String skillLevel
+            String level
     ) {
-        return new PositionSlot(position, proficiency, capacity, skillLevel,0);
+        return new PositionSlot(position, capacity, level,0);
     }
 
     public boolean isFull() {
@@ -66,9 +61,8 @@ public class PositionSlot {
 
     public String getProjectGuid() { return projectGuid; }
     public String getPosition() { return position; }
-    public String getProficiency() { return proficiency; }
     public int getCapacity() { return capacity; }
-    public String getSkillLevel() { return skillLevel; }
+    public String getLevel() { return level; }
     public int getApprovedCount() { return approvedCount; }
     public void assignProject(String projectGuid) { this.projectGuid = projectGuid;}
 }

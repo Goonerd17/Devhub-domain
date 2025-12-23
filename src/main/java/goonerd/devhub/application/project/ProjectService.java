@@ -36,9 +36,8 @@ public class ProjectService implements ProjectUseCase {
         List<PositionSlot> positionSlotList = createProjectCommand.getPositions().stream()
                         .map(p -> PositionSlot.createPositionSlot(
                                 p.getPosition(),
-                                p.getProficiency(),
                                 p.getCapacity(),
-                                p.getSkillLevel()))
+                                p.getLevel()))
                         .toList();
 
         Project project = Project.createNew(

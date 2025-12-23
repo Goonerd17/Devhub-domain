@@ -9,9 +9,8 @@ public class PositionSlotMapper {
         return PositionSlotEntity.builder()
                 .projectEntity(projectEntity)
                 .position(positionSlot.getPosition())
-                .proficiency(positionSlot.getProficiency())
                 .capacity(positionSlot.getCapacity())
-                .skillLevel(positionSlot.getSkillLevel())
+                .level(positionSlot.getLevel())
                 .approvedCount(positionSlot.getApprovedCount())
                 .build();
     }
@@ -19,9 +18,8 @@ public class PositionSlotMapper {
     public static PositionSlot toDomain(PositionSlotEntity positionSlotEntity) {
         PositionSlot positionSlot = PositionSlot.createPositionSlot(
                 positionSlotEntity.getPosition(),
-                positionSlotEntity.getProficiency(),
                 positionSlotEntity.getCapacity(),
-                positionSlotEntity.getSkillLevel()
+                positionSlotEntity.getLevel()
         );
         positionSlot.assignProject(positionSlotEntity.getProjectEntity().getProjectGuid());
         return positionSlot;

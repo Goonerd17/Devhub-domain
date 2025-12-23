@@ -15,13 +15,11 @@ public class CreateProjectPositionRequestDto {
     @Schema(description = "포지션명", example = "BACKEND")
     private String position;
 
-    @NotBlank
-    @Schema(description = "숙련도", example = "JUNIOR")
-    private String proficiency;
-
     @Positive
     @Schema(description = "모집 인원", example = "2")
     private int capacity;
 
-    private String skillLevel;
+    @NotBlank
+    @Schema(description = "숙련도", example = "JUNIOR")
+    private String level;
 }
