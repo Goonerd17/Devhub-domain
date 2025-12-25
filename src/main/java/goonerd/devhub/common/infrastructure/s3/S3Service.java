@@ -1,4 +1,4 @@
-package goonerd.devhub.common.service.s3;
+package goonerd.devhub.common.infrastructure.s3;
 
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.exception.BusinessRuleException;

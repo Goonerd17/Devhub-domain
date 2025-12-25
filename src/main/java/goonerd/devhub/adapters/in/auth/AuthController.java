@@ -1,4 +1,4 @@
-package goonerd.devhub.common.auth.controller;
+package goonerd.devhub.adapters.in.auth;
 
 import goonerd.devhub.adapters.in.vo.ApiResponseVo;
 import goonerd.devhub.common.auth.service.AuthService;
@@ -16,10 +16,10 @@ public class AuthController {
 
     @PostMapping("/reissue")
     public ResponseEntity<ApiResponseVo<?>> refresh(@RequestHeader("Refresh-Token") String refreshToken) {
-        String newAccessToken = authService.refreshAccessToken(refreshToken);
         return ResponseEntity.ok(
-                ApiResponseVo.successWithoutParamAndData(
-                        SuccessCodeEnum.CREATE_SUCCESS
+                ApiResponseVo.successWithData(
+                        SuccessCodeEnum.CREATE_SUCCESS,
+                        authService.refreshAccessToken(refreshToken)
                 )
         );
     }
