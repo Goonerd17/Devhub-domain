@@ -11,6 +11,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")              // 모든 엔드포인트
                 .allowedOrigins("http://localhost:5173")  // 허용할 프론트엔드
+                .allowedHeaders("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowCredentials(true);        // 쿠키 허용 여부
     }

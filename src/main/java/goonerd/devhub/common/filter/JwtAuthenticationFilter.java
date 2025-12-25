@@ -3,7 +3,7 @@ package goonerd.devhub.common.filter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import goonerd.devhub.adapters.in.user.dto.LoginUserRequestDto;
 import goonerd.devhub.adapters.in.vo.ApiResponseVo;
-import goonerd.devhub.common.auth.service.RefreshTokenService;
+import goonerd.devhub.application.auth.RefreshTokenService;
 import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.SuccessCodeEnum;

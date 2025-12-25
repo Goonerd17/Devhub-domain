@@ -69,9 +69,8 @@ public class ProjectController {
         CreateProjectCommand createProjectCommand = CreateProjectCommand.fromCreateProjectRequestDto(createProjectRequestDto, userDetailsImpl.getUserId());
         Project project = projectUseCase.createProject(createProjectCommand);
         return ResponseEntity.ok(
-                ApiResponseVo.successWithParamAndData(
+                ApiResponseVo.successWithData(
                         SuccessCodeEnum.CREATE_SUCCESS,
-                        createProjectCommand,
                         ProjectResponseDto.fromDomain(project)
                 )
         );

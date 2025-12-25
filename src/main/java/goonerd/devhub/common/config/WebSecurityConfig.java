@@ -1,7 +1,7 @@
 package goonerd.devhub.common.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import goonerd.devhub.common.auth.service.RefreshTokenService;
+import goonerd.devhub.application.auth.RefreshTokenService;
 import goonerd.devhub.common.auth.userdetails.UserDetailsServiceImpl;
 import goonerd.devhub.common.component.CustomAuthenticationEntryPoint;
 import goonerd.devhub.common.component.CustomFilterExceptionHandler;
@@ -28,7 +28,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
-import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration

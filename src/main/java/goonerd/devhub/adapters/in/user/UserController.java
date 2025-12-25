@@ -27,9 +27,8 @@ public class UserController {
         SignupUserCommand signupUserCommand = SignupUserCommand.fromSignupUserRequestDto(signupUserRequestDto);
         User user = userUseCase.signup(signupUserCommand);
         return ResponseEntity.ok(
-                ApiResponseVo.successWithParamAndData(
+                ApiResponseVo.successWithData(
                         SuccessCodeEnum.SIGNUP_SUCCESS,
-                        signupUserCommand,
                         SignupUserResponseDto.fromUserDomain(user)
                 )
         );

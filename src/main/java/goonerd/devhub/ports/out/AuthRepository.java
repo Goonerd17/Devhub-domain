@@ -1,6 +1,6 @@
 package goonerd.devhub.ports.out;
 
-import goonerd.devhub.common.auth.entity.RefreshTokenEntity;
+import goonerd.devhub.adapters.out.auth.RefreshTokenEntity;
 
 import java.util.Optional;
 

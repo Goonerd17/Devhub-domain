@@ -8,8 +8,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Map;
-
 @Getter
 @Builder
 @NoArgsConstructor
@@ -21,29 +19,11 @@ public class ApiResponseVo <T> {
     private boolean success;
     @Schema(description = "응답 코드")
     private String code;
-    @Schema(description = "파라미터")
-    private Object param;
     @Schema(description = "정상 응답 데이터")
     private T data;
     @Schema(description = "에러 발생 시 상세 정보")
     private ErrorResponseVo error;
-    
-    public static <T> ApiResponseVo<T> successWithParamAndData(SuccessCodeEnum codeEnum, Object param, T data) {
-        return ApiResponseVo.<T>builder()
-                .success(true)
-                .code(codeEnum.getCode())
-                .param(param)
-                .data(data)
-                .build();
-    }
-    
-    public static <T> ApiResponseVo<T> successWithParam(SuccessCodeEnum codeEnum, Object param) {
-        return ApiResponseVo.<T>builder()
-                .success(true)
-                .code(codeEnum.getCode())
-                .param(param)
-                .build();
-    }
+
 
     public static <T> ApiResponseVo<T> successWithData(SuccessCodeEnum codeEnum, T data) {
         return ApiResponseVo.<T>builder()
@@ -57,15 +37,6 @@ public class ApiResponseVo <T> {
         return ApiResponseVo.<Void>builder()
                 .success(true)
                 .code(codeEnum.getCode())
-                .build();
-    }
-    
-    public static <T> ApiResponseVo<T> failureWithParam(ErrorCodeEnum errorCode, Object param) {
-        return ApiResponseVo.<T>builder()
-                .success(false)
-                .code(errorCode.getCode())
-                .param(param)
-                .error(ErrorResponseVo.of(errorCode))
                 .build();
     }
 
@@ -103,12 +74,9 @@ public class ApiResponseVo <T> {
     }
 
     public static <T> ApiResponseVo<T> failureFromFilter(Throwable throwable) {
-        Map<String, Object> param = Map.of("exception", throwable.getClass().getSimpleName());
-
         return ApiResponseVo.<T>builder()
                 .success(false)
                 .code(ErrorCodeEnum.UNKNOWN_FAIL.getCode())
-                .param(param)
                 .error(ErrorResponseVo.of(throwable))
                 .build();
     }

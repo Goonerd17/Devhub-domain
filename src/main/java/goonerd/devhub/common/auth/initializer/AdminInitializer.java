@@ -1,4 +1,4 @@
-package goonerd.devhub.common.auth.admin;
+package goonerd.devhub.common.auth.initializer;
 
 import goonerd.devhub.domain.user.UserRole;
 import goonerd.devhub.application.user.UserService;

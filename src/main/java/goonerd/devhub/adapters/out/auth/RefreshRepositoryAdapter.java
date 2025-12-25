@@ -1,6 +1,5 @@
 package goonerd.devhub.adapters.out.auth;
 
-import goonerd.devhub.common.auth.entity.RefreshTokenEntity;
 import goonerd.devhub.ports.out.AuthRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

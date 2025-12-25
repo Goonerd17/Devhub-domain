@@ -1,11 +1,13 @@
-package goonerd.devhub.common.auth.service;
+package goonerd.devhub.application.auth;
 
+import goonerd.devhub.adapters.in.auth.dto.TokenResponseDto;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.JwtStatusEnum;
 import goonerd.devhub.common.exception.AuthRuleException;
 import goonerd.devhub.common.utils.JwtUtil;
 import goonerd.devhub.domain.user.User;
 import goonerd.devhub.ports.in.AuthUseCase;
+import goonerd.devhub.ports.out.AuthRepository;
 import goonerd.devhub.ports.out.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,19 +17,19 @@ import org.springframework.stereotype.Service;
 public class AuthService implements AuthUseCase {
 
     private final JwtUtil jwtUtil;
-    private final RefreshTokenService refreshTokenService;
+    private final AuthRepository authRepository;
     private final UserRepository userRepository;
 
     @Override
-    public String refreshAccessToken(String refreshToken) {
+    public TokenResponseDto refreshAccessToken(String refreshToken) {
 
-        JwtStatusEnum status = jwtUtil.validateToken(refreshToken);
+        JwtStatusEnum jwtStatusEnum = jwtUtil.validateToken(refreshToken);
 
-        if (status == JwtStatusEnum.EXPIRED) {
+        if (jwtStatusEnum == JwtStatusEnum.EXPIRED) {
             throw AuthRuleException.of(ErrorCodeEnum.TOKEN_EXPIRED);
         }
 
-        if (status != JwtStatusEnum.VALID) {
+        if (jwtStatusEnum != JwtStatusEnum.VALID) {
             throw AuthRuleException.of(ErrorCodeEnum.REFRESH_TOKEN_INVALID);
         }
 
@@ -35,9 +37,11 @@ public class AuthService implements AuthUseCase {
         User user = userRepository.findByUserId(userId)
                 .orElseThrow(() -> AuthRuleException.of(ErrorCodeEnum.USER_NOT_FOUND));
 
-        refreshTokenService.findByUserId(userId)
+        authRepository.findByUserId(userId)
                 .filter(token -> token.getRefreshToken().equals(refreshToken))
                 .orElseThrow(() -> AuthRuleException.of(ErrorCodeEnum.REFRESH_TOKEN_INVALID));
-        return jwtUtil.createAccessToken(user.getUserId(), user.getRole());
+
+        String newAccessToken = jwtUtil.createAccessToken(user.getUserId(), user.getRole());
+        return TokenResponseDto.reissue(newAccessToken, refreshToken);
     }
 }

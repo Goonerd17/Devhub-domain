@@ -1,5 +1,7 @@
 package goonerd.devhub.ports.in;
 
+import goonerd.devhub.adapters.in.auth.dto.TokenResponseDto;
+
 public interface AuthUseCase {
-    String refreshAccessToken(String refreshToken);
+    TokenResponseDto refreshAccessToken(String refreshToken);
 }

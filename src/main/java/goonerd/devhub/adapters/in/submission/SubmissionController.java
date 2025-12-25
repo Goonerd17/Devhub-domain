@@ -23,9 +23,8 @@ public class SubmissionController {
     public ResponseEntity<ApiResponseVo<SubmissionResponseDto>> apply(@PathVariable String projectGuid, @RequestBody SubmissionRequestDto submissionRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
         SubmissionCommand submissionApplyCommand = SubmissionCommand.fromApplySubmissionRequestDto(projectGuid, submissionRequestDto, userDetailsImpl.getUserId());
         return ResponseEntity.ok(ApiResponseVo.
-                successWithParamAndData(
+                successWithData(
                         SuccessCodeEnum.CREATE_SUCCESS,
-                        submissionApplyCommand,
                         SubmissionResponseDto.fromDomain(submissionUseCase.applySubmission(submissionApplyCommand))
                 )
         );
@@ -35,9 +34,8 @@ public class SubmissionController {
     public ResponseEntity<ApiResponseVo<SubmissionResponseDto>> approve(@PathVariable String projectGuid, @PathVariable String submissionGuid, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
         SubmissionCommand submissionApproveCommand = SubmissionCommand.fromApproveSubmissionRequestDto(projectGuid, submissionGuid, userDetailsImpl.getUserId());
         return ResponseEntity.ok(ApiResponseVo.
-                successWithParamAndData(
+                successWithData(
                         SuccessCodeEnum.CREATE_SUCCESS,
-                        submissionApproveCommand,
                         SubmissionResponseDto.fromDomain(submissionUseCase.approveSubmission(submissionApproveCommand))
                 )
         );
