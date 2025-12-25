@@ -1,7 +1,8 @@
 package goonerd.devhub.adapters.out.project.project;
 
-import goonerd.devhub.adapters.out.project.position.PositionSlotEntity;
+import goonerd.devhub.adapters.out.project.position.entity.PositionSlotEntity;
 import goonerd.devhub.adapters.out.project.position.PositionSlotMapper;
+import goonerd.devhub.adapters.out.project.project.entity.ProjectEntity;
 import goonerd.devhub.domain.common.AuditInfo;
 import goonerd.devhub.domain.project.PositionSlot;
 import goonerd.devhub.domain.project.Project;

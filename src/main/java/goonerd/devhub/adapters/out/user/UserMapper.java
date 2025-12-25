@@ -1,5 +1,6 @@
 package goonerd.devhub.adapters.out.user;
 
+import goonerd.devhub.adapters.out.user.entity.UserEntity;
 import goonerd.devhub.domain.common.AuditInfo;
 import goonerd.devhub.domain.user.User;
 

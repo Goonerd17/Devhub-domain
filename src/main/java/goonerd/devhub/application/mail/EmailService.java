@@ -4,10 +4,10 @@ import goonerd.devhub.adapters.in.mail.command.ConfirmEmailVerificationCommand;
 import goonerd.devhub.adapters.in.mail.dto.EmailVerificationRequestDto;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.exception.AuthRuleException;
-import goonerd.devhub.common.utils.EmailAuthCodeUtil;
-import goonerd.devhub.ports.in.EmailVerificationUseCase;
-import goonerd.devhub.ports.out.EmailVerificationCodeRepository;
-import goonerd.devhub.ports.out.EmailSendPort;
+import goonerd.devhub.common.utils.EmailVerificationCodeUtil;
+import goonerd.devhub.ports.in.mail.EmailVerificationUseCase;
+import goonerd.devhub.ports.out.mail.EmailVerificationCodeRepository;
+import goonerd.devhub.ports.out.mail.EmailSendPort;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class EmailService implements EmailVerificationUseCase {
             throw AuthRuleException.of(ErrorCodeEnum.EMAIL_VERIFICATION_CODE_ALREADY_SENT);
         }
 
-        String code = EmailAuthCodeUtil.generateEmailAuthCode();
+        String code = EmailVerificationCodeUtil.generateEmailVerificationCode();
         emailVerificationRepository.save(email, code, Duration.ofMinutes(5));
         emailSendPort.sendEmail(email, "[회원가입] 이메일 인증 코드", buildBody(code));
     }

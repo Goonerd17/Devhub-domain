@@ -1,4 +1,4 @@
-package goonerd.devhub.adapters.out.user;
+package goonerd.devhub.adapters.out.user.entity;
 
 import goonerd.devhub.adapters.out.common.BaseEntity;
 import goonerd.devhub.domain.user.UserRole;

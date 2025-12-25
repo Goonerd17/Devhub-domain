@@ -1,6 +1,6 @@
 package goonerd.devhub.adapters.out.mail;
 
-import goonerd.devhub.ports.out.EmailSendPort;
+import goonerd.devhub.ports.out.mail.EmailSendPort;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;

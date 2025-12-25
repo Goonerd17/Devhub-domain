@@ -1,6 +1,7 @@
 package goonerd.devhub.adapters.out.project.position;
 
-import goonerd.devhub.adapters.out.project.project.ProjectEntity;
+import goonerd.devhub.adapters.out.project.position.entity.PositionSlotEntity;
+import goonerd.devhub.adapters.out.project.project.entity.ProjectEntity;
 import goonerd.devhub.domain.project.PositionSlot;
 
 public class PositionSlotMapper {

@@ -1,4 +1,4 @@
-package goonerd.devhub.adapters.out.mail;
+package goonerd.devhub.adapters.out.mail.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

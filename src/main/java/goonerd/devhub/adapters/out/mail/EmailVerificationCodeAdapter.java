@@ -1,6 +1,7 @@
 package goonerd.devhub.adapters.out.mail;
 
-import goonerd.devhub.ports.out.EmailVerificationCodeRepository;
+import goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity;
+import goonerd.devhub.ports.out.mail.EmailVerificationCodeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

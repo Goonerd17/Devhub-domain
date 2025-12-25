@@ -1,4 +1,4 @@
-package goonerd.devhub.adapters.out.project.project;
+package goonerd.devhub.adapters.out.project.project.entity;
 
 import goonerd.devhub.adapters.out.common.BaseEntity;
 import goonerd.devhub.domain.project.ProjectProgressType;

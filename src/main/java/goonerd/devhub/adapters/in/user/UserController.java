@@ -6,7 +6,7 @@ import goonerd.devhub.adapters.in.user.dto.SignupUserResponseDto;
 import goonerd.devhub.adapters.in.common.vo.ApiResponseVo;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
 import goonerd.devhub.domain.user.User;
-import goonerd.devhub.ports.in.UserUseCase;
+import goonerd.devhub.ports.in.user.UserUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

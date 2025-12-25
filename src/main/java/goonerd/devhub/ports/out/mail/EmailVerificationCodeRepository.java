@@ -1,4 +1,4 @@
-package goonerd.devhub.ports.out;
+package goonerd.devhub.ports.out.mail;
 
 import java.time.Duration;
 

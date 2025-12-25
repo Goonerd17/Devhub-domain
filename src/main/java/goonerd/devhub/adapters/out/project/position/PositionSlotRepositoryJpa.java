@@ -1,5 +1,6 @@
 package goonerd.devhub.adapters.out.project.position;
 
+import goonerd.devhub.adapters.out.project.position.entity.PositionSlotEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

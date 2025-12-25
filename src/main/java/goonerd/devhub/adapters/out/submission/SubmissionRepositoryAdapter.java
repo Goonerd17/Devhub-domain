@@ -1,7 +1,8 @@
 package goonerd.devhub.adapters.out.submission;
 
+import goonerd.devhub.adapters.out.submission.entity.SubmissionEntity;
 import goonerd.devhub.domain.submission.Submission;
-import goonerd.devhub.ports.out.SubmissionRepository;
+import goonerd.devhub.ports.out.submission.SubmissionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

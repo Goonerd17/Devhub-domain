@@ -1,4 +1,4 @@
-package goonerd.devhub.ports.in;
+package goonerd.devhub.ports.in.auth;
 
 import goonerd.devhub.adapters.in.auth.dto.TokenResponseDto;
 

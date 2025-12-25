@@ -1,4 +1,4 @@
-package goonerd.devhub.adapters.out.submission;
+package goonerd.devhub.adapters.out.submission.entity;
 
 import goonerd.devhub.adapters.out.common.BaseEntity;
 import goonerd.devhub.domain.submission.SubmissionStatus;

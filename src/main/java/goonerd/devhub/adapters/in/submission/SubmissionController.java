@@ -6,7 +6,7 @@ import goonerd.devhub.adapters.in.submission.dto.SubmissionResponseDto;
 import goonerd.devhub.adapters.in.common.vo.ApiResponseVo;
 import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
-import goonerd.devhub.ports.in.SubmissionUseCase;
+import goonerd.devhub.ports.in.submission.SubmissionUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

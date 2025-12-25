@@ -14,7 +14,7 @@ import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
 import goonerd.devhub.adapters.in.common.pagination.PageConverter;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
 import goonerd.devhub.domain.project.Project;
-import goonerd.devhub.ports.in.ProjectUseCase;
+import goonerd.devhub.ports.in.project.ProjectUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

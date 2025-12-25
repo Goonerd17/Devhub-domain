@@ -1,5 +1,6 @@
 package goonerd.devhub.adapters.out.submission;
 
+import goonerd.devhub.adapters.out.submission.entity.SubmissionEntity;
 import goonerd.devhub.domain.submission.Submission;
 import goonerd.devhub.domain.common.AuditInfo;
 

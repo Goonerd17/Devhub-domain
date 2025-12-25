@@ -5,7 +5,7 @@ import goonerd.devhub.adapters.in.mail.command.ConfirmEmailVerificationCommand;
 import goonerd.devhub.adapters.in.mail.dto.ConfirmEmailVerificationRequestDto;
 import goonerd.devhub.adapters.in.mail.dto.EmailVerificationRequestDto;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
-import goonerd.devhub.ports.in.EmailVerificationUseCase;
+import goonerd.devhub.ports.in.mail.EmailVerificationUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -2,7 +2,7 @@ package goonerd.devhub.adapters.out.user;
 
 import goonerd.devhub.domain.user.UserRole;
 import goonerd.devhub.domain.user.User;
-import goonerd.devhub.ports.out.UserRepository;
+import goonerd.devhub.ports.out.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

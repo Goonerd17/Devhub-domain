@@ -1,4 +1,4 @@
-package goonerd.devhub.ports.in;
+package goonerd.devhub.ports.in.user;
 
 import goonerd.devhub.adapters.in.user.command.SignupUserCommand;
 import goonerd.devhub.domain.user.User;

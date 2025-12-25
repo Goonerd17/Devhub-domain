@@ -2,11 +2,12 @@ package goonerd.devhub.adapters.out.project.project;
 
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import goonerd.devhub.adapters.in.common.pagination.PageCommand;
-import goonerd.devhub.adapters.out.project.position.PositionSlotEntity;
+import goonerd.devhub.adapters.out.project.position.entity.PositionSlotEntity;
 import goonerd.devhub.adapters.out.project.position.PositionSlotMapper;
 import goonerd.devhub.adapters.out.project.position.PositionSlotRepositoryJpa;
+import goonerd.devhub.adapters.out.project.project.entity.ProjectEntity;
 import goonerd.devhub.domain.project.Project;
-import goonerd.devhub.ports.out.ProjectRepository;
+import goonerd.devhub.ports.out.project.ProjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

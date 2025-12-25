@@ -1,4 +1,4 @@
-package goonerd.devhub.adapters.out.auth;
+package goonerd.devhub.adapters.out.auth.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

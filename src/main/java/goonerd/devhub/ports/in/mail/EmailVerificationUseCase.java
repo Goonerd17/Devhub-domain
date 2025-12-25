@@ -1,4 +1,4 @@
-package goonerd.devhub.ports.in;
+package goonerd.devhub.ports.in.mail;
 
 import goonerd.devhub.adapters.in.mail.command.ConfirmEmailVerificationCommand;
 import goonerd.devhub.adapters.in.mail.dto.EmailVerificationRequestDto;

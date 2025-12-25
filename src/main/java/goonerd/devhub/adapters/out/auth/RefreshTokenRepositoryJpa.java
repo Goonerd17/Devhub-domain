@@ -1,5 +1,6 @@
 package goonerd.devhub.adapters.out.auth;
 
+import goonerd.devhub.adapters.out.auth.entity.RefreshTokenEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

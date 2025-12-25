@@ -1,4 +1,4 @@
-package goonerd.devhub.ports.in;
+package goonerd.devhub.ports.in.project;
 
 import goonerd.devhub.adapters.in.project.command.CreateProjectCommand;
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;

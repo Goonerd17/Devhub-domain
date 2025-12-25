@@ -2,6 +2,7 @@ package goonerd.devhub.common.utils;
 
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.JwtStatusEnum;
+import goonerd.devhub.common.enums.TokenTypeEnum;
 import goonerd.devhub.common.exception.AuthRuleException;
 import goonerd.devhub.domain.user.UserRole;
 import io.jsonwebtoken.*;
@@ -75,6 +76,7 @@ public class JwtUtil {
         return Jwts.builder()
                         .setSubject(userId)
                         .claim(AUTHORIZATION_KEY, role)
+                        .claim("token_type", TokenTypeEnum.ACCESS.name())
                         .setExpiration(new Date(now.getTime() + ACCESS_TOKEN_TIME))
                         .setIssuedAt(now)
                         .signWith(key, signatureAlgorithm)
@@ -86,6 +88,7 @@ public class JwtUtil {
         Date now = new Date();
         return Jwts.builder()
                         .setSubject(userId)
+                        .claim("token_type", TokenTypeEnum.REFRESH.name())
                         .setExpiration(new Date(now.getTime() + REFRESH_TOKEN_TIME))
                         .setIssuedAt(now)
                         .signWith(key, signatureAlgorithm)
@@ -117,5 +120,14 @@ public class JwtUtil {
     // 토큰에서 사용자 정보 가져오기
     public Claims getUserInfo(String token) {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+    }
+
+    public String getUserIdFromRefreshToken(String refreshToken) {
+        Claims claims = getUserInfo(refreshToken);
+        TokenTypeEnum tokenTypeEnum = TokenTypeEnum.valueOf(claims.get("token_type", String.class));
+        if (tokenTypeEnum != TokenTypeEnum.REFRESH) {
+            throw AuthRuleException.of(ErrorCodeEnum.TOKEN_INVALID);
+        }
+        return claims.getSubject();
     }
 }

@@ -1,5 +1,6 @@
 package goonerd.devhub.adapters.out.project.project;
 
+import goonerd.devhub.adapters.out.project.project.entity.ProjectEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

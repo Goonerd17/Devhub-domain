@@ -3,6 +3,8 @@ package goonerd.devhub.adapters.out.project.project;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
+import goonerd.devhub.adapters.out.project.project.entity.ProjectEntity;
+import goonerd.devhub.adapters.out.project.project.entity.QProjectEntity;
 import goonerd.devhub.domain.project.ProjectProgressType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -13,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 
-import static goonerd.devhub.adapters.out.project.project.QProjectEntity.projectEntity;
+import static goonerd.devhub.adapters.out.project.project.entity.QProjectEntity.projectEntity;
 
 
 @Repository

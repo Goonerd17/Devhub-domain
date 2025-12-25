@@ -6,9 +6,9 @@ import goonerd.devhub.common.enums.JwtStatusEnum;
 import goonerd.devhub.common.exception.AuthRuleException;
 import goonerd.devhub.common.utils.JwtUtil;
 import goonerd.devhub.domain.user.User;
-import goonerd.devhub.ports.in.AuthUseCase;
-import goonerd.devhub.ports.out.AuthRepository;
-import goonerd.devhub.ports.out.UserRepository;
+import goonerd.devhub.ports.in.auth.AuthUseCase;
+import goonerd.devhub.ports.out.auth.AuthRepository;
+import goonerd.devhub.ports.out.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +33,7 @@ public class AuthService implements AuthUseCase {
             throw AuthRuleException.of(ErrorCodeEnum.REFRESH_TOKEN_INVALID);
         }
 
-        String userId = jwtUtil.getUserInfo(refreshToken).getSubject();
+        String userId = jwtUtil.getUserIdFromRefreshToken(refreshToken);
         User user = userRepository.findByUserId(userId)
                 .orElseThrow(() -> AuthRuleException.of(ErrorCodeEnum.USER_NOT_FOUND));
 

@@ -1,6 +1,6 @@
-package goonerd.devhub.adapters.out.project.position;
+package goonerd.devhub.adapters.out.project.position.entity;
 
-import goonerd.devhub.adapters.out.project.project.ProjectEntity;
+import goonerd.devhub.adapters.out.project.project.entity.ProjectEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

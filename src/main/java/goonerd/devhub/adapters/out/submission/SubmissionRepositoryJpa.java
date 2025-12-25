@@ -1,5 +1,6 @@
 package goonerd.devhub.adapters.out.submission;
 
+import goonerd.devhub.adapters.out.submission.entity.SubmissionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SubmissionRepositoryJpa extends JpaRepository<SubmissionEntity, String> {

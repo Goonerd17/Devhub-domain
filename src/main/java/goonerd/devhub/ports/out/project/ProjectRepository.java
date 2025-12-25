@@ -1,4 +1,4 @@
-package goonerd.devhub.ports.out;
+package goonerd.devhub.ports.out.project;
 
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import goonerd.devhub.adapters.in.common.pagination.PageCommand;

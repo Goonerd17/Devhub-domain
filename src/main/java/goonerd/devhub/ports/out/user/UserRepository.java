@@ -1,4 +1,4 @@
-package goonerd.devhub.ports.out;
+package goonerd.devhub.ports.out.user;
 
 import goonerd.devhub.domain.user.User;
 import goonerd.devhub.domain.user.UserRole;
