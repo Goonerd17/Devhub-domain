@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.UUID;
+
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
@@ -19,8 +21,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Table(name = "users")
 public class UserEntity extends BaseEntity {
 
-    @Id @GeneratedValue
-    @UuidGenerator @Column(length = 36, nullable = false, unique = true)
+    @Id @Column(length = 36, nullable = false, unique = true)
     private String userGuid;
 
     @Column(unique = true)
@@ -35,4 +36,11 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.userGuid == null) {
+            this.userGuid = UUID.randomUUID().toString().replace("-", "");
+        }
+    }
 }

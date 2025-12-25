@@ -1,12 +1,13 @@
-package goonerd.devhub.adapters.out.project.position.entity;
+package goonerd.devhub.adapters.out.position.entity;
 
-import goonerd.devhub.adapters.out.project.project.entity.ProjectEntity;
+import goonerd.devhub.adapters.out.project.entity.ProjectEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.UuidGenerator;
+
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -16,10 +17,7 @@ import org.hibernate.annotations.UuidGenerator;
 @Table(name = "project_position_slots")
 public class PositionSlotEntity {
 
-    @Id
-    @GeneratedValue
-    @UuidGenerator
-    @Column(length = 36, nullable = false, unique = true)
+    @Id @Column(length = 36, nullable = false, unique = true)
     private String positionSlotGuid;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -40,4 +38,11 @@ public class PositionSlotEntity {
     private String level;
 
     private int approvedCount;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.positionSlotGuid == null) {
+            this.positionSlotGuid = UUID.randomUUID().toString().replace("-", "");
+        }
+    }
 }

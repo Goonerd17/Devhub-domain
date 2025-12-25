@@ -13,7 +13,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/project/{projectGuid}/submission")
+@RequestMapping("/projects/{projectGuid}/submissions")
 @RequiredArgsConstructor
 public class SubmissionController {
 
@@ -40,14 +40,4 @@ public class SubmissionController {
                 )
         );
     }
-//
-//    @PostMapping("/{applicationId}/reject")
-//    public void reject(@PathVariable String applicationId) {
-//        applicationUseCase.reject(applicationId);
-//    }
-//
-//    @PostMapping("/{applicationId}/cancel")
-//    public void cancel(@PathVariable String applicationId) {
-//        applicationUseCase.cancel(applicationId);
-//    }
 }

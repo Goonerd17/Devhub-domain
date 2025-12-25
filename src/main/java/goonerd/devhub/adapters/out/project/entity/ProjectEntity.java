@@ -1,4 +1,4 @@
-package goonerd.devhub.adapters.out.project.project.entity;
+package goonerd.devhub.adapters.out.project.entity;
 
 import goonerd.devhub.adapters.out.common.BaseEntity;
 import goonerd.devhub.domain.project.ProjectProgressType;
@@ -9,10 +9,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -21,9 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ProjectEntity extends BaseEntity {
 
-    @Id @GeneratedValue
-    @UuidGenerator
-    @Column(length = 36, nullable = false, unique = true)
+    @Id @Column(length = 36, nullable = false, unique = true)
     private String projectGuid;
 
     private String authorId;
@@ -50,4 +48,11 @@ public class ProjectEntity extends BaseEntity {
     )
     @Column(name = "skill")
     private List<String> projectSkillList;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.projectGuid == null) {
+            this.projectGuid = UUID.randomUUID().toString().replace("-", "");
+        }
+    }
 }

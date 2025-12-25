@@ -1,11 +1,11 @@
-package goonerd.devhub.adapters.out.project.project;
+package goonerd.devhub.adapters.out.project;
 
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import goonerd.devhub.adapters.in.common.pagination.PageCommand;
-import goonerd.devhub.adapters.out.project.position.entity.PositionSlotEntity;
-import goonerd.devhub.adapters.out.project.position.PositionSlotMapper;
-import goonerd.devhub.adapters.out.project.position.PositionSlotRepositoryJpa;
-import goonerd.devhub.adapters.out.project.project.entity.ProjectEntity;
+import goonerd.devhub.adapters.out.position.entity.PositionSlotEntity;
+import goonerd.devhub.adapters.out.position.PositionSlotMapper;
+import goonerd.devhub.adapters.out.position.PositionSlotRepositoryJpa;
+import goonerd.devhub.adapters.out.project.entity.ProjectEntity;
 import goonerd.devhub.domain.project.Project;
 import goonerd.devhub.ports.out.project.ProjectRepository;
 import lombok.RequiredArgsConstructor;

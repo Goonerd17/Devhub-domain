@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -19,9 +20,7 @@ import java.time.LocalDateTime;
 @Table(name = "submissions")
 public class SubmissionEntity extends BaseEntity {
 
-    @Id @GeneratedValue
-    @UuidGenerator
-    @Column(name = "submission_guid", length = 36)
+    @Id @Column(name = "submission_guid", length = 36)
     private String submissionGuid;
 
     @Column(name = "project_guid", nullable = false)
@@ -48,4 +47,11 @@ public class SubmissionEntity extends BaseEntity {
 
     @Column(name = "submitted_at")
     private LocalDateTime submittedAt;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.submissionGuid == null) {
+            this.submissionGuid = UUID.randomUUID().toString().replace("-", "");
+        }
+    }
 }
