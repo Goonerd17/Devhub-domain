@@ -1,7 +1,7 @@
 package goonerd.devhub.adapters.in.auth;
 
 import goonerd.devhub.adapters.in.auth.dto.TokenResponseDto;
-import goonerd.devhub.adapters.in.vo.ApiResponseVo;
+import goonerd.devhub.adapters.in.common.vo.ApiResponseVo;
 import goonerd.devhub.application.auth.AuthService;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
 import lombok.RequiredArgsConstructor;

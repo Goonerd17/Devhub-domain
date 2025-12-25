@@ -1,7 +1,7 @@
 package goonerd.devhub.ports.out;
 
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
-import goonerd.devhub.adapters.in.vo.PageCommand;
+import goonerd.devhub.adapters.in.common.pagination.PageCommand;
 import goonerd.devhub.domain.project.Project;
 import org.springframework.data.domain.Page;
 

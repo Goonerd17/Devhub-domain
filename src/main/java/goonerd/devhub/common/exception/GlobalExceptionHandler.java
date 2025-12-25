@@ -1,6 +1,6 @@
 package goonerd.devhub.common.exception;
 
-import goonerd.devhub.adapters.in.vo.ApiResponseVo;
+import goonerd.devhub.adapters.in.common.vo.ApiResponseVo;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponseVo<?>> handleDomainException(DomainRuleException e) {
         logException(e);
         return ResponseEntity.badRequest()
-                .body(ApiResponseVo.failureWithoutParam(e.getErrorCodeEnum()));
+                .body(ApiResponseVo.failureWithoutData(e.getErrorCodeEnum()));
     }
 
     @ExceptionHandler(BusinessRuleException.class)
@@ -40,7 +40,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponseVo<?>> handleBusinessRuleException(BusinessRuleException e) {
         logException(e);
         return ResponseEntity.badRequest()
-                .body(ApiResponseVo.failureWithoutParam(e.getErrorCodeEnum()));
+                .body(ApiResponseVo.failureWithoutData(e.getErrorCodeEnum()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

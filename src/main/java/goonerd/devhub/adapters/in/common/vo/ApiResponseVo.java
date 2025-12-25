@@ -1,4 +1,4 @@
-package goonerd.devhub.adapters.in.vo;
+package goonerd.devhub.adapters.in.common.vo;
 
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Getter
 @Builder
@@ -19,49 +21,62 @@ public class ApiResponseVo <T> {
     private boolean success;
     @Schema(description = "응답 코드")
     private String code;
-    @Schema(description = "정상 응답 데이터")
+    @Schema(description = "단건 응답 데이터")
     private T data;
+    @Schema(description = "리스트 응답 데이터")
+    private List<T> dataList;
+    @Schema(description = "페이징 정보")
+    private PageVo pagination;
     @Schema(description = "에러 발생 시 상세 정보")
     private ErrorResponseVo error;
 
 
-    public static <T> ApiResponseVo<T> successWithData(SuccessCodeEnum codeEnum, T data) {
+    public static <T> ApiResponseVo<T> successWithData(SuccessCodeEnum successCodeEnum, T data) {
         return ApiResponseVo.<T>builder()
                 .success(true)
-                .code(codeEnum.getCode())
+                .code(successCodeEnum.getCode())
                 .data(data)
                 .build();
     }
 
-    public static ApiResponseVo<Void> successWithoutParamAndData(SuccessCodeEnum codeEnum) {
+    public static ApiResponseVo<Void> successWithoutData(SuccessCodeEnum successCodeEnum) {
         return ApiResponseVo.<Void>builder()
                 .success(true)
-                .code(codeEnum.getCode())
+                .code(successCodeEnum.getCode())
                 .build();
     }
 
-    public static <T> ApiResponseVo<T> failureWithData(ErrorCodeEnum errorCode, T data) {
+    public static <T> ApiResponseVo<T> successWithDataList(SuccessCodeEnum successCodeEnum, List<T> dataList, PageVo pageVo) {
+        return ApiResponseVo.<T>builder()
+                .success(true)
+                .code(successCodeEnum.getCode())
+                .dataList(dataList)
+                .pagination(pageVo)
+                .build();
+    }
+
+    public static <T> ApiResponseVo<T> failureWithData(ErrorCodeEnum errorCodeEnum, T data) {
         return ApiResponseVo.<T>builder()
                 .success(false)
-                .code(errorCode.getCode())
+                .code(errorCodeEnum.getCode())
                 .data(data)
-                .error(ErrorResponseVo.of(errorCode))
+                .error(ErrorResponseVo.of(errorCodeEnum))
                 .build();
     }
     
-    public static <T> ApiResponseVo<T> failureWithoutParam(ErrorCodeEnum errorCode) {
+    public static <T> ApiResponseVo<T> failureWithoutData(ErrorCodeEnum errorCodeEnum) {
         return ApiResponseVo.<T>builder()
                 .success(false)
-                .code(errorCode.getCode())
-                .error(ErrorResponseVo.of(errorCode))
+                .code(errorCodeEnum.getCode())
+                .error(ErrorResponseVo.of(errorCodeEnum))
                 .build();
     }
 
-    public static ApiResponseVo<?> failureWithMessage(ErrorCodeEnum errorCode, String message) {
+    public static ApiResponseVo<?> failureWithMessage(ErrorCodeEnum errorCodeEnum, String message) {
         return ApiResponseVo.builder()
                 .success(false)
-                .code(errorCode.getCode())
-                .error(new ErrorResponseVo(errorCode.getCode(), message))
+                .code(errorCodeEnum.getCode())
+                .error(new ErrorResponseVo(errorCodeEnum.getCode(), message))
                 .build();
     }
 

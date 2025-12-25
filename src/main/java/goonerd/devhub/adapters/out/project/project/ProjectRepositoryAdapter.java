@@ -1,7 +1,7 @@
 package goonerd.devhub.adapters.out.project.project;
 
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
-import goonerd.devhub.adapters.in.vo.PageCommand;
+import goonerd.devhub.adapters.in.common.pagination.PageCommand;
 import goonerd.devhub.adapters.out.project.position.PositionSlotEntity;
 import goonerd.devhub.adapters.out.project.position.PositionSlotMapper;
 import goonerd.devhub.adapters.out.project.position.PositionSlotRepositoryJpa;

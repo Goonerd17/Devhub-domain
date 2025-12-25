@@ -2,7 +2,7 @@ package goonerd.devhub.common.component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
-import goonerd.devhub.adapters.in.vo.ApiResponseVo;
+import goonerd.devhub.adapters.in.common.vo.ApiResponseVo;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,7 +28,7 @@ public class CustomFilterExceptionHandler {
             res.setContentType("application/json");
             res.setCharacterEncoding("UTF-8");
 
-            ApiResponseVo<?> result = ApiResponseVo.failureWithoutParam(errorCodeEnum);
+            ApiResponseVo<?> result = ApiResponseVo.failureWithoutData(errorCodeEnum);
             String json = mapper.writeValueAsString(result);
 
             res.getWriter().write(json);

@@ -1,18 +1,19 @@
-package goonerd.devhub.adapters.in.vo;
+package goonerd.devhub.adapters.in.common.pagination;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
-public class PageRequestVo {
+public class PageCommand {
+    private final int page;
+    private final int size;
 
-    private int page = 0;
-    private int size = 10;
+    public static PageCommand of(PageRequestDto vo) {
+        return new PageCommand(vo.getPage(), vo.getSize());
+    }
 
     public Pageable toPageable() {
         return PageRequest.of(page, size);

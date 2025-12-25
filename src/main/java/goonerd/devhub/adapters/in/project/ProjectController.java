@@ -5,13 +5,13 @@ import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import goonerd.devhub.adapters.in.project.dto.CreateProjectRequestDto;
 import goonerd.devhub.adapters.in.project.dto.ProjectResponseDto;
 import goonerd.devhub.adapters.in.project.dto.SearchProjectRequestDto;
-import goonerd.devhub.adapters.in.vo.ApiResponseVo;
-import goonerd.devhub.adapters.in.vo.PageCommand;
-import goonerd.devhub.adapters.in.vo.PageRequestVo;
-import goonerd.devhub.adapters.in.vo.PageVo;
+import goonerd.devhub.adapters.in.common.vo.ApiResponseVo;
+import goonerd.devhub.adapters.in.common.pagination.PageCommand;
+import goonerd.devhub.adapters.in.common.pagination.PageRequestDto;
+import goonerd.devhub.adapters.in.common.vo.PageVo;
 import goonerd.devhub.application.project.ProjectWithStatus;
 import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
-import goonerd.devhub.common.converter.PageConverter;
+import goonerd.devhub.adapters.in.common.pagination.PageConverter;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
 import goonerd.devhub.domain.project.Project;
 import goonerd.devhub.ports.in.ProjectUseCase;
@@ -28,6 +28,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/project")
 @RequiredArgsConstructor
@@ -42,16 +44,14 @@ public class ProjectController {
             security = {@SecurityRequirement(name = "BearerAuth")}
     )
     @GetMapping()
-    public ResponseEntity<ApiResponseVo<PageVo<ProjectResponseDto>>> listProject(@RequestBody SearchProjectRequestDto searchProjectRequestDto, PageRequestVo pageRequestVo) {
+    public ResponseEntity<ApiResponseVo<ProjectResponseDto>> listProject(@RequestBody SearchProjectRequestDto searchProjectRequestDto, PageRequestDto pageRequestDto) {
         SearchProjectCommand searchProjectCommand = SearchProjectCommand.fromProjectSearchRequestDto(searchProjectRequestDto);
-        PageCommand pageCommand = PageCommand.of(pageRequestVo);
+        PageCommand pageCommand = PageCommand.of(pageRequestDto);
+
         Page<ProjectWithStatus> projectWithStatusPage = projectUseCase.listProject(searchProjectCommand, pageCommand);
-        return ResponseEntity.ok(
-                ApiResponseVo.successWithData(
-                        SuccessCodeEnum.READ_SUCCESS,
-                        PageConverter.convert(projectWithStatusPage, ProjectResponseDto::fromDomainReadModel)
-                )
-        );
+        List<ProjectResponseDto> dataList = PageConverter.toList(projectWithStatusPage, ProjectResponseDto::fromDomainReadModel);
+        PageVo pageVo = PageConverter.toPageVo(projectWithStatusPage);
+        return ResponseEntity.ok(ApiResponseVo.successWithDataList(SuccessCodeEnum.READ_SUCCESS, dataList, pageVo));
     }
 
     @Operation(

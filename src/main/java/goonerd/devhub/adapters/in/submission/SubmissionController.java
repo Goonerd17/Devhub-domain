@@ -3,7 +3,7 @@ package goonerd.devhub.adapters.in.submission;
 import goonerd.devhub.adapters.in.submission.command.SubmissionCommand;
 import goonerd.devhub.adapters.in.submission.dto.SubmissionRequestDto;
 import goonerd.devhub.adapters.in.submission.dto.SubmissionResponseDto;
-import goonerd.devhub.adapters.in.vo.ApiResponseVo;
+import goonerd.devhub.adapters.in.common.vo.ApiResponseVo;
 import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
 import goonerd.devhub.ports.in.SubmissionUseCase;

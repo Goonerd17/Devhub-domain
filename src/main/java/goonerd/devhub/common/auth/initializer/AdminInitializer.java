@@ -1,7 +1,7 @@
 package goonerd.devhub.common.auth.initializer;
 
 import goonerd.devhub.domain.user.UserRole;
-import goonerd.devhub.application.user.UserService;
+import goonerd.devhub.ports.in.UserUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -12,13 +12,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class AdminInitializer implements CommandLineRunner {
 
-    private final UserService userService;
+    private final UserUseCase userUseCase;
 
     @Override
     public void run(String... args) {
-        boolean existAdmin = userService.existsByRole(UserRole.ADMIN);
+        boolean existAdmin = userUseCase.existsByRole(UserRole.ADMIN);
         if (!existAdmin) {
-            userService.createAdminUser("admin@admin.co.kr", "admin", "admin1234!");
+            userUseCase.createAdminUser("admin@admin.co.kr", "admin", "admin1234!");
             log.info("기본 ADMIN 계정 생성됨 - ID : admin@admin.co.kr / PW : admin1234!");
         }
     }

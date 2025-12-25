@@ -1,0 +1,11 @@
+package goonerd.devhub.ports.out;
+
+import java.time.Duration;
+
+public interface EmailVerificationCodeRepository {
+    void save(String email, String code, Duration ttl);
+    boolean existsValidCode(String email);
+    boolean verify(String email, String code);
+    boolean isVerified(String email);
+    void delete(String email);
+}

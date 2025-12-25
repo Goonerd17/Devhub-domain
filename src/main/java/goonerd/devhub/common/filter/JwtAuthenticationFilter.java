@@ -2,7 +2,7 @@ package goonerd.devhub.common.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import goonerd.devhub.adapters.in.user.dto.LoginUserRequestDto;
-import goonerd.devhub.adapters.in.vo.ApiResponseVo;
+import goonerd.devhub.adapters.in.common.vo.ApiResponseVo;
 import goonerd.devhub.application.auth.RefreshTokenService;
 import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
@@ -81,7 +81,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException {
-        ApiResponseVo<?> apiResponse = ApiResponseVo.failureWithoutParam(ErrorCodeEnum.LOGIN_FAIL);
+        ApiResponseVo<?> apiResponse = ApiResponseVo.failureWithoutData(ErrorCodeEnum.LOGIN_FAIL);
         String jsonResponse = objectMapper.writeValueAsString(apiResponse);
 
         response.setContentType("application/json");
