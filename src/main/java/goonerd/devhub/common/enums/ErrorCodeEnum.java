@@ -27,7 +27,9 @@ public enum ErrorCodeEnum {
     SIGNUP_FAIL("ERR.DVH.0019", "회원가입에 실패했습니다.", BAD_REQUEST),
     LOGIN_FAIL("ERR.DVH.0020", "로그인에 실패했습니다.", BAD_REQUEST),
     DUPLICATE_USERID("ERR.DVH.0021", "중복된 ID를 사용할 수는 없습니다.", BAD_REQUEST),
-    EMAIL_NOT_VERIFIED("ERR.DVH.0022", "E-mail 인증이 완료되지 않았습니다.", BAD_REQUEST),
+    EMAIL_VERIFICATION_CODE_ALREADY_SENT("ERR.DVH.0022", "인증 코드가 이미 발송되었습니다. 잠시 후 재시도해주세요.", BAD_REQUEST),
+    EMAIL_NOT_VERIFIED("ERR.DVH.0023", "E-mail 인증에 실패했습니다.", BAD_REQUEST),
+    EMAIL_VERIFICATION_CODE_INVALID("ERR.DVH.0024", "E-mail 인증코드가 일치하지 않습니다.", BAD_REQUEST),
 
     USER_ID_FAIL("ERR.DVH.0030", "사용자 ID 값이 잘못되었습니다.",BAD_REQUEST),
     USER_PASSWORD_FAIL("ERR.DVH.0031", "사용자 비밀번호 값이 잘못되었습니다.",BAD_REQUEST),

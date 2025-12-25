@@ -25,7 +25,7 @@ public class EmailService implements EmailVerificationUseCase {
     public void requestEmailVerificationCode(EmailVerificationRequestDto emailVerificationRequestDto) {
         String email = emailVerificationRequestDto.getEmail();
         if (emailVerificationRepository.existsValidCode(email)) {
-            throw AuthRuleException.of(ErrorCodeEnum.UNKNOWN_FAIL);
+            throw AuthRuleException.of(ErrorCodeEnum.EMAIL_VERIFICATION_CODE_ALREADY_SENT);
         }
 
         String code = EmailAuthCodeUtil.generateEmailAuthCode();
@@ -37,7 +37,7 @@ public class EmailService implements EmailVerificationUseCase {
     public void verifyEmailVerificationCode(ConfirmEmailVerificationCommand confirmEmailVerificationCommand) {
         boolean verified = emailVerificationRepository.verify(confirmEmailVerificationCommand.getEmail(), confirmEmailVerificationCommand.getCode());
         if (!verified) {
-            throw AuthRuleException.of(ErrorCodeEnum.UNKNOWN_FAIL);
+            throw AuthRuleException.of(ErrorCodeEnum.EMAIL_NOT_VERIFIED);
         }
     }
 
