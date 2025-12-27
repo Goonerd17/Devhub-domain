@@ -1,4 +1,4 @@
-package goonerd.devhub.adapters.in.mail.command;
+package goonerd.devhub.adapters.in.auth.command;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

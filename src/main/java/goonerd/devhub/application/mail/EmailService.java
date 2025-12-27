@@ -1,7 +1,7 @@
 package goonerd.devhub.application.mail;
 
-import goonerd.devhub.adapters.in.mail.command.ConfirmEmailVerificationCommand;
-import goonerd.devhub.adapters.in.mail.dto.EmailVerificationRequestDto;
+import goonerd.devhub.adapters.in.auth.command.ConfirmEmailVerificationCommand;
+import goonerd.devhub.adapters.in.auth.dto.EmailVerificationRequestDto;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.exception.AuthRuleException;
 import goonerd.devhub.common.utils.EmailVerificationCodeUtil;

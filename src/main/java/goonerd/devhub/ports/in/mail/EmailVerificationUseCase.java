@@ -1,7 +1,7 @@
 package goonerd.devhub.ports.in.mail;
 
-import goonerd.devhub.adapters.in.mail.command.ConfirmEmailVerificationCommand;
-import goonerd.devhub.adapters.in.mail.dto.EmailVerificationRequestDto;
+import goonerd.devhub.adapters.in.auth.command.ConfirmEmailVerificationCommand;
+import goonerd.devhub.adapters.in.auth.dto.EmailVerificationRequestDto;
 
 public interface EmailVerificationUseCase {
     void requestEmailVerificationCode(EmailVerificationRequestDto emailVerificationRequestDto);
