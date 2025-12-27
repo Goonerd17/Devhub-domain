@@ -18,6 +18,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "project")
 public class ProjectEntity extends BaseEntity {
 
     @Id @Column(length = 36, nullable = false, unique = true)

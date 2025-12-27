@@ -9,6 +9,7 @@ import goonerd.devhub.ports.in.mail.EmailVerificationUseCase;
 import goonerd.devhub.ports.out.mail.EmailVerificationCodeRepository;
 import goonerd.devhub.ports.out.mail.EmailSendPort;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.time.Duration;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class EmailService implements EmailVerificationUseCase {
 
     private final EmailSendPort emailSendPort;

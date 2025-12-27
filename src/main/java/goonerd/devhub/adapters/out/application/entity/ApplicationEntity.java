@@ -16,7 +16,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "applications")
+@Table(name = "application")
 public class ApplicationEntity extends BaseEntity {
 
     @Id @Column(name = "application_guid", length = 36)

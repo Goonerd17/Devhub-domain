@@ -21,8 +21,8 @@ public class CreateProjectCommand {
     private ProgressType progressType;
     private LocalDate startDate;
     private LocalDate endDate;
-    private List<CreateProjectPositionCommand> positions;
-    private List<String> skills;
+    private List<CreateProjectPositionCommand> positionList;
+    private List<String> skillList;
     private int recruitCount;
 
     public static CreateProjectCommand fromCreateProjectRequestDto(CreateProjectRequestDto createProjectRequestDto, String userGuid) {
@@ -35,12 +35,12 @@ public class CreateProjectCommand {
                 .progressType(parseProgressType(createProjectRequestDto.getProgressType()))
                 .startDate(createProjectRequestDto.getStartDate())
                 .endDate(createProjectRequestDto.getEndDate())
-                .positions(
-                        createProjectRequestDto.getPositionRequestDtoList().stream()
+                .positionList(
+                        createProjectRequestDto.getPositionList().stream()
                                 .map(CreateProjectPositionCommand::fromCreateProjectRequestDto)
                                 .toList()
                 )
-                .skills(createProjectRequestDto.getSkills())
+                .skillList(createProjectRequestDto.getSkillList())
                 .build();
     }
 

@@ -103,8 +103,6 @@ public class WebSecurityConfig {
                                         "/webjars/**"
                                 ).permitAll()
                                 .requestMatchers("/h2-console/**").permitAll()
-                                .requestMatchers("/email-verifications").permitAll()
-                                .requestMatchers("/email-verifications/**").permitAll()
                                 .requestMatchers("/user/signup").permitAll()
                                 .requestMatchers("/auth/**").permitAll()
                                 .anyRequest().authenticated()

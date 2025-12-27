@@ -9,7 +9,7 @@ public class PositionMapper {
     public static PositionEntity toEntity(ProjectEntity projectEntity, Position position) {
         return PositionEntity.builder()
                 .positionGuid(position.getPositionGuid())
-                .projectGuid(projectEntity.getProjectGuid())
+                .projectId(projectEntity.getProjectGuid())
                 .positionName(position.getPositionName())
                 .capacity(position.getCapacity())
                 .level(position.getLevel())
@@ -21,7 +21,7 @@ public class PositionMapper {
     public static Position toDomain(PositionEntity positionEntity) {
         return Position.createPosition(
                 positionEntity.getPositionGuid(),
-                positionEntity.getProjectGuid(),
+                positionEntity.getProjectId(),
                 positionEntity.getPositionName(),
                 positionEntity.getCapacity(),
                 positionEntity.getLevel()

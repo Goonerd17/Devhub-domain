@@ -42,11 +42,11 @@ public class CreateProjectRequestDto {
 
     @NotNull
     @Schema(description = "모집 포지션 목록")
-    private List<CreateProjectPositionRequestDto> positionRequestDtoList;
+    private List<CreateProjectPositionRequestDto> positionList;
 
     @NotNull
     @Schema(description = "사용 기술 목록")
-    private List<String> skills;
+    private List<String> skillList;
 
     @NotNull
     @FutureOrPresent

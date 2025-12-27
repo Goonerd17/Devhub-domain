@@ -12,14 +12,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "project_position")
+@Table(name = "position")
 public class PositionEntity {
 
     @Id @Column(length = 36, nullable = false, unique = true)
     private String positionGuid;
 
     @Column(nullable = false)
-    private String projectGuid;
+    private String projectId;
 
     @Column(nullable = false)
     private String positionName;

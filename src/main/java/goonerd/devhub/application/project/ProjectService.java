@@ -8,6 +8,7 @@ import goonerd.devhub.domain.project.Project;
 import goonerd.devhub.ports.in.project.ProjectUseCase;
 import goonerd.devhub.ports.out.common.IdentifierGeneratorPort;
 import goonerd.devhub.ports.out.project.ProjectRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ProjectService implements ProjectUseCase {
 
     private final ProjectRepository projectRepository;
@@ -37,13 +39,13 @@ public class ProjectService implements ProjectUseCase {
 
         String projectGuid = identifierGeneratorPort.generate();
 
-        List<Position> positionList = createProjectCommand.getPositions().stream()
-                        .map(p -> Position.createPosition(
+        List<Position> positionList = createProjectCommand.getPositionList().stream()
+                        .map(positionCommand -> Position.createPosition(
                                 identifierGeneratorPort.generate(),
                                 projectGuid,
-                                p.getPositionName(),
-                                p.getCapacity(),
-                                p.getLevel()))
+                                positionCommand.getPositionName(),
+                                positionCommand.getCapacity(),
+                                positionCommand.getLevel()))
                         .toList();
 
         Project project = Project.createNew(
@@ -57,7 +59,7 @@ public class ProjectService implements ProjectUseCase {
                 createProjectCommand.getStartDate(),
                 createProjectCommand.getEndDate(),
                 positionList,
-                createProjectCommand.getSkills(),
+                createProjectCommand.getSkillList(),
                 createProjectCommand.getRecruitCount()
         );
         return projectRepository.save(project);

@@ -9,11 +9,13 @@ import goonerd.devhub.ports.in.auth.AuthUseCase;
 import goonerd.devhub.ports.out.auth.AuthRepository;
 import goonerd.devhub.ports.out.common.AuthTokenPort;
 import goonerd.devhub.ports.out.user.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class AuthService implements AuthUseCase {
 
     private final AuthTokenPort authTokenPort;
