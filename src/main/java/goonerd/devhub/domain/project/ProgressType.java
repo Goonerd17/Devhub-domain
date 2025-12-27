@@ -5,18 +5,18 @@ import goonerd.devhub.common.exception.DomainRuleException;
 
 import java.util.Arrays;
 
-public enum ProjectProgressType {
+public enum ProgressType {
     ONLINE("online"),
     OFFLINE("offline"),
     HYBRID("hybrid");
 
     private final String value;
 
-    ProjectProgressType(String value) {
+    ProgressType(String value) {
         this.value = value;
     }
 
-    public static ProjectProgressType from(String value) {
+    public static ProgressType from(String value) {
         if (value == null || value.isBlank()) {
             throw DomainRuleException.of(ErrorCodeEnum.PROJECT_PROGRESS_FAIL);
         }

@@ -13,7 +13,7 @@ public class CreateProjectPositionRequestDto {
 
     @NotBlank
     @Schema(description = "포지션명", example = "BACKEND")
-    private String position;
+    private String positionName;
 
     @Positive
     @Schema(description = "모집 인원", example = "2")

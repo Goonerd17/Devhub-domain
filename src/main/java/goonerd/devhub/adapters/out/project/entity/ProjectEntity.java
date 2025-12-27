@@ -1,7 +1,7 @@
 package goonerd.devhub.adapters.out.project.entity;
 
 import goonerd.devhub.adapters.out.common.BaseEntity;
-import goonerd.devhub.domain.project.ProjectProgressType;
+import goonerd.devhub.domain.project.ProgressType;
 import goonerd.devhub.domain.project.RecruitmentType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,6 @@ import org.hibernate.annotations.BatchSize;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -24,19 +23,17 @@ public class ProjectEntity extends BaseEntity {
     @Id @Column(length = 36, nullable = false, unique = true)
     private String projectGuid;
 
-    private String authorId;
+    private String authorGuid;
     private String authorName;
+
     private String title;
-    private String description;
+    private String content;
 
     @Enumerated(EnumType.STRING)
     private RecruitmentType recruitmentType;
-
     @Enumerated(EnumType.STRING)
-    private ProjectProgressType projectProgressType;
+    private ProgressType progressType;
 
-    private int recruitCount;
-    private int likes;
     private LocalDate startDate;
     private LocalDate endDate;
 
@@ -47,12 +44,8 @@ public class ProjectEntity extends BaseEntity {
             joinColumns = @JoinColumn(name = "project_guid")
     )
     @Column(name = "skill")
-    private List<String> projectSkillList;
+    private List<String> skillList;
 
-    @PrePersist
-    public void prePersist() {
-        if (this.projectGuid == null) {
-            this.projectGuid = UUID.randomUUID().toString().replace("-", "");
-        }
-    }
+    private int recruitCount;
+    private int likes;
 }

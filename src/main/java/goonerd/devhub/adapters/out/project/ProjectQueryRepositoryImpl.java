@@ -5,7 +5,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import goonerd.devhub.adapters.out.project.entity.ProjectEntity;
 import goonerd.devhub.adapters.out.project.entity.QProjectEntity;
-import goonerd.devhub.domain.project.ProjectProgressType;
+import goonerd.devhub.domain.project.ProgressType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -38,7 +38,7 @@ public class ProjectQueryRepositoryImpl implements ProjectQueryRepository {
                                 searchProjectCommand.getEndDateFrom(),
                                 searchProjectCommand.getEndDateTo()
                         ),
-                        hasProgressType(searchProjectCommand.getProjectProgressType())
+                        hasProgressType(searchProjectCommand.getProgressType())
                 )
                 .orderBy(projectEntity.createdAt.asc())
                 .offset(pageable.getOffset())
@@ -52,7 +52,7 @@ public class ProjectQueryRepositoryImpl implements ProjectQueryRepository {
                         keywordContains(searchProjectCommand.getKeyword()),
                         startDateBetween(searchProjectCommand.getStartDateFrom(), searchProjectCommand.getStartDateTo()),
                         endDateBetween(searchProjectCommand.getEndDateFrom(), searchProjectCommand.getEndDateTo()),
-                        hasProgressType(searchProjectCommand.getProjectProgressType())
+                        hasProgressType(searchProjectCommand.getProgressType())
                 )
                 .fetchOne();
 
@@ -69,7 +69,7 @@ public class ProjectQueryRepositoryImpl implements ProjectQueryRepository {
         }
         QProjectEntity project = projectEntity;
         return project.title.containsIgnoreCase(keyword)
-                .or(project.description.containsIgnoreCase(keyword));
+                .or(project.content.containsIgnoreCase(keyword));
     }
 
     private BooleanExpression startDateBetween(
@@ -106,10 +106,10 @@ public class ProjectQueryRepositoryImpl implements ProjectQueryRepository {
         return null;
     }
 
-    private BooleanExpression hasProgressType(ProjectProgressType type) {
+    private BooleanExpression hasProgressType(ProgressType type) {
         if (type == null) {
             return null;
         }
-        return projectEntity.projectProgressType.eq(type);
+        return projectEntity.progressType.eq(type);
     }
 }

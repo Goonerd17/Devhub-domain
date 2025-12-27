@@ -18,7 +18,7 @@ public class ApplicationResponseDto {
     private String applicantGuid;
     private String applicantEmail;
     private String applicantName;
-    private String position;
+    private String positionName;
     private String proficiency;
     private String status;
     private LocalDateTime appliedAt;
@@ -38,9 +38,9 @@ public class ApplicationResponseDto {
                 .applicantGuid(application.getApplicantGuid())
                 .applicantEmail(application.getApplicantEmail())
                 .applicantName(application.getApplicantName())
-                .position(application.getPosition())
+                .positionName(application.getPositionName())
                 .proficiency(application.getSkillLevel())
-                .status(application.getSubmissionStatus().name())
+                .status(application.getApplicationStatus().name())
                 .appliedAt(application.getSubmittedAt())
                 .createdAt(application.getAuditInfo().getCreatedAt())
                 .modifiedAt(application.getAuditInfo().getModifiedAt())

@@ -16,7 +16,7 @@ public class Application {
     private String applicantName;
 
     private String motivation;
-    private String position;
+    private String positionName;
     private String skillLevel;
 
     private ApplicationStatus applicationStatus;
@@ -30,7 +30,7 @@ public class Application {
             String applicantEmail,
             String applicantName,
             String motivation,
-            String position,
+            String positionName,
             String skillLevel,
             ApplicationStatus applicationStatus,
             LocalDateTime submittedAt,
@@ -47,7 +47,7 @@ public class Application {
         this.applicantEmail = applicantEmail;
         this.applicantName = applicantName;
         this.motivation = motivation;
-        this.position = position;
+        this.positionName = positionName;
         this.skillLevel = skillLevel;
         this.applicationStatus = applicationStatus;
 
@@ -132,13 +132,13 @@ public class Application {
     public String getApplicantEmail() { return applicantEmail; }
     public String getApplicantName() { return applicantName; }
     public String getMotivation() { return motivation; }
-    public String getPosition() {
-        return position;
+    public String getPositionName() {
+        return positionName;
     }
     public String getSkillLevel() {
         return skillLevel;
     }
-    public ApplicationStatus getSubmissionStatus() { return applicationStatus; }
+    public ApplicationStatus getApplicationStatus() { return applicationStatus; }
     public LocalDateTime getSubmittedAt() { return submittedAt; }
     public AuditInfo getAuditInfo() { return auditInfo; }
 }

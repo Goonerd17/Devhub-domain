@@ -1,7 +1,7 @@
 package goonerd.devhub.adapters.in.project.command;
 
 import goonerd.devhub.adapters.in.project.dto.CreateProjectRequestDto;
-import goonerd.devhub.domain.project.ProjectProgressType;
+import goonerd.devhub.domain.project.ProgressType;
 import goonerd.devhub.domain.project.RecruitmentType;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,30 +13,30 @@ import java.util.List;
 @Builder
 public class CreateProjectCommand {
 
-    private String authorId;
+    private String authorGuid;
     private String authorName;
     private String title;
-    private String description;
+    private String content;
     private RecruitmentType recruitmentType;
-    private ProjectProgressType projectProgressType;
-    private int recruitCount;
+    private ProgressType progressType;
     private LocalDate startDate;
     private LocalDate endDate;
     private List<CreateProjectPositionCommand> positions;
     private List<String> skills;
+    private int recruitCount;
 
-    public static CreateProjectCommand fromCreateProjectRequestDto(CreateProjectRequestDto createProjectRequestDto, String userId) {
+    public static CreateProjectCommand fromCreateProjectRequestDto(CreateProjectRequestDto createProjectRequestDto, String userGuid) {
         return CreateProjectCommand.builder()
-                .authorId(userId)
+                .authorGuid(userGuid)
                 .authorName(createProjectRequestDto.getAuthorName())
                 .title(createProjectRequestDto.getTitle())
-                .description(createProjectRequestDto.getDescription())
+                .content(createProjectRequestDto.getContent())
                 .recruitmentType(parseRecruitmentType(createProjectRequestDto.getRecruitmentType()))
-                .projectProgressType(parseProgressType(createProjectRequestDto.getProjectProgressType()))
+                .progressType(parseProgressType(createProjectRequestDto.getProgressType()))
                 .startDate(createProjectRequestDto.getStartDate())
                 .endDate(createProjectRequestDto.getEndDate())
                 .positions(
-                        createProjectRequestDto.getPositions().stream()
+                        createProjectRequestDto.getPositionRequestDtoList().stream()
                                 .map(CreateProjectPositionCommand::fromCreateProjectRequestDto)
                                 .toList()
                 )
@@ -55,10 +55,10 @@ public class CreateProjectCommand {
         }
     }
 
-    private static ProjectProgressType parseProgressType(String value) {
+    private static ProgressType parseProgressType(String value) {
         if (value == null || value.isBlank()) {
             throw new IllegalArgumentException("프로젝트 진행 방식은 필수입니다.");
         }
-        return ProjectProgressType.from(value);
+        return ProgressType.from(value);
     }
 }

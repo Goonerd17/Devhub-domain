@@ -2,9 +2,9 @@ package goonerd.devhub.adapters.out.project;
 
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import goonerd.devhub.adapters.in.common.pagination.PageCommand;
-import goonerd.devhub.adapters.out.position.entity.PositionSlotEntity;
-import goonerd.devhub.adapters.out.position.PositionSlotMapper;
-import goonerd.devhub.adapters.out.position.PositionSlotRepositoryJpa;
+import goonerd.devhub.adapters.out.position.entity.PositionEntity;
+import goonerd.devhub.adapters.out.position.PositionMapper;
+import goonerd.devhub.adapters.out.position.PositionRepositoryJpa;
 import goonerd.devhub.adapters.out.project.entity.ProjectEntity;
 import goonerd.devhub.domain.project.Project;
 import goonerd.devhub.ports.out.project.ProjectRepository;
@@ -25,7 +25,7 @@ public class ProjectRepositoryAdapter implements ProjectRepository {
 
     private final ProjectRepositoryJpa projectRepositoryJpa;
     private final ProjectQueryRepository projectQueryRepository;
-    private final PositionSlotRepositoryJpa positionSlotRepositoryJpa;
+    private final PositionRepositoryJpa positionRepositoryJpa;
 
     @Override
     public Page<Project> listProject(SearchProjectCommand searchProjectCommand, PageCommand pageCommand) {
@@ -40,18 +40,18 @@ public class ProjectRepositoryAdapter implements ProjectRepository {
         List<String> projectGuids = projectEntitiyList.stream()
                 .map(ProjectEntity::getProjectGuid)
                 .toList();
-        List<PositionSlotEntity> slotEntities =
-                positionSlotRepositoryJpa.findByProjectEntity_ProjectGuidIn(projectGuids);
-        Map<String, List<PositionSlotEntity>> slotEntityMap =
-                slotEntities.stream()
+        List<PositionEntity> positionEntityList =
+                positionRepositoryJpa.findByProjectEntity_ProjectGuidIn(projectGuids);
+        Map<String, List<PositionEntity>> positionEntityMap =
+                positionEntityList.stream()
                         .collect(Collectors.groupingBy(
-                                slot -> slot.getProjectEntity().getProjectGuid()
+                                positionEntity -> positionEntity.getProjectEntity().getProjectGuid()
                         ));
         List<Project> projects = projectEntitiyList.stream()
                 .map(projectEntity ->
                         ProjectMapper.toDomain(
                                 projectEntity,
-                                slotEntityMap.getOrDefault(
+                                positionEntityMap.getOrDefault(
                                         projectEntity.getProjectGuid(),
                                         List.of()
                                 )
@@ -70,22 +70,22 @@ public class ProjectRepositoryAdapter implements ProjectRepository {
     public Project save(Project project) {
         ProjectEntity savedProjectEntity = projectRepositoryJpa.save(ProjectMapper.toEntity(project));
 
-        List<PositionSlotEntity> positionSlotEntityList = project.getPositionSlots().stream()
-                .map(positionSlot -> PositionSlotMapper.toEntity(savedProjectEntity, positionSlot))
+        List<PositionEntity> positionEntityList = project.getPositionList().stream()
+                .map(position -> PositionMapper.toEntity(savedProjectEntity, position))
                 .toList();
 
-        List<PositionSlotEntity> savedPositionSlotEntityList = positionSlotRepositoryJpa.saveAll(positionSlotEntityList);
-        return ProjectMapper.toDomain(savedProjectEntity, savedPositionSlotEntityList);
+        List<PositionEntity> savedPositionEntityList = positionRepositoryJpa.saveAll(positionEntityList);
+        return ProjectMapper.toDomain(savedProjectEntity, savedPositionEntityList);
     }
 
     @Override
     public Optional<Project> findByProjectGuId(String projectGuid) {
         return projectRepositoryJpa.findByProjectGuid(projectGuid)
                 .map(savedProjectEntity -> {
-                    List<PositionSlotEntity> positionSlotEntityList = positionSlotRepositoryJpa.findByProjectEntity_ProjectGuid(savedProjectEntity.getProjectGuid())
+                    List<PositionEntity> positionEntityList = positionRepositoryJpa.findByProjectEntity_ProjectGuid(savedProjectEntity.getProjectGuid())
                             .stream()
                             .toList();
-                    return ProjectMapper.toDomain(savedProjectEntity, positionSlotEntityList);
+                    return ProjectMapper.toDomain(savedProjectEntity, positionEntityList);
                 });
     }
 }

@@ -35,7 +35,7 @@ public class ApplicationService implements ApplicationUseCase {
                 applyApplicationCommand.getApplicantEmail(),
                 applyApplicationCommand.getApplicantName(),
                 applyApplicationCommand.getMotivation(),
-                applyApplicationCommand.getPosition(),
+                applyApplicationCommand.getPositionName(),
                 applyApplicationCommand.getSkillLevel()
         );
 

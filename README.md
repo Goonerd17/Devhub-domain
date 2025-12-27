@@ -187,14 +187,14 @@
   "title": "AI 기반 프로젝트 매칭 플랫폼 개발",
   "description": "사용자의 기술 스택을 기반으로 프로젝트를 자동 추천하는 플랫폼을 개발합니다.",
   "recruitmentType": "EXTRA",
-  "projectProgressType": "ONLINE",
+  "progressType": "ONLINE",
   "recruitCount": 5,
   "positions": [
-    {"position": "BACKEND", "proficiency": "JUNIOR", "capacity": 2},
-    {"position": "FRONTEND", "proficiency": "JUNIOR", "capacity": 2},
-    {"position": "DESIGNER", "proficiency": "JUNIOR", "capacity": 1}
+    {"positionName": "BACKEND", "proficiency": "JUNIOR", "capacity": 2},
+    {"positionName": "FRONTEND", "proficiency": "JUNIOR", "capacity": 2},
+    {"positionName": "DESIGNER", "proficiency": "JUNIOR", "capacity": 1}
   ],
-  "skills": ["Java", "Spring Boot", "React", "Figma"],
+  "skillList": ["Java", "Spring Boot", "React", "Figma"],
   "startDate": "2025-12-15",
   "endDate": "2025-12-20"
 }

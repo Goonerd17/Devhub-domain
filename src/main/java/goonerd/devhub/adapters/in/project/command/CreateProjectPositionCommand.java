@@ -8,13 +8,13 @@ import lombok.Getter;
 @AllArgsConstructor
 public class CreateProjectPositionCommand {
 
-    private String position;
+    private String positionName;
     private int capacity;
     private String level;
 
     public static CreateProjectPositionCommand fromCreateProjectRequestDto(CreateProjectPositionRequestDto createProjectPositionRequestDto) {
         return new CreateProjectPositionCommand(
-                createProjectPositionRequestDto.getPosition(),
+                createProjectPositionRequestDto.getPositionName(),
                 createProjectPositionRequestDto.getCapacity(),
                 createProjectPositionRequestDto.getLevel()
         );

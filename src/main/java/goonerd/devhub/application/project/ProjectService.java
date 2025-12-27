@@ -3,9 +3,10 @@ package goonerd.devhub.application.project;
 import goonerd.devhub.adapters.in.project.command.CreateProjectCommand;
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import goonerd.devhub.adapters.in.common.pagination.PageCommand;
-import goonerd.devhub.domain.project.PositionSlot;
+import goonerd.devhub.domain.position.Position;
 import goonerd.devhub.domain.project.Project;
 import goonerd.devhub.ports.in.project.ProjectUseCase;
+import goonerd.devhub.ports.out.common.IdentifierGeneratorPort;
 import goonerd.devhub.ports.out.project.ProjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ import java.util.List;
 public class ProjectService implements ProjectUseCase {
 
     private final ProjectRepository projectRepository;
+    private final IdentifierGeneratorPort identifierGeneratorPort;
 
     public Page<ProjectWithStatus> listProject(SearchProjectCommand searchProjectCommand, PageCommand pageCommand) {
         LocalDate currentLocalDate = LocalDate.now();
@@ -33,27 +35,31 @@ public class ProjectService implements ProjectUseCase {
 
     public Project createProject(CreateProjectCommand createProjectCommand) {
 
-        List<PositionSlot> positionSlotList = createProjectCommand.getPositions().stream()
-                        .map(p -> PositionSlot.createPositionSlot(
-                                p.getPosition(),
+        String projectGuid = identifierGeneratorPort.generate();
+
+        List<Position> positionList = createProjectCommand.getPositions().stream()
+                        .map(p -> Position.createPosition(
+                                identifierGeneratorPort.generate(),
+                                projectGuid,
+                                p.getPositionName(),
                                 p.getCapacity(),
                                 p.getLevel()))
                         .toList();
 
         Project project = Project.createNew(
-                createProjectCommand.getAuthorId(),
+                projectGuid,
+                createProjectCommand.getAuthorGuid(),
                 createProjectCommand.getAuthorName(),
                 createProjectCommand.getTitle(),
-                createProjectCommand.getDescription(),
-                createProjectCommand.getRecruitCount(),
+                createProjectCommand.getContent(),
                 createProjectCommand.getRecruitmentType(),
-                createProjectCommand.getProjectProgressType(),
+                createProjectCommand.getProgressType(),
                 createProjectCommand.getStartDate(),
                 createProjectCommand.getEndDate(),
-                positionSlotList,
-                createProjectCommand.getSkills()
+                positionList,
+                createProjectCommand.getSkills(),
+                createProjectCommand.getRecruitCount()
         );
-
         return projectRepository.save(project);
     }
 }

@@ -12,7 +12,7 @@ public class SearchProjectRequestDto {
 
     private String keyword;
     private String projectStatus;
-    private String projectProgressType;
+    private String progressType;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDateFrom;

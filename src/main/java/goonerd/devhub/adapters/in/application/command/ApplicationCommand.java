@@ -17,7 +17,7 @@ public class ApplicationCommand {
     private String applicantName;
     private String reviewerGuid;
     private String motivation;
-    private String position;
+    private String positionName;
     private String skillLevel;
 
     public static ApplicationCommand fromApplyApplicationRequestDto(String projectGuid, ApplicationRequestDto applicationRequestDto, String userGuid) {
@@ -27,7 +27,7 @@ public class ApplicationCommand {
                 .applicantEmail(applicationRequestDto.getApplicantEmail())
                 .applicantName(applicationRequestDto.getApplicantName())
                 .motivation(applicationRequestDto.getMotivation())
-                .position(applicationRequestDto.getPosition())
+                .positionName(applicationRequestDto.getPositionName())
                 .skillLevel(applicationRequestDto.getSkillLevel())
                 .build();
     }

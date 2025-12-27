@@ -14,9 +14,9 @@ public class ApplicationMapper {
                 .applicantEmail(application.getApplicantEmail())
                 .applicantName(application.getApplicantName())
                 .motivation(application.getMotivation())
-                .position(application.getPosition())
+                .positionName(application.getPositionName())
                 .skillLevel(application.getSkillLevel())
-                .applicationStatus(application.getSubmissionStatus())
+                .applicationStatus(application.getApplicationStatus())
                 .submittedAt(application.getSubmittedAt())
                 .build();
     }
@@ -29,7 +29,7 @@ public class ApplicationMapper {
                 applicationEntity.getApplicantEmail(),
                 applicationEntity.getApplicantName(),
                 applicationEntity.getMotivation(),
-                applicationEntity.getPosition(),
+                applicationEntity.getPositionName(),
                 applicationEntity.getSkillLevel(),
                 applicationEntity.getApplicationStatus(),
                 applicationEntity.getSubmittedAt(),

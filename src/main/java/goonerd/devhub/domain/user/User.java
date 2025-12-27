@@ -7,22 +7,23 @@ import goonerd.devhub.domain.common.AuditInfo;
 public class User {
 
     private final String userGuid;
+
     private final String email;
     private String password;
     private String username;
-
     private UserRole role;
 
     private AuditInfo auditInfo;
 
     public User(String userGuid, String email, String username, String password, UserRole role, AuditInfo auditInfo) {
-        this.userGuid = userGuid;
         if (email == null || email.isBlank()) {
             throw DomainRuleException.of(ErrorCodeEnum.USER_ID_FAIL);
         }
         if (password == null || password.length() < 6) {
             throw DomainRuleException.of(ErrorCodeEnum.USER_PASSWORD_FAIL);
         }
+
+        this.userGuid = userGuid;
         this.email = email;
         this.username = username;
         this.password = password;

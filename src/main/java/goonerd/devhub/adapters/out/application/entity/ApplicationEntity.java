@@ -38,7 +38,7 @@ public class ApplicationEntity extends BaseEntity {
     private String motivation;
 
     @Column(name = "position", nullable = false)
-    private String position;
+    private String positionName;
 
     @Column(name = "skill_level", nullable = false)
     private String skillLevel;

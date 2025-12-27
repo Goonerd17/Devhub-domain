@@ -26,7 +26,7 @@ public class CreateProjectRequestDto {
 
     @NotNull
     @Schema(description = "프로젝트 내용")
-    private String description;
+    private String content;
 
     @NotNull
     @Schema(description = "모집 유형")
@@ -34,7 +34,7 @@ public class CreateProjectRequestDto {
 
     @NotNull
     @Schema(description = "진행 방식")
-    private String projectProgressType;
+    private String progressType;
 
     @Positive
     @Schema(description = "모집 인원")
@@ -42,7 +42,7 @@ public class CreateProjectRequestDto {
 
     @NotNull
     @Schema(description = "모집 포지션 목록")
-    private List<CreateProjectPositionRequestDto> positions;
+    private List<CreateProjectPositionRequestDto> positionRequestDtoList;
 
     @NotNull
     @Schema(description = "사용 기술 목록")

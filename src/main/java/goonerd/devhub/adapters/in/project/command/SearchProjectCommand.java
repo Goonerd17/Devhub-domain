@@ -1,7 +1,7 @@
 package goonerd.devhub.adapters.in.project.command;
 
 import goonerd.devhub.adapters.in.project.dto.SearchProjectRequestDto;
-import goonerd.devhub.domain.project.ProjectProgressType;
+import goonerd.devhub.domain.project.ProgressType;
 import goonerd.devhub.domain.project.ProjectStatus;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +14,7 @@ public class SearchProjectCommand {
 
     private String keyword;
     private ProjectStatus projectStatus;
-    private ProjectProgressType projectProgressType;
+    private ProgressType progressType;
     private LocalDate startDateFrom;
     private LocalDate startDateTo;
     private LocalDate endDateFrom;
@@ -24,7 +24,7 @@ public class SearchProjectCommand {
         return SearchProjectCommand.builder()
                 .keyword(searchProjectRequestDto.getKeyword())
                 .projectStatus(parseStatus(searchProjectRequestDto.getProjectStatus()))
-                .projectProgressType(parseProgressType(searchProjectRequestDto.getProjectProgressType()))
+                .progressType(parseProgressType(searchProjectRequestDto.getProgressType()))
                 .startDateFrom(searchProjectRequestDto.getStartDateFrom())
                 .startDateTo(searchProjectRequestDto.getStartDateTo())
                 .endDateFrom(searchProjectRequestDto.getEndDateFrom())
@@ -43,11 +43,10 @@ public class SearchProjectCommand {
         }
     }
 
-    private static ProjectProgressType parseProgressType(String value) {
+    private static ProgressType parseProgressType(String value) {
         if (value == null || value.isBlank()) {
             return null;
         }
-        return ProjectProgressType.from(value);
+        return ProgressType.from(value);
     }
-
 }

@@ -20,16 +20,16 @@ public class ProjectResponseDto {
     private String projectGuid;
 
     @Schema(description = "사용자 ID")
-    private String userId;
+    private String authorGuid;
 
     @Schema(description = "사용자 이름")
-    private String username;
+    private String authorName;
 
     @Schema(description = "프로젝트 제목")
     private String title;
 
     @Schema(description = "프로젝트 설명")
-    private String description;
+    private String content;
 
     @Schema(description = "프로젝트 상태")
     private String projectStatus;
@@ -38,7 +38,7 @@ public class ProjectResponseDto {
     private int recruitCount;
 
     @Schema(description = "모집 포지션 목록")
-    private List<PositionSlotResponseDto> positionSlotResponseDtoList;
+    private List<PositionResponseDto> positionResponseDtoList;
 
     private List<String> skillList;
 
@@ -63,17 +63,17 @@ public class ProjectResponseDto {
     public static ProjectResponseDto fromDomainReadModel(ProjectWithStatus projectWithStatus) {
         return ProjectResponseDto.builder()
                 .projectGuid(projectWithStatus.getProject().getProjectGuid())
-                .userId(projectWithStatus.getProject().getAuthorId())
-                .username(projectWithStatus.getProject().getAuthorName())
+                .authorGuid(projectWithStatus.getProject().getAuthorGuid())
+                .authorName(projectWithStatus.getProject().getAuthorName())
                 .title(projectWithStatus.getProject().getTitle())
-                .description(projectWithStatus.getProject().getDescription())
+                .content(projectWithStatus.getProject().getContent())
                 .projectStatus(projectWithStatus.getProjectStatus().toString())
                 .recruitCount(projectWithStatus.getProject().getRecruitCount())
-                .positionSlotResponseDtoList(
-                        projectWithStatus.getProject().getPositionSlots().stream()
-                                .map(PositionSlotResponseDto::fromDomain)
+                .positionResponseDtoList(
+                        projectWithStatus.getProject().getPositionList().stream()
+                                .map(PositionResponseDto::fromDomain)
                                 .toList())
-                .skillList(projectWithStatus.getProject().getSkills())
+                .skillList(projectWithStatus.getProject().getSkillList())
                 .startDate(projectWithStatus.getProject().getStartDate())
                 .endDate(projectWithStatus.getProject().getEndDate())
                 .createdAt(projectWithStatus.getProject().getAuditInfo().getCreatedAt())
@@ -86,17 +86,17 @@ public class ProjectResponseDto {
     public static ProjectResponseDto fromDomain(Project project) {
         return ProjectResponseDto.builder()
                 .projectGuid(project.getProjectGuid())
-                .userId(project.getAuthorId())
-                .username(project.getAuthorName())
+                .authorGuid(project.getAuthorGuid())
+                .authorName(project.getAuthorName())
                 .title(project.getTitle())
-                .description(project.getDescription())
+                .content(project.getContent())
                 .projectStatus(ProjectStatus.RECRUITING.name())
                 .recruitCount(project.getRecruitCount())
-                .positionSlotResponseDtoList(
-                        project.getPositionSlots().stream()
-                                .map(PositionSlotResponseDto::fromDomain)
+                .positionResponseDtoList(
+                        project.getPositionList().stream()
+                                .map(PositionResponseDto::fromDomain)
                                 .toList())
-                .skillList(project.getSkills())
+                .skillList(project.getSkillList())
                 .startDate(project.getStartDate())
                 .endDate(project.getEndDate())
                 .createdAt(project.getAuditInfo().getCreatedAt())

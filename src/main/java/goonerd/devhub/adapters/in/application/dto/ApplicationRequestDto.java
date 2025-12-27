@@ -18,7 +18,7 @@ public class ApplicationRequestDto {
     private String motivation;
 
     @NotBlank
-    private String position;
+    private String positionName;
 
     @NotBlank
     private String skillLevel;
