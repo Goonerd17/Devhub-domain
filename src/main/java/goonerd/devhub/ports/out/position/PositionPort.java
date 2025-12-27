@@ -5,7 +5,7 @@ import goonerd.devhub.domain.position.Position;
 
 import java.util.List;
 
-public interface PositionPort {
+public interface PositionRepository {
     List<Position> findByProjectGuid(String projectGuid);
     void saveAll(ProjectEntity projectEntity, List<Position> positionList);
     void deleteByProjectGuid(String projectGuid);

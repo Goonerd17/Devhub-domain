@@ -24,7 +24,7 @@ public class ApplicationService implements ApplicationUseCase {
 
     public Application applyApplication(ApplicationCommand applyApplicationCommand) {
         if (applicationPort.existsByProjectGuidAndApplicantGuid(applyApplicationCommand.getProjectGuid(), applyApplicationCommand.getApplicantGuid())) {
-            throw DomainRuleException.of(ErrorCodeEnum.SUBMISSION_APPLY_FAIL);
+            throw DomainRuleException.of(ErrorCodeEnum.APPLICATION_APPLY_FAIL);
         }
 
         String applicationGuid = identifierGeneratorPort.generate();
@@ -45,7 +45,7 @@ public class ApplicationService implements ApplicationUseCase {
     public Application approveApplication(ApplicationCommand approveApplicationCommand) {
         Application application = applicationPort.findByApplicationGuid(approveApplicationCommand.getApplicantGuid());
         Project project = projectPort.findByProjectGuId(application.getProjectGuid())
-                .orElseThrow(() -> DomainRuleException.of(ErrorCodeEnum.SUBMISSION_PROJECT_FAIL));
+                .orElseThrow(() -> DomainRuleException.of(ErrorCodeEnum.APPLICATION_PROJECT_FAIL));
 
         project.approveApplication(application);
         applicationPort.save(application);

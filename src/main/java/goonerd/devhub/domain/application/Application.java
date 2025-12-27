@@ -37,9 +37,9 @@ public class Application {
             AuditInfo auditInfo
     ) {
         if (projectGuid == null || projectGuid.isBlank())
-            throw DomainRuleException.of(ErrorCodeEnum.SUBMISSION_PROJECT_FAIL);
+            throw DomainRuleException.of(ErrorCodeEnum.APPLICATION_PROJECT_FAIL);
         if (applicantGuid == null || applicantGuid.isBlank())
-            throw DomainRuleException.of(ErrorCodeEnum.SUBMISSION_USER_FAIL);
+            throw DomainRuleException.of(ErrorCodeEnum.APPLICATION_USER_FAIL);
 
         this.applicationGuid = applicationGuid;
         this.projectGuid = projectGuid;
@@ -110,19 +110,19 @@ public class Application {
 
     public void approve() {
         if (this.applicationStatus != ApplicationStatus.PENDING)
-            throw DomainRuleException.of(ErrorCodeEnum.SUBMISSION_APPROVE_FAIL);
+            throw DomainRuleException.of(ErrorCodeEnum.APPLICATION_APPROVE_FAIL);
         this.applicationStatus = ApplicationStatus.ACCEPTED;
     }
 
     public void reject() {
         if (this.applicationStatus != ApplicationStatus.PENDING)
-            throw DomainRuleException.of(ErrorCodeEnum.SUBMISSION_REJECT_FAIL);
+            throw DomainRuleException.of(ErrorCodeEnum.APPLICATION_REJECT_FAIL);
         this.applicationStatus = ApplicationStatus.REJECTED;
     }
 
     public void cancel() {
         if (this.applicationStatus == ApplicationStatus.ACCEPTED)
-            throw DomainRuleException.of(ErrorCodeEnum.SUBMISSION_CANCEL_FAIL);
+            throw DomainRuleException.of(ErrorCodeEnum.APPLICATION_CANCEL_FAIL);
         this.applicationStatus = ApplicationStatus.CANCELED;
     }
 
