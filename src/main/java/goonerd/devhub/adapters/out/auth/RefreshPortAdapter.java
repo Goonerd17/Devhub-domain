@@ -1,7 +1,7 @@
 package goonerd.devhub.adapters.out.auth;
 
 import goonerd.devhub.adapters.out.auth.entity.RefreshTokenEntity;
-import goonerd.devhub.ports.out.auth.AuthRepository;
+import goonerd.devhub.ports.out.auth.AuthPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class RefreshRepositoryAdapter implements AuthRepository {
+public class RefreshPortAdapter implements AuthPort {
 
     private final RefreshTokenRepositoryJpa refreshTokenRepositoryJpa;
 

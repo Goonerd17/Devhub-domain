@@ -7,7 +7,7 @@ import goonerd.devhub.adapters.out.position.PositionMapper;
 import goonerd.devhub.adapters.out.position.PositionRepositoryJpa;
 import goonerd.devhub.adapters.out.project.entity.ProjectEntity;
 import goonerd.devhub.domain.project.Project;
-import goonerd.devhub.ports.out.project.ProjectRepository;
+import goonerd.devhub.ports.out.project.ProjectPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class ProjectRepositoryAdapter implements ProjectRepository {
+public class ProjectPortAdapter implements ProjectPort {
 
     private final ProjectRepositoryJpa projectRepositoryJpa;
     private final ProjectQueryRepository projectQueryRepository;

@@ -6,7 +6,7 @@ import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.exception.AuthRuleException;
 import goonerd.devhub.common.utils.EmailVerificationCodeUtil;
 import goonerd.devhub.ports.in.mail.EmailVerificationUseCase;
-import goonerd.devhub.ports.out.mail.EmailVerificationCodeRepository;
+import goonerd.devhub.ports.out.mail.EmailVerificationPort;
 import goonerd.devhub.ports.out.mail.EmailSendPort;
 
 import jakarta.transaction.Transactional;
@@ -21,7 +21,7 @@ import java.time.Duration;
 public class EmailService implements EmailVerificationUseCase {
 
     private final EmailSendPort emailSendPort;
-    private final EmailVerificationCodeRepository emailVerificationRepository;
+    private final EmailVerificationPort emailVerificationRepository;
 
     @Override
     public void requestEmailVerificationCode(EmailVerificationRequestDto emailVerificationRequestDto) {

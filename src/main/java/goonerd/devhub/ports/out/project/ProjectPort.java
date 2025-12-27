@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.Optional;
 
-public interface ProjectRepository {
+public interface ProjectPort {
     Page<Project> listProject(SearchProjectCommand searchProjectCommand, PageCommand pageCommand);
     Project save(Project project);
     Optional<Project> findByProjectGuId(String projectGuid);

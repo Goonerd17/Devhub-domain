@@ -3,7 +3,7 @@ package goonerd.devhub.adapters.out.position;
 import goonerd.devhub.adapters.out.position.entity.PositionEntity;
 import goonerd.devhub.adapters.out.project.entity.ProjectEntity;
 import goonerd.devhub.domain.position.Position;
-import goonerd.devhub.ports.out.position.PositionRepository;
+import goonerd.devhub.ports.out.position.PositionPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 @Transactional
-public class PositionRepositoryAdapter implements PositionRepository {
+public class PositionPortAdapter implements PositionPort {
 
     private final PositionRepositoryJpa positionRepositoryJpa;
 

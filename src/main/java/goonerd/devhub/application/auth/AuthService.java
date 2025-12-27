@@ -6,9 +6,9 @@ import goonerd.devhub.common.enums.JwtStatusEnum;
 import goonerd.devhub.common.exception.AuthRuleException;
 import goonerd.devhub.domain.user.User;
 import goonerd.devhub.ports.in.auth.AuthUseCase;
-import goonerd.devhub.ports.out.auth.AuthRepository;
+import goonerd.devhub.ports.out.auth.AuthPort;
 import goonerd.devhub.ports.out.common.AuthTokenPort;
-import goonerd.devhub.ports.out.user.UserRepository;
+import goonerd.devhub.ports.out.user.UserPort;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,8 +19,8 @@ import org.springframework.stereotype.Service;
 public class AuthService implements AuthUseCase {
 
     private final AuthTokenPort authTokenPort;
-    private final AuthRepository authRepository;
-    private final UserRepository userRepository;
+    private final AuthPort authPort;
+    private final UserPort userPort;
 
     @Override
     public TokenResponseDto refreshAccessToken(String refreshToken) {
@@ -36,12 +36,10 @@ public class AuthService implements AuthUseCase {
         }
 
         String email = authTokenPort.getEmailFromRefreshToken(refreshToken);
-        User user = userRepository.findByEmail(email)
+        User user = userPort.findByEmail(email)
                 .orElseThrow(() -> AuthRuleException.of(ErrorCodeEnum.USER_NOT_FOUND));
 
-        authRepository.findByEmail(email)
-                .filter(token -> token.getRefreshToken().equals(refreshToken))
-                .orElseThrow(() -> AuthRuleException.of(ErrorCodeEnum.REFRESH_TOKEN_INVALID));
+        authPort.findByEmail(email).filter(token -> token.getRefreshToken().equals(refreshToken)).orElseThrow(() -> AuthRuleException.of(ErrorCodeEnum.REFRESH_TOKEN_INVALID));
 
         String newAccessToken = authTokenPort.createAccessToken(user.getEmail(), user.getRole());
         return TokenResponseDto.reissue(newAccessToken, refreshToken);

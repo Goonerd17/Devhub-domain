@@ -7,8 +7,8 @@ import goonerd.devhub.domain.application.Application;
 import goonerd.devhub.domain.project.Project;
 import goonerd.devhub.ports.in.application.ApplicationUseCase;
 import goonerd.devhub.ports.out.common.IdentifierGeneratorPort;
-import goonerd.devhub.ports.out.project.ProjectRepository;
-import goonerd.devhub.ports.out.application.ApplicationRepository;
+import goonerd.devhub.ports.out.project.ProjectPort;
+import goonerd.devhub.ports.out.application.ApplicationPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,12 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ApplicationService implements ApplicationUseCase {
 
-    private final ApplicationRepository applicationRepository;
-    private final ProjectRepository projectRepository;
+    private final ApplicationPort applicationPort;
+    private final ProjectPort projectPort;
     private final IdentifierGeneratorPort identifierGeneratorPort;
 
     public Application applyApplication(ApplicationCommand applyApplicationCommand) {
-        if (applicationRepository.existsByProjectGuidAndApplicantGuid(applyApplicationCommand.getProjectGuid(), applyApplicationCommand.getApplicantGuid())) {
+        if (applicationPort.existsByProjectGuidAndApplicantGuid(applyApplicationCommand.getProjectGuid(), applyApplicationCommand.getApplicantGuid())) {
             throw DomainRuleException.of(ErrorCodeEnum.SUBMISSION_APPLY_FAIL);
         }
 
@@ -39,17 +39,17 @@ public class ApplicationService implements ApplicationUseCase {
                 applyApplicationCommand.getSkillLevel()
         );
 
-        return applicationRepository.save(application);
+        return applicationPort.save(application);
     }
 
     public Application approveApplication(ApplicationCommand approveApplicationCommand) {
-        Application application = applicationRepository.findByApplicationGuid(approveApplicationCommand.getApplicantGuid());
-        Project project = projectRepository.findByProjectGuId(application.getProjectGuid())
+        Application application = applicationPort.findByApplicationGuid(approveApplicationCommand.getApplicantGuid());
+        Project project = projectPort.findByProjectGuId(application.getProjectGuid())
                 .orElseThrow(() -> DomainRuleException.of(ErrorCodeEnum.SUBMISSION_PROJECT_FAIL));
 
         project.approveApplication(application);
-        applicationRepository.save(application);
-        projectRepository.save(project);
+        applicationPort.save(application);
+        projectPort.save(project);
         return application;
     }
 }

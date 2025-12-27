@@ -7,7 +7,7 @@ import goonerd.devhub.domain.position.Position;
 import goonerd.devhub.domain.project.Project;
 import goonerd.devhub.ports.in.project.ProjectUseCase;
 import goonerd.devhub.ports.out.common.IdentifierGeneratorPort;
-import goonerd.devhub.ports.out.project.ProjectRepository;
+import goonerd.devhub.ports.out.project.ProjectPort;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,12 +22,12 @@ import java.util.List;
 @Transactional
 public class ProjectService implements ProjectUseCase {
 
-    private final ProjectRepository projectRepository;
+    private final ProjectPort projectPort;
     private final IdentifierGeneratorPort identifierGeneratorPort;
 
     public Page<ProjectWithStatus> listProject(SearchProjectCommand searchProjectCommand, PageCommand pageCommand) {
         LocalDate currentLocalDate = LocalDate.now();
-        Page<Project> pagedProjectList = projectRepository.listProject(searchProjectCommand, pageCommand);
+        Page<Project> pagedProjectList = projectPort.listProject(searchProjectCommand, pageCommand);
         List<ProjectWithStatus> pagedProjectWithStatusList = pagedProjectList.getContent()
                 .stream()
                 .map(project -> ProjectWithStatus.fromProject(project, project.calculateStatus(currentLocalDate)))
@@ -62,6 +62,6 @@ public class ProjectService implements ProjectUseCase {
                 createProjectCommand.getSkillList(),
                 createProjectCommand.getRecruitCount()
         );
-        return projectRepository.save(project);
+        return projectPort.save(project);
     }
 }

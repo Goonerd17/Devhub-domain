@@ -1,7 +1,7 @@
 package goonerd.devhub.application.auth;
 
 import goonerd.devhub.adapters.out.auth.entity.RefreshTokenEntity;
-import goonerd.devhub.ports.out.auth.AuthRepository;
+import goonerd.devhub.ports.out.auth.AuthPort;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,19 +13,19 @@ import java.util.Optional;
 @Transactional
 public class RefreshTokenService {
 
-    private final AuthRepository authRepository;
+    private final AuthPort authPort;
 
     public void save(String email, String refreshToken) {
-        authRepository.findByEmail(email).ifPresentOrElse(
+        authPort.findByEmail(email).ifPresentOrElse(
                 entity -> entity.rotate(refreshToken),
-                () -> authRepository.save(email, refreshToken));
+                () -> authPort.save(email, refreshToken));
     }
 
     public Optional<RefreshTokenEntity> findByEmail(String email) {
-        return authRepository.findByEmail(email);
+        return authPort.findByEmail(email);
     }
 
     public void delete(String email) {
-        authRepository.deleteByEmail(email);
+        authPort.deleteByEmail(email);
     }
 }

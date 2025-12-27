@@ -5,7 +5,7 @@ import goonerd.devhub.domain.user.UserRole;
 
 import java.util.Optional;
 
-public interface UserRepository {
+public interface UserPort {
 
     User save(User user);
     boolean existsByEmail(String email);

@@ -1,7 +1,7 @@
 package goonerd.devhub.adapters.out.mail;
 
 import goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity;
-import goonerd.devhub.ports.out.mail.EmailVerificationCodeRepository;
+import goonerd.devhub.ports.out.mail.EmailVerificationPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Component
 @RequiredArgsConstructor
 @Transactional
-public class EmailVerificationCodeAdapter implements EmailVerificationCodeRepository {
+public class EmailVerificationCodeAdapter implements EmailVerificationPort {
 
     private final EmailVerificationRepositoryJpa emailVerificationRepositoryJpa;
 

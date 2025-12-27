@@ -2,13 +2,13 @@ package goonerd.devhub.adapters.out.application;
 
 import goonerd.devhub.adapters.out.application.entity.ApplicationEntity;
 import goonerd.devhub.domain.application.Application;
-import goonerd.devhub.ports.out.application.ApplicationRepository;
+import goonerd.devhub.ports.out.application.ApplicationPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class ApplicationRepositoryAdapter implements ApplicationRepository {
+public class ApplicationPortAdapter implements ApplicationPort {
 
     private final ApplicationRepositoryJpa applicationRepositoryJpa;
 

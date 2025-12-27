@@ -2,7 +2,7 @@ package goonerd.devhub.adapters.out.user;
 
 import goonerd.devhub.domain.user.UserRole;
 import goonerd.devhub.domain.user.User;
-import goonerd.devhub.ports.out.user.UserRepository;
+import goonerd.devhub.ports.out.user.UserPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class UserRepositoryAdapter implements UserRepository {
+public class UserPortAdapter implements UserPort {
 
     private final UserRepositoryJpa userRepositoryJpa;
 
