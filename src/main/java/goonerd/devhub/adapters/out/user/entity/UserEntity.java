@@ -18,14 +18,22 @@ import static lombok.AccessLevel.PROTECTED;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
-@Table(name = "users")
+@Table(
+        name = "users",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uk_users_email",
+                        columnNames = "email"
+                )
+        }
+)
 public class UserEntity extends BaseEntity {
 
-    @Id @Column(length = 36, nullable = false, unique = true)
+    @Id @Column(length = 32, nullable = false, unique = true)
     private String userGuid;
 
-    @Column(unique = true)
-    private String userId;
+    @Column(nullable = false)
+    private String email;
 
     @Column
     private String username;
@@ -36,11 +44,4 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
-
-    @PrePersist
-    public void prePersist() {
-        if (this.userGuid == null) {
-            this.userGuid = UUID.randomUUID().toString().replace("-", "");
-        }
-    }
 }

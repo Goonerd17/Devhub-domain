@@ -14,18 +14,18 @@ public class RefreshTokenEntity {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String userId;
+    private String email;
 
     @Column(nullable = false, length = 500)
     private String refreshToken;
 
-    protected RefreshTokenEntity(String userId, String refreshToken) {
-        this.userId = userId;
+    protected RefreshTokenEntity(String email, String refreshToken) {
+        this.email = email;
         this.refreshToken = refreshToken;
     }
 
-    public static RefreshTokenEntity of(String userId, String refreshToken) {
-        return new RefreshTokenEntity(userId, refreshToken);
+    public static RefreshTokenEntity of(String email, String refreshToken) {
+        return new RefreshTokenEntity(email, refreshToken);
     }
 
     public void rotate(String newToken) {

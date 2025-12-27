@@ -6,7 +6,8 @@ import goonerd.devhub.domain.common.AuditInfo;
 
 public class User {
 
-    private final String userId;
+    private final String userGuid;
+    private final String email;
     private String password;
     private String username;
 
@@ -14,30 +15,31 @@ public class User {
 
     private AuditInfo auditInfo;
 
-    public User(String userId, String username, String password, UserRole role, AuditInfo auditInfo) {
-        if (userId == null || userId.isBlank()) {
+    public User(String userGuid, String email, String username, String password, UserRole role, AuditInfo auditInfo) {
+        this.userGuid = userGuid;
+        if (email == null || email.isBlank()) {
             throw DomainRuleException.of(ErrorCodeEnum.USER_ID_FAIL);
         }
         if (password == null || password.length() < 6) {
             throw DomainRuleException.of(ErrorCodeEnum.USER_PASSWORD_FAIL);
         }
-        this.userId = userId;
+        this.email = email;
         this.username = username;
         this.password = password;
         this.role = role;
         this.auditInfo = auditInfo != null ? auditInfo : AuditInfo.empty();
     }
 
-    public static User createGeneralUser(String userId, String username, String password) {
-        return new User(userId, username, password, UserRole.USER, AuditInfo.empty());
+    public static User createGeneralUser(String userGuid, String email, String username, String password) {
+        return new User(userGuid, email, username, password, UserRole.USER, AuditInfo.empty());
     }
 
-    public static User createAdminUser(String userId, String username, String password) {
-        return new User(userId, username, password, UserRole.ADMIN, AuditInfo.empty());
+    public static User createAdminUser(String userGuid, String email, String username, String password) {
+        return new User(userGuid, email, username, password, UserRole.ADMIN, AuditInfo.empty());
     }
 
-    public static User of(String userId, String username, String password, UserRole role, AuditInfo auditInfo) {
-        return new User(userId, username, password, role, auditInfo);
+    public static User of(String userGuid, String email, String username, String password, UserRole role, AuditInfo auditInfo) {
+        return new User(userGuid, email, username, password, role, auditInfo);
     }
 
     public boolean hasRole(UserRole checkRole) {
@@ -45,10 +47,11 @@ public class User {
     }
 
     public User changeUsername(String newUsername) {
-        return new User(this.userId, newUsername, this.password, this.role, this.auditInfo);
+        return new User(this.userGuid, this.email, newUsername, this.password, this.role, this.auditInfo);
     }
 
-    public String getUserId() { return userId; }
+    public String getUserGuid() { return userGuid; }
+    public String getEmail() { return email; }
     public String getUsername() { return username; }
     public String getPassword() { return password; }
     public UserRole getRole() { return role; }

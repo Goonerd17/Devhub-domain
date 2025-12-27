@@ -46,7 +46,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
             return getAuthenticationManager().authenticate(
                             new UsernamePasswordAuthenticationToken(
-                                    loginUserRequestDto.getUserId(),
+                                    loginUserRequestDto.getEmail(),
                                     loginUserRequestDto.getPassword()));
         } catch (IOException e) {
             log.error(e.getMessage());
@@ -61,12 +61,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             Authentication authResult) throws IOException {
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authResult.getPrincipal();
-        String userId = userDetails.getUsername();
+        String email = userDetails.getUsername();
         UserRole role = userDetails.getUser().getRole();
 
-        String accessToken = jwtUtil.createAccessToken(userId, role);
-        String refreshToken = jwtUtil.createRefreshToken(userId);
-        refreshTokenService.save(userId, refreshToken);
+        String accessToken = jwtUtil.createAccessToken(email, role);
+        String refreshToken = jwtUtil.createRefreshToken(email);
+        refreshTokenService.save(email, refreshToken);
 
         ApiResponseVo<?> responseBody = ApiResponseVo.successWithData(SuccessCodeEnum.LOGIN_SUCCESS, Map.of("accessToken", accessToken, "refreshToken", refreshToken));
 

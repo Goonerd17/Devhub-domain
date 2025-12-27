@@ -2,14 +2,13 @@ package goonerd.devhub.common.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import goonerd.devhub.application.auth.RefreshTokenService;
-import goonerd.devhub.common.auth.userdetails.UserDetailsServiceImpl;
+import goonerd.devhub.common.component.CustomAccessDeniedHandler;
 import goonerd.devhub.common.component.CustomAuthenticationEntryPoint;
 import goonerd.devhub.common.component.CustomFilterExceptionHandler;
 import goonerd.devhub.common.component.JwtAuthenticationProvider;
 import goonerd.devhub.common.filter.JwtAuthenticationFilter;
 import goonerd.devhub.common.filter.JwtAuthorizationFilter;
 import goonerd.devhub.common.filter.JwtExceptionFilter;
-import goonerd.devhub.common.component.CustomAccessDeniedHandler;
 import goonerd.devhub.common.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -39,8 +38,6 @@ public class WebSecurityConfig {
     private final JwtUtil jwtUtil;
     private final JwtAuthenticationProvider jwtAuthenticationProvider;
     private final RefreshTokenService refreshTokenService;
-    private final UserDetailsServiceImpl userDetailsService;
-    private final AuthenticationConfiguration authenticationConfiguration;
     private final CustomFilterExceptionHandler customFilterExceptionHandler;
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;

@@ -42,7 +42,7 @@
 
 [//]: # (│   ├─ user)
 
-[//]: # (│   └─ submission)
+[//]: # (│   └─ application)
 
 [//]: # (├─ ports)
 
@@ -52,7 +52,7 @@
 
 [//]: # (├─ service)
 
-[//]: # (│   ├─ submission  )
+[//]: # (│   ├─ application  )
 
 [//]: # (│   ├─ facade       # 여러 서비스 호출 후 응답 조립)
 
@@ -183,7 +183,7 @@
 
 ```json
 {
-  "submitterName": "Goonerd",
+  "applicantName": "Goonerd",
   "title": "AI 기반 프로젝트 매칭 플랫폼 개발",
   "description": "사용자의 기술 스택을 기반으로 프로젝트를 자동 추천하는 플랫폼을 개발합니다.",
   "recruitmentType": "EXTRA",

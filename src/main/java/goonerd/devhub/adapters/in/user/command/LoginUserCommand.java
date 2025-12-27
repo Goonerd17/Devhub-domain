@@ -10,12 +10,12 @@ import lombok.Getter;
 @AllArgsConstructor
 public class LoginUserCommand {
 
-    private final String userId;
+    private final String email;
     private final String password;
 
     public static LoginUserCommand fromLoginUserRequestDto(LoginUserRequestDto loginUserRequestDto) {
         return LoginUserCommand.builder()
-                .userId(loginUserRequestDto.getUserId())
+                .email(loginUserRequestDto.getEmail())
                 .password(loginUserRequestDto.getPassword())
                 .build();
     }

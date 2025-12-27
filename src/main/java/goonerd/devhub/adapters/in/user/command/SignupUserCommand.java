@@ -10,13 +10,13 @@ import lombok.Getter;
 @AllArgsConstructor
 public class SignupUserCommand {
 
-    private final String userId;
+    private final String email;
     private final String username;
     private final String password;
 
     public static SignupUserCommand fromSignupUserRequestDto(SignupUserRequestDto signupUserRequestDto) {
         return SignupUserCommand.builder()
-                .userId(signupUserRequestDto.getUserId())
+                .email(signupUserRequestDto.getEmail())
                 .username(signupUserRequestDto.getUsername())
                 .password(signupUserRequestDto.getPassword())
                 .build();

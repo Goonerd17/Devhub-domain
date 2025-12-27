@@ -13,17 +13,17 @@ public class RefreshTokenService {
 
     private final AuthRepository authRepository;
 
-    public void save(String userId, String refreshToken) {
-        authRepository.findByUserId(userId).ifPresentOrElse(
+    public void save(String email, String refreshToken) {
+        authRepository.findByEmail(email).ifPresentOrElse(
                 entity -> entity.rotate(refreshToken),
-                () -> authRepository.save(userId, refreshToken));
+                () -> authRepository.save(email, refreshToken));
     }
 
-    public Optional<RefreshTokenEntity> findByUserId(String userId) {
-        return authRepository.findByUserId(userId);
+    public Optional<RefreshTokenEntity> findByEmail(String email) {
+        return authRepository.findByEmail(email);
     }
 
-    public void delete(String userId) {
-        authRepository.deleteByUserId(userId);
+    public void delete(String email) {
+        authRepository.deleteByEmail(email);
     }
 }

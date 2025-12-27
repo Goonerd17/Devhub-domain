@@ -38,7 +38,7 @@ public class EmailVerificationCodeEntity {
     }
 
     public void verify(LocalDateTime now) {
-        this.code = null;       // 코드 무효화
-        this.verifiedAt = now;  // 인증 완료
+        this.code = null;
+        this.verifiedAt = now;
     }
 }

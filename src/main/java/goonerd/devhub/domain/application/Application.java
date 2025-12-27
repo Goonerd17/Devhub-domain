@@ -1,99 +1,104 @@
-package goonerd.devhub.domain.submission;
+package goonerd.devhub.domain.application;
 
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.exception.DomainRuleException;
 import goonerd.devhub.domain.common.AuditInfo;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
-public class Submission {
+public class Application {
 
-    private final String submissionGuid;
+    private final String applicationGuid;
     private final String projectGuid;
+    private final String applicantGuid;
 
-    private final String submitterId;
-    private String submitterName;
+    private String applicantEmail;
+    private String applicantName;
 
     private String motivation;
     private String position;
     private String skillLevel;
 
-    private SubmissionStatus submissionStatus;
+    private ApplicationStatus applicationStatus;
     private LocalDateTime submittedAt;
     private AuditInfo auditInfo;
 
-    private Submission(
-            String submissionGuid,
+    private Application(
+            String applicationGuid,
             String projectGuid,
-            String submitterId,
-            String submitterName,
+            String applicantGuid,
+            String applicantEmail,
+            String applicantName,
             String motivation,
             String position,
             String skillLevel,
-            SubmissionStatus submissionStatus,
+            ApplicationStatus applicationStatus,
             LocalDateTime submittedAt,
             AuditInfo auditInfo
     ) {
-        this.submissionGuid = submissionGuid;
-
         if (projectGuid == null || projectGuid.isBlank())
             throw DomainRuleException.of(ErrorCodeEnum.SUBMISSION_PROJECT_FAIL);
-        this.projectGuid = projectGuid;
-
-        if (submitterId == null || submitterId.isBlank())
+        if (applicantGuid == null || applicantGuid.isBlank())
             throw DomainRuleException.of(ErrorCodeEnum.SUBMISSION_USER_FAIL);
-        this.submitterId = submitterId;
-        this.submitterName = Objects.requireNonNull(submitterName);
-        this.motivation = Objects.requireNonNull(motivation);
 
-        this.position = Objects.requireNonNull(position);
-        this.skillLevel = Objects.requireNonNull(skillLevel);
-        this.submissionStatus = Objects.requireNonNull(submissionStatus);
+        this.applicationGuid = applicationGuid;
+        this.projectGuid = projectGuid;
+        this.applicantGuid = applicantGuid;
+        this.applicantEmail = applicantEmail;
+        this.applicantName = applicantName;
+        this.motivation = motivation;
+        this.position = position;
+        this.skillLevel = skillLevel;
+        this.applicationStatus = applicationStatus;
 
         this.submittedAt = submittedAt != null ? submittedAt : LocalDateTime.now();
         this.auditInfo = auditInfo != null ? auditInfo : AuditInfo.empty();
     }
 
-    public static Submission createApplication(
+    public static Application createApplication(
+            String applicationGuid,
             String projectGuid,
-            String userId,
-            String username,
+            String applicantGuid,
+            String applicantEmail,
+            String applicantName,
             String motivation,
             String position,
             String skillLevel
     ) {
-        return new Submission(
-                null,
+        return new Application(
+                applicationGuid,
                 projectGuid,
-                userId,
-                username,
+                applicantGuid,
+                applicantEmail,
+                applicantName,
                 motivation,
                 position,
                 skillLevel,
-                SubmissionStatus.PENDING,
+                ApplicationStatus.PENDING,
                 LocalDateTime.now(),
                 AuditInfo.empty()
         );
     }
 
-    public static Submission reconstruct(
+    public static Application reconstruct(
             String applicationGuid,
             String projectGuid,
-            String userId,
-            String username,
+            String applicantGuid,
+            String applicantEmail,
+            String applicantName,
             String motivation,
             String position,
             String skillLevel,
-            SubmissionStatus status,
+            ApplicationStatus status,
             LocalDateTime appliedAt,
             AuditInfo auditInfo
     ) {
-        return new Submission(
+        return new Application(
                 applicationGuid,
                 projectGuid,
-                userId,
-                username,
+                applicantGuid,
+                applicantEmail,
+                applicantName,
                 motivation,
                 position,
                 skillLevel,
@@ -104,27 +109,28 @@ public class Submission {
     }
 
     public void approve() {
-        if (this.submissionStatus != SubmissionStatus.PENDING)
+        if (this.applicationStatus != ApplicationStatus.PENDING)
             throw DomainRuleException.of(ErrorCodeEnum.SUBMISSION_APPROVE_FAIL);
-        this.submissionStatus = SubmissionStatus.ACCEPTED;
+        this.applicationStatus = ApplicationStatus.ACCEPTED;
     }
 
     public void reject() {
-        if (this.submissionStatus != SubmissionStatus.PENDING)
+        if (this.applicationStatus != ApplicationStatus.PENDING)
             throw DomainRuleException.of(ErrorCodeEnum.SUBMISSION_REJECT_FAIL);
-        this.submissionStatus = SubmissionStatus.REJECTED;
+        this.applicationStatus = ApplicationStatus.REJECTED;
     }
 
     public void cancel() {
-        if (this.submissionStatus == SubmissionStatus.ACCEPTED)
+        if (this.applicationStatus == ApplicationStatus.ACCEPTED)
             throw DomainRuleException.of(ErrorCodeEnum.SUBMISSION_CANCEL_FAIL);
-        this.submissionStatus = SubmissionStatus.CANCELED;
+        this.applicationStatus = ApplicationStatus.CANCELED;
     }
 
-    public String getSubmissionGuid() { return submissionGuid; }
+    public String getApplicationGuid() { return applicationGuid; }
     public String getProjectGuid() { return projectGuid; }
-    public String getSubmitterId() { return submitterId; }
-    public String getSubmitterName() { return submitterName; }
+    public String getApplicantGuid() { return applicantGuid; }
+    public String getApplicantEmail() { return applicantEmail; }
+    public String getApplicantName() { return applicantName; }
     public String getMotivation() { return motivation; }
     public String getPosition() {
         return position;
@@ -132,7 +138,7 @@ public class Submission {
     public String getSkillLevel() {
         return skillLevel;
     }
-    public SubmissionStatus getSubmissionStatus() { return submissionStatus; }
+    public ApplicationStatus getSubmissionStatus() { return applicationStatus; }
     public LocalDateTime getSubmittedAt() { return submittedAt; }
     public AuditInfo getAuditInfo() { return auditInfo; }
 }

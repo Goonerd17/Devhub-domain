@@ -1,4 +1,4 @@
-package goonerd.devhub.adapters.in.submission.dto;
+package goonerd.devhub.adapters.in.application.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class SubmissionRequestDto {
+public class ApplicationRequestDto {
 
     @NotBlank
-    private String submitterName;
+    private String applicantEmail;
 
     @NotBlank
-    private String submitterEmail;
+    private String applicantName;
 
     @NotBlank
     private String motivation;

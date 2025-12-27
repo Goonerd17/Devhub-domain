@@ -61,8 +61,8 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
-    public void setAuthentication(String userId) {
-        Authentication authentication = jwtAuthenticationProvider.authenticate(userId);
+    public void setAuthentication(String email) {
+        Authentication authentication = jwtAuthenticationProvider.authenticate(email);
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }

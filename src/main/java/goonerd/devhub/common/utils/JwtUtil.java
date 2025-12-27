@@ -5,6 +5,7 @@ import goonerd.devhub.common.enums.JwtStatusEnum;
 import goonerd.devhub.common.enums.TokenTypeEnum;
 import goonerd.devhub.common.exception.AuthRuleException;
 import goonerd.devhub.domain.user.UserRole;
+import goonerd.devhub.ports.out.common.AuthTokenPort;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -24,7 +25,7 @@ import java.util.Date;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class JwtUtil {
+public class JwtUtil implements AuthTokenPort {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
     public static final String AUTHORIZATION_KEY = "auth";
@@ -43,20 +44,11 @@ public class JwtUtil {
         key = Keys.hmacShaKeyFor(bytes);
     }
 
-    public String removeBearer(String token) {
-        if (token.startsWith(BEARER_PREFIX)) {
-            return token.substring(7);
-        }
-        return token;
-    }
-
-    // Header 토큰을 가져오기
     public String substringHeaderToken(String token) {
         if (StringUtils.hasText(token) && token.startsWith(BEARER_PREFIX)) { return token.substring(7);}
         throw AuthRuleException.of(ErrorCodeEnum.TOKEN_INVALID);
     }
 
-    // Header 안에 있는 토큰 decode
     public String getTokenFromHeader(HttpServletRequest req) {
         String token = req.getHeader(AUTHORIZATION_HEADER);
         if(token != null) {
@@ -70,11 +62,11 @@ public class JwtUtil {
         return null;
     }
 
-    // AccessToken 생성
-    public String createAccessToken(String userId, UserRole role) {
+    @Override
+    public String createAccessToken(String email, UserRole role) {
         Date now = new Date();
         return Jwts.builder()
-                        .setSubject(userId)
+                        .setSubject(email)
                         .claim(AUTHORIZATION_KEY, role)
                         .claim("token_type", TokenTypeEnum.ACCESS.name())
                         .setExpiration(new Date(now.getTime() + ACCESS_TOKEN_TIME))
@@ -83,11 +75,10 @@ public class JwtUtil {
                         .compact();
     }
 
-    // RefreshToken 생성
-    public String createRefreshToken(String userId) {
+    public String createRefreshToken(String email) {
         Date now = new Date();
         return Jwts.builder()
-                        .setSubject(userId)
+                        .setSubject(email)
                         .claim("token_type", TokenTypeEnum.REFRESH.name())
                         .setExpiration(new Date(now.getTime() + REFRESH_TOKEN_TIME))
                         .setIssuedAt(now)
@@ -95,7 +86,7 @@ public class JwtUtil {
                         .compact();
     }
 
-    // 토큰 검증
+    @Override
     public JwtStatusEnum validateToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
@@ -117,12 +108,12 @@ public class JwtUtil {
         }
     }
 
-    // 토큰에서 사용자 정보 가져오기
     public Claims getUserInfo(String token) {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
     }
 
-    public String getUserIdFromRefreshToken(String refreshToken) {
+    @Override
+    public String getEmailFromRefreshToken(String refreshToken) {
         Claims claims = getUserInfo(refreshToken);
         TokenTypeEnum tokenTypeEnum = TokenTypeEnum.valueOf(claims.get("token_type", String.class));
         if (tokenTypeEnum != TokenTypeEnum.REFRESH) {

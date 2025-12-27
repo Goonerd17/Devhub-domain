@@ -6,6 +6,6 @@ import goonerd.devhub.domain.user.UserRole;
 
 public interface UserUseCase {
     User signup(SignupUserCommand signupUserCommand);
-    void createAdminUser(String userId, String username, String rawPassword);
+    void createAdminUser(String email, String username, String rawPassword);
     boolean existsByRole(UserRole role);
 }

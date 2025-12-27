@@ -40,7 +40,7 @@ out/
 /Jenkinsfile-prd
 /Jenkinsfile-dev
 
-/src/main/resources/submission.yml
+/src/main/resources/application.yml
 /logs/error.log
 /src/main/resources/application.yml
 /src/test/resources/application-test.yml

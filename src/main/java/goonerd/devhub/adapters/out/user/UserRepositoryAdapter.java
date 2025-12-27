@@ -20,13 +20,13 @@ public class UserRepositoryAdapter implements UserRepository {
     }
 
     @Override
-    public boolean existsByUserId(String userId) {
-        return userRepositoryJpa.existsByUserId(userId);
+    public boolean existsByEmail(String email) {
+        return userRepositoryJpa.existsByEmail(email);
     }
 
     @Override
-    public Optional<User> findByUserId(String userId) {
-        return userRepositoryJpa.findByUserId(userId)
+    public Optional<User> findByEmail(String email) {
+        return userRepositoryJpa.findByEmail(email)
                 .map(UserMapper::toDomain);
     }
 

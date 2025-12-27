@@ -12,7 +12,7 @@ public class EmailVerificationCodeUtil {
     public static String generateEmailVerificationCode() {
         StringBuilder code = new StringBuilder(CODE_LENGTH);
         for (int i = 0; i < CODE_LENGTH; i++) {
-            code.append(RANDOM.nextInt(10)); // 0 ~ 9
+            code.append(RANDOM.nextInt(10));
         }
         return code.toString();
     }

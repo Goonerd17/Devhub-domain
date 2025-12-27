@@ -8,7 +8,8 @@ public class UserMapper {
 
     public static UserEntity toEntity(User user) {
         return UserEntity.builder()
-                .userId(user.getUserId())
+                .userGuid(user.getUserGuid())
+                .email(user.getEmail())
                 .password(user.getPassword())
                 .username(user.getUsername())
                 .role(user.getRole())
@@ -17,7 +18,8 @@ public class UserMapper {
 
     public static User toDomain(UserEntity userEntity) {
         return User.of(
-                userEntity.getUserId(),
+                userEntity.getUserGuid(),
+                userEntity.getEmail(),
                 userEntity.getUsername(),
                 userEntity.getPassword(),
                 userEntity.getRole(),

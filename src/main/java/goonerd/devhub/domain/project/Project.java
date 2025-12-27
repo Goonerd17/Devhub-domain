@@ -3,7 +3,7 @@ package goonerd.devhub.domain.project;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.exception.DomainRuleException;
 import goonerd.devhub.domain.common.AuditInfo;
-import goonerd.devhub.domain.submission.Submission;
+import goonerd.devhub.domain.application.Application;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -176,18 +176,18 @@ public class Project {
                 .anyMatch(p -> !p.isFull());
     }
 
-    public void approveSubmission(Submission submission) {
+    public void approveApplication(Application application) {
         if (isClosed(LocalDate.now())) {
             throw DomainRuleException.of(ErrorCodeEnum.PROJECT_PERIOD_FAIL);
         }
 
         PositionSlot slot = findPositionSlot(
-                submission.getPosition(),
-                submission.getSkillLevel()
+                application.getPosition(),
+                application.getSkillLevel()
         );
 
         slot.ensureCanApprove();
-        submission.approve();
+        application.approve();
         slot.increaseApprovedCount();
     }
 

@@ -7,7 +7,7 @@ import lombok.Getter;
 public class LoginUserRequestDto {
 
     @NotBlank
-    private String userId;
+    private String email;
     @NotBlank
     private String password;
 }

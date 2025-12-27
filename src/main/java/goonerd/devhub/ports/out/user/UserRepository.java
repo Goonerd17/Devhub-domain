@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface UserRepository {
 
     User save(User user);
-    boolean existsByUserId(String userId);// 도메인 객체를 저장
-    Optional<User> findByUserId(String userId);
+    boolean existsByEmail(String email);
+    Optional<User> findByEmail(String email);
     boolean existsByRole(UserRole role);
 }

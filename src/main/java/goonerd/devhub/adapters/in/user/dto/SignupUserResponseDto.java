@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class SignupUserResponseDto {
 
     @Schema(description = "사용자 ID")
-    private String userId;
+    private String email;
 
     @Schema(description = "사용자명")
     private String username;
@@ -32,7 +32,7 @@ public class SignupUserResponseDto {
 
     public static SignupUserResponseDto fromUserDomain(User user) {
         return SignupUserResponseDto.builder()
-                .userId(user.getUserId())
+                .email(user.getEmail())
                 .username(user.getUsername())
                 .createdAt(user.getAuditInfo().getCreatedAt())
                 .modifiedAt(user.getAuditInfo().getModifiedAt())

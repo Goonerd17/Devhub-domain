@@ -13,8 +13,8 @@ public class JwtAuthenticationProvider {
 
     private final UserDetailsService userDetailsService;
 
-    public Authentication authenticate(String userId) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(userId);
+    public Authentication authenticate(String email) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
 }

@@ -31,7 +31,7 @@ class ProjectTest {
                 RecruitmentType.NORMAL,
                 ProjectProgressType.ONLINE,
                 LocalDate.now(),
-                LocalDate.now().plusDays(1), // 종료일이 내일
+                LocalDate.now().plusDays(1),
                 List.of(
                         new PositionSlot("BACKEND", 1,"JUNIOR", 0)
                 ),
