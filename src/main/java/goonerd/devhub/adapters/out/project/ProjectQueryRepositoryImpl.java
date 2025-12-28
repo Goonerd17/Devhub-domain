@@ -5,7 +5,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import goonerd.devhub.adapters.in.project.command.SearchProjectCommand;
 import goonerd.devhub.adapters.out.project.entity.ProjectEntity;
 import goonerd.devhub.adapters.out.project.entity.QProjectEntity;
-import goonerd.devhub.domain.project.ProgressType;
+import goonerd.devhub.domains.project.ProgressType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

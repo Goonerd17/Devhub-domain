@@ -1,8 +1,8 @@
 package goonerd.devhub.adapters.in.project.command;
 
 import goonerd.devhub.adapters.in.project.dto.CreateProjectRequestDto;
-import goonerd.devhub.domain.project.ProgressType;
-import goonerd.devhub.domain.project.RecruitmentType;
+import goonerd.devhub.domains.project.ProgressType;
+import goonerd.devhub.domains.project.RecruitmentType;
 import lombok.Builder;
 import lombok.Getter;
 

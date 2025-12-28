@@ -1,7 +1,7 @@
 package goonerd.devhub.ports.in.application;
 
 import goonerd.devhub.adapters.in.application.command.ApplicationCommand;
-import goonerd.devhub.domain.application.Application;
+import goonerd.devhub.domains.application.Application;
 
 public interface ApplicationUseCase {
     Application applyApplication(ApplicationCommand applyApplicationCommand);

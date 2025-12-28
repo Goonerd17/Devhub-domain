@@ -1,6 +1,6 @@
 package goonerd.devhub.common.auth.initializer;
 
-import goonerd.devhub.domain.user.UserRole;
+import goonerd.devhub.domains.user.UserRole;
 import goonerd.devhub.ports.in.user.UserUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

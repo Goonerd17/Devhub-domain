@@ -1,8 +1,8 @@
 package goonerd.devhub.adapters.in.project.dto;
 
-import goonerd.devhub.application.project.ProjectWithStatus;
-import goonerd.devhub.domain.project.Project;
-import goonerd.devhub.domain.project.ProjectStatus;
+import goonerd.devhub.applications.project.ProjectWithStatus;
+import goonerd.devhub.domains.project.Project;
+import goonerd.devhub.domains.project.ProjectStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;

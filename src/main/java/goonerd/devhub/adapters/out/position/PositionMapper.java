@@ -2,7 +2,7 @@ package goonerd.devhub.adapters.out.position;
 
 import goonerd.devhub.adapters.out.position.entity.PositionEntity;
 import goonerd.devhub.adapters.out.project.entity.ProjectEntity;
-import goonerd.devhub.domain.position.Position;
+import goonerd.devhub.domains.position.Position;
 
 public class PositionMapper {
 
@@ -24,7 +24,8 @@ public class PositionMapper {
                 positionEntity.getProjectId(),
                 positionEntity.getPositionName(),
                 positionEntity.getCapacity(),
-                positionEntity.getLevel()
+                positionEntity.getLevel(),
+                positionEntity.getApprovedCount()
         );
     }
 }

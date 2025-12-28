@@ -8,6 +8,7 @@ import goonerd.devhub.common.auth.userdetails.UserDetailsImpl;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
 import goonerd.devhub.ports.in.application.ApplicationUseCase;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/projects/{projectGuid}/applications")
 @RequiredArgsConstructor
+@Slf4j
 public class ApplicationController {
 
     private final ApplicationUseCase applicationUseCase;
@@ -22,6 +24,7 @@ public class ApplicationController {
     @PostMapping
     public ResponseEntity<ApiResponseVo<ApplicationResponseDto>> apply(@PathVariable String projectGuid, @RequestBody ApplicationRequestDto applicationRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
         ApplicationCommand applyApplicationCommand = ApplicationCommand.fromApplyApplicationRequestDto(projectGuid, applicationRequestDto, userDetailsImpl.getUserId());
+        log.info("userId {}", userDetailsImpl.getUserId());
         return ResponseEntity.ok(ApiResponseVo.
                 successWithData(
                         SuccessCodeEnum.CREATE_SUCCESS,

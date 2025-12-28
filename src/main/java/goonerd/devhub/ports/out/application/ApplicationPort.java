@@ -1,6 +1,6 @@
 package goonerd.devhub.ports.out.application;
 
-import goonerd.devhub.domain.application.Application;
+import goonerd.devhub.domains.application.Application;
 
 public interface ApplicationPort {
     Application save(Application application);

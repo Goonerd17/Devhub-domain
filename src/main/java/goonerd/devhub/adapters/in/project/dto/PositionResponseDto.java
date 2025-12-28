@@ -1,6 +1,6 @@
 package goonerd.devhub.adapters.in.project.dto;
 
-import goonerd.devhub.domain.position.Position;
+import goonerd.devhub.domains.position.Position;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,6 +20,7 @@ public class PositionResponseDto {
         return PositionResponseDto.builder()
                 .positionName(position.getPositionName())
                 .capacity(position.getCapacity())
+                .level(position.getLevel())
                 .approvedCount(position.getApprovedCount())
                 .full(position.isFull())
                 .build();

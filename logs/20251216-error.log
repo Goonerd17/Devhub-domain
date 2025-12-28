@@ -10,11 +10,11 @@ org.springframework.web.bind.MethodArgumentNotValidException: Validation failed 
 	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:224)
 2025-12-16 23:13:07.014 [http-nio-8080-exec-7] ERROR ERROR_FILE [f09b6c3b66] - [f09b6c3b66] -----GlobalExceptionHandler-----: 잘못된 프로젝트 진행 방식입니다.
 java.lang.IllegalArgumentException: 잘못된 프로젝트 진행 방식입니다.
-	at goonerd.devhub.domain.project.ProgressType.from(ProjectProgressType.java:12)
+	at goonerd.devhub.domains.project.ProgressType.from(ProjectProgressType.java:12)
 	at goonerd.devhub.adapters.in.project.command.SearchProjectCommand.parseProgressType(SearchProjectCommand.java:50)
 	at goonerd.devhub.adapters.in.project.command.SearchProjectCommand.fromProjectSearchRequestDto(SearchProjectCommand.java:27)
 2025-12-16 23:13:21.301 [http-nio-8080-exec-9] ERROR ERROR_FILE [d035675608] - [d035675608] -----GlobalExceptionHandler-----: 잘못된 프로젝트 진행 방식입니다.
 java.lang.IllegalArgumentException: 잘못된 프로젝트 진행 방식입니다.
-	at goonerd.devhub.domain.project.ProgressType.from(ProjectProgressType.java:12)
+	at goonerd.devhub.domains.project.ProgressType.from(ProjectProgressType.java:12)
 	at goonerd.devhub.adapters.in.project.command.SearchProjectCommand.parseProgressType(SearchProjectCommand.java:50)
 	at goonerd.devhub.adapters.in.project.command.SearchProjectCommand.fromProjectSearchRequestDto(SearchProjectCommand.java:27)

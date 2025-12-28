@@ -1,8 +1,8 @@
 package goonerd.devhub.adapters.out.project.entity;
 
 import goonerd.devhub.adapters.out.common.BaseEntity;
-import goonerd.devhub.domain.project.ProgressType;
-import goonerd.devhub.domain.project.RecruitmentType;
+import goonerd.devhub.domains.project.ProgressType;
+import goonerd.devhub.domains.project.RecruitmentType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

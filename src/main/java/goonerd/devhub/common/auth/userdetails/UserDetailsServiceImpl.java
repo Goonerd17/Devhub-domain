@@ -1,6 +1,6 @@
 package goonerd.devhub.common.auth.userdetails;
 
-import goonerd.devhub.domain.user.User;
+import goonerd.devhub.domains.user.User;
 import goonerd.devhub.ports.out.user.UserPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

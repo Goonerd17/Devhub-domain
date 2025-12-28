@@ -1,7 +1,7 @@
 package goonerd.devhub.common.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import goonerd.devhub.application.auth.RefreshTokenService;
+import goonerd.devhub.applications.auth.RefreshTokenService;
 import goonerd.devhub.common.component.CustomAccessDeniedHandler;
 import goonerd.devhub.common.component.CustomAuthenticationEntryPoint;
 import goonerd.devhub.common.component.CustomFilterExceptionHandler;

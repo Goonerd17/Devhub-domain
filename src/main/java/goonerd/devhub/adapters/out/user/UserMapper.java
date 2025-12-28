@@ -1,8 +1,8 @@
 package goonerd.devhub.adapters.out.user;
 
 import goonerd.devhub.adapters.out.user.entity.UserEntity;
-import goonerd.devhub.domain.common.AuditInfo;
-import goonerd.devhub.domain.user.User;
+import goonerd.devhub.domains.common.AuditInfo;
+import goonerd.devhub.domains.user.User;
 
 public class UserMapper {
 

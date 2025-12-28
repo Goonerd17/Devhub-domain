@@ -6,5 +6,5 @@ org.springframework.web.bind.MethodArgumentNotValidException: Validation failed 
 2025-12-22 23:07:30.919 [http-nio-8080-exec-5] ERROR ERROR_FILE [ce4b423d5b] - [ce4b423d5b] -----GlobalExceptionHandler-----: null
 java.lang.NullPointerException: null
 	at java.base/java.util.Objects.requireNonNull(Objects.java:209)
-	at goonerd.devhub.domain.positionName.Position.<init>(PositionSlot.java:24)
-	at goonerd.devhub.domain.positionName.Position.createPositionSlot(PositionSlot.java:50)
+	at goonerd.devhub.domains.positionName.Position.<init>(PositionSlot.java:24)
+	at goonerd.devhub.domains.positionName.Position.createPositionSlot(PositionSlot.java:50)

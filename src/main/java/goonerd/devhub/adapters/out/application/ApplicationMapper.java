@@ -1,14 +1,14 @@
 package goonerd.devhub.adapters.out.application;
 
 import goonerd.devhub.adapters.out.application.entity.ApplicationEntity;
-import goonerd.devhub.domain.application.Application;
-import goonerd.devhub.domain.common.AuditInfo;
+import goonerd.devhub.domains.application.Application;
+import goonerd.devhub.domains.common.AuditInfo;
 
 public class ApplicationMapper {
 
     public static ApplicationEntity toEntity(Application application) {
         return ApplicationEntity.builder()
-                .applicantGuid(application.getApplicationGuid())
+                .applicationGuid(application.getApplicationGuid())
                 .projectGuid(application.getProjectGuid())
                 .applicantGuid(application.getApplicantGuid())
                 .applicantEmail(application.getApplicantEmail())
@@ -17,7 +17,7 @@ public class ApplicationMapper {
                 .positionName(application.getPositionName())
                 .skillLevel(application.getSkillLevel())
                 .applicationStatus(application.getApplicationStatus())
-                .submittedAt(application.getSubmittedAt())
+                .submittedAt(application.getAppliedAt())
                 .build();
     }
 

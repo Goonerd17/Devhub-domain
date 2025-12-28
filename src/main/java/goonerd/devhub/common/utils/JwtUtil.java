@@ -4,7 +4,7 @@ import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.enums.JwtStatusEnum;
 import goonerd.devhub.common.enums.TokenTypeEnum;
 import goonerd.devhub.common.exception.AuthRuleException;
-import goonerd.devhub.domain.user.UserRole;
+import goonerd.devhub.domains.user.UserRole;
 import goonerd.devhub.ports.out.common.AuthTokenPort;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

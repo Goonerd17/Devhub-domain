@@ -1,7 +1,7 @@
 package goonerd.devhub.ports.out.user;
 
-import goonerd.devhub.domain.user.User;
-import goonerd.devhub.domain.user.UserRole;
+import goonerd.devhub.domains.user.User;
+import goonerd.devhub.domains.user.UserRole;
 
 import java.util.Optional;
 

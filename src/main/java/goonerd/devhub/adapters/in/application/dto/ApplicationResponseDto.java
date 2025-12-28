@@ -1,6 +1,6 @@
 package goonerd.devhub.adapters.in.application.dto;
 
-import goonerd.devhub.domain.application.Application;
+import goonerd.devhub.domains.application.Application;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,7 +41,7 @@ public class ApplicationResponseDto {
                 .positionName(application.getPositionName())
                 .proficiency(application.getSkillLevel())
                 .status(application.getApplicationStatus().name())
-                .appliedAt(application.getSubmittedAt())
+                .appliedAt(application.getAppliedAt())
                 .createdAt(application.getAuditInfo().getCreatedAt())
                 .modifiedAt(application.getAuditInfo().getModifiedAt())
                 .createdBy(application.getAuditInfo().getCreatedBy())

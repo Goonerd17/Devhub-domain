@@ -1,7 +1,7 @@
 package goonerd.devhub.adapters.out.user;
 
 import goonerd.devhub.adapters.out.user.entity.UserEntity;
-import goonerd.devhub.domain.user.UserRole;
+import goonerd.devhub.domains.user.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

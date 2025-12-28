@@ -1,7 +1,7 @@
 package goonerd.devhub.ports.out.common;
 
 import goonerd.devhub.common.enums.JwtStatusEnum;
-import goonerd.devhub.domain.user.UserRole;
+import goonerd.devhub.domains.user.UserRole;
 
 public interface AuthTokenPort {
     JwtStatusEnum validateToken(String token);

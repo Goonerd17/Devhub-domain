@@ -1,15 +1,12 @@
 package goonerd.devhub.adapters.out.user.entity;
 
 import goonerd.devhub.adapters.out.common.BaseEntity;
-import goonerd.devhub.domain.user.UserRole;
+import goonerd.devhub.domains.user.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.UuidGenerator;
-
-import java.util.UUID;
 
 import static lombok.AccessLevel.PROTECTED;
 

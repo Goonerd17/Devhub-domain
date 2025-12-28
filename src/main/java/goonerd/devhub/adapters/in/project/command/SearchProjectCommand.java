@@ -1,8 +1,8 @@
 package goonerd.devhub.adapters.in.project.command;
 
 import goonerd.devhub.adapters.in.project.dto.SearchProjectRequestDto;
-import goonerd.devhub.domain.project.ProgressType;
-import goonerd.devhub.domain.project.ProjectStatus;
+import goonerd.devhub.domains.project.ProgressType;
+import goonerd.devhub.domains.project.ProjectStatus;
 import lombok.Builder;
 import lombok.Getter;
 

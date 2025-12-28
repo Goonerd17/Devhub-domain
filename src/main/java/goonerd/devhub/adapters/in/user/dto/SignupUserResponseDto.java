@@ -1,6 +1,6 @@
 package goonerd.devhub.adapters.in.user.dto;
 
-import goonerd.devhub.domain.user.User;
+import goonerd.devhub.domains.user.User;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
