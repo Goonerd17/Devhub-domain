@@ -8,13 +8,12 @@ import lombok.Getter;
 public class TokenResponseDto {
 
     private String accessToken;
-    private String refreshToken;
 
-    public static TokenResponseDto of(String accessToken, String refreshToken) {
-        return new TokenResponseDto(accessToken, refreshToken);
+    public static TokenResponseDto of(String accessToken) {
+        return new TokenResponseDto(accessToken);
     }
 
-    public static TokenResponseDto reissue(String newAccessToken, String refreshToken) {
-        return new TokenResponseDto(newAccessToken, refreshToken);
+    public static TokenResponseDto reissue(String newAccessToken) {
+        return new TokenResponseDto(newAccessToken);
     }
 }

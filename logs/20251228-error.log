@@ -1,0 +1,373 @@
+2025-12-24 00:05:11.661 [http-nio-8080-exec-2] ERROR ERROR_FILE [f8e2538413] - [f8e2538413] -----GlobalExceptionHandler-----: 유효하지 않은 Refresh Token 입니다.
+goonerd.devhub.common.exception.AuthRuleException: 유효하지 않은 Refresh Token 입니다.
+	at goonerd.devhub.common.exception.AuthRuleException.of(AuthRuleException.java:17)
+	at goonerd.devhub.applications.auth.AuthService.refreshAccessToken(AuthService.java:38)
+	at goonerd.devhub.adapters.in.auth.AuthController.refresh(AuthController.java:22)
+2025-12-25 18:35:55.077 [http-nio-8080-exec-2] ERROR ERROR_FILE [cacec5d858] - [cacec5d858] -----GlobalExceptionHandler-----: 토큰이 만료되었습니다.
+goonerd.devhub.common.exception.AuthRuleException: 토큰이 만료되었습니다.
+	at goonerd.devhub.common.exception.AuthRuleException.of(AuthRuleException.java:17)
+	at goonerd.devhub.applications.auth.AuthService.refreshAccessToken(AuthService.java:29)
+	at goonerd.devhub.adapters.in.auth.AuthController.refresh(AuthController.java:23)
+2025-12-25 18:37:11.190 [http-nio-8080-exec-1] ERROR ERROR_FILE [9ef2fdd3f6] - [9ef2fdd3f6] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-25 18:37:22.516 [http-nio-8080-exec-4] ERROR ERROR_FILE [54cb35e1ca] - [54cb35e1ca] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-25 18:37:25.470 [http-nio-8080-exec-10] ERROR ERROR_FILE [9a5aea7f09] - [9a5aea7f09] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-25 18:37:56.047 [http-nio-8080-exec-8] ERROR ERROR_FILE [2e352980c4] - [2e352980c4] -----GlobalExceptionHandler-----: could not prepare statement [Table "USERS" not found (this database is empty); SQL statement:
+/* <criteria> */ select ue1_0.user_guid from users ue1_0 where ue1_0.user_id=? fetch first ? rows only [42104-232]] [/* <criteria> */ select ue1_0.user_guid from users ue1_0 where ue1_0.user_id=? fetch first ? rows only]; SQL [/* <criteria> */ select ue1_0.user_guid from users ue1_0 where ue1_0.user_id=? fetch first ? rows only]
+org.springframework.dao.InvalidDataAccessResourceUsageException: could not prepare statement [Table "USERS" not found (this database is empty); SQL statement:
+/* <criteria> */ select ue1_0.user_guid from users ue1_0 where ue1_0.user_id=? fetch first ? rows only [42104-232]] [/* <criteria> */ select ue1_0.user_guid from users ue1_0 where ue1_0.user_id=? fetch first ? rows only]; SQL [/* <criteria> */ select ue1_0.user_guid from users ue1_0 where ue1_0.user_id=? fetch first ? rows only]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:281)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:256)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
+Caused by: org.hibernate.exception.SQLGrammarException: could not prepare statement [Table "USERS" not found (this database is empty); SQL statement:
+/* <criteria> */ select ue1_0.user_guid from users ue1_0 where ue1_0.user_id=? fetch first ? rows only [42104-232]] [/* <criteria> */ select ue1_0.user_guid from users ue1_0 where ue1_0.user_id=? fetch first ? rows only]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:66)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+/* <criteria> */ select ue1_0.user_guid from users ue1_0 where ue1_0.user_id=? fetch first ? rows only [42104-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+2025-12-25 18:38:24.879 [http-nio-8080-exec-5] ERROR ERROR_FILE [81e8541312] - [81e8541312] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-25 18:38:27.902 [http-nio-8080-exec-4] ERROR ERROR_FILE [6bc5513fc6] - [6bc5513fc6] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-25 19:08:32.721 [http-nio-8080-exec-4] ERROR ERROR_FILE [8f88380a7a] - [8f88380a7a] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-25 19:08:35.799 [http-nio-8080-exec-4] ERROR ERROR_FILE [6627e1677a] - [6627e1677a] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-25 22:06:58.638 [http-nio-8080-exec-3] ERROR ERROR_FILE [2eb7c9ec33] - [2eb7c9ec33] -----GlobalExceptionHandler-----: E-mail 인증이 완료되지 않았습니다.
+goonerd.devhub.common.exception.BusinessRuleException: E-mail 인증이 완료되지 않았습니다.
+	at goonerd.devhub.common.exception.BusinessRuleException.of(BusinessRuleException.java:17)
+	at goonerd.devhub.applications.user.UserService.signup(UserService.java:28)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2025-12-25 22:11:07.090 [http-nio-8080-exec-2] ERROR ERROR_FILE [fa58d90e0c] - [fa58d90e0c] -----GlobalExceptionHandler-----: E-mail 인증이 완료되지 않았습니다.
+goonerd.devhub.common.exception.BusinessRuleException: E-mail 인증이 완료되지 않았습니다.
+	at goonerd.devhub.common.exception.BusinessRuleException.of(BusinessRuleException.java:17)
+	at goonerd.devhub.applications.user.UserService.signup(UserService.java:28)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2025-12-25 22:13:09.434 [http-nio-8080-exec-9] ERROR ERROR_FILE [3d41a23666] - [3d41a23666] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-25 22:13:12.877 [http-nio-8080-exec-5] ERROR ERROR_FILE [d1f577534a] - [d1f577534a] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-25 22:13:26.731 [http-nio-8080-exec-10] ERROR ERROR_FILE [0a9c85d368] - [0a9c85d368] -----GlobalExceptionHandler-----: could not execute statement [NULL not allowed for column "CODE"; SQL statement:
+/* update for goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity [23502-232]] [/* update for goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity */update email_auth_code set code=?,expired_at=?,verified_at=? where email=?]; SQL [/* update for goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity */update email_auth_code set code=?,expired_at=?,verified_at=? where email=?]; constraint [null]
+org.springframework.dao.DataIntegrityViolationException: could not execute statement [NULL not allowed for column "CODE"; SQL statement:
+/* update for goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity [23502-232]] [/* update for goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity */update email_auth_code set code=?,expired_at=?,verified_at=? where email=?]; SQL [/* update for goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity */update email_auth_code set code=?,expired_at=?,verified_at=? where email=?]; constraint [null]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:294)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:256)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [NULL not allowed for column "CODE"; SQL statement:
+/* update for goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity [23502-232]] [/* update for goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity */update email_auth_code set code=?,expired_at=?,verified_at=? where email=?]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:62)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: NULL not allowed for column "CODE"; SQL statement:
+/* update for goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity [23502-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+2025-12-25 22:16:25.066 [http-nio-8080-exec-2] ERROR ERROR_FILE [a78f736f90] - [a78f736f90] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-25 22:16:28.339 [http-nio-8080-exec-5] ERROR ERROR_FILE [ab602b6862] - [ab602b6862] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-25 22:19:58.596 [http-nio-8080-exec-3] ERROR ERROR_FILE [183fb4d5e1] - [183fb4d5e1] -----GlobalExceptionHandler-----: 원인 미상의 에러가 발생했습니다.
+goonerd.devhub.common.exception.AuthRuleException: 원인 미상의 에러가 발생했습니다.
+	at goonerd.devhub.common.exception.AuthRuleException.of(AuthRuleException.java:17)
+	at goonerd.devhub.applications.mail.EmailService.verifyEmailVerificationCode(EmailService.java:40)
+	at goonerd.devhub.adapters.in.mail.EmailVerificationController.verifyEmailVerificationCode(EmailVerificationController.java:34)
+2025-12-25 22:20:13.613 [http-nio-8080-exec-4] ERROR ERROR_FILE [d91e76e6ff] - [d91e76e6ff] -----GlobalExceptionHandler-----: E-mail 인증이 완료되지 않았습니다.
+goonerd.devhub.common.exception.BusinessRuleException: E-mail 인증이 완료되지 않았습니다.
+	at goonerd.devhub.common.exception.BusinessRuleException.of(BusinessRuleException.java:17)
+	at goonerd.devhub.applications.user.UserService.signup(UserService.java:28)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2025-12-25 22:28:00.857 [http-nio-8080-exec-2] ERROR ERROR_FILE [0a7783109b] - [0a7783109b] -----GlobalExceptionHandler-----: E-mail 인증이 완료되지 않았습니다.
+goonerd.devhub.common.exception.AuthRuleException: E-mail 인증이 완료되지 않았습니다.
+	at goonerd.devhub.common.exception.AuthRuleException.of(AuthRuleException.java:17)
+	at goonerd.devhub.applications.mail.EmailService.verifyEmailVerificationCode(EmailService.java:40)
+	at goonerd.devhub.adapters.in.mail.EmailVerificationController.verifyEmailVerificationCode(EmailVerificationController.java:34)
+2025-12-25 22:28:20.439 [http-nio-8080-exec-1] ERROR ERROR_FILE [29c5cef3b8] - [29c5cef3b8] -----GlobalExceptionHandler-----: 인증 코드가 이미 발송되었습니다. 잠시 후 재시도해주세요.
+goonerd.devhub.common.exception.AuthRuleException: 인증 코드가 이미 발송되었습니다. 잠시 후 재시도해주세요.
+	at goonerd.devhub.common.exception.AuthRuleException.of(AuthRuleException.java:17)
+	at goonerd.devhub.applications.mail.EmailService.requestEmailVerificationCode(EmailService.java:28)
+	at goonerd.devhub.adapters.in.mail.EmailVerificationController.requestEmailVerificationCode(EmailVerificationController.java:23)
+2025-12-25 22:28:22.424 [http-nio-8080-exec-7] ERROR ERROR_FILE [a1407d59c5] - [a1407d59c5] -----GlobalExceptionHandler-----: 인증 코드가 이미 발송되었습니다. 잠시 후 재시도해주세요.
+goonerd.devhub.common.exception.AuthRuleException: 인증 코드가 이미 발송되었습니다. 잠시 후 재시도해주세요.
+	at goonerd.devhub.common.exception.AuthRuleException.of(AuthRuleException.java:17)
+	at goonerd.devhub.applications.mail.EmailService.requestEmailVerificationCode(EmailService.java:28)
+	at goonerd.devhub.adapters.in.mail.EmailVerificationController.requestEmailVerificationCode(EmailVerificationController.java:23)
+2025-12-25 22:28:29.430 [http-nio-8080-exec-10] ERROR ERROR_FILE [8d6bf04e73] - [8d6bf04e73] -----GlobalExceptionHandler-----: E-mail 인증이 완료되지 않았습니다.
+goonerd.devhub.common.exception.AuthRuleException: E-mail 인증이 완료되지 않았습니다.
+	at goonerd.devhub.common.exception.AuthRuleException.of(AuthRuleException.java:17)
+	at goonerd.devhub.applications.mail.EmailService.verifyEmailVerificationCode(EmailService.java:40)
+	at goonerd.devhub.adapters.in.mail.EmailVerificationController.verifyEmailVerificationCode(EmailVerificationController.java:34)
+2025-12-26 01:32:54.631 [http-nio-8080-exec-5] ERROR ERROR_FILE [0e0571002c] - [0e0571002c] -----GlobalExceptionHandler-----: E-mail 인증에 실패했습니다.
+goonerd.devhub.common.exception.AuthRuleException: E-mail 인증에 실패했습니다.
+	at goonerd.devhub.common.exception.AuthRuleException.of(AuthRuleException.java:17)
+	at goonerd.devhub.applications.mail.EmailService.verifyEmailVerificationCode(EmailService.java:40)
+	at goonerd.devhub.adapters.in.mail.EmailVerificationController.verifyEmailVerificationCode(EmailVerificationController.java:34)
+2025-12-26 01:46:18.206 [http-nio-8080-exec-1] ERROR ERROR_FILE [3a24f1e35a] - [3a24f1e35a] -----GlobalExceptionHandler-----: No static resource api/projects/3780c8a6-2c36-4283-8ceb-08f4d5b08dfa/application.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/projects/3780c8a6-2c36-4283-8ceb-08f4d5b08dfa/application.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-26 01:46:34.147 [http-nio-8080-exec-3] ERROR ERROR_FILE [b10944b499] - [b10944b499] -----GlobalExceptionHandler-----: No static resource projects/3780c8a6-2c36-4283-8ceb-08f4d5b08dfa/application.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource projects/3780c8a6-2c36-4283-8ceb-08f4d5b08dfa/application.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-26 01:46:52.794 [http-nio-8080-exec-4] ERROR ERROR_FILE [56ea9b360d] - [56ea9b360d] -----GlobalExceptionHandler-----: null
+java.lang.NullPointerException: null
+	at java.base/java.util.Objects.requireNonNull(Objects.java:209)
+	at goonerd.devhub.domains.application.Application.<init>(Submission.java:47)
+	at goonerd.devhub.domains.application.Application.createApplication(Submission.java:76)
+2025-12-26 01:49:07.747 [http-nio-8080-exec-10] ERROR ERROR_FILE [518dc9327e] - [518dc9327e] -----GlobalExceptionHandler-----: 원인 미상의 에러가 발생했습니다.
+goonerd.devhub.common.exception.DomainRuleException: 원인 미상의 에러가 발생했습니다.
+	at goonerd.devhub.common.exception.DomainRuleException.of(DomainRuleException.java:17)
+	at goonerd.devhub.domains.project.Project.lambda$findPositionSlot$3(Project.java:200)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+2025-12-26 01:54:52.493 [http-nio-8080-exec-3] ERROR ERROR_FILE [48406ac6b8] - [48406ac6b8] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-26 01:54:57.645 [http-nio-8080-exec-3] ERROR ERROR_FILE [aa2ddfee24] - [aa2ddfee24] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-26 02:00:29.641 [http-nio-8080-exec-5] ERROR ERROR_FILE [bb0d9c9c73] - [bb0d9c9c73] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-26 02:00:33.833 [http-nio-8080-exec-8] ERROR ERROR_FILE [15fa912ae2] - [15fa912ae2] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-26 02:08:37.718 [http-nio-8080-exec-5] ERROR ERROR_FILE [2b1c3e9597] - [2b1c3e9597] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-26 02:08:41.656 [http-nio-8080-exec-7] ERROR ERROR_FILE [3a34ce22b4] - [3a34ce22b4] -----GlobalExceptionHandler-----: No static resource favicon.ico.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-28 04:25:55.856 [http-nio-8080-exec-6] ERROR ERROR_FILE [a969bfb02d] - [a969bfb02d] -----GlobalExceptionHandler-----: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<goonerd.devhub.adapters.in.common.vo.ApiResponseVo<goonerd.devhub.adapters.in.user.dto.SignupUserResponseDto>> goonerd.devhub.adapters.in.user.UserController.signup(goonerd.devhub.adapters.in.user.dto.SignupUserRequestDto): [Field error in object 'signupUserRequestDto' on field 'email': rejected value [null]; codes [NotBlank.signupUserRequestDto.email,NotBlank.email,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [signupUserRequestDto.email,email]; arguments []; default message [email]]; default message [공백일 수 없습니다]] 
+org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<goonerd.devhub.adapters.in.common.vo.ApiResponseVo<goonerd.devhub.adapters.in.user.dto.SignupUserResponseDto>> goonerd.devhub.adapters.in.user.UserController.signup(goonerd.devhub.adapters.in.user.dto.SignupUserRequestDto): [Field error in object 'signupUserRequestDto' on field 'email': rejected value [null]; codes [NotBlank.signupUserRequestDto.email,NotBlank.email,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [signupUserRequestDto.email,email]; arguments []; default message [email]]; default message [공백일 수 없습니다]] 
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:159)
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122)
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:227)
+2025-12-28 04:26:03.650 [http-nio-8080-exec-2] ERROR ERROR_FILE [a95682e33a] - [a95682e33a] -----GlobalExceptionHandler-----: E-mail 인증에 실패했습니다.
+goonerd.devhub.common.exception.BusinessRuleException: E-mail 인증에 실패했습니다.
+	at goonerd.devhub.common.exception.BusinessRuleException.of(BusinessRuleException.java:17)
+	at goonerd.devhub.applications.user.UserService.signup(UserService.java:30)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2025-12-28 04:26:18.215 [http-nio-8080-exec-3] ERROR ERROR_FILE [6bbb890317] - [6bbb890317] -----GlobalExceptionHandler-----: E-mail 인증에 실패했습니다.
+goonerd.devhub.common.exception.BusinessRuleException: E-mail 인증에 실패했습니다.
+	at goonerd.devhub.common.exception.BusinessRuleException.of(BusinessRuleException.java:17)
+	at goonerd.devhub.applications.user.UserService.signup(UserService.java:30)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2025-12-28 04:26:23.035 [http-nio-8080-exec-4] ERROR ERROR_FILE [1075bafc4b] - [1075bafc4b] -----GlobalExceptionHandler-----: No static resource auth/email-verifications.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource auth/email-verifications.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-28 04:27:06.432 [http-nio-8080-exec-1] ERROR ERROR_FILE [07f55ade2e] - [07f55ade2e] -----GlobalExceptionHandler-----: No static resource auth/email-verifications/confirm.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource auth/email-verifications/confirm.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-28 04:28:40.837 [http-nio-8080-exec-4] ERROR ERROR_FILE [a271f69219] - [a271f69219] -----GlobalExceptionHandler-----: could not execute statement [NULL not allowed for column "POSITION_NAME"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.position.entity.PositionEntity */insert into project_position (approved_count,capacity,level, [23502-232]] [/* insert for goonerd.devhub.adapters.out.position.entity.PositionEntity */insert into project_position (approved_count,capacity,level,position_name,project_guid,project_id,position_guid) values (?,?,?,?,?,?,?)]; SQL [/* insert for goonerd.devhub.adapters.out.position.entity.PositionEntity */insert into project_position (approved_count,capacity,level,position_name,project_guid,project_id,position_guid) values (?,?,?,?,?,?,?)]; constraint [null]
+org.springframework.dao.DataIntegrityViolationException: could not execute statement [NULL not allowed for column "POSITION_NAME"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.position.entity.PositionEntity */insert into project_position (approved_count,capacity,level, [23502-232]] [/* insert for goonerd.devhub.adapters.out.position.entity.PositionEntity */insert into project_position (approved_count,capacity,level,position_name,project_guid,project_id,position_guid) values (?,?,?,?,?,?,?)]; SQL [/* insert for goonerd.devhub.adapters.out.position.entity.PositionEntity */insert into project_position (approved_count,capacity,level,position_name,project_guid,project_id,position_guid) values (?,?,?,?,?,?,?)]; constraint [null]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:294)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:256)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [NULL not allowed for column "POSITION_NAME"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.position.entity.PositionEntity */insert into project_position (approved_count,capacity,level, [23502-232]] [/* insert for goonerd.devhub.adapters.out.position.entity.PositionEntity */insert into project_position (approved_count,capacity,level,position_name,project_guid,project_id,position_guid) values (?,?,?,?,?,?,?)]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:62)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: NULL not allowed for column "POSITION_NAME"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.position.entity.PositionEntity */insert into project_position (approved_count,capacity,level, [23502-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+2025-12-28 20:43:41.730 [http-nio-8080-exec-9] ERROR ERROR_FILE [7bca5fd865] - [7bca5fd865] -----GlobalExceptionHandler-----: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<goonerd.devhub.adapters.in.common.vo.ApiResponseVo<goonerd.devhub.adapters.in.project.dto.ProjectResponseDto>> goonerd.devhub.adapters.in.project.ProjectController.createProject(goonerd.devhub.adapters.in.project.dto.CreateProjectRequestDto,goonerd.devhub.common.auth.userdetails.UserDetailsImpl) with 2 errors: [Field error in object 'createProjectRequestDto' on field 'skillList': rejected value [null]; codes [NotNull.createProjectRequestDto.skillList,NotNull.skillList,NotNull.java.util.List,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createProjectRequestDto.skillList,skillList]; arguments []; default message [skillList]]; default message [널이어서는 안됩니다]] [Field error in object 'createProjectRequestDto' on field 'positionList': rejected value [null]; codes [NotNull.createProjectRequestDto.positionList,NotNull.positionList,NotNull.java.util.List,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createProjectRequestDto.positionList,positionList]; arguments []; default message [positionList]]; default message [널이어서는 안됩니다]] 
+org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<goonerd.devhub.adapters.in.common.vo.ApiResponseVo<goonerd.devhub.adapters.in.project.dto.ProjectResponseDto>> goonerd.devhub.adapters.in.project.ProjectController.createProject(goonerd.devhub.adapters.in.project.dto.CreateProjectRequestDto,goonerd.devhub.common.auth.userdetails.UserDetailsImpl) with 2 errors: [Field error in object 'createProjectRequestDto' on field 'skillList': rejected value [null]; codes [NotNull.createProjectRequestDto.skillList,NotNull.skillList,NotNull.java.util.List,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createProjectRequestDto.skillList,skillList]; arguments []; default message [skillList]]; default message [널이어서는 안됩니다]] [Field error in object 'createProjectRequestDto' on field 'positionList': rejected value [null]; codes [NotNull.createProjectRequestDto.positionList,NotNull.positionList,NotNull.java.util.List,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createProjectRequestDto.positionList,positionList]; arguments []; default message [positionList]]; default message [널이어서는 안됩니다]] 
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:159)
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122)
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:227)
+2025-12-28 20:44:17.213 [http-nio-8080-exec-8] ERROR ERROR_FILE [a2681fd12d] - [a2681fd12d] -----GlobalExceptionHandler-----: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<goonerd.devhub.adapters.in.common.vo.ApiResponseVo<goonerd.devhub.adapters.in.project.dto.ProjectResponseDto>> goonerd.devhub.adapters.in.project.ProjectController.createProject(goonerd.devhub.adapters.in.project.dto.CreateProjectRequestDto,goonerd.devhub.common.auth.userdetails.UserDetailsImpl) with 2 errors: [Field error in object 'createProjectRequestDto' on field 'skillList': rejected value [null]; codes [NotNull.createProjectRequestDto.skillList,NotNull.skillList,NotNull.java.util.List,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createProjectRequestDto.skillList,skillList]; arguments []; default message [skillList]]; default message [널이어서는 안됩니다]] [Field error in object 'createProjectRequestDto' on field 'positionList': rejected value [null]; codes [NotNull.createProjectRequestDto.positionList,NotNull.positionList,NotNull.java.util.List,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createProjectRequestDto.positionList,positionList]; arguments []; default message [positionList]]; default message [널이어서는 안됩니다]] 
+org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<goonerd.devhub.adapters.in.common.vo.ApiResponseVo<goonerd.devhub.adapters.in.project.dto.ProjectResponseDto>> goonerd.devhub.adapters.in.project.ProjectController.createProject(goonerd.devhub.adapters.in.project.dto.CreateProjectRequestDto,goonerd.devhub.common.auth.userdetails.UserDetailsImpl) with 2 errors: [Field error in object 'createProjectRequestDto' on field 'skillList': rejected value [null]; codes [NotNull.createProjectRequestDto.skillList,NotNull.skillList,NotNull.java.util.List,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createProjectRequestDto.skillList,skillList]; arguments []; default message [skillList]]; default message [널이어서는 안됩니다]] [Field error in object 'createProjectRequestDto' on field 'positionList': rejected value [null]; codes [NotNull.createProjectRequestDto.positionList,NotNull.positionList,NotNull.java.util.List,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createProjectRequestDto.positionList,positionList]; arguments []; default message [positionList]]; default message [널이어서는 안됩니다]] 
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:159)
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122)
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:227)
+2025-12-28 20:44:39.596 [http-nio-8080-exec-10] ERROR ERROR_FILE [0cd7b01f8e] - [0cd7b01f8e] -----GlobalExceptionHandler-----: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<goonerd.devhub.adapters.in.common.vo.ApiResponseVo<goonerd.devhub.adapters.in.project.dto.ProjectResponseDto>> goonerd.devhub.adapters.in.project.ProjectController.createProject(goonerd.devhub.adapters.in.project.dto.CreateProjectRequestDto,goonerd.devhub.common.auth.userdetails.UserDetailsImpl): [Field error in object 'createProjectRequestDto' on field 'positionList': rejected value [null]; codes [NotNull.createProjectRequestDto.positionList,NotNull.positionList,NotNull.java.util.List,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createProjectRequestDto.positionList,positionList]; arguments []; default message [positionList]]; default message [널이어서는 안됩니다]] 
+org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<goonerd.devhub.adapters.in.common.vo.ApiResponseVo<goonerd.devhub.adapters.in.project.dto.ProjectResponseDto>> goonerd.devhub.adapters.in.project.ProjectController.createProject(goonerd.devhub.adapters.in.project.dto.CreateProjectRequestDto,goonerd.devhub.common.auth.userdetails.UserDetailsImpl): [Field error in object 'createProjectRequestDto' on field 'positionList': rejected value [null]; codes [NotNull.createProjectRequestDto.positionList,NotNull.positionList,NotNull.java.util.List,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createProjectRequestDto.positionList,positionList]; arguments []; default message [positionList]]; default message [널이어서는 안됩니다]] 
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:159)
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122)
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:227)
+2025-12-28 20:45:56.062 [http-nio-8080-exec-5] ERROR ERROR_FILE [306e6b4b33] - [306e6b4b33] -----GlobalExceptionHandler-----: No static resource project/36cba1c5bd054205bf0ff3f02df05f72/applications.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource project/36cba1c5bd054205bf0ff3f02df05f72/applications.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+2025-12-28 20:46:05.855 [http-nio-8080-exec-8] ERROR ERROR_FILE [290398e112] - [290398e112] -----GlobalExceptionHandler-----: 이메일은 필수입니다.
+goonerd.devhub.common.exception.DomainRuleException: 이메일은 필수입니다.
+	at goonerd.devhub.common.exception.DomainRuleException.of(DomainRuleException.java:17)
+	at goonerd.devhub.domains.application.Application.<init>(Application.java:42)
+	at goonerd.devhub.domains.application.Application.createApplication(Application.java:79)
+2025-12-28 20:47:51.334 [http-nio-8080-exec-5] ERROR ERROR_FILE [dd3a4a347d] - [dd3a4a347d] -----GlobalExceptionHandler-----: E-mail 인증에 실패했습니다.
+goonerd.devhub.common.exception.AuthRuleException: E-mail 인증에 실패했습니다.
+	at goonerd.devhub.common.exception.AuthRuleException.of(AuthRuleException.java:17)
+	at goonerd.devhub.applications.mail.EmailService.verifyEmailVerificationCode(EmailService.java:42)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2025-12-28 20:48:25.316 [http-nio-8080-exec-10] ERROR ERROR_FILE [1dc055d690] - [1dc055d690] -----GlobalExceptionHandler-----: Identifier of entity 'goonerd.devhub.adapters.out.application.entity.ApplicationEntity' must be manually assigned before calling 'persist()'
+org.springframework.orm.jpa.JpaSystemException: Identifier of entity 'goonerd.devhub.adapters.out.application.entity.ApplicationEntity' must be manually assigned before calling 'persist()'
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:348)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:256)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
+Caused by: org.hibernate.id.IdentifierGenerationException: Identifier of entity 'goonerd.devhub.adapters.out.application.entity.ApplicationEntity' must be manually assigned before calling 'persist()'
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:209)
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:136)
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:177)
+2025-12-28 20:52:33.567 [http-nio-8080-exec-7] ERROR ERROR_FILE [fd2689ed76] - [fd2689ed76] -----GlobalExceptionHandler-----: could not execute statement [NULL not allowed for column "APPLICANT_GUID"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_gui [23502-232]] [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; constraint [null]
+org.springframework.dao.DataIntegrityViolationException: could not execute statement [NULL not allowed for column "APPLICANT_GUID"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_gui [23502-232]] [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; constraint [null]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:294)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:256)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [NULL not allowed for column "APPLICANT_GUID"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_gui [23502-232]] [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:62)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: NULL not allowed for column "APPLICANT_GUID"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_gui [23502-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+2025-12-28 20:55:13.396 [http-nio-8080-exec-8] ERROR ERROR_FILE [6b831a3cee] - [6b831a3cee] -----GlobalExceptionHandler-----: could not execute statement [NULL not allowed for column "APPLICANT_GUID"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_gui [23502-232]] [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; constraint [null]
+org.springframework.dao.DataIntegrityViolationException: could not execute statement [NULL not allowed for column "APPLICANT_GUID"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_gui [23502-232]] [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; constraint [null]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:294)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:256)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [NULL not allowed for column "APPLICANT_GUID"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_gui [23502-232]] [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:62)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: NULL not allowed for column "APPLICANT_GUID"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_gui [23502-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+2025-12-28 20:58:30.782 [http-nio-8080-exec-10] ERROR ERROR_FILE [a40e2ce2d7] - [a40e2ce2d7] -----GlobalExceptionHandler-----: Cannot invoke "goonerd.devhub.adapters.out.application.entity.ApplicationEntity.getApplicationGuid()" because "applicationEntity" is null
+java.lang.NullPointerException: Cannot invoke "goonerd.devhub.adapters.out.application.entity.ApplicationEntity.getApplicationGuid()" because "applicationEntity" is null
+	at goonerd.devhub.adapters.out.application.ApplicationMapper.toDomain(ApplicationMapper.java:26)
+	at goonerd.devhub.adapters.out.application.ApplicationAdapter.findByApplicationGuid(ApplicationPortAdapter.java:29)
+	at goonerd.devhub.applications.application.ApplicationService.approveApplication(ApplicationService.java:46)
+2025-12-28 21:00:54.548 [http-nio-8080-exec-8] ERROR ERROR_FILE [5371dcfffb] - [5371dcfffb] -----GlobalExceptionHandler-----: 원인 미상의 에러가 발생했습니다.
+goonerd.devhub.common.exception.DomainRuleException: 원인 미상의 에러가 발생했습니다.
+	at goonerd.devhub.common.exception.DomainRuleException.of(DomainRuleException.java:17)
+	at goonerd.devhub.domains.project.Project.lambda$findPosition$3(Project.java:197)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+2025-12-28 21:02:07.691 [http-nio-8080-exec-9] ERROR ERROR_FILE [f40ff8791d] - [f40ff8791d] -----GlobalExceptionHandler-----: 이미 지원한 내역이 존재합니다.
+goonerd.devhub.common.exception.DomainRuleException: 이미 지원한 내역이 존재합니다.
+	at goonerd.devhub.common.exception.DomainRuleException.of(DomainRuleException.java:17)
+	at goonerd.devhub.applications.application.ApplicationService.applyApplication(ApplicationService.java:27)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2025-12-28 21:12:27.664 [http-nio-8080-exec-8] ERROR ERROR_FILE [920fd97ff3] - [920fd97ff3] -----GlobalExceptionHandler-----: could not execute statement [NULL not allowed for column "SKILL_LEVEL"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_gui [23502-232]] [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; constraint [null]
+org.springframework.dao.DataIntegrityViolationException: could not execute statement [NULL not allowed for column "SKILL_LEVEL"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_gui [23502-232]] [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; constraint [null]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:294)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:256)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [NULL not allowed for column "SKILL_LEVEL"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_gui [23502-232]] [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:62)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: NULL not allowed for column "SKILL_LEVEL"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_gui [23502-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+2025-12-28 21:12:40.718 [http-nio-8080-exec-5] ERROR ERROR_FILE [495e2f3f1b] - [495e2f3f1b] -----GlobalExceptionHandler-----: could not execute statement [NULL not allowed for column "SKILL_LEVEL"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_gui [23502-232]] [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; constraint [null]
+org.springframework.dao.DataIntegrityViolationException: could not execute statement [NULL not allowed for column "SKILL_LEVEL"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_gui [23502-232]] [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; constraint [null]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:294)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:256)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [NULL not allowed for column "SKILL_LEVEL"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_gui [23502-232]] [/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_guid,skill_level,submitted_at,application_guid) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:62)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: NULL not allowed for column "SKILL_LEVEL"; SQL statement:
+/* insert for goonerd.devhub.adapters.out.application.entity.ApplicationEntity */insert into application (applicant_email,applicant_guid,applicant_name,status,created_at,created_by,modified_at,modified_by,motivation,position,project_gui [23502-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+2025-12-28 21:13:33.223 [http-nio-8080-exec-2] ERROR ERROR_FILE [457e18269d] - [457e18269d] -----GlobalExceptionHandler-----: Cannot invoke "goonerd.devhub.adapters.out.application.entity.ApplicationEntity.getApplicationGuid()" because "applicationEntity" is null
+java.lang.NullPointerException: Cannot invoke "goonerd.devhub.adapters.out.application.entity.ApplicationEntity.getApplicationGuid()" because "applicationEntity" is null
+	at goonerd.devhub.adapters.out.application.ApplicationMapper.toDomain(ApplicationMapper.java:26)
+	at goonerd.devhub.adapters.out.application.ApplicationAdapter.findByApplicationGuid(ApplicationPortAdapter.java:29)
+	at goonerd.devhub.applications.application.ApplicationService.approveApplication(ApplicationService.java:46)
+2025-12-28 21:14:52.908 [http-nio-8080-exec-8] ERROR ERROR_FILE [1b65884522] - [1b65884522] -----GlobalExceptionHandler-----: 이미 지원한 내역이 존재합니다.
+goonerd.devhub.common.exception.DomainRuleException: 이미 지원한 내역이 존재합니다.
+	at goonerd.devhub.common.exception.DomainRuleException.of(DomainRuleException.java:17)
+	at goonerd.devhub.applications.application.ApplicationService.applyApplication(ApplicationService.java:27)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2025-12-28 21:18:34.094 [http-nio-8080-exec-4] ERROR ERROR_FILE [1994f37c53] - [1994f37c53] -----GlobalExceptionHandler-----: E-mail 인증에 실패했습니다.
+goonerd.devhub.common.exception.AuthRuleException: E-mail 인증에 실패했습니다.
+	at goonerd.devhub.common.exception.AuthRuleException.of(AuthRuleException.java:17)
+	at goonerd.devhub.applications.mail.EmailService.verifyEmailVerificationCode(EmailService.java:42)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)

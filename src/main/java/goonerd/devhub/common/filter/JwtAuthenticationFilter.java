@@ -70,8 +70,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         refreshTokenService.save(email, refreshToken);
         ResponseCookie refreshCookie = ResponseCookie.from("refreshToken", refreshToken)
                 .httpOnly(true)
-                .secure(true) // HTTPS 환경
-                .sameSite("Strict") // 상황에 따라 Lax / None
+                .secure(false)
+                .sameSite("Lax")
                 .path("/auth/reissue")
                 .maxAge(14 * 24 * 60 * 60)
                 .build();
