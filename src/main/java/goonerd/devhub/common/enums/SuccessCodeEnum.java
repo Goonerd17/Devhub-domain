@@ -12,8 +12,8 @@ public enum SuccessCodeEnum {
 
     SIGNUP_SUCCESS("SUC.DVH.0010", "회원가입 성공"),
     LOGIN_SUCCESS("SUC.DVH.0011", "로그인 성공"),
-    EMAIL_VERIFICATION_SENT("SUC.DVH.0012", "인증코드 발송 성공"),
-    EMAIL_VERIFICATION_SUCCESS("SUC.DVH.0013", "인증코드 검증 성공");
+    EMAIL_CERTIFICATION_SENT("SUC.DVH.0012", "인증코드 발송 성공"),
+    EMAIL_CERTIFICATION_SUCCESS("SUC.DVH.0013", "인증코드 검증 성공");
 
     private final String code;
     private final String message;

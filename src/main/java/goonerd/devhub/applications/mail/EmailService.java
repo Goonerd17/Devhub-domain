@@ -1,12 +1,12 @@
 package goonerd.devhub.applications.mail;
 
-import goonerd.devhub.adapters.in.auth.command.ConfirmEmailVerificationCommand;
-import goonerd.devhub.adapters.in.auth.dto.EmailVerificationRequestDto;
+import goonerd.devhub.adapters.in.auth.command.ConfirmEmailCertificationCommand;
+import goonerd.devhub.adapters.in.auth.dto.EmailCertificationRequestDto;
 import goonerd.devhub.common.enums.ErrorCodeEnum;
 import goonerd.devhub.common.exception.AuthRuleException;
-import goonerd.devhub.common.utils.EmailVerificationCodeUtil;
-import goonerd.devhub.ports.in.mail.EmailVerificationUseCase;
-import goonerd.devhub.ports.out.mail.EmailVerificationPort;
+import goonerd.devhub.common.utils.EmailCertificationUtil;
+import goonerd.devhub.ports.in.mail.EmailCertificationUseCase;
+import goonerd.devhub.ports.out.mail.EmailCertificationPort;
 import goonerd.devhub.ports.out.mail.EmailSendPort;
 
 import jakarta.transaction.Transactional;
@@ -18,39 +18,39 @@ import java.time.Duration;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class EmailService implements EmailVerificationUseCase {
+public class EmailService implements EmailCertificationUseCase {
 
     private final EmailSendPort emailSendPort;
-    private final EmailVerificationPort emailVerificationRepository;
+    private final EmailCertificationPort emailCertificationPort;
 
     @Override
-    public void requestEmailVerificationCode(EmailVerificationRequestDto emailVerificationRequestDto) {
-        String email = emailVerificationRequestDto.getEmail();
-        if (emailVerificationRepository.existsValidCode(email)) {
-            throw AuthRuleException.of(ErrorCodeEnum.EMAIL_VERIFICATION_CODE_ALREADY_SENT);
+    public void sendEmailCertificationCode(EmailCertificationRequestDto emailCertificationRequestDto) {
+        String email = emailCertificationRequestDto.getEmail();
+        if (emailCertificationPort.existsValidCode(email)) {
+            throw AuthRuleException.of(ErrorCodeEnum.EMAIL_CERTIFICATION_CODE_ALREADY_SENT);
         }
 
-        String code = EmailVerificationCodeUtil.generateEmailVerificationCode();
-        emailVerificationRepository.save(email, code, Duration.ofMinutes(5));
-        emailSendPort.sendEmail(email, "[회원가입] 이메일 인증 코드", buildBody(code));
+        String code = EmailCertificationUtil.generateEmailCertificationCode();
+        emailCertificationPort.save(email, code, Duration.ofMinutes(5));
+        //emailSendPort.sendEmail(email, "[회원가입] 이메일 인증 코드", buildBody(code));
     }
 
     @Override
-    public void verifyEmailVerificationCode(ConfirmEmailVerificationCommand confirmEmailVerificationCommand) {
-        boolean verified = emailVerificationRepository.verify(confirmEmailVerificationCommand.getEmail(), confirmEmailVerificationCommand.getCode());
+    public void confirmEmailCertificationCode(ConfirmEmailCertificationCommand confirmEmailCertificationCommand) {
+        boolean verified = emailCertificationPort.verify(confirmEmailCertificationCommand.getEmail(), confirmEmailCertificationCommand.getCode());
         if (!verified) {
-            throw AuthRuleException.of(ErrorCodeEnum.EMAIL_NOT_VERIFIED);
+            throw AuthRuleException.of(ErrorCodeEnum.EMAIL_NOT_CONFIRMED);
         }
     }
 
     @Override
     public boolean isVerified(String email) {
-        return emailVerificationRepository.isVerified(email);
+        return emailCertificationPort.isVerified(email);
     }
 
     @Override
     public void delete(String email) {
-        emailVerificationRepository.delete(email);
+        emailCertificationPort.delete(email);
     }
 
     private String buildBody(String code) {

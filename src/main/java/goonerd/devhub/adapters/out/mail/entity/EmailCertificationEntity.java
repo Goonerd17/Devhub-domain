@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "email_verification_code")
+@Table(name = "email_certifications")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class EmailVerificationCodeEntity {
+public class EmailCertificationEntity {
 
     @Id @Column(nullable = false, length = 100)
     private String email;

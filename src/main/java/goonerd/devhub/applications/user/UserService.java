@@ -8,7 +8,7 @@ import goonerd.devhub.domains.user.UserRole;
 import goonerd.devhub.ports.in.user.UserUseCase;
 import goonerd.devhub.ports.out.common.IdentifierGeneratorPort;
 import goonerd.devhub.ports.out.common.PasswordPolicyPort;
-import goonerd.devhub.ports.out.mail.EmailVerificationPort;
+import goonerd.devhub.ports.out.mail.EmailCertificationPort;
 import goonerd.devhub.ports.out.user.UserPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,19 +20,19 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService implements UserUseCase {
 
     private final UserPort userPort;
-    private final EmailVerificationPort emailVerificationPort;
+    private final EmailCertificationPort emailCertificationPort;
     private final PasswordPolicyPort passwordPolicyPort;
     private final IdentifierGeneratorPort identifierGeneratorPort;
 
     @Override
     public User signup(SignupUserCommand signupUserCommand) {
-        if (!emailVerificationPort.isVerified(signupUserCommand.getEmail())) {
-            throw BusinessRuleException.of(ErrorCodeEnum.EMAIL_NOT_VERIFIED);
+        if (!emailCertificationPort.isVerified(signupUserCommand.getEmail())) {
+            throw BusinessRuleException.of(ErrorCodeEnum.EMAIL_NOT_CONFIRMED);
         }
         String userGuid = identifierGeneratorPort.generate();
         String encodedPassword = passwordPolicyPort.encode(signupUserCommand.getPassword());
         User user = User.createGeneralUser(userGuid, signupUserCommand.getEmail(), signupUserCommand.getUsername(), encodedPassword);
-        emailVerificationPort.delete(signupUserCommand.getEmail());
+        emailCertificationPort.delete(signupUserCommand.getEmail());
         return userPort.save(user);
     }
 
@@ -47,5 +47,10 @@ public class UserService implements UserUseCase {
     @Override
     public boolean existsByRole(UserRole role) {
         return userPort.existsByRole(role);
+    }
+
+    @Override
+    public void update() {
+
     }
 }

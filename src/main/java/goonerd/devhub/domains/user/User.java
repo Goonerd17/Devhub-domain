@@ -9,11 +9,11 @@ public class User {
     private final String userGuid;
 
     private final String email;
-    private String password;
-    private String username;
-    private UserRole role;
+    private final String password;
+    private final String username;
+    private final UserRole role;
 
-    private AuditInfo auditInfo;
+    private final AuditInfo auditInfo;
 
     public User(String userGuid, String email, String username, String password, UserRole role, AuditInfo auditInfo) {
         if (email == null || email.isBlank()) {

@@ -2,12 +2,12 @@ package goonerd.devhub.adapters.in.auth;
 
 import goonerd.devhub.adapters.in.auth.dto.TokenResponseDto;
 import goonerd.devhub.adapters.in.common.vo.ApiResponseVo;
-import goonerd.devhub.adapters.in.auth.command.ConfirmEmailVerificationCommand;
-import goonerd.devhub.adapters.in.auth.dto.ConfirmEmailVerificationRequestDto;
-import goonerd.devhub.adapters.in.auth.dto.EmailVerificationRequestDto;
+import goonerd.devhub.adapters.in.auth.command.ConfirmEmailCertificationCommand;
+import goonerd.devhub.adapters.in.auth.dto.ConfirmEmailCertificationRequestDto;
+import goonerd.devhub.adapters.in.auth.dto.EmailCertificationRequestDto;
 import goonerd.devhub.common.enums.SuccessCodeEnum;
 import goonerd.devhub.ports.in.auth.AuthUseCase;
-import goonerd.devhub.ports.in.mail.EmailVerificationUseCase;
+import goonerd.devhub.ports.in.mail.EmailCertificationUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthUseCase authUseCase;
-    private final EmailVerificationUseCase emailVerificationUseCase;
+    private final EmailCertificationUseCase emailCertificationUseCase;
 
     @PostMapping("/reissue")
     public ResponseEntity<ApiResponseVo<TokenResponseDto>> refresh(@CookieValue("refreshToken") String refreshToken) {
@@ -31,23 +31,23 @@ public class AuthController {
         );
     }
 
-    @PostMapping("/email-verification")
-    public ResponseEntity<ApiResponseVo<Void>> requestEmailVerificationCode(@Valid @RequestBody EmailVerificationRequestDto emailVerificationRequestDto) {
-        emailVerificationUseCase.requestEmailVerificationCode(emailVerificationRequestDto);
+    @PostMapping("/email-certification")
+    public ResponseEntity<ApiResponseVo<Void>> sendEmailCertificationCode(@Valid @RequestBody EmailCertificationRequestDto emailCertificationRequestDto) {
+        emailCertificationUseCase.sendEmailCertificationCode(emailCertificationRequestDto);
         return ResponseEntity.ok(
                 ApiResponseVo.successWithoutData(
-                        SuccessCodeEnum.EMAIL_VERIFICATION_SENT
+                        SuccessCodeEnum.EMAIL_CERTIFICATION_SENT
                 )
         );
     }
 
-    @PostMapping("/email-verification/confirm")
-    public ResponseEntity<ApiResponseVo<Void>> verifyEmailVerificationCode(@Valid @RequestBody ConfirmEmailVerificationRequestDto confirmEmailVerificationRequestDto) {
-        ConfirmEmailVerificationCommand confirmEmailVerificationCommand = ConfirmEmailVerificationCommand.of(confirmEmailVerificationRequestDto.getEmail(), confirmEmailVerificationRequestDto.getCode());
-        emailVerificationUseCase.verifyEmailVerificationCode(confirmEmailVerificationCommand);
+    @PostMapping("/email-certification/confirm")
+    public ResponseEntity<ApiResponseVo<Void>> confirmEmailCertificationCode(@Valid @RequestBody ConfirmEmailCertificationRequestDto confirmEmailCertificationRequestDto) {
+        ConfirmEmailCertificationCommand confirmEmailCertificationCommand = ConfirmEmailCertificationCommand.of(confirmEmailCertificationRequestDto.getEmail(), confirmEmailCertificationRequestDto.getCode());
+        emailCertificationUseCase.confirmEmailCertificationCode(confirmEmailCertificationCommand);
         return ResponseEntity.ok(
                 ApiResponseVo.successWithoutData(
-                        SuccessCodeEnum.EMAIL_VERIFICATION_SUCCESS
+                        SuccessCodeEnum.EMAIL_CERTIFICATION_SUCCESS
                 )
         );
     }

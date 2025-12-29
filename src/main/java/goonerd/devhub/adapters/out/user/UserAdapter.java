@@ -34,4 +34,9 @@ public class UserAdapter implements UserPort {
     public boolean existsByRole(UserRole role) {
         return userRepositoryJpa.existsByRole(role);
     }
+
+    @Override
+    public boolean isSameUser(String userGuid, String otherUserGuid) {
+        return userGuid != null && userGuid.equals(otherUserGuid);
+    }
 }

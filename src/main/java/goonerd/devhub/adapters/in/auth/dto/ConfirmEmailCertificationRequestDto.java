@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ConfirmEmailVerificationRequestDto {
+public class ConfirmEmailCertificationRequestDto {
     private String email;
     @NotBlank
     @Size(min = 6, max = 6)

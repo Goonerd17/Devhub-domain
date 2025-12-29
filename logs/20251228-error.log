@@ -81,19 +81,19 @@ org.springframework.web.servlet.resource.NoResourceFoundException: No static res
 	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
 	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
 2025-12-25 22:13:26.731 [http-nio-8080-exec-10] ERROR ERROR_FILE [0a9c85d368] - [0a9c85d368] -----GlobalExceptionHandler-----: could not execute statement [NULL not allowed for column "CODE"; SQL statement:
-/* update for goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity [23502-232]] [/* update for goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity */update email_auth_code set code=?,expired_at=?,verified_at=? where email=?]; SQL [/* update for goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity */update email_auth_code set code=?,expired_at=?,verified_at=? where email=?]; constraint [null]
+/* update for goonerd.devhub.adapters.out.mail.entity.EmailCertificationEntity [23502-232]] [/* update for goonerd.devhub.adapters.out.mail.entity.EmailCertificationEntity */update email_auth_code set code=?,expired_at=?,verified_at=? where email=?]; SQL [/* update for goonerd.devhub.adapters.out.mail.entity.EmailCertificationEntity */update email_auth_code set code=?,expired_at=?,verified_at=? where email=?]; constraint [null]
 org.springframework.dao.DataIntegrityViolationException: could not execute statement [NULL not allowed for column "CODE"; SQL statement:
-/* update for goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity [23502-232]] [/* update for goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity */update email_auth_code set code=?,expired_at=?,verified_at=? where email=?]; SQL [/* update for goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity */update email_auth_code set code=?,expired_at=?,verified_at=? where email=?]; constraint [null]
+/* update for goonerd.devhub.adapters.out.mail.entity.EmailCertificationEntity [23502-232]] [/* update for goonerd.devhub.adapters.out.mail.entity.EmailCertificationEntity */update email_auth_code set code=?,expired_at=?,verified_at=? where email=?]; SQL [/* update for goonerd.devhub.adapters.out.mail.entity.EmailCertificationEntity */update email_auth_code set code=?,expired_at=?,verified_at=? where email=?]; constraint [null]
 	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:294)
 	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:256)
 	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
 Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [NULL not allowed for column "CODE"; SQL statement:
-/* update for goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity [23502-232]] [/* update for goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity */update email_auth_code set code=?,expired_at=?,verified_at=? where email=?]
+/* update for goonerd.devhub.adapters.out.mail.entity.EmailCertificationEntity [23502-232]] [/* update for goonerd.devhub.adapters.out.mail.entity.EmailCertificationEntity */update email_auth_code set code=?,expired_at=?,verified_at=? where email=?]
 	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:62)
 	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
 	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
 Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: NULL not allowed for column "CODE"; SQL statement:
-/* update for goonerd.devhub.adapters.out.mail.entity.EmailVerificationCodeEntity [23502-232]
+/* update for goonerd.devhub.adapters.out.mail.entity.EmailCertificationEntity [23502-232]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	at org.h2.message.DbException.get(DbException.java:223)
@@ -110,7 +110,7 @@ org.springframework.web.servlet.resource.NoResourceFoundException: No static res
 2025-12-25 22:19:58.596 [http-nio-8080-exec-3] ERROR ERROR_FILE [183fb4d5e1] - [183fb4d5e1] -----GlobalExceptionHandler-----: 원인 미상의 에러가 발생했습니다.
 goonerd.devhub.common.exception.AuthRuleException: 원인 미상의 에러가 발생했습니다.
 	at goonerd.devhub.common.exception.AuthRuleException.of(AuthRuleException.java:17)
-	at goonerd.devhub.applications.mail.EmailService.verifyEmailVerificationCode(EmailService.java:40)
+	at confirmEmailCertificationCode(EmailService.java:40)
 	at goonerd.devhub.adapters.in.mail.EmailVerificationController.verifyEmailVerificationCode(EmailVerificationController.java:34)
 2025-12-25 22:20:13.613 [http-nio-8080-exec-4] ERROR ERROR_FILE [d91e76e6ff] - [d91e76e6ff] -----GlobalExceptionHandler-----: E-mail 인증이 완료되지 않았습니다.
 goonerd.devhub.common.exception.BusinessRuleException: E-mail 인증이 완료되지 않았습니다.
@@ -120,27 +120,27 @@ goonerd.devhub.common.exception.BusinessRuleException: E-mail 인증이 완료�
 2025-12-25 22:28:00.857 [http-nio-8080-exec-2] ERROR ERROR_FILE [0a7783109b] - [0a7783109b] -----GlobalExceptionHandler-----: E-mail 인증이 완료되지 않았습니다.
 goonerd.devhub.common.exception.AuthRuleException: E-mail 인증이 완료되지 않았습니다.
 	at goonerd.devhub.common.exception.AuthRuleException.of(AuthRuleException.java:17)
-	at goonerd.devhub.applications.mail.EmailService.verifyEmailVerificationCode(EmailService.java:40)
+	at confirmEmailCertificationCode(EmailService.java:40)
 	at goonerd.devhub.adapters.in.mail.EmailVerificationController.verifyEmailVerificationCode(EmailVerificationController.java:34)
 2025-12-25 22:28:20.439 [http-nio-8080-exec-1] ERROR ERROR_FILE [29c5cef3b8] - [29c5cef3b8] -----GlobalExceptionHandler-----: 인증 코드가 이미 발송되었습니다. 잠시 후 재시도해주세요.
 goonerd.devhub.common.exception.AuthRuleException: 인증 코드가 이미 발송되었습니다. 잠시 후 재시도해주세요.
 	at goonerd.devhub.common.exception.AuthRuleException.of(AuthRuleException.java:17)
-	at goonerd.devhub.applications.mail.EmailService.requestEmailVerificationCode(EmailService.java:28)
+	at sendEmailCertificationCode(EmailService.java:28)
 	at goonerd.devhub.adapters.in.mail.EmailVerificationController.requestEmailVerificationCode(EmailVerificationController.java:23)
 2025-12-25 22:28:22.424 [http-nio-8080-exec-7] ERROR ERROR_FILE [a1407d59c5] - [a1407d59c5] -----GlobalExceptionHandler-----: 인증 코드가 이미 발송되었습니다. 잠시 후 재시도해주세요.
 goonerd.devhub.common.exception.AuthRuleException: 인증 코드가 이미 발송되었습니다. 잠시 후 재시도해주세요.
 	at goonerd.devhub.common.exception.AuthRuleException.of(AuthRuleException.java:17)
-	at goonerd.devhub.applications.mail.EmailService.requestEmailVerificationCode(EmailService.java:28)
+	at sendEmailCertificationCode(EmailService.java:28)
 	at goonerd.devhub.adapters.in.mail.EmailVerificationController.requestEmailVerificationCode(EmailVerificationController.java:23)
 2025-12-25 22:28:29.430 [http-nio-8080-exec-10] ERROR ERROR_FILE [8d6bf04e73] - [8d6bf04e73] -----GlobalExceptionHandler-----: E-mail 인증이 완료되지 않았습니다.
 goonerd.devhub.common.exception.AuthRuleException: E-mail 인증이 완료되지 않았습니다.
 	at goonerd.devhub.common.exception.AuthRuleException.of(AuthRuleException.java:17)
-	at goonerd.devhub.applications.mail.EmailService.verifyEmailVerificationCode(EmailService.java:40)
+	at confirmEmailCertificationCode(EmailService.java:40)
 	at goonerd.devhub.adapters.in.mail.EmailVerificationController.verifyEmailVerificationCode(EmailVerificationController.java:34)
 2025-12-26 01:32:54.631 [http-nio-8080-exec-5] ERROR ERROR_FILE [0e0571002c] - [0e0571002c] -----GlobalExceptionHandler-----: E-mail 인증에 실패했습니다.
 goonerd.devhub.common.exception.AuthRuleException: E-mail 인증에 실패했습니다.
 	at goonerd.devhub.common.exception.AuthRuleException.of(AuthRuleException.java:17)
-	at goonerd.devhub.applications.mail.EmailService.verifyEmailVerificationCode(EmailService.java:40)
+	at confirmEmailCertificationCode(EmailService.java:40)
 	at goonerd.devhub.adapters.in.mail.EmailVerificationController.verifyEmailVerificationCode(EmailVerificationController.java:34)
 2025-12-26 01:46:18.206 [http-nio-8080-exec-1] ERROR ERROR_FILE [3a24f1e35a] - [3a24f1e35a] -----GlobalExceptionHandler-----: No static resource api/projects/3780c8a6-2c36-4283-8ceb-08f4d5b08dfa/application.
 org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/projects/3780c8a6-2c36-4283-8ceb-08f4d5b08dfa/application.
@@ -262,7 +262,7 @@ goonerd.devhub.common.exception.DomainRuleException: 이메일은 필수입니�
 2025-12-28 20:47:51.334 [http-nio-8080-exec-5] ERROR ERROR_FILE [dd3a4a347d] - [dd3a4a347d] -----GlobalExceptionHandler-----: E-mail 인증에 실패했습니다.
 goonerd.devhub.common.exception.AuthRuleException: E-mail 인증에 실패했습니다.
 	at goonerd.devhub.common.exception.AuthRuleException.of(AuthRuleException.java:17)
-	at goonerd.devhub.applications.mail.EmailService.verifyEmailVerificationCode(EmailService.java:42)
+	at confirmEmailCertificationCode(EmailService.java:42)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 2025-12-28 20:48:25.316 [http-nio-8080-exec-10] ERROR ERROR_FILE [1dc055d690] - [1dc055d690] -----GlobalExceptionHandler-----: Identifier of entity 'goonerd.devhub.adapters.out.application.entity.ApplicationEntity' must be manually assigned before calling 'persist()'
 org.springframework.orm.jpa.JpaSystemException: Identifier of entity 'goonerd.devhub.adapters.out.application.entity.ApplicationEntity' must be manually assigned before calling 'persist()'
@@ -369,5 +369,5 @@ goonerd.devhub.common.exception.DomainRuleException: 이미 지원한 내역이 
 2025-12-28 21:18:34.094 [http-nio-8080-exec-4] ERROR ERROR_FILE [1994f37c53] - [1994f37c53] -----GlobalExceptionHandler-----: E-mail 인증에 실패했습니다.
 goonerd.devhub.common.exception.AuthRuleException: E-mail 인증에 실패했습니다.
 	at goonerd.devhub.common.exception.AuthRuleException.of(AuthRuleException.java:17)
-	at goonerd.devhub.applications.mail.EmailService.verifyEmailVerificationCode(EmailService.java:42)
+	at confirmEmailCertificationCode(EmailService.java:42)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
