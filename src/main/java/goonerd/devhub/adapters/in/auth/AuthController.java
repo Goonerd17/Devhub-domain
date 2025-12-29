@@ -22,7 +22,7 @@ public class AuthController {
     private final EmailVerificationUseCase emailVerificationUseCase;
 
     @PostMapping("/reissue")
-    public ResponseEntity<ApiResponseVo<TokenResponseDto>> refresh(@RequestHeader("Refresh-Token") String refreshToken) {
+    public ResponseEntity<ApiResponseVo<TokenResponseDto>> refresh(@CookieValue("refreshToken") String refreshToken) {
         return ResponseEntity.ok(
                 ApiResponseVo.successWithData(
                         SuccessCodeEnum.CREATE_SUCCESS,
