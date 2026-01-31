@@ -199,13 +199,3 @@
   "endDate": "2025-12-20"
 }
 ```
-
----
-
-## 주의 사항
-
-1. **도메인 불변 유지:** Service와 Facade에서 도메인을 직접 변경하지 않음
-2. **Mapper 책임 분리:** Domain ↔ Entity 변환 전담
-3. **AuditInfo 처리:** BaseEntity 상속된 Entity + 도메인에 해당 정보 필드 추가
-
----
